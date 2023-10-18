@@ -192,7 +192,7 @@ function Circuit() {
             type="button"
             onClick={handleClickMap}
           >
-            <img className="h-12" src={pins} alt="Pins koala" />
+            {/* <img className="h-12" src={pins} alt="Pins koala" /> */}
             Voir le plan
           </button>
         </div>
@@ -205,11 +205,11 @@ function Circuit() {
               >
                 X
               </button>
-              <MapCircuit
+              {/* <MapCircuit
                 longitude={circuit.longitude}
                 latitude={circuit.latitude}
                 className="w-full h-full"
-              />
+              /> */}
             </div>
           </div>
         )}
