@@ -1,0 +1,103 @@
+.patchcircuit {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  margin: 1rem;
+
+  &-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  &-infos {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 1rem;
+    padding: 1rem;
+    border: 1px solid black;
+    border-radius: 10px;
+    &_part {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &-picture {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2rem 1rem;
+    padding: 1rem;
+    border: 1px solid black;
+    border-radius: 10px;
+  }
+
+  &-step {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2rem 1rem;
+    padding: 1rem;
+    border: 1px solid black;
+    border-radius: 10px;
+
+    &_delete {
+      padding: 1rem;
+      border: 1px solid black;
+    }
+  }
+
+  &-button {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    &_addstep {
+      padding: 1rem;
+      margin: 0.5rem 1rem;
+      border: 1px solid black;
+    }
+
+    &_patchcircuit {
+      padding: 1rem;
+      border: 1px solid black;
+    }
+  }
+
+  @media (min-width: 768px) {
+    &-title {
+      align-self: flex-start;
+    }
+    &-infos {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 0 2rem;
+
+      &_part {
+        display: flex;
+        padding: 2rem;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+    }
+    &-step-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    &-step {
+      display: flex;
+      width: 30%;
+    }
+  }
+}
+
+select {
+  padding: 0.5rem;
+  text-align: center;
+  width: fit-content;
+}

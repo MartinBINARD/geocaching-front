@@ -1,0 +1,47 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  &-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  &-paragraph {
+    font-size: 0.8rem;
+    margin: 0 2rem;
+    text-align: justify;
+  }
+
+  &-button {
+    text-align: center;
+    min-width: fit-content;
+    width: 80%;
+    padding: 2rem;
+    background-color: white;
+    box-shadow: 1px 1px 4px -1px rgba(0, 0, 0, 0.52);
+    border-radius: 10px;
+  }
+
+  @media (min-width: 768px) {
+    justify-content: flex-start;
+    gap: 3rem;
+
+    &-title {
+      padding: 2rem;
+      align-self: flex-start;
+    }
+
+    &-paragraph {
+      font-size: 1rem;
+    }
+
+    &-button {
+      width: 20%;
+    }
+  }
+}
