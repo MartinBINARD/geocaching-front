@@ -1,5 +1,4 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { LatLngTuple } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import FindCenter from '../../utils/FindCenter';
@@ -22,11 +21,7 @@ function Map({ markers, className }: MapsProps) {
   const centerCoordintates = FindCenter(markers);
 
   return (
-    <MapContainer
-      center={centerCoordintates as LatLngTuple}
-      zoom={6}
-      className={className}
-    >
+    <MapContainer center={centerCoordintates} zoom={6} className={className}>
       <TileLayer
         attribution='&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png"
