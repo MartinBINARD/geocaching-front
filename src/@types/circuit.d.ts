@@ -24,7 +24,7 @@ export interface Search {
   city?: string;
   description?: string;
   distance?: number;
-  mobility?: string[];
+  mobility?: string[] | string;
   region?: string;
   state?: string;
   theme?: string;
