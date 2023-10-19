@@ -1,5 +1,23 @@
 import FilteredObjectKeys from './FilteredObjectKeys';
 
+function stringifyObjectValues(obj, key, value) {
+  return typeof obj[key] !== 'string'
+    ? obj[key].toString() === value
+    : obj[key] === value;
+}
+
+function compareValuesObject(obj, filteredSearchObj) {
+  return Object.entries(filteredSearchObj).every(([key, value]) => {
+    // Check Array values obj from arr
+    if (Array.isArray(obj[key])) {
+      return obj[key].includes(value);
+    }
+
+    // Stringify for number value of obj
+    return stringifyObjectValues(obj, key, value);
+  });
+}
+
 function filteredList(searchObj, arr) {
   // Remove any object keys with empty string value in order to remove side effect
   const filteredSearchObj = FilteredObjectKeys(searchObj);
@@ -11,17 +29,7 @@ function filteredList(searchObj, arr) {
     }
 
     // If key search entries found then compare search value with values object
-    return Object.entries(filteredSearchObj).every(([key, value]) => {
-      // Check Array values obj from arr
-      if (Array.isArray(obj[key])) {
-        return obj[key].includes(value);
-      }
-
-      // Stringify for number value of obj
-      return typeof obj[key] !== 'string'
-        ? obj[key].toString() === value
-        : obj[key] === value;
-    });
+    return compareValuesObject(obj, filteredSearchObj);
   });
 }
 

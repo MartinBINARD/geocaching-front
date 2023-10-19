@@ -1,5 +1,5 @@
 // Remove any object keys with empty string values
-/* Use built-in utility Record to spécify an object
+/* Use built-in utility Record types to spécify an object
 with random key with value string */
 function FilteredObjectKeys(obj: Record<string, string>) {
   return Object.keys(obj)
