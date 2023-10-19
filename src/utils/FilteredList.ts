@@ -1,16 +1,17 @@
+import { Circuit, Search } from '../@types/circuit';
 import FilteredObjectKeys from './FilteredObjectKeys';
 
-function stringifyObjectValues(obj, key, value) {
-  return typeof obj[key] !== 'string'
-    ? obj[key].toString() === value
-    : obj[key] === value;
+function stringifyObjectValues(obj: Circuit, key: string, value: string) {
+  return typeof obj[key as keyof Circuit] !== 'string'
+    ? obj[key as keyof Circuit].toString() === value
+    : obj[key as keyof Circuit] === value;
 }
 
-function compareValuesObject(obj, filteredSearchObj) {
+function compareValuesObject(obj: Circuit, filteredSearchObj: Search): boolean {
   return Object.entries(filteredSearchObj).every(([key, value]) => {
     // Check Array values obj from arr
-    if (Array.isArray(obj[key])) {
-      return obj[key].includes(value);
+    if (key === 'mobility') {
+      return obj[key].find((v) => v === value);
     }
 
     // Stringify for number value of obj
@@ -18,7 +19,7 @@ function compareValuesObject(obj, filteredSearchObj) {
   });
 }
 
-function filteredList(searchObj, arr) {
+function filteredList(searchObj: Search, arr: Circuit[]): Circuit[] {
   // Remove any object keys with empty string value in order to remove side effect
   const filteredSearchObj = FilteredObjectKeys(searchObj);
 
