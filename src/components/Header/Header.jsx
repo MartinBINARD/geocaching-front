@@ -63,8 +63,8 @@ function Header() {
       <nav
         className={
           isOpen
-            ? 'absolute inset-0 z-50 mt-20 flex flex-col justify-center items-center p-8 space-y-8 bg-white'
-            : 'hidden xl:block '
+            ? 'absolute inset-0 z-50 mt-16 flex flex-col justify-center items-center p-8 space-y-8 bg-white'
+            : 'hidden xl:block'
         }
       >
         <HeaderNavLink to="/presentation" onClick={handleClick}>
