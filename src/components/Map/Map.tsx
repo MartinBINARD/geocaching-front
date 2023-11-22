@@ -2,6 +2,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import FindCenter from '../../utils/FindCenter';
+import LocationMarker from '../LocationMarker/LocationMarker';
 
 import { Circuit } from '../../@types/circuit';
 
@@ -34,6 +35,7 @@ function Map({ markers, className }: MapsProps) {
           <Popup>{marker.name}</Popup>
         </Marker>
       ))}
+      <LocationMarker />
     </MapContainer>
   );
 }

@@ -52,7 +52,7 @@ function CircuitsList() {
         <div className="w-full overflow-y-hidden flex justify-between mt-4 max-lg:flex-wrap">
           <Map
             markers={list}
-            className="z-0 h-[60vh] w-full lg:w-1/2 rounded-lg shadow-xl max-md:h-[30vh]"
+            className="z-0 h-[60vh] w-full lg:w-1/2 rounded-lg shadow-xl max-md:h-[30vh] relative"
           />
           <CircuitListCard list={list} />
         </div>
