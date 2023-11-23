@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { LatLngLiteral } from 'leaflet';
-import { Marker, Popup, useMapEvents } from 'react-leaflet';
+import { Circle, Marker, Popup, useMapEvents } from 'react-leaflet';
 
-import { MapPin } from 'lucide-react';
+import { LocateFixed } from 'lucide-react';
 
 import LeafletControl from '../LeafletControl/LeafletControl';
 
 function ButtonLocateMe() {
-  const zoom = 18;
+  const zoom = 15;
   const second = 2;
   const [position, setPosition] = useState<LatLngLiteral | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -24,6 +24,7 @@ function ButtonLocateMe() {
   return (
     <>
       <LeafletControl position="topright">
+        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
         <button
           type="button"
           disabled={isLoading}
@@ -32,13 +33,22 @@ function ButtonLocateMe() {
             map.locate();
           }}
         >
-          <MapPin />
+          <LocateFixed />
         </button>
       </LeafletControl>
 
       {position === null ? null : (
-        <Marker position={position}>
+        <Marker position={position} title="Vous êtes ici" alt="votre position">
           <Popup>Vous êtes ici</Popup>
+          <Circle
+            center={{
+              lat: position.lat,
+              lng: position.lng,
+            }}
+            radius={150}
+            color="red"
+            opacity={0.1}
+          />
         </Marker>
       )}
     </>

@@ -31,6 +31,8 @@ function Map({ markers, className }: MapsProps) {
         <Marker
           key={marker.id_circuit}
           position={[marker.latitude, marker.longitude]}
+          title={marker.name}
+          alt={marker.name}
         >
           <Popup>{marker.name}</Popup>
         </Marker>
