@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { LatLngLiteral } from 'leaflet';
-import { Circle, Marker, Popup, useMapEvents } from 'react-leaflet';
+import { Circle, CircleMarker, useMapEvents } from 'react-leaflet';
 
 import { LocateFixed } from 'lucide-react';
 
@@ -38,8 +38,7 @@ function ButtonLocateMe() {
       </LeafletControl>
 
       {position === null ? null : (
-        <Marker position={position} title="Vous êtes ici" alt="votre position">
-          <Popup>Vous êtes ici</Popup>
+        <>
           <Circle
             center={{
               lat: position.lat,
@@ -49,7 +48,16 @@ function ButtonLocateMe() {
             color="red"
             opacity={0.1}
           />
-        </Marker>
+          <CircleMarker
+            center={{
+              lat: position.lat,
+              lng: position.lng,
+            }}
+            color="red"
+            radius={10}
+            opacity={0.4}
+          />
+        </>
       )}
     </>
   );
