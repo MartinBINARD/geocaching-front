@@ -1,10 +1,11 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import FindCenter from '../../utils/FindCenter';
 import ButtonLocateMe from '../ButtonLocateMe/ButtonLocateMe';
 
 import { Circuit } from '../../@types/circuit';
+import CircuitCardPopup from '../MapPopup/CirtuitCardPopup';
 
 interface MapsProps {
   markers: Circuit[];
@@ -29,16 +30,17 @@ function Map({ markers, className }: MapsProps) {
       attributionControl={false}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png" />
-      {markers.map((marker) => (
-        <Marker
-          key={marker.id_circuit}
-          position={[marker.latitude, marker.longitude]}
-          title={marker.name}
-          alt={marker.name}
-        >
-          <Popup>{marker.name}</Popup>
-        </Marker>
-      ))}
+      {markers.length > 1 &&
+        markers.map((marker) => (
+          <Marker
+            key={marker.id_circuit}
+            position={[marker.latitude, marker.longitude]}
+            title={marker.name}
+            alt={marker.name}
+          >
+            <CircuitCardPopup marker={marker} />
+          </Marker>
+        ))}
       <ButtonLocateMe />
     </MapContainer>
   );
