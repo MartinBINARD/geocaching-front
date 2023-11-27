@@ -30,17 +30,16 @@ function Map({ markers, className }: MapsProps) {
       attributionControl={false}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png" />
-      {markers.length > 1 &&
-        markers.map((marker) => (
-          <Marker
-            key={marker.id_circuit}
-            position={[marker.latitude, marker.longitude]}
-            title={marker.name}
-            alt={marker.name}
-          >
-            <CircuitCardPopup marker={marker} />
-          </Marker>
-        ))}
+      {markers.map((marker) => (
+        <Marker
+          key={marker.id_circuit}
+          position={[marker.latitude, marker.longitude]}
+          title={marker.name}
+          alt={marker.name}
+        >
+          <CircuitCardPopup marker={marker} />
+        </Marker>
+      ))}
       <ButtonLocateMe />
     </MapContainer>
   );
