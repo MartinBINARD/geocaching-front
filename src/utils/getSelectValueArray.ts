@@ -2,7 +2,7 @@
 with entries key object and array of object */
 import { Circuit } from '../@types/circuit';
 
-function valuesArray(key: string, arr: Circuit[]) {
+function getValuesArray(key: string, arr: Circuit[]) {
   return arr.map((obj: Circuit) => {
     const findKeySelect: string | undefined = Object.keys(obj).find(
       (str) => str.toLocaleLowerCase() === key.toLocaleLowerCase()
@@ -40,19 +40,19 @@ function GetSelectValueArray(
     return [];
   }
   // Search for values from key selector
-  const getSelectorValuesList = valuesArray(key, arr);
+  const getSelectorValuesList = getValuesArray(key, arr);
 
   // Concat of any array value
 
   const mergeSelectorValuesList = concatValuesArray(getSelectorValuesList);
 
   // Removal of any duplicate values
-  const selectorUniqueValues = removeDuplicatedValuesArray(
+  const selectorUniqueValuesList = removeDuplicatedValuesArray(
     mergeSelectorValuesList
   );
 
   // Sort Data order
-  return selectorUniqueValues.sort();
+  return selectorUniqueValuesList.sort();
 }
 
 export default GetSelectValueArray;
