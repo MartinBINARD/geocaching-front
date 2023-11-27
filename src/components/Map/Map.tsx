@@ -22,11 +22,13 @@ function Map({ markers, className }: MapsProps) {
   const centerCoordintates = FindCenter(markers);
 
   return (
-    <MapContainer center={centerCoordintates} zoom={6} className={className}>
-      <TileLayer
-        attribution='&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png"
-      />
+    <MapContainer
+      center={centerCoordintates}
+      zoom={6}
+      className={className}
+      attributionControl={false}
+    >
+      <TileLayer url="https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png" />
       {markers.map((marker) => (
         <Marker
           key={marker.id_circuit}
