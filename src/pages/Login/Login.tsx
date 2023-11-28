@@ -23,13 +23,13 @@ function Login() {
   const loading = useAppSelector((state) => state.settings.loading);
 
   // Form login processing
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form) as unknown as HTMLFormElement;
 
     // Making the email to lower case before checking at database
-    const emailInput = formData.get('email');
+    const emailInput = formData.get('email') as string;
     const emailToLowerCase = emailInput.toLowerCase();
     formData.set('email', emailToLowerCase);
 
