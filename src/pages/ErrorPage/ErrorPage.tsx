@@ -15,7 +15,7 @@ function ErrorPage() {
         to="/"
       >
         Retourner vers la page d&apos;accueil
-        <Compass size={34} />
+        <Compass className="w-7 h-7" />
       </Link>
     </div>
   );
