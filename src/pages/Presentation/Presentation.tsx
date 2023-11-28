@@ -1,17 +1,10 @@
-import { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Compass, Lightbulb, Map, MapPinned, Trophy } from 'lucide-react';
 
 import Footer from '../../components/Footer/Footer';
 
 function Presentation() {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
   return (
     <div className="flex-grow-1 flex flex-col">
       <section className="flex flex-col m-auto p-4">
