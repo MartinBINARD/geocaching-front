@@ -1,16 +1,12 @@
 import { Link, Navigate } from 'react-router-dom';
+import { Compass, MountainSnow } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-// Import login from settings reducer
 import { login } from '../../store/reducers/settings';
 
-// Componants
 import Footer from '../../components/Footer/Footer';
 import SettingsInput from '../../components/SettingsInput/SettingsInput';
 import Loader from '../../components/Loader/Loader';
-
-// import of icons
-import logo from '../../assets/logo/compass.png';
 
 function Login() {
   const dispatch = useAppDispatch();
@@ -37,7 +33,6 @@ function Login() {
     dispatch(login(formData));
   };
 
-  // if call API is pending, display Loader componant
   if (loading) {
     return <Loader />;
   }
@@ -45,11 +40,7 @@ function Login() {
   return (
     <>
       <div className="flex flex-col items-center justify-center gap-5  lg:flex-row m-auto w-full p-4">
-        {/* <img
-          className="w-1/2 lg:w-1/4 lg:pr-20"
-          src={icon}
-          alt="Icon d'un sac à dos"
-        /> */}
+        <MountainSnow className="w-44 h-44 m-5" />
         <div className="lg:w-1/3 flex flex-col items-center lg:items-start lg:border-l lg:border-primary lg:pl-20">
           <h2 className="font-bold text-xl my-5">Connexion</h2>
           {failedLogin ? (
@@ -79,7 +70,7 @@ function Login() {
                 type="submit"
                 className="flex gap-2 items-center btn btn-primary text-white mt-2 text-base normal-case"
               >
-                <img className="h-10" src={logo} alt="logo de caching'o" />
+                <Compass className="w-7 h-7" />
                 Connexion
               </button>
             </div>
