@@ -1,5 +1,5 @@
 // import footer componant
-import { Footprints, Lightbulb, MapPinned, UnlockKeyhole } from 'lucide-react';
+import { Footprints, Navigation, Sprout, UnlockKeyhole } from 'lucide-react';
 import Footer from '../../components/Footer/Footer';
 // import icons and member's illustrations
 
@@ -14,7 +14,7 @@ function Informations() {
         </div>
         <section className="flex flex-col xl:flex-row lg:justify-center items-center xl:items-start text-lg gap-20 mb-5 pb-10 align-top">
           <section className="max-w-sm flex flex-col items-center">
-            <UnlockKeyhole className="w-24 h-24" />
+            <UnlockKeyhole className="w-24 h-24 text-yellow-400" />
             <h3 className="font-bold text-2xl my-3">Accès au jeu</h3>
             <p className="text-base text">
               L&apos;accès au parcours n&apos;est accordé qu&apos;aux
@@ -22,7 +22,7 @@ function Informations() {
             </p>
           </section>
           <section className="max-w-sm flex flex-col items-center">
-            <MapPinned className="w-24 h-24" />
+            <Navigation className="w-24 h-24 text-blue-700" />
             <h3 className="font-bold text-2xl my-3">Géolocalisation</h3>
             <p className="text-base">
               Afin que le joueur puisse voir sa position sur la carte, il doit
@@ -31,7 +31,7 @@ function Informations() {
             </p>
           </section>
           <section className="max-w-sm flex flex-col items-center">
-            <Footprints className="w-24 h-24" />
+            <Footprints className="w-24 h-24 text-secondary" />
             <h3 className="font-bold text-2xl my-3">Les parcours</h3>
             <p className="text-base">
               Le jeu se déroule en intégralité sur le domaine public. Le joueur
@@ -45,7 +45,7 @@ function Informations() {
           </section>
         </section>
         <section className="flex flex-col xl:flex-row xl:gap-10 xl:w-2/3 xl:shadow-lg xl:rounded-lg xl:p-6 items-center m-auto">
-          <Lightbulb className="w-24 h-24" />
+          <Sprout className="w-24 h-24 text-green-500" />
           <div className="flex flex-col items-center xl:items-start">
             <h3 className="font-bold text-2xl my-3">Génèse</h3>
             <p>
