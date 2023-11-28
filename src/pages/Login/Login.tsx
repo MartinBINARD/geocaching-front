@@ -1,5 +1,5 @@
 import { Link, Navigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 // Import login from settings reducer
 import { login } from '../../store/reducers/settings';
@@ -13,19 +13,16 @@ import Loader from '../../components/Loader/Loader';
 import logo from '../../assets/logo/compass.png';
 
 function Login() {
-  // Dispatch function for sending actions to the store
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  // State to know if the user is logged and then redirect him to his profile
-  const user = useSelector((state) => state.settings.user);
-  // State to know if the user request was refused
-  const failedLogin = useSelector((state) => state.settings.failedLogin);
-  // State to know the error message for user request
-  const errorMessage = useSelector((state) => state.settings.loginErrorMessage);
-  // State to know if login is pending
-  const loading = useSelector((state) => state.settings.loading);
+  const user = useAppSelector((state) => state.settings.user);
+  const failedLogin = useAppSelector((state) => state.settings.failedLogin);
+  const errorMessage = useAppSelector(
+    (state) => state.settings.loginErrorMessage
+  );
+  const loading = useAppSelector((state) => state.settings.loading);
 
-  // Function to get formData and send it to API with login()
+  // Form login processing
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
