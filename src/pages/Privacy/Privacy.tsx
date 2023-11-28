@@ -20,7 +20,7 @@ function Privacy() {
       </h3>
       <p>
         Selon le décret 2021-1363 sur la conservation des données aux fins de
-        sauvegarde de la sécurité nationale, l’application Caching’O se doit –
+        sauvegarde de la sécurité nationale, l’application CacheTrek se doit –
         en tant qu’intermédiaire technique – de conserver :
       </p>
       <ul>
@@ -38,7 +38,7 @@ function Privacy() {
       </ul>
       <h3 className="font-bold text-xl">Cookies</h3>
       <p>
-        Caching’O n’utilise que les cookies strictement nécessaires au bon
+        CacheTrek n’utilise que les cookies strictement nécessaires au bon
         fonctionnement de l’application.
       </p>
       <div className="flex flex-col items-center gap-5 lg:flex-row lg:gap-10">
@@ -49,7 +49,7 @@ function Privacy() {
             Les problèmes liés à un accès limité au réseau internet
             (encombrement du réseau, accès aux informations, transfert de
             données, rupture de transmission, etc.) ne relèvent pas de la
-            responsabilité de Caching’O.
+            responsabilité de CacheTrek.
           </p>
           <p>
             Le joueur s’engage à choisir un parcours adapté à son âge, à sa

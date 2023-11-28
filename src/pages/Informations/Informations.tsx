@@ -1,28 +1,28 @@
 // import footer componant
+import { Footprints, Navigation, Sprout, UnlockKeyhole } from 'lucide-react';
 import Footer from '../../components/Footer/Footer';
 // import icons and member's illustrations
 
 function Informations() {
   return (
     <div className="flex-grow-1 flex flex-col mt-auto">
-      <section className="m-8 flex flex-col m-auto p-8">
+      <section className="flex flex-col m-auto p-8">
         <div className="flex self-center gap-2">
-          <h2 className="font-bold mb-20 text-4xl text-center mb-20">
+          <h2 className="font-bold text-4xl text-center mb-20">
             Informations pratiques
           </h2>
         </div>
         <section className="flex flex-col xl:flex-row lg:justify-center items-center xl:items-start text-lg gap-20 mb-5 pb-10 align-top">
           <section className="max-w-sm flex flex-col items-center">
-            {/* <img className="w-44 mb-2" src={access} alt="compass" /> */}
+            <UnlockKeyhole className="w-24 h-24 text-yellow-400" />
             <h3 className="font-bold text-2xl my-3">Accès au jeu</h3>
             <p className="text-base text">
-              {' '}
               L&apos;accès au parcours n&apos;est accordé qu&apos;aux
               utilisateurs ayant créé un compte.
             </p>
           </section>
           <section className="max-w-sm flex flex-col items-center">
-            <img className="w-44 mb-2" src={geo} alt="compass" />
+            <Navigation className="w-24 h-24 text-blue-700" />
             <h3 className="font-bold text-2xl my-3">Géolocalisation</h3>
             <p className="text-base">
               Afin que le joueur puisse voir sa position sur la carte, il doit
@@ -31,7 +31,7 @@ function Informations() {
             </p>
           </section>
           <section className="max-w-sm flex flex-col items-center">
-            {/* <img className="w-44 mb-2" src={parcours} alt="compass" /> */}
+            <Footprints className="w-24 h-24 text-secondary" />
             <h3 className="font-bold text-2xl my-3">Les parcours</h3>
             <p className="text-base">
               Le jeu se déroule en intégralité sur le domaine public. Le joueur
@@ -45,7 +45,7 @@ function Informations() {
           </section>
         </section>
         <section className="flex flex-col xl:flex-row xl:gap-10 xl:w-2/3 xl:shadow-lg xl:rounded-lg xl:p-6 items-center m-auto">
-          {/* <img className="w-44" src={genese} alt="icon de genese" /> */}
+          <Sprout className="w-24 h-24 text-green-500" />
           <div className="flex flex-col items-center xl:items-start">
             <h3 className="font-bold text-2xl my-3">Génèse</h3>
             <p>
