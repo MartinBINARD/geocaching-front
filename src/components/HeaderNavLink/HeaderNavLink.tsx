@@ -1,6 +1,20 @@
 import { NavLink } from 'react-router-dom';
 
-function HeaderNavLink({ to, label, onClick, className, classNameActive }) {
+interface HeaderNavLinkProps {
+  to: string;
+  label: string;
+  onClick: React.MouseEventHandler<HTMLAnchorElement>;
+  className: string;
+  classNameActive?: string;
+}
+
+function HeaderNavLink({
+  to,
+  label,
+  onClick,
+  className,
+  classNameActive = '',
+}: HeaderNavLinkProps) {
   return (
     <NavLink
       to={to}
