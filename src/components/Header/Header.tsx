@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Navigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 // import from the settings' reducers - logout et session
 import { logout, session } from '../../store/reducers/settings';
@@ -17,10 +17,10 @@ function Header() {
   // building a state for listening the click on "deconnexion" button
   const [logOut, setLogOut] = useState(false);
   // getting pseudo state from store
-  const user = useSelector((state) => state.settings.user);
+  const user = useAppSelector((state) => state.settings.user);
 
   // dispatch function for sending actions to the store
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   // local state for opening the burger menu
   const [isOpen, setIsOpen] = useState(false);
