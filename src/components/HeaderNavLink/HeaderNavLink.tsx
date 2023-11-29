@@ -1,15 +1,11 @@
 import { NavLink } from 'react-router-dom';
 
-// building a component for the header that will utilize daisyUI and Tailwind for each NavLink
-// eslint-disable-next-line react/prop-types
-function HeaderNavLink({ to, children, onClick, classNoActive, classActiv }) {
+function HeaderNavLink({ to, children, onClick, className, classNameActive }) {
   return (
     <NavLink
       to={to}
       className={({ isActive }) =>
-        isActive
-          ? `lg:px-4 link link-hover font-bold ${classActiv}`
-          : `lg:px-4 link link-hover ${classNoActive}`
+        isActive ? `${classNameActive} ${className}` : `${className}`
       }
       onClick={onClick}
     >

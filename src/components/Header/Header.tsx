@@ -2,30 +2,22 @@ import { useState, useEffect } from 'react';
 import { NavLink, Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-// import from the settings' reducers - logout et session
 import { logout, session } from '../../store/reducers/settings';
 
-// import compenant for the nav link
 import HeaderNavLink from '../HeaderNavLink/HeaderNavLink';
 
-// import some icons
 import logo from '../../assets/logo/compass.png';
 import burger from '../../assets/menu/hamburger-menu.svg';
 import close from '../../assets/menu/close.svg';
 
 function Header() {
-  // building a state for listening the click on "deconnexion" button
   const [logOut, setLogOut] = useState(false);
-  // getting pseudo state from store
-  const user = useAppSelector((state) => state.settings.user);
-
-  // dispatch function for sending actions to the store
-  const dispatch = useAppDispatch();
-
-  // local state for opening the burger menu
   const [isOpen, setIsOpen] = useState(false);
 
-  // Call useEffect hook for dispatch session
+  const user = useAppSelector((state) => state.settings.user);
+
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     dispatch(session());
   }, [dispatch]);
@@ -67,25 +59,42 @@ function Header() {
             : 'hidden xl:block'
         }
       >
-        <HeaderNavLink to="/presentation" onClick={handleClick}>
+        <HeaderNavLink
+          to="/presentation"
+          onClick={handleClick}
+          className="link link-hover lg:px-4"
+        >
           Comment jouer ?
         </HeaderNavLink>
-        <HeaderNavLink to="/circuits" onClick={handleClick}>
+        <HeaderNavLink
+          to="/circuits"
+          onClick={handleClick}
+          className="link link-hover lg:px-4"
+        >
           Parcours
         </HeaderNavLink>
-        <HeaderNavLink to="/info" onClick={handleClick}>
+        <HeaderNavLink
+          to="/info"
+          onClick={handleClick}
+          className="link link-hover lg:px-4"
+        >
           Informations pratiques
         </HeaderNavLink>
         {!user || !user.verified ? (
           <>
-            <HeaderNavLink to="/login" onClick={handleClick}>
+            <HeaderNavLink
+              to="/login"
+              onClick={handleClick}
+              className="link link-hover lg:px-4"
+              classNameActive="font-bold"
+            >
               Connexion
             </HeaderNavLink>
             <HeaderNavLink
-              classNoActive="lg:border lg:rounded-md lg:p-1 lg:border-primary lg:bg-primary lg:text-white"
-              classActiv="lg:border lg:rounded-md lg:p-1 lg:border-primary lg:bg-primary lg:text-white"
               to="/register"
               onClick={handleClick}
+              className="link link-hover lg:border lg:rounded-md lg:border-primary lg:bg-primary lg:text-white lg:p-1 lg:px-4"
+              classNameActive="font-bold"
             >
               S&apos;inscrire
             </HeaderNavLink>
@@ -93,14 +102,26 @@ function Header() {
         ) : (
           <>
             {user && user.role === 'admin' ? (
-              <HeaderNavLink to="/admin" onClick={handleClick}>
+              <HeaderNavLink
+                to="/admin"
+                onClick={handleClick}
+                className="link link-hover lg:px-4"
+              >
                 Dashboard
               </HeaderNavLink>
             ) : null}
-            <HeaderNavLink to="/profile" onClick={handleClick}>
+            <HeaderNavLink
+              to="/profile"
+              onClick={handleClick}
+              className="link link-hover lg:px-4"
+            >
               Profil
             </HeaderNavLink>
-            <HeaderNavLink to="/register" onClick={handleLogOut}>
+            <HeaderNavLink
+              to="/register"
+              onClick={handleLogOut}
+              className="link link-hover lg:px-4"
+            >
               Déconnexion
             </HeaderNavLink>
           </>
