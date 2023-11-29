@@ -63,23 +63,20 @@ function Header() {
           to="/presentation"
           onClick={handleClick}
           className="link link-hover lg:px-4"
-        >
-          Comment jouer ?
-        </HeaderNavLink>
+          label="Comment jouer ?"
+        />
         <HeaderNavLink
           to="/circuits"
           onClick={handleClick}
           className="link link-hover lg:px-4"
-        >
-          Parcours
-        </HeaderNavLink>
+          label="Parcours"
+        />
         <HeaderNavLink
           to="/info"
           onClick={handleClick}
           className="link link-hover lg:px-4"
-        >
-          Informations pratiques
-        </HeaderNavLink>
+          label="Informations pratiques"
+        />
         {!user || !user.verified ? (
           <>
             <HeaderNavLink
@@ -87,17 +84,15 @@ function Header() {
               onClick={handleClick}
               className="link link-hover lg:px-4"
               classNameActive="font-bold"
-            >
-              Connexion
-            </HeaderNavLink>
+              label="Connexion"
+            />
             <HeaderNavLink
               to="/register"
               onClick={handleClick}
               className="link link-hover lg:border lg:rounded-md lg:border-primary lg:bg-primary lg:text-white lg:p-1 lg:px-4"
               classNameActive="font-bold"
-            >
-              S&apos;inscrire
-            </HeaderNavLink>
+              label="S'inscrire"
+            />
           </>
         ) : (
           <>
@@ -106,24 +101,21 @@ function Header() {
                 to="/admin"
                 onClick={handleClick}
                 className="link link-hover lg:px-4"
-              >
-                Dashboard
-              </HeaderNavLink>
+                label="Dashboard"
+              />
             ) : null}
             <HeaderNavLink
               to="/profile"
               onClick={handleClick}
               className="link link-hover lg:px-4"
-            >
-              Profil
-            </HeaderNavLink>
+              label="Profil"
+            />
             <HeaderNavLink
               to="/register"
               onClick={handleLogOut}
               className="link link-hover lg:px-4"
-            >
-              Déconnexion
-            </HeaderNavLink>
+              label="Déconnexion"
+            />
           </>
         )}
         {logOut ? <Navigate to="/" /> : null}

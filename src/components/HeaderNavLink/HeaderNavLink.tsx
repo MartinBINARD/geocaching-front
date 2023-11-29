@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-function HeaderNavLink({ to, children, onClick, className, classNameActive }) {
+function HeaderNavLink({ to, label, onClick, className, classNameActive }) {
   return (
     <NavLink
       to={to}
@@ -9,7 +9,7 @@ function HeaderNavLink({ to, children, onClick, className, classNameActive }) {
       }
       onClick={onClick}
     >
-      {children}
+      {label}
     </NavLink>
   );
 }
