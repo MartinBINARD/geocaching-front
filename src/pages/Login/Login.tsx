@@ -1,38 +1,31 @@
 import { Link, Navigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { Compass, MountainSnow } from 'lucide-react';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-// Import login from settings reducer
 import { login } from '../../store/reducers/settings';
 
-// Componants
 import Footer from '../../components/Footer/Footer';
 import SettingsInput from '../../components/SettingsInput/SettingsInput';
 import Loader from '../../components/Loader/Loader';
 
-// import of icons
-import logo from '../../assets/logo/compass.png';
-
 function Login() {
-  // Dispatch function for sending actions to the store
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  // State to know if the user is logged and then redirect him to his profile
-  const user = useSelector((state) => state.settings.user);
-  // State to know if the user request was refused
-  const failedLogin = useSelector((state) => state.settings.failedLogin);
-  // State to know the error message for user request
-  const errorMessage = useSelector((state) => state.settings.loginErrorMessage);
-  // State to know if login is pending
-  const loading = useSelector((state) => state.settings.loading);
+  const user = useAppSelector((state) => state.settings.user);
+  const failedLogin = useAppSelector((state) => state.settings.failedLogin);
+  const errorMessage = useAppSelector(
+    (state) => state.settings.loginErrorMessage
+  );
+  const loading = useAppSelector((state) => state.settings.loading);
 
-  // Function to get formData and send it to API with login()
-  const handleSubmit = (e) => {
+  // Form login processing
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form) as unknown as HTMLFormElement;
 
     // Making the email to lower case before checking at database
-    const emailInput = formData.get('email');
+    const emailInput = formData.get('email') as string;
     const emailToLowerCase = emailInput.toLowerCase();
     formData.set('email', emailToLowerCase);
 
@@ -40,7 +33,6 @@ function Login() {
     dispatch(login(formData));
   };
 
-  // if call API is pending, display Loader componant
   if (loading) {
     return <Loader />;
   }
@@ -48,11 +40,7 @@ function Login() {
   return (
     <>
       <div className="flex flex-col items-center justify-center gap-5  lg:flex-row m-auto w-full p-4">
-        {/* <img
-          className="w-1/2 lg:w-1/4 lg:pr-20"
-          src={icon}
-          alt="Icon d'un sac à dos"
-        /> */}
+        <MountainSnow className="w-44 h-44 m-5" />
         <div className="lg:w-1/3 flex flex-col items-center lg:items-start lg:border-l lg:border-primary lg:pl-20">
           <h2 className="font-bold text-xl my-5">Connexion</h2>
           {failedLogin ? (
@@ -82,7 +70,7 @@ function Login() {
                 type="submit"
                 className="flex gap-2 items-center btn btn-primary text-white mt-2 text-base normal-case"
               >
-                <img className="h-10" src={logo} alt="logo de caching'o" />
+                <Compass className="w-7 h-7" />
                 Connexion
               </button>
             </div>
