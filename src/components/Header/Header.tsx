@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
 import { NavLink, Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
@@ -18,9 +18,17 @@ function Header() {
 
   const dispatch = useAppDispatch();
 
+  const stopScrollingModal = (isModalOpen: boolean): void => {
+    document.body.style.overflow = isModalOpen ? 'hidden' : 'unset';
+  };
+
   useEffect(() => {
     dispatch(session());
   }, [dispatch]);
+
+  useEffect(() => {
+    stopScrollingModal(isOpen);
+  }, [isOpen]);
 
   const handleClickHamburgerMenu = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
