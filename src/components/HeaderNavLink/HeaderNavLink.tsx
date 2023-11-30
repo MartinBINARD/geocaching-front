@@ -5,7 +5,7 @@ interface HeaderNavLinkProps {
   label: string;
   onClick: React.MouseEventHandler<HTMLAnchorElement>;
   className: string;
-  classNameActive?: string;
+  classNameActive: string;
 }
 
 function HeaderNavLink({
@@ -13,7 +13,7 @@ function HeaderNavLink({
   label,
   onClick,
   className,
-  classNameActive = '',
+  classNameActive,
 }: HeaderNavLinkProps) {
   return (
     <NavLink

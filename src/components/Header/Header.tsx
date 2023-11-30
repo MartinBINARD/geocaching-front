@@ -63,18 +63,21 @@ function Header() {
           to="/presentation"
           onClick={handleClick}
           className="link link-hover lg:px-4"
+          classNameActive="font-bold"
           label="Comment jouer ?"
         />
         <HeaderNavLink
           to="/circuits"
           onClick={handleClick}
           className="link link-hover lg:px-4"
+          classNameActive="font-bold"
           label="Parcours"
         />
         <HeaderNavLink
           to="/info"
           onClick={handleClick}
           className="link link-hover lg:px-4"
+          classNameActive="font-bold"
           label="Informations pratiques"
         />
         {user || user.verified ? (
@@ -84,6 +87,7 @@ function Header() {
                 to="/admin"
                 onClick={handleClick}
                 className="link link-hover lg:px-4"
+                classNameActive="font-bold"
                 label="Dashboard"
               />
             ) : null}
@@ -91,12 +95,14 @@ function Header() {
               to="/profile"
               onClick={handleClick}
               className="link link-hover lg:px-4"
+              classNameActive="font-bold"
               label="Profil"
             />
             <HeaderNavLink
               to="/register"
               onClick={handleLogOut}
               className="link link-hover lg:px-4"
+              classNameActive="font-bold"
               label="Déconnexion"
             />
           </>
