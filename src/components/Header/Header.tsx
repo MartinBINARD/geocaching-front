@@ -55,75 +55,77 @@ function Header() {
       <nav
         className={
           isOpen
-            ? 'absolute inset-0 z-50 mt-16 flex flex-col justify-center items-center p-8 space-y-8 bg-white'
+            ? 'absolute inset-0 z-50 mt-16 flex flex-col justify-center items-center p-8 bg-white'
             : 'hidden xl:block'
         }
       >
-        <HeaderNavLink
-          to="/presentation"
-          onClick={handleClick}
-          className="link link-hover lg:px-4"
-          classNameActive="font-bold"
-          label="Comment jouer ?"
-        />
-        <HeaderNavLink
-          to="/circuits"
-          onClick={handleClick}
-          className="link link-hover lg:px-4"
-          classNameActive="font-bold"
-          label="Parcours"
-        />
-        <HeaderNavLink
-          to="/info"
-          onClick={handleClick}
-          className="link link-hover lg:px-4"
-          classNameActive="font-bold"
-          label="Informations pratiques"
-        />
-        {user || user.verified ? (
-          <>
-            {user && user.role === 'admin' ? (
+        <ul className="menu menu-vertical xl:menu-horizontal rounded-box">
+          <HeaderNavLink
+            to="/presentation"
+            onClick={handleClick}
+            className="lg:px-4 max-lg:my-1"
+            classNameActive="active"
+            label="Comment jouer ?"
+          />
+          <HeaderNavLink
+            to="/circuits"
+            onClick={handleClick}
+            className="lg:px-4 max-lg:my-1"
+            classNameActive="active"
+            label="Parcours"
+          />
+          <HeaderNavLink
+            to="/info"
+            onClick={handleClick}
+            className="lg:px-4 max-lg:my-1"
+            classNameActive="active"
+            label="Informations pratiques"
+          />
+          {user || user?.verified ? (
+            <>
+              {user.role === 'admin' ? (
+                <HeaderNavLink
+                  to="/admin"
+                  onClick={handleClick}
+                  className="lg:px-4 max-lg:my-1"
+                  classNameActive="active"
+                  label="Dashboard"
+                />
+              ) : null}
               <HeaderNavLink
-                to="/admin"
+                to="/profile"
                 onClick={handleClick}
-                className="link link-hover lg:px-4"
-                classNameActive="font-bold"
-                label="Dashboard"
+                className="lg:px-4 max-lg:my-1"
+                classNameActive="active"
+                label="Profil"
               />
-            ) : null}
-            <HeaderNavLink
-              to="/profile"
-              onClick={handleClick}
-              className="link link-hover lg:px-4"
-              classNameActive="font-bold"
-              label="Profil"
-            />
-            <HeaderNavLink
-              to="/register"
-              onClick={handleLogOut}
-              className="link link-hover lg:px-4"
-              classNameActive="font-bold"
-              label="Déconnexion"
-            />
-          </>
-        ) : (
-          <>
-            <HeaderNavLink
-              to="/login"
-              onClick={handleClick}
-              className="link link-hover lg:px-4"
-              classNameActive="font-bold"
-              label="Connexion"
-            />
-            <HeaderNavLink
-              to="/register"
-              onClick={handleClick}
-              className="link link-hover lg:border lg:rounded-md lg:border-primary lg:bg-primary lg:text-white lg:p-1 lg:px-4"
-              classNameActive="font-bold"
-              label="S'inscrire"
-            />
-          </>
-        )}
+              <HeaderNavLink
+                to="/register"
+                onClick={handleLogOut}
+                className="lg:px-4 max-lg:my-1"
+                classNameActive="active"
+                label="Déconnexion"
+              />
+            </>
+          ) : (
+            <>
+              <HeaderNavLink
+                to="/login"
+                onClick={handleClick}
+                className="lg:px-4 max-lg:my-1"
+                classNameActive="active"
+                label="Connexion"
+              />
+              <HeaderNavLink
+                to="/register"
+                onClick={handleClick}
+                className="link font-extrabold lg:px-4 max-lg:my-1"
+                classNameActive="active"
+                label="S'inscrire"
+              />
+            </>
+          )}
+        </ul>
         {logOut ? <Navigate to="/" /> : null}
       </nav>
     </header>

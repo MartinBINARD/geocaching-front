@@ -16,15 +16,15 @@ function HeaderNavLink({
   classNameActive,
 }: HeaderNavLinkProps) {
   return (
-    <NavLink
-      to={to}
-      className={({ isActive }) =>
-        isActive ? `${classNameActive} ${className}` : `${className}`
-      }
-      onClick={onClick}
-    >
-      {label}
-    </NavLink>
+    <li className={className}>
+      <NavLink
+        to={to}
+        className={({ isActive }) => (isActive ? classNameActive : '')}
+        onClick={onClick}
+      >
+        {label}
+      </NavLink>
+    </li>
   );
 }
 
