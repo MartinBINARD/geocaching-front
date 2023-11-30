@@ -77,24 +77,7 @@ function Header() {
           className="link link-hover lg:px-4"
           label="Informations pratiques"
         />
-        {!user || !user.verified ? (
-          <>
-            <HeaderNavLink
-              to="/login"
-              onClick={handleClick}
-              className="link link-hover lg:px-4"
-              classNameActive="font-bold"
-              label="Connexion"
-            />
-            <HeaderNavLink
-              to="/register"
-              onClick={handleClick}
-              className="link link-hover lg:border lg:rounded-md lg:border-primary lg:bg-primary lg:text-white lg:p-1 lg:px-4"
-              classNameActive="font-bold"
-              label="S'inscrire"
-            />
-          </>
-        ) : (
+        {user || user.verified ? (
           <>
             {user && user.role === 'admin' ? (
               <HeaderNavLink
@@ -115,6 +98,23 @@ function Header() {
               onClick={handleLogOut}
               className="link link-hover lg:px-4"
               label="Déconnexion"
+            />
+          </>
+        ) : (
+          <>
+            <HeaderNavLink
+              to="/login"
+              onClick={handleClick}
+              className="link link-hover lg:px-4"
+              classNameActive="font-bold"
+              label="Connexion"
+            />
+            <HeaderNavLink
+              to="/register"
+              onClick={handleClick}
+              className="link link-hover lg:border lg:rounded-md lg:border-primary lg:bg-primary lg:text-white lg:p-1 lg:px-4"
+              classNameActive="font-bold"
+              label="S'inscrire"
             />
           </>
         )}
