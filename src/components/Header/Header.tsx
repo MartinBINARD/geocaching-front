@@ -22,13 +22,22 @@ function Header() {
     dispatch(session());
   }, [dispatch]);
 
-  // function to toggle the local state of the burger menu for mobile
-  const handleClick = () => {
-    if (window.innerWidth < 1280) {
-      setIsOpen(!isOpen);
+  const handleClickHamburgerMenu = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+    setIsOpen(!isOpen);
+  };
+
+  const handleClickLink = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+    if (isOpen) {
+      setIsOpen(false);
     }
   };
-  // function to send logout to the store and disconnect
+
   const handleLogOut = () => {
     setLogOut(true);
     localStorage.clear();
@@ -43,7 +52,7 @@ function Header() {
       </NavLink>
       <button
         type="button"
-        onClick={handleClick}
+        onClick={handleClickHamburgerMenu}
         className="xl:hidden cursor-pointer"
       >
         <img
@@ -62,31 +71,31 @@ function Header() {
         <ul className="menu menu-vertical xl:menu-horizontal rounded-box">
           <HeaderNavLink
             to="/presentation"
-            onClick={handleClick}
+            onClick={handleClickLink}
             className="lg:px-4 max-lg:my-1"
             classNameActive="active"
             label="Comment jouer ?"
           />
           <HeaderNavLink
             to="/circuits"
-            onClick={handleClick}
+            onClick={handleClickLink}
             className="lg:px-4 max-lg:my-1"
             classNameActive="active"
             label="Parcours"
           />
           <HeaderNavLink
             to="/info"
-            onClick={handleClick}
+            onClick={handleClickLink}
             className="lg:px-4 max-lg:my-1"
             classNameActive="active"
             label="Informations pratiques"
           />
-          {user || user?.verified ? (
+          {user && user?.verified ? (
             <>
               {user.role === 'admin' ? (
                 <HeaderNavLink
                   to="/admin"
-                  onClick={handleClick}
+                  onClick={handleClickLink}
                   className="lg:px-4 max-lg:my-1"
                   classNameActive="active"
                   label="Dashboard"
@@ -94,7 +103,7 @@ function Header() {
               ) : null}
               <HeaderNavLink
                 to="/profile"
-                onClick={handleClick}
+                onClick={handleClickLink}
                 className="lg:px-4 max-lg:my-1"
                 classNameActive="active"
                 label="Profil"
@@ -111,14 +120,14 @@ function Header() {
             <>
               <HeaderNavLink
                 to="/login"
-                onClick={handleClick}
+                onClick={handleClickLink}
                 className="lg:px-4 max-lg:my-1"
                 classNameActive="active"
                 label="Connexion"
               />
               <HeaderNavLink
                 to="/register"
-                onClick={handleClick}
+                onClick={handleClickLink}
                 className="link font-extrabold lg:px-4 max-lg:my-1"
                 classNameActive="active"
                 label="S'inscrire"
