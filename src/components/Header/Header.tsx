@@ -1,18 +1,18 @@
-import { useState, useEffect, ReactNode } from 'react';
-import { NavLink, Navigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-import { logout, session } from '../../store/reducers/settings';
+import { session } from '../../store/reducers/settings';
 
 import HeaderNavLink from '../HeaderNavLink/HeaderNavLink';
+import HeaderNavLinkLogin from '../HeaderNavLinkLogin/HeaderNavLinkLogin';
 
 import logo from '../../assets/logo/compass.png';
 import burger from '../../assets/menu/hamburger-menu.svg';
 import close from '../../assets/menu/close.svg';
 
 function Header() {
-  const [logOut, setLogOut] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const user = useAppSelector((state) => state.settings.user);
 
@@ -44,13 +44,6 @@ function Header() {
     if (isOpen) {
       setIsOpen(false);
     }
-  };
-
-  const handleLogOut = () => {
-    setLogOut(true);
-    localStorage.clear();
-    dispatch(logout());
-    setIsOpen(false);
   };
 
   return (
@@ -99,31 +92,10 @@ function Header() {
             label="Informations pratiques"
           />
           {user && user?.verified ? (
-            <>
-              {user.role === 'admin' ? (
-                <HeaderNavLink
-                  to="/admin"
-                  onClick={handleClickLink}
-                  className="lg:px-4 max-lg:my-1"
-                  classNameActive="active"
-                  label="Dashboard"
-                />
-              ) : null}
-              <HeaderNavLink
-                to="/profile"
-                onClick={handleClickLink}
-                className="lg:px-4 max-lg:my-1"
-                classNameActive="active"
-                label="Profil"
-              />
-              <HeaderNavLink
-                to="/register"
-                onClick={handleLogOut}
-                className="lg:px-4 max-lg:my-1"
-                classNameActive="active"
-                label="Déconnexion"
-              />
-            </>
+            <HeaderNavLinkLogin
+              setIsOpen={setIsOpen}
+              handleClickLink={handleClickLink}
+            />
           ) : (
             <>
               <HeaderNavLink
@@ -143,7 +115,6 @@ function Header() {
             </>
           )}
         </ul>
-        {logOut ? <Navigate to="/" /> : null}
       </nav>
     </header>
   );
