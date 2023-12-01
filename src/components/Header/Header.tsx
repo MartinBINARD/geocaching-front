@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-
-import { session } from '../../store/reducers/settings';
+import { useAppSelector } from '../../hooks/redux';
 
 import HeaderNavLink from '../HeaderNavLink/HeaderNavLink';
 import HeaderNavLinkLogin from '../HeaderNavLinkLogin/HeaderNavLinkLogin';
@@ -16,15 +14,9 @@ function Header() {
 
   const user = useAppSelector((state) => state.settings.user);
 
-  const dispatch = useAppDispatch();
-
   const stopScrollingModal = (isModalOpen: boolean): void => {
     document.body.style.overflow = isModalOpen ? 'hidden' : 'unset';
   };
-
-  useEffect(() => {
-    dispatch(session());
-  }, [dispatch]);
 
   useEffect(() => {
     stopScrollingModal(isOpen);

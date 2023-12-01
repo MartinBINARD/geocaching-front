@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-import { logout } from '../../store/reducers/settings';
+import { session, logout } from '../../store/reducers/settings';
 
 import HeaderNavLink from '../HeaderNavLink/HeaderNavLink';
 
@@ -20,6 +20,10 @@ function HeaderNavLinkLogin({
   const user = useAppSelector((state) => state.settings.user);
 
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(session());
+  }, [dispatch]);
 
   const handleLogOut = () => {
     setLogOut(true);
