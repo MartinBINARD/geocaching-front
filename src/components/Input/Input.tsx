@@ -2,7 +2,7 @@
 function SettingsInput({ name, type, label, placeholder }) {
   return (
     <>
-      <label className="label" htmlFor={name}>
+      <label className="label" for={name}>
         <span className="label-text">{label}</span>
       </label>
       <input

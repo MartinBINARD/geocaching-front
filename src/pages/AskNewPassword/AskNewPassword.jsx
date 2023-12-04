@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { askPassword } from '../../store/reducers/settings';
 
 // Components
-import SettingsInput from '../../components/SettingsInput/SettingsInput';
 import Loader from '../../components/Loader/Loader';
+import TextInput from '../../components/TextInput/TextInput';
 
 function AskNewPassword() {
   // Init dispatch
@@ -50,11 +50,13 @@ function AskNewPassword() {
         onSubmit={handleSubmit}
         className="flex flex-col gap-2 items-center"
       >
-        <SettingsInput
+        <TextInput
           type="email"
           name="email"
           label="Adresse email"
           placeholder="Renseignez votre email"
+          defaultValue=""
+          className="input input-bordered w-full max-w-xs"
           required
         />
         <div className="self-end py-2">

@@ -5,8 +5,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { login } from '../../store/reducers/settings';
 
 import Footer from '../../components/Footer/Footer';
-import SettingsInput from '../../components/SettingsInput/SettingsInput';
 import Loader from '../../components/Loader/Loader';
+import TextInput from '../../components/TextInput/TextInput';
 
 function Login() {
   const dispatch = useAppDispatch();
@@ -50,17 +50,23 @@ function Login() {
             className="form-control w-full max-w-xs"
             onSubmit={handleSubmit}
           >
-            <SettingsInput
+            <TextInput
               name="email"
               type="email"
               label="Email"
               placeholder="Renseignez votre email ici"
+              defaultValue=""
+              className="input input-bordered w-full max-w-xs"
+              required
             />
-            <SettingsInput
+            <TextInput
               name="password"
               type="password"
               label="Mot de passe"
               placeholder="Renseignez votre mot de passe"
+              defaultValue=""
+              className="input input-bordered w-full max-w-xs"
+              required
             />
             <Link className="p-2 hover:underline text-sm" to="/ask-password">
               Mot de passe oublié ?
