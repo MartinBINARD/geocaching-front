@@ -28,8 +28,8 @@ function Register() {
 
   return (
     <>
-      <article className="flex flex-col-reverse gap-20 lg:flex-row-reverse lg:w-3/4 justify-center items-center p-4 m-auto">
-        <section className="lg:w-1/3 lg:p-8 lg:shadow-lg flex flex-col items-center">
+      <article className="flex flex-col-reverse justify-center items-center p-4 m-auto lg:flex-row-reverse lg:gap-20">
+        <section className="flex flex-col items-center lg:p-8 lg:shadow-lg">
           <h2 className="font-bold my-4">Passeport d&apos;inscription</h2>
           {!isRegistered && (
             <h4 className="text-red-500 font-semibold">{registerError}</h4>
@@ -91,19 +91,11 @@ function Register() {
             Déjà inscrit ?
           </Link>
         </section>
-        <section className="flex flex-col gap-4 lg:w-1/3">
-          <Globe2 className="w-44 h-44 mx-auto" />
-          <h2 className="font-bold text-xl mt-2 py-2 border-b border-primary w-3/4">
+        <section className="flex flex-col">
+          <Globe2 className="w-12 h-12 lg:w-44 lg:h-44 mx-auto" />
+          <h2 className="font-bold text-lg text-center mt-2 py-2 border-b border-primary lg:text-2xl">
             Rejoins la communauté CacheTrek !
           </h2>
-          <p>
-            Tu es un explorateur novice ou expérimenté ? Pars à l’aventure et
-            découvre le monde qui t’entoure !
-          </p>
-          <p>
-            Renseigne ton pseudo et ton email puis valide ton passeport
-            CacheTrek grâce à l&apos;email de confirmation !
-          </p>
         </section>
       </article>
       <Footer />
