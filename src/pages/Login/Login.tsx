@@ -21,13 +21,8 @@ function Login() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
-    const formData = new FormData(form) as unknown as HTMLFormElement;
 
-    const emailInput = formData.get('email') as string;
-    const emailToLowerCase = emailInput.toLowerCase();
-    formData.set('email', emailToLowerCase);
-
-    dispatch(login(formData));
+    dispatch(login(form));
   };
 
   if (loading) {

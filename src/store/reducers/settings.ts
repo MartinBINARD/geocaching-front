@@ -11,6 +11,8 @@ import {
   User,
 } from '../../@types/setting';
 
+import formatUserDataFrom from '../../utils/formatUserDataForm';
+
 interface SettingState {
   /* key user receive both Login (user login form) and User
   infos type from server */
@@ -67,9 +69,9 @@ export const register = createAsyncThunk(
 // using axios for POST at API (login)
 export const login = createAsyncThunk(
   'settings/login',
-  async (formData: HTMLFormElement): Promise<Login> => {
+  async (form: HTMLFormElement): Promise<Login> => {
     try {
-      const objData = Object.fromEntries(formData.entries());
+      const objData = formatUserDataFrom(form);
 
       const { data } = await api.post<Login>('login', objData);
       // return pseudo and role of the user
