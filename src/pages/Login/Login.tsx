@@ -36,10 +36,10 @@ function Login() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center gap-5  lg:flex-row m-auto w-full p-4">
-        <MountainSnow className="w-44 h-44 m-5" />
+      <div className="flex flex-col items-center justify-center w-full gap-5 p-4 m-auto lg:flex-row ">
+        <MountainSnow className="w-12 h-12 lg:w-44 lg:h-44 m-2 lg:m-20" />
         <div className="lg:w-1/3 flex flex-col items-center lg:items-start lg:border-l lg:border-primary lg:pl-20">
-          <h2 className="font-bold text-xl my-5">Connexion</h2>
+          <h2 className="font-bold text-xl my-2 lg:my-5">Connexion</h2>
           {failedLogin && (
             <h4 className="text-red-500 font-semibold">{errorMessage}</h4>
           )}
@@ -65,13 +65,13 @@ function Login() {
               className="input input-bordered w-full max-w-xs"
               required
             />
-            <Link className="p-2 hover:underline text-sm" to="/ask-password">
+            <Link className="text-sm p-2 hover:underline" to="/ask-password">
               Mot de passe oublié ?
             </Link>
-            <div className="flex lg:justify-end justify-center py-2">
+            <div className="flex justify-center py-2 lg:justify-end">
               <button
                 type="submit"
-                className="flex gap-2 items-center btn btn-primary text-white mt-2 text-base normal-case"
+                className="flex items-center gap-2 btn btn-primary text-white mt-2 text-base normal-case"
               >
                 <Compass className="w-7 h-7" />
                 Connexion
@@ -80,7 +80,7 @@ function Login() {
           </form>
           <div className="mt-5">
             <Link
-              className="btn normal-case bg-white m-auto text-sm self-start border border-primary rounded-lg p-2"
+              className="btn normal-case bg-white m-auto text-sm border border-primary rounded-lg p-2"
               to="/register"
             >
               Pas encore inscrit ?
