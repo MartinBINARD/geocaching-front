@@ -3,8 +3,8 @@ import { useLocation, Navigate } from 'react-router-dom';
 import { resetPassword } from '../../store/reducers/settings';
 
 // import componants
-import SettingsInput from '../../components/SettingsInput/SettingsInput';
 import Loader from '../../components/Loader/Loader';
+import TextInput from '../../components/TextInput/TextInput';
 
 function ResetPassword() {
   // init dispatch
@@ -43,18 +43,22 @@ function ResetPassword() {
           Choissisez votre nouveau mot de passe
         </h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-          <SettingsInput
+          <TextInput
             type="password"
             name="password"
             label="Nouveau mot de passe"
             placeholder="Renseignez votre nouveau mot de passe"
+            defaultValue=""
+            className="input input-bordered w-full max-w-xs"
             required
           />
-          <SettingsInput
+          <TextInput
             type="password"
             name="confirmation"
             label="Confirmer le mot de passe"
             placeholder="Confirmer votre nouveau mot de passe"
+            defaultValue=""
+            className="input input-bordered w-full max-w-xs"
             required
           />
           <div className="card-actions justify-end py-2">
