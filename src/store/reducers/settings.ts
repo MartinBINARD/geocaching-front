@@ -19,7 +19,7 @@ interface SettingState {
   loginErrorMessage: string | null;
   isRegistered: boolean | null;
   registerError: string;
-  verified: boolean;
+  isVerified: boolean;
   isReset: boolean;
   loading: boolean;
 }
@@ -31,7 +31,7 @@ const intialState: SettingState = {
   loginErrorMessage: null,
   isRegistered: null,
   registerError: '',
-  verified: false,
+  isVerified: false,
   isReset: false,
   loading: false,
 };
@@ -207,7 +207,7 @@ const settingsReducer = createReducer(intialState, (builder) => {
     .addCase(logout.fulfilled, (state) => {
       toast.success('Vous êtes déconnecté');
       state.user = null;
-      state.verified = false;
+      state.isVerified = false;
     })
     // case of logout is rejected
     .addCase(logout.rejected, () => {
@@ -221,13 +221,13 @@ const settingsReducer = createReducer(intialState, (builder) => {
     })
     // if axios verify is success
     .addCase(verify.fulfilled, (state) => {
-      state.verified = true;
+      state.isVerified = true;
       toast.success('Compte approuvé !');
       state.loading = false;
     })
     // if axios verify is rejected
     .addCase(verify.rejected, (state) => {
-      state.verified = false;
+      state.isVerified = false;
       toast.error('Une erreur est survenue');
       state.loading = false;
     })
