@@ -34,6 +34,10 @@ function Login() {
     return <Loader />;
   }
 
+  if (user) {
+    return <Navigate to="/profile" />;
+  }
+
   return (
     <>
       <div className="flex flex-col items-center justify-center w-full gap-5 p-4 m-auto lg:flex-row ">
@@ -85,7 +89,6 @@ function Login() {
             >
               Pas encore inscrit ?
             </Link>
-            {user && <Navigate to="/profile" />}
           </div>
         </div>
       </div>
