@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Map } from 'lucide-react';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import { getProfile } from '../../store/reducers/user';
 
@@ -8,21 +9,21 @@ import ProfileForm from '../../components/ProfileForm/ProfileForm';
 import ProfileAward from '../../components/ProfileAward/ProfileAward';
 
 function Profile() {
-  const [edit, setEdit] = useState(false);
-  const profile = useSelector((state) => state.user.profile);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const profile = useAppSelector((state) => state.user.profile);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleClick = () => {
-    setEdit(!edit);
+    setIsEdit(!isEdit);
   };
 
   // Refresh profile change when edit is done
   useEffect(() => {
-    if (!edit) {
+    if (!isEdit) {
       dispatch(getProfile());
     }
-  }, [dispatch, edit]);
+  }, [dispatch, isEdit]);
 
   return (
     profile && (
@@ -30,44 +31,33 @@ function Profile() {
         <h2 className="text-center font-bold text-4xl p-4 relative m-auto mb-8">
           <div>
             <span>Mon profil</span>
-            {/* <img
-              src={}
-              alt=""
-              width={200}
-              className="relative mt-[-15px]"
-            /> */}
           </div>
         </h2>
         <section className=" flex flex-row flex-wrap m-auto items-center justify-between max-w-4xl">
           <article className="card flex-col items-center sm:p-4">
             <div className="flex flex-col gap-2 p-4 text-primary shadow-lg rounded-lg self-stretch">
               <h3 className="font-semibold text-lg pt-5 pl-3">Mon profil</h3>
-              {!edit ? (
-                <ProfileDescription {...profile} />
+              {isEdit ? (
+                <ProfileForm {...profile} setIsEdit={setIsEdit} />
               ) : (
-                <ProfileForm {...profile} setEdit={setEdit} />
+                <ProfileDescription {...profile} />
               )}
 
               <button
                 onClick={handleClick}
                 type="button"
                 className={`btn btn-primary ${
-                  !edit ? 'btn-primary' : 'btn-secondary'
+                  isEdit ? 'btn-secondary' : 'btn-primary'
                 }`}
               >
-                {!edit ? 'Modifier' : 'Annuler'}
+                {isEdit ? 'Annuler' : 'Modifier'}
               </button>
             </div>
           </article>
 
           <article className="m-auto">
             <div className="flex flex-col gap-5 text-lg">
-              <img
-                src={pinMapIcon}
-                alt="Une illustration d'une carte"
-                width={150}
-                className="self-center"
-              />
+              <Map className="w-12 h-12" />
               <p className="flex justify-between items-center">
                 <span className="font-bold mr-3">
                   Nombre de circuits terminés:

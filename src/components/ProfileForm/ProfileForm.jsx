@@ -5,7 +5,7 @@ import api from '../../service/axios';
 import TextInput from '../TextInput/TextInput';
 import TextArea from '../TextArea/TextArea';
 
-function ProfileForm({ setEdit, ...profile }) {
+function ProfileForm({ setIsEdit, ...profile }) {
   const { pseudo, email, region, state, city, presentation } = profile;
 
   const [errorMessage, setErrorMessage] = useState(null);
@@ -13,7 +13,7 @@ function ProfileForm({ setEdit, ...profile }) {
   function updateProfile(data) {
     api.patch('/profile', data).then(
       () => {
-        setEdit(false);
+        setIsEdit(false);
         toast.success('Votre profil a bien été mis à jour');
       },
       (err) => {
