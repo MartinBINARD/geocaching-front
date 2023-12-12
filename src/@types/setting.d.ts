@@ -1,14 +1,12 @@
-export interface Login {
-  email: Email;
-  password: string;
+export interface UserRequirements {
+  role: string;
+  isVerified: string;
 }
 
-export interface User {
+export interface User extends UserRequirements {
   id: number;
   email: string;
   pseudo: string;
-  role: string;
-  verified: boolean;
 }
 
 export interface Register {
@@ -18,12 +16,15 @@ export interface Register {
   pseudo: string;
 }
 
-export interface Session {
+export interface Login extends HTMLFormElement {
+  email: HTMLInputElement;
+  password: HTMLInputElement;
+}
+
+export interface Session extends UserRequirements {
   id: number;
   email: string;
   pseudo: string;
-  role: string;
-  verified: boolean;
 }
 
 export interface ResetState {

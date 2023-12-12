@@ -1,3 +1,5 @@
+import { Login } from '../@types/setting';
+
 function setLowerCaseEmail(formData: HTMLFormElement) {
   const emailInput = formData.get('email') as string;
   const emailToLowerCase = emailInput.toLowerCase();
@@ -5,8 +7,8 @@ function setLowerCaseEmail(formData: HTMLFormElement) {
   return formData.set('email', emailToLowerCase);
 }
 
-function formatUserDataFrom(form: HTMLFormElement) {
-  const formData = new FormData(form) as unknown as HTMLFormElement;
+function formatUserDataFrom(form: Login) {
+  const formData = new FormData(form) as unknown as Login;
 
   setLowerCaseEmail(formData);
 

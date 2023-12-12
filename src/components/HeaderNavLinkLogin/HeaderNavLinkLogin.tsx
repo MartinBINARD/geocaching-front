@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-import { session, logout } from '../../store/reducers/settings';
+import { logout } from '../../store/reducers/settings';
 
 import HeaderNavLink from '../HeaderNavLink/HeaderNavLink';
 
@@ -21,16 +21,16 @@ function HeaderNavLinkLogin({
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(session());
-  }, [dispatch]);
-
   const handleLogOut = () => {
     setLogOut(true);
     localStorage.clear();
     dispatch(logout());
     setIsOpen(false);
   };
+
+  if (logOut) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <>
@@ -57,7 +57,6 @@ function HeaderNavLinkLogin({
         classNameActive="active"
         label="Déconnexion"
       />
-      {logOut && <Navigate to="/" />}
     </>
   );
 }

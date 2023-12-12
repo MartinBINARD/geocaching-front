@@ -14,9 +14,7 @@ import {
 import formatUserDataFrom from '../../utils/formatUserDataForm';
 
 interface SettingState {
-  /* key user receive both Login (user login form) and User
-  infos type from server */
-  user: User | Login | null;
+  user: User | null;
   failedLogin: boolean;
   loginErrorMessage: string | null;
   isRegistered: boolean | null;
@@ -26,7 +24,6 @@ interface SettingState {
   loading: boolean;
 }
 
-// init states
 const intialState: SettingState = {
   user: null,
   failedLogin: false,
@@ -69,12 +66,12 @@ export const register = createAsyncThunk(
 // using axios for POST at API (login)
 export const login = createAsyncThunk(
   'settings/login',
-  async (form: HTMLFormElement): Promise<Login> => {
+  async (form: Login): Promise<User> => {
     try {
       const objData = formatUserDataFrom(form);
 
-      const { data } = await api.post<Login>('login', objData);
-      // return pseudo and role of the user
+      const { data } = await api.post<User>('login', objData);
+
       return data;
     } catch (error) {
       throw error.response.data.error;
@@ -182,6 +179,7 @@ const settingsReducer = createReducer(intialState, (builder) => {
     // if axios POST login is success
     .addCase(login.fulfilled, (state, action) => {
       state.user = action.payload;
+
       toast.success('Vous êtes connecté');
       state.failedLogin = false;
       state.loading = false;
