@@ -20,7 +20,7 @@ interface SettingState {
   loginErrorMessage: string | null;
   isRegistered: boolean | null;
   registerErrorMessage: string;
-  isVerified: boolean;
+  isAccountConfirmed: boolean;
   isReset: boolean;
   isLoading: boolean;
 }
@@ -31,7 +31,7 @@ const intialState: SettingState = {
   loginErrorMessage: null,
   isRegistered: null,
   registerErrorMessage: '',
-  isVerified: false,
+  isAccountConfirmed: false,
   isReset: false,
   isLoading: false,
 };
@@ -194,7 +194,7 @@ const settingsReducer = createReducer(intialState, (builder) => {
     .addCase(logout.fulfilled, (state) => {
       toast.success('Vous êtes déconnecté');
       state.user = null;
-      state.isVerified = false;
+      state.isAccountConfirmed = false;
     })
     .addCase(logout.rejected, () => {
       toast.error(
@@ -205,12 +205,12 @@ const settingsReducer = createReducer(intialState, (builder) => {
       state.isLoading = true;
     })
     .addCase(verify.fulfilled, (state) => {
-      state.isVerified = true;
+      state.isAccountConfirmed = true;
       toast.success('Compte approuvé !');
       state.isLoading = false;
     })
     .addCase(verify.rejected, (state) => {
-      state.isVerified = false;
+      state.isAccountConfirmed = false;
       toast.error('Une erreur est survenue');
       state.isLoading = false;
     })

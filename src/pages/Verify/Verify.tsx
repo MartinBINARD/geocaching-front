@@ -11,7 +11,9 @@ function Verify() {
   const searchParams = new URLSearchParams(location.search);
   const token: string | null = searchParams.get('token');
 
-  const isVerified = useAppSelector((state) => state.settings.isVerified);
+  const isAccountConfirmed = useAppSelector(
+    (state) => state.settings.isAccountConfirmed
+  );
 
   useEffect(() => {
     if (token) {
@@ -19,7 +21,7 @@ function Verify() {
     }
   }, [dispatch, token]);
 
-  if (isVerified) {
+  if (isAccountConfirmed) {
     return <Navigate to="/login" />;
   }
 

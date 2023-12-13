@@ -91,7 +91,7 @@ function Header() {
             classNameActive="active"
             label="Informations pratiques"
           />
-          {user && user.verified ? (
+          {user?.isAccountConfirmed ? (
             <HeaderNavLinkLogin
               setIsOpen={setIsOpen}
               handleClickLink={handleClickLink}

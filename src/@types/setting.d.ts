@@ -14,7 +14,7 @@ export interface RegisterSucces {
 
 export interface UserRequirements {
   role: string;
-  isVerified: string;
+  isAccountConfirmed: string;
 }
 
 export interface User extends UserRequirements {
