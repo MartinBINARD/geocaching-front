@@ -16,7 +16,7 @@ import formatUserDataFrom from '../../utils/formatUserDataForm';
 
 interface SettingState {
   user: User | null;
-  failedLogin: boolean;
+  isLoginSuccess: boolean;
   loginErrorMessage: string | null;
   isRegistered: boolean | null;
   registerError: string;
@@ -27,7 +27,7 @@ interface SettingState {
 
 const intialState: SettingState = {
   user: null,
-  failedLogin: false,
+  isLoginSuccess: true,
   loginErrorMessage: null,
   isRegistered: null,
   registerError: '',
@@ -172,11 +172,11 @@ const settingsReducer = createReducer(intialState, (builder) => {
       state.user = action.payload;
 
       toast.success('Vous êtes connecté');
-      state.failedLogin = false;
+      state.isLoginSuccess = true;
       state.loading = false;
     })
     .addCase(login.rejected, (state, action) => {
-      state.failedLogin = true;
+      state.isLoginSuccess = false;
       /* "!" post-fix expression operator for null and undefined compatibility 
       TypeScript can not predict error server reponse
       See documentation :
@@ -188,7 +188,7 @@ const settingsReducer = createReducer(intialState, (builder) => {
       state.user = action.payload;
     })
     .addCase(session.rejected, (state) => {
-      state.failedLogin = true;
+      state.isLoginSuccess = false;
       toast.error('Impossible de se connecté à la session');
     })
     .addCase(logout.fulfilled, (state) => {
