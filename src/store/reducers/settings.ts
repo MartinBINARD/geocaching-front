@@ -22,7 +22,7 @@ interface SettingState {
   registerErrorMessage: string;
   isVerified: boolean;
   isReset: boolean;
-  loading: boolean;
+  isLoading: boolean;
 }
 
 const intialState: SettingState = {
@@ -33,7 +33,7 @@ const intialState: SettingState = {
   registerErrorMessage: '',
   isVerified: false,
   isReset: false,
-  loading: false,
+  isLoading: false,
 };
 
 export const register = createAsyncThunk(
@@ -150,12 +150,12 @@ export const resetPassword = createAsyncThunk(
 const settingsReducer = createReducer(intialState, (builder) => {
   builder
     .addCase(register.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     })
     .addCase(register.fulfilled, (state, action) => {
       state.registerErrorMessage = '';
       toast.success(action.payload.message);
-      state.loading = false;
+      state.isLoading = false;
     })
     .addCase(register.rejected, (state, action) => {
       /* "!" post-fix expression operator for null and undefined compatibility 
@@ -163,17 +163,17 @@ const settingsReducer = createReducer(intialState, (builder) => {
       See documentation :
       https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator */
       state.registerErrorMessage = action.error.message!;
-      state.loading = false;
+      state.isLoading = false;
     })
     .addCase(login.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     })
     .addCase(login.fulfilled, (state, action) => {
       state.user = action.payload;
 
       toast.success('Vous êtes connecté');
       state.isLoginSuccess = true;
-      state.loading = false;
+      state.isLoading = false;
     })
     .addCase(login.rejected, (state, action) => {
       state.isLoginSuccess = false;
@@ -182,7 +182,7 @@ const settingsReducer = createReducer(intialState, (builder) => {
       See documentation :
       https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator */
       state.loginErrorMessage = action.error.message!;
-      state.loading = false;
+      state.isLoading = false;
     })
     .addCase(session.fulfilled, (state, action) => {
       state.user = action.payload;
@@ -202,40 +202,40 @@ const settingsReducer = createReducer(intialState, (builder) => {
       );
     })
     .addCase(verify.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     })
     .addCase(verify.fulfilled, (state) => {
       state.isVerified = true;
       toast.success('Compte approuvé !');
-      state.loading = false;
+      state.isLoading = false;
     })
     .addCase(verify.rejected, (state) => {
       state.isVerified = false;
       toast.error('Une erreur est survenue');
-      state.loading = false;
+      state.isLoading = false;
     })
     .addCase(askPassword.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     })
     .addCase(askPassword.fulfilled, (state) => {
-      state.loading = false;
+      state.isLoading = false;
       toast.success('Vérifiez vos email !');
     })
     .addCase(askPassword.rejected, (state) => {
-      state.loading = false;
+      state.isLoading = false;
       toast.error('Email invalide');
     })
     .addCase(resetPassword.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     })
     .addCase(resetPassword.fulfilled, (state) => {
       state.isRegistered = true;
       toast('Réinitialisation effectuée !');
-      state.loading = false;
+      state.isLoading = false;
     })
     .addCase(resetPassword.rejected, (state) => {
       toast('Erreur de mot de passe !');
-      state.loading = false;
+      state.isLoading = false;
     });
 });
 
