@@ -4,6 +4,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import { login } from '../../store/reducers/settings';
 
+import { LoginForm } from '../../@types/setting';
+
 import Footer from '../../components/Footer/Footer';
 import Loader from '../../components/Loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';
@@ -18,9 +20,9 @@ function Login() {
   );
   const loading = useAppSelector((state) => state.settings.loading);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = (e: React.FormEvent<LoginForm>): void => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
+    const form = e.target as LoginForm;
 
     dispatch(login(form));
   };

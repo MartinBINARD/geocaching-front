@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import api from '../../service/axios';
 
 import {
-  Login,
+  LoginForm,
   RegisterForm,
   RegisterSucces,
   ResetState,
@@ -70,7 +70,7 @@ export const register = createAsyncThunk(
 // using axios for POST at API (login)
 export const login = createAsyncThunk(
   'settings/login',
-  async (form: Login): Promise<User> => {
+  async (form: LoginForm): Promise<User> => {
     try {
       const objData = formatUserDataFrom(form);
 
