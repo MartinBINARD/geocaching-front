@@ -67,7 +67,6 @@ export const register = createAsyncThunk(
   }
 );
 
-// using axios for POST at API (login)
 export const login = createAsyncThunk(
   'settings/login',
   async (form: LoginForm): Promise<User> => {
@@ -83,7 +82,6 @@ export const login = createAsyncThunk(
   }
 );
 
-// using axios for GET at API (session)
 export const session = createAsyncThunk(
   'settings/fetchSession',
   async (): Promise<Session> => {
@@ -97,7 +95,6 @@ export const session = createAsyncThunk(
   }
 );
 
-// usings axios for GET at API (verify)
 export const verify = createAsyncThunk(
   'settings/verify',
   async (token: string): Promise<boolean> => {
@@ -110,7 +107,6 @@ export const verify = createAsyncThunk(
   }
 );
 
-// using axios for GET at API (logout)
 export const logout = createAsyncThunk(
   'settings/logout',
   async (): Promise<null> => {
@@ -123,7 +119,6 @@ export const logout = createAsyncThunk(
   }
 );
 
-// using axios for POST the email for ask new password
 export const askPassword = createAsyncThunk(
   'settings/askPassword',
   async (formData: HTMLFormElement): Promise<void> => {
@@ -137,7 +132,6 @@ export const askPassword = createAsyncThunk(
   }
 );
 
-// using axios for PATCH the new password
 export const resetPassword = createAsyncThunk(
   'settings/resetPassword',
   async ({ formData, token, userId }: ResetState): Promise<void> => {
@@ -155,17 +149,14 @@ export const resetPassword = createAsyncThunk(
 
 const settingsReducer = createReducer(intialState, (builder) => {
   builder
-    // if axios POST register is pending
     .addCase(register.pending, (state) => {
       state.loading = true;
     })
-    // if axios POST register is success
     .addCase(register.fulfilled, (state, action) => {
       state.registerError = '';
       toast.success(action.payload.message);
       state.loading = false;
     })
-    // if axios POST register is rejected
     .addCase(register.rejected, (state, action) => {
       /* "!" post-fix expression operator for null and undefined compatibility 
       TypeScript can not predict error server reponse
@@ -174,11 +165,9 @@ const settingsReducer = createReducer(intialState, (builder) => {
       state.registerError = action.error.message!;
       state.loading = false;
     })
-    // if axios POST login is pending
     .addCase(login.pending, (state) => {
       state.loading = true;
     })
-    // if axios POST login is success
     .addCase(login.fulfilled, (state, action) => {
       state.user = action.payload;
 
@@ -186,7 +175,6 @@ const settingsReducer = createReducer(intialState, (builder) => {
       state.failedLogin = false;
       state.loading = false;
     })
-    // if axios POST login is rejected
     .addCase(login.rejected, (state, action) => {
       state.failedLogin = true;
       /* "!" post-fix expression operator for null and undefined compatibility 
@@ -196,38 +184,31 @@ const settingsReducer = createReducer(intialState, (builder) => {
       state.loginErrorMessage = action.error.message!;
       state.loading = false;
     })
-    // if axios session is success
     .addCase(session.fulfilled, (state, action) => {
       state.user = action.payload;
     })
-    // if axios session is rejected
     .addCase(session.rejected, (state) => {
       state.failedLogin = true;
       toast.error('Impossible de se connecté à la session');
     })
-    // case of logout is success
     .addCase(logout.fulfilled, (state) => {
       toast.success('Vous êtes déconnecté');
       state.user = null;
       state.isVerified = false;
     })
-    // case of logout is rejected
     .addCase(logout.rejected, () => {
       toast.error(
         'Impossible de vous déconnecté, veuillez essayer ultérieurement'
       );
     })
-    // if axios verify is pending
     .addCase(verify.pending, (state) => {
       state.loading = true;
     })
-    // if axios verify is success
     .addCase(verify.fulfilled, (state) => {
       state.isVerified = true;
       toast.success('Compte approuvé !');
       state.loading = false;
     })
-    // if axios verify is rejected
     .addCase(verify.rejected, (state) => {
       state.isVerified = false;
       toast.error('Une erreur est survenue');
@@ -244,17 +225,14 @@ const settingsReducer = createReducer(intialState, (builder) => {
       state.loading = false;
       toast.error('Email invalide');
     })
-    // if axios resetPassword is pending
     .addCase(resetPassword.pending, (state) => {
       state.loading = true;
     })
-    // if axios resetPassword is success
     .addCase(resetPassword.fulfilled, (state) => {
       state.isRegistered = true;
       toast('Réinitialisation effectuée !');
       state.loading = false;
     })
-    // if axios resetPassword is rejected
     .addCase(resetPassword.rejected, (state) => {
       toast('Erreur de mot de passe !');
       state.loading = false;
