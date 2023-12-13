@@ -19,7 +19,7 @@ interface SettingState {
   isLoginSuccess: boolean;
   loginErrorMessage: string | null;
   isRegistered: boolean | null;
-  registerError: string;
+  registerErrorMessage: string;
   isVerified: boolean;
   isReset: boolean;
   loading: boolean;
@@ -30,7 +30,7 @@ const intialState: SettingState = {
   isLoginSuccess: true,
   loginErrorMessage: null,
   isRegistered: null,
-  registerError: '',
+  registerErrorMessage: '',
   isVerified: false,
   isReset: false,
   loading: false,
@@ -153,7 +153,7 @@ const settingsReducer = createReducer(intialState, (builder) => {
       state.loading = true;
     })
     .addCase(register.fulfilled, (state, action) => {
-      state.registerError = '';
+      state.registerErrorMessage = '';
       toast.success(action.payload.message);
       state.loading = false;
     })
@@ -162,7 +162,7 @@ const settingsReducer = createReducer(intialState, (builder) => {
       TypeScript can not predict error server reponse
       See documentation :
       https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator */
-      state.registerError = action.error.message!;
+      state.registerErrorMessage = action.error.message!;
       state.loading = false;
     })
     .addCase(login.pending, (state) => {
