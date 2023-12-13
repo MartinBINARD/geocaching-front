@@ -4,6 +4,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import { register } from '../../store/reducers/settings';
 
+import { RegisterForm } from '../../@types/setting';
+
 import Footer from '../../components/Footer/Footer';
 import Loader from '../../components/Loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';
@@ -15,10 +17,10 @@ function Register() {
   const registerError = useAppSelector((state) => state.settings.registerError);
   const loading = useAppSelector((state) => state.settings.loading);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = (e: React.FormEvent<RegisterForm>): void => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const formData = new FormData(form) as unknown as HTMLFormElement;
+    const form = e.target as RegisterForm;
+    const formData = new FormData(form) as unknown as RegisterForm;
     dispatch(register(formData));
   };
 
@@ -32,7 +34,9 @@ function Register() {
         <section className="flex flex-col items-center lg:p-8 lg:shadow-lg">
           <h2 className="font-bold my-4">Passeport d&apos;inscription</h2>
           {!isRegistered && (
-            <h4 className="text-red-500 font-semibold">{registerError}</h4>
+            <h4 className="text-red-500 font-semibold w-full max-w-xs">
+              {registerError}
+            </h4>
           )}
           <form
             className="flex flex-col gap-1 max-w-xs"

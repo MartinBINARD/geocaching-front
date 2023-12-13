@@ -5,7 +5,8 @@ import api from '../../service/axios';
 
 import {
   Login,
-  Register,
+  RegisterForm,
+  RegisterSucces,
   ResetState,
   Session,
   User,
@@ -37,28 +38,31 @@ const intialState: SettingState = {
 
 export const register = createAsyncThunk(
   'settings/register',
-  async (formData: HTMLFormElement): Promise<boolean> => {
+  async (formData: RegisterForm): Promise<RegisterSucces> => {
     try {
       const objData = Object.fromEntries(formData.entries());
 
-      await api.post<Register>('register', objData);
+      const { data } = await api.post<RegisterSucces>('register', objData);
 
-      return true;
+      return data;
     } catch (error) {
-      // Send notification priority error from server or send generic message
       if (error.response.data.error) {
-        console.log(error.response.data.error);
         const errorMessage = error.response.data.error;
+
         if (errorMessage.includes('user_email_key')) {
-          throw new Error('Email déjà utilisé');
-        } else if (errorMessage.includes('user_pseudo_key')) {
-          throw new Error('Pseudo déjà utilisé');
-        } else {
-          throw new Error(errorMessage);
+          throw new Error(`Cette adresse email n'est pas valide`);
         }
+
+        if (errorMessage.includes('user_pseudo_key')) {
+          throw new Error(`Ce pseudo n'est pas valide`);
+        }
+
+        throw new Error(errorMessage);
       }
-      // // Throw prior error server or generic to be dispatched in regsiterError located in card
-      throw error.response ? error.response.data : error.message;
+
+      throw new Error(
+        'Désolé, nous rencontrons quelques problèmes techniques. Veuillez essayer de nouveau.'
+      );
     }
   }
 );
@@ -156,11 +160,9 @@ const settingsReducer = createReducer(intialState, (builder) => {
       state.loading = true;
     })
     // if axios POST register is success
-    .addCase(register.fulfilled, (state) => {
+    .addCase(register.fulfilled, (state, action) => {
       state.registerError = '';
-      toast.success(
-        `Inscription réussie. Validez votre inscription avec le mail de confirmation !`
-      );
+      toast.success(action.payload.message);
       state.loading = false;
     })
     // if axios POST register is rejected
