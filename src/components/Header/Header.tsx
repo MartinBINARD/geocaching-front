@@ -14,7 +14,7 @@ import close from '../../assets/menu/close.svg';
 function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const user = useAppSelector((state) => state.settings.user);
+  const isLogin = useAppSelector((state) => state.settings.isLogin);
 
   const dispatch = useAppDispatch();
 
@@ -91,7 +91,7 @@ function Header() {
             classNameActive="active"
             label="Informations pratiques"
           />
-          {user?.isAccountConfirmed ? (
+          {isLogin ? (
             <HeaderNavLinkLogin
               setIsOpen={setIsOpen}
               handleClickLink={handleClickLink}

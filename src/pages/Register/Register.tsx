@@ -14,8 +14,10 @@ function Register() {
   const dispatch = useAppDispatch();
 
   const isRegistered = useAppSelector((state) => state.settings.isRegistered);
-  const registerError = useAppSelector((state) => state.settings.registerError);
-  const loading = useAppSelector((state) => state.settings.loading);
+  const registerErrorMessage = useAppSelector(
+    (state) => state.settings.registerErrorMessage
+  );
+  const isLoading = useAppSelector((state) => state.settings.isLoading);
 
   const handleSubmit = (e: React.FormEvent<RegisterForm>): void => {
     e.preventDefault();
@@ -24,7 +26,7 @@ function Register() {
     dispatch(register(formData));
   };
 
-  if (loading) {
+  if (isLoading) {
     return <Loader />;
   }
 
@@ -35,7 +37,7 @@ function Register() {
           <h2 className="font-bold my-4">Passeport d&apos;inscription</h2>
           {!isRegistered && (
             <h4 className="text-red-500 font-semibold w-full max-w-xs">
-              {registerError}
+              {registerErrorMessage}
             </h4>
           )}
           <form

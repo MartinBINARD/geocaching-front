@@ -12,7 +12,7 @@ import Privacy from '../pages/Privacy/Privacy';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 import Profile from '../pages/Profile/Profile';
-import Verify from '../pages/Verify/Verify';
+import CheckUserAccountConfirmation from '../pages/CheckUserAccountConfirmation/CheckUserAccountConfirmation';
 import AskNewPassword from '../pages/AskNewPassword/AskNewPassword';
 import ResetPassword from '../pages/ResetPassword/ResetPassword';
 import Congrats from '../pages/Congrats/Congrats';
@@ -68,7 +68,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/verify',
-        element: <Verify />,
+        element: <CheckUserAccountConfirmation />,
       },
       {
         path: '/register',

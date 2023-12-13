@@ -2,10 +2,9 @@ import { useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-import { verify } from '../../store/reducers/settings';
+import { checkUserAccountConfirmation } from '../../store/reducers/settings';
 
-function Verify() {
-  // Init dispatch and location and use URLSearchParams to get the token
+function CheckUserAccountConfirmation() {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -17,7 +16,7 @@ function Verify() {
 
   useEffect(() => {
     if (token) {
-      dispatch(verify(token));
+      dispatch(checkUserAccountConfirmation(token));
     }
   }, [dispatch, token]);
 
@@ -35,4 +34,4 @@ function Verify() {
   );
 }
 
-export default Verify;
+export default CheckUserAccountConfirmation;

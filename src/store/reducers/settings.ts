@@ -16,7 +16,7 @@ import formatUserDataFrom from '../../utils/formatUserDataForm';
 
 interface SettingState {
   user: User | null;
-  isLoginSuccess: boolean;
+  isLogin: boolean;
   loginErrorMessage: string | null;
   isRegistered: boolean | null;
   registerErrorMessage: string;
@@ -27,7 +27,7 @@ interface SettingState {
 
 const intialState: SettingState = {
   user: null,
-  isLoginSuccess: true,
+  isLogin: false,
   loginErrorMessage: null,
   isRegistered: null,
   registerErrorMessage: '',
@@ -95,8 +95,8 @@ export const session = createAsyncThunk(
   }
 );
 
-export const verify = createAsyncThunk(
-  'settings/verify',
+export const checkUserAccountConfirmation = createAsyncThunk(
+  'settings/confirm-user-account',
   async (token: string): Promise<boolean> => {
     try {
       await api.get(`verify?token=${token}`);
@@ -172,11 +172,11 @@ const settingsReducer = createReducer(intialState, (builder) => {
       state.user = action.payload;
 
       toast.success('Vous êtes connecté');
-      state.isLoginSuccess = true;
+      state.isLogin = true;
       state.isLoading = false;
     })
     .addCase(login.rejected, (state, action) => {
-      state.isLoginSuccess = false;
+      state.isLogin = false;
       /* "!" post-fix expression operator for null and undefined compatibility 
       TypeScript can not predict error server reponse
       See documentation :
@@ -188,28 +188,28 @@ const settingsReducer = createReducer(intialState, (builder) => {
       state.user = action.payload;
     })
     .addCase(session.rejected, (state) => {
-      state.isLoginSuccess = false;
+      state.isLogin = false;
       toast.error('Impossible de se connecté à la session');
     })
     .addCase(logout.fulfilled, (state) => {
       toast.success('Vous êtes déconnecté');
       state.user = null;
-      state.isAccountConfirmed = false;
+      state.isLogin = false;
     })
     .addCase(logout.rejected, () => {
       toast.error(
         'Impossible de vous déconnecté, veuillez essayer ultérieurement'
       );
     })
-    .addCase(verify.pending, (state) => {
+    .addCase(checkUserAccountConfirmation.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(verify.fulfilled, (state) => {
+    .addCase(checkUserAccountConfirmation.fulfilled, (state) => {
       state.isAccountConfirmed = true;
       toast.success('Compte approuvé !');
       state.isLoading = false;
     })
-    .addCase(verify.rejected, (state) => {
+    .addCase(checkUserAccountConfirmation.rejected, (state) => {
       state.isAccountConfirmed = false;
       toast.error('Une erreur est survenue');
       state.isLoading = false;
