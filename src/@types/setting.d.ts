@@ -29,8 +29,13 @@ export interface Session extends UserRequirements {
   pseudo: string;
 }
 
-export interface ResetState {
-  formData: HTMLFormElement;
-  token: string;
-  userId: string;
+export interface ResetUserPasswordForm extends HTMLFormElement {
+  password: HTMLInputElement;
+  confirmation: HTMLInputElement;
+}
+
+export interface ResetCredentials {
+  form: ResetUserPasswordForm;
+  token: string | null;
+  userId: string | null;
 }

@@ -7,16 +7,16 @@ import {
   LoginForm,
   RegisterForm,
   RegisterSucces,
-  ResetState,
+  ResetCredentials,
   Session,
   User,
 } from '../../@types/setting';
 
 import formatUserDataFrom from '../../utils/formatUserDataForm';
+import formatUserResetCredentials from '../../utils/formatUserResetCredentials';
 
 interface SettingState {
   user: User | null;
-  isLogin: boolean;
   loginErrorMessage: string | null;
   isRegistered: boolean | null;
   registerErrorMessage: string;
@@ -27,7 +27,6 @@ interface SettingState {
 
 const intialState: SettingState = {
   user: null,
-  isLogin: false,
   loginErrorMessage: null,
   isRegistered: null,
   registerErrorMessage: '',
@@ -112,8 +111,9 @@ export const logout = createAsyncThunk(
   'settings/logout',
   async (): Promise<null> => {
     try {
-      await api.get(`/logout`);
-      return null;
+      const { data } = await api.get(`/logout`);
+
+      return data?.message;
     } catch (error) {
       throw error.response ? error.response.data : error.message;
     }
@@ -121,7 +121,7 @@ export const logout = createAsyncThunk(
 );
 
 export const askPassword = createAsyncThunk(
-  'settings/askPassword',
+  'settings/ask-password',
   async (formData: HTMLFormElement): Promise<void> => {
     try {
       const objData = Object.fromEntries(formData.entries());
@@ -133,14 +133,12 @@ export const askPassword = createAsyncThunk(
   }
 );
 
-export const resetPassword = createAsyncThunk(
-  'settings/resetPassword',
-  async ({ formData, token, userId }: ResetState): Promise<void> => {
+export const updatePassword = createAsyncThunk(
+  'settings/update-password',
+  async (credentials: ResetCredentials): Promise<void> => {
     try {
-      const objData = Object.fromEntries(formData.entries());
+      const objData = formatUserResetCredentials(credentials);
 
-      objData.token = token;
-      objData.user_id = userId;
       await api.patch('reset-password', objData);
     } catch (error) {
       throw error.response ? error.response.data : error.message;
@@ -173,11 +171,9 @@ const settingsReducer = createReducer(intialState, (builder) => {
       state.user = action.payload;
 
       toast.success('Vous êtes connecté');
-      state.isLogin = true;
       state.isLoading = false;
     })
     .addCase(login.rejected, (state, action) => {
-      state.isLogin = false;
       /* "!" post-fix expression operator for null and undefined compatibility 
       TypeScript can not predict error server reponse
       See documentation :
@@ -188,14 +184,12 @@ const settingsReducer = createReducer(intialState, (builder) => {
     .addCase(session.fulfilled, (state, action) => {
       state.user = action.payload;
     })
-    .addCase(session.rejected, (state) => {
-      state.isLogin = false;
+    .addCase(session.rejected, () => {
       toast.error('Impossible de se connecté à la session');
     })
-    .addCase(logout.fulfilled, (state) => {
-      toast.success('Vous êtes déconnecté');
+    .addCase(logout.fulfilled, (state, action) => {
+      toast.success(action.payload);
       state.user = null;
-      state.isLogin = false;
     })
     .addCase(logout.rejected, () => {
       toast.error(
@@ -226,15 +220,15 @@ const settingsReducer = createReducer(intialState, (builder) => {
       state.isLoading = false;
       toast.error('Email invalide');
     })
-    .addCase(resetPassword.pending, (state) => {
+    .addCase(updatePassword.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(resetPassword.fulfilled, (state) => {
+    .addCase(updatePassword.fulfilled, (state) => {
       state.isRegistered = true;
       toast('Réinitialisation effectuée !');
       state.isLoading = false;
     })
-    .addCase(resetPassword.rejected, (state) => {
+    .addCase(updatePassword.rejected, (state) => {
       toast('Erreur de mot de passe !');
       state.isLoading = false;
     });
