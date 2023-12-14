@@ -11,6 +11,7 @@ import ProfileAward from '../../components/ProfileAward/ProfileAward';
 function Profile() {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const profile = useAppSelector((state) => state.user.profile);
+  console.log('profile', profile);
 
   const dispatch = useAppDispatch();
 
