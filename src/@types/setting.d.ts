@@ -29,6 +29,10 @@ export interface Session extends UserRequirements {
   pseudo: string;
 }
 
+export interface EmailForm extends HTMLFormElement {
+  email: HTMLInputElement;
+}
+
 export interface UpdatePasswordForm extends HTMLFormElement {
   password: HTMLInputElement;
   confirmation: HTMLInputElement;

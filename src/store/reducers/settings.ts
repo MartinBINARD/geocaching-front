@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import api from '../../service/axios';
 
 import {
+  EmailForm,
   LoginForm,
   RegisterForm,
   RegisterSucces,
@@ -12,7 +13,7 @@ import {
   User,
 } from '../../@types/setting';
 
-import formatUserDataFrom from '../../utils/formatUserDataForm';
+import formatUserDataForm from '../../utils/formatUserDataForm';
 import formatUserUpdateCredentials from '../../utils/formatUserUpdateCredentials';
 
 interface SettingState {
@@ -70,7 +71,7 @@ export const login = createAsyncThunk(
   'settings/login',
   async (form: LoginForm): Promise<User> => {
     try {
-      const objData = formatUserDataFrom(form);
+      const objData = formatUserDataForm(form);
 
       const { data } = await api.post<User>('login', objData);
 
@@ -122,9 +123,9 @@ export const logout = createAsyncThunk(
 
 export const forgotPassword = createAsyncThunk(
   'settings/forgot-password',
-  async (formData: HTMLFormElement): Promise<void> => {
+  async (form: EmailForm): Promise<void> => {
     try {
-      const objData = Object.fromEntries(formData.entries());
+      const objData = formatUserDataForm(form);
 
       await api.post('ask-password', objData);
     } catch (error) {

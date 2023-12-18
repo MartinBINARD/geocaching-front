@@ -13,13 +13,7 @@ function ForgotPassword() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
-    const formData = new FormData(form);
-
-    const emailInput = formData.get('email');
-    const emailToLowerCase = emailInput.toLowerCase();
-    formData.set('email', emailToLowerCase);
-
-    dispatch(forgotPassword(formData));
+    dispatch(forgotPassword(form));
     form.reset();
   };
 
