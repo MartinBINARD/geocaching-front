@@ -1,6 +1,6 @@
 import { UpdateCredentials } from '../@types/setting';
 
-function formatUserResetCredentials(credentials: UpdateCredentials) {
+function formatUserUpdateCredentials(credentials: UpdateCredentials) {
   const { form, token, userId } = credentials;
   const formData = new FormData(form);
   const objectData = Object.fromEntries(formData.entries());
@@ -10,4 +10,4 @@ function formatUserResetCredentials(credentials: UpdateCredentials) {
   return newObjectData;
 }
 
-export default formatUserResetCredentials;
+export default formatUserUpdateCredentials;

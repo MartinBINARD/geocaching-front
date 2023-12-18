@@ -13,7 +13,7 @@ import {
 } from '../../@types/setting';
 
 import formatUserDataFrom from '../../utils/formatUserDataForm';
-import formatUserResetCredentials from '../../utils/formatUserResetCredentials';
+import formatUserUpdateCredentials from '../../utils/formatUserUpdateCredentials';
 
 interface SettingState {
   user: User | null;
@@ -137,7 +137,7 @@ export const updatePassword = createAsyncThunk(
   'settings/update-password',
   async (credentials: UpdateCredentials): Promise<void> => {
     try {
-      const objData = formatUserResetCredentials(credentials);
+      const objData = formatUserUpdateCredentials(credentials);
 
       await api.patch('reset-password', objData);
     } catch (error) {
