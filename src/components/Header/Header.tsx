@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+
+import { session } from '../../store/reducers/auth';
 
 import HeaderNavLink from '../HeaderNavLink/HeaderNavLink';
 import HeaderNavLinkLogin from '../HeaderNavLinkLogin/HeaderNavLinkLogin';
@@ -11,8 +13,13 @@ import close from '../../assets/menu/close.svg';
 
 function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
   const user = useAppSelector((state) => state.settings.user);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(session());
+  }, [dispatch]);
 
   const stopScrollingModal = (isModalOpen: boolean): void => {
     document.body.style.overflow = isModalOpen ? 'hidden' : 'unset';
@@ -83,7 +90,7 @@ function Header() {
             classNameActive="active"
             label="Informations pratiques"
           />
-          {user && user?.verified ? (
+          {user?.verified ? (
             <HeaderNavLinkLogin
               setIsOpen={setIsOpen}
               handleClickLink={handleClickLink}

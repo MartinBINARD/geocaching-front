@@ -12,9 +12,9 @@ import Privacy from '../pages/Privacy/Privacy';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 import Profile from '../pages/Profile/Profile';
-import Verify from '../pages/Verify/Verify';
-import AskNewPassword from '../pages/AskNewPassword/AskNewPassword';
-import ResetPassword from '../pages/ResetPassword/ResetPassword';
+import CheckUserAccountConfirmation from '../pages/CheckUserAccountConfirmation/CheckUserAccountConfirmation';
+import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
+import UpdatePassword from '../pages/UpdatePassword/UpdatePassword';
 import Congrats from '../pages/Congrats/Congrats';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import AddCircuit from '../pages/AddCircuit/AddCircuit';
@@ -68,7 +68,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/verify',
-        element: <Verify />,
+        element: <CheckUserAccountConfirmation />,
       },
       {
         path: '/register',
@@ -79,12 +79,12 @@ const router = createBrowserRouter([
         element: <Profile />,
       },
       {
-        path: '/ask-password',
-        element: <AskNewPassword />,
+        path: '/forgot-password',
+        element: <ForgotPassword />,
       },
       {
         path: '/reset',
-        element: <ResetPassword />,
+        element: <UpdatePassword />,
       },
       {
         path: '/admin',
