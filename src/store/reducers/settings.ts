@@ -7,7 +7,7 @@ import {
   LoginForm,
   RegisterForm,
   RegisterSucces,
-  ResetCredentials,
+  UpdateCredentials,
   Session,
   User,
 } from '../../@types/setting';
@@ -135,7 +135,7 @@ export const forgotPassword = createAsyncThunk(
 
 export const updatePassword = createAsyncThunk(
   'settings/update-password',
-  async (credentials: ResetCredentials): Promise<void> => {
+  async (credentials: UpdateCredentials): Promise<void> => {
     try {
       const objData = formatUserResetCredentials(credentials);
 

@@ -1,6 +1,6 @@
-import { ResetCredentials } from '../@types/setting';
+import { UpdateCredentials } from '../@types/setting';
 
-function formatUserResetCredentials(credentials: ResetCredentials) {
+function formatUserResetCredentials(credentials: UpdateCredentials) {
   const { form, token, userId } = credentials;
   const formData = new FormData(form);
   const objectData = Object.fromEntries(formData.entries());

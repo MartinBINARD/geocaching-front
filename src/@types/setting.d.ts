@@ -29,13 +29,13 @@ export interface Session extends UserRequirements {
   pseudo: string;
 }
 
-export interface ResetUserPasswordForm extends HTMLFormElement {
+export interface UpdatePasswordForm extends HTMLFormElement {
   password: HTMLInputElement;
   confirmation: HTMLInputElement;
 }
 
-export interface ResetCredentials {
-  form: ResetUserPasswordForm;
+export interface UpdateCredentials {
+  form: UpdatePasswordForm;
   token: string | null;
   userId: string | null;
 }

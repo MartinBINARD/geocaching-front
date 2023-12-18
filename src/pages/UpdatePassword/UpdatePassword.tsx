@@ -2,7 +2,7 @@ import { useLocation, Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { updatePassword } from '../../store/reducers/settings';
 
-import { ResetCredentials, ResetUserPasswordForm } from '../../@types/setting';
+import { UpdateCredentials, UpdatePasswordForm } from '../../@types/setting';
 
 import Loader from '../../components/Loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';
@@ -18,10 +18,10 @@ function UpdatePassword() {
   const token = searchParams.get('token');
   const userId = searchParams.get('user_id');
 
-  const handleSubmit = (e: React.FormEvent<ResetUserPasswordForm>): void => {
+  const handleSubmit = (e: React.FormEvent<UpdatePasswordForm>): void => {
     e.preventDefault();
-    const form = e.target as ResetUserPasswordForm;
-    const credentials = { form, token, userId } as ResetCredentials;
+    const form = e.target as UpdatePasswordForm;
+    const credentials = { form, token, userId } as UpdateCredentials;
     dispatch(updatePassword(credentials));
   };
 
