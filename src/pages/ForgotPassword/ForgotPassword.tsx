@@ -1,23 +1,25 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import { forgotPassword } from '../../store/reducers/settings';
+
+import { EmailForm } from '../../@types/setting';
 
 import Loader from '../../components/Loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';
 
 function ForgotPassword() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const loading = useSelector((state) => state.settings.loading);
+  const isLoading = useAppSelector((state) => state.settings.isLoading);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<EmailForm>): void => {
     e.preventDefault();
-    const form = e.target;
+    const form = e.target as EmailForm;
     dispatch(forgotPassword(form));
     form.reset();
   };
 
-  if (loading) {
+  if (isLoading) {
     return <Loader />;
   }
 
