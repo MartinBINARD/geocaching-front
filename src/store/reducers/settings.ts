@@ -120,8 +120,8 @@ export const logout = createAsyncThunk(
   }
 );
 
-export const askPassword = createAsyncThunk(
-  'settings/ask-password',
+export const forgotPassword = createAsyncThunk(
+  'settings/forgot-password',
   async (formData: HTMLFormElement): Promise<void> => {
     try {
       const objData = Object.fromEntries(formData.entries());
@@ -209,14 +209,14 @@ const settingsReducer = createReducer(intialState, (builder) => {
       toast.error('Une erreur est survenue');
       state.isLoading = false;
     })
-    .addCase(askPassword.pending, (state) => {
+    .addCase(forgotPassword.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(askPassword.fulfilled, (state) => {
+    .addCase(forgotPassword.fulfilled, (state) => {
       state.isLoading = false;
       toast.success('Vérifiez vos email !');
     })
-    .addCase(askPassword.rejected, (state) => {
+    .addCase(forgotPassword.rejected, (state) => {
       state.isLoading = false;
       toast.error('Email invalide');
     })

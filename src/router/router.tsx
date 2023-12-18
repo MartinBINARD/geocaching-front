@@ -13,7 +13,7 @@ import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 import Profile from '../pages/Profile/Profile';
 import CheckUserAccountConfirmation from '../pages/CheckUserAccountConfirmation/CheckUserAccountConfirmation';
-import AskNewPassword from '../pages/AskNewPassword/AskNewPassword';
+import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import UpdateResetPassword from '../pages/UpdateResetPassword/UpdateResetPassword';
 import Congrats from '../pages/Congrats/Congrats';
 import Dashboard from '../pages/Dashboard/Dashboard';
@@ -79,8 +79,8 @@ const router = createBrowserRouter([
         element: <Profile />,
       },
       {
-        path: '/ask-password',
-        element: <AskNewPassword />,
+        path: '/forgot-password',
+        element: <ForgotPassword />,
       },
       {
         path: '/reset',

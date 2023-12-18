@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { askPassword } from '../../store/reducers/settings';
+import { forgotPassword } from '../../store/reducers/settings';
 
 import Loader from '../../components/Loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';
 
-function AskNewPassword() {
+function ForgotPassword() {
   const dispatch = useDispatch();
 
   const loading = useSelector((state) => state.settings.loading);
@@ -19,7 +19,7 @@ function AskNewPassword() {
     const emailToLowerCase = emailInput.toLowerCase();
     formData.set('email', emailToLowerCase);
 
-    dispatch(askPassword(formData));
+    dispatch(forgotPassword(formData));
     form.reset();
   };
 
@@ -54,4 +54,4 @@ function AskNewPassword() {
   );
 }
 
-export default AskNewPassword;
+export default ForgotPassword;

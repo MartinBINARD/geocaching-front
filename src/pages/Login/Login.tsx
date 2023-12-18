@@ -65,7 +65,7 @@ function Login() {
               className="input input-bordered w-full max-w-xs"
               required
             />
-            <Link className="text-sm p-2 hover:underline" to="/ask-password">
+            <Link className="text-sm p-2 hover:underline" to="/forgot-password">
               Mot de passe oublié ?
             </Link>
             <div className="flex justify-center py-2 lg:justify-end">
