@@ -40,6 +40,6 @@ export interface UpdatePasswordForm extends HTMLFormElement {
 
 export interface UpdateCredentials {
   form: UpdatePasswordForm;
-  token: string | null;
-  userId: string | null;
+  token: string;
+  userId: string;
 }
