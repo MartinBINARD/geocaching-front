@@ -1,4 +1,4 @@
-import { UpdateCredentials } from '../@types/setting';
+import { UpdateCredentials } from '../@types/auth';
 
 function formatUserUpdateCredentials(credentials: UpdateCredentials) {
   const { form, token, userId } = credentials;

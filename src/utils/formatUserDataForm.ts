@@ -1,4 +1,4 @@
-import { EmailForm, LoginForm } from '../@types/setting';
+import { EmailForm, LoginForm } from '../@types/auth';
 
 function setLowerCaseEmail(formData: EmailForm) {
   const emailInput = formData.get('email') as string;

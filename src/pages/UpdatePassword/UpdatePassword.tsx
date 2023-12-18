@@ -1,8 +1,8 @@
 import { useLocation, Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { updatePassword } from '../../store/reducers/settings';
+import { updatePassword } from '../../store/reducers/auth';
 
-import { UpdateCredentials, UpdatePasswordForm } from '../../@types/setting';
+import { UpdateCredentials, UpdatePasswordForm } from '../../@types/auth';
 
 import Loader from '../../components/Loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';

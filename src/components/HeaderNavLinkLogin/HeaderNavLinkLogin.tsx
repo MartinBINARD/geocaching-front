@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-import { logout } from '../../store/reducers/settings';
+import { logout } from '../../store/reducers/auth';
 
 import HeaderNavLink from '../HeaderNavLink/HeaderNavLink';
 

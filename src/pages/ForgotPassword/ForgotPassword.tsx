@@ -1,8 +1,8 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-import { forgotPassword } from '../../store/reducers/settings';
+import { forgotPassword } from '../../store/reducers/auth';
 
-import { EmailForm } from '../../@types/setting';
+import { EmailForm } from '../../@types/auth';
 
 import Loader from '../../components/Loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';

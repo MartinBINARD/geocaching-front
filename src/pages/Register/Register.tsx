@@ -2,9 +2,9 @@ import { Compass, Globe2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-import { register } from '../../store/reducers/settings';
+import { register } from '../../store/reducers/auth';
 
-import { RegisterForm } from '../../@types/setting';
+import { RegisterForm } from '../../@types/auth';
 
 import Footer from '../../components/Footer/Footer';
 import Loader from '../../components/Loader/Loader';

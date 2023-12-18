@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-import { checkUserAccountConfirmation } from '../../store/reducers/settings';
+import { checkUserAccountConfirmation } from '../../store/reducers/auth';
 
 function CheckUserAccountConfirmation() {
   const dispatch = useAppDispatch();
