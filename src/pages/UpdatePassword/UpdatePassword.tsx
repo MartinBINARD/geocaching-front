@@ -7,7 +7,7 @@ import { ResetCredentials, ResetUserPasswordForm } from '../../@types/setting';
 import Loader from '../../components/Loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';
 
-function UpdateResetPassword() {
+function UpdatePassword() {
   const dispatch = useAppDispatch();
 
   const isRegistered = useAppSelector((state) => state.settings.isRegistered);
@@ -65,4 +65,4 @@ function UpdateResetPassword() {
   );
 }
 
-export default UpdateResetPassword;
+export default UpdatePassword;

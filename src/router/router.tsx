@@ -14,7 +14,7 @@ import Register from '../pages/Register/Register';
 import Profile from '../pages/Profile/Profile';
 import CheckUserAccountConfirmation from '../pages/CheckUserAccountConfirmation/CheckUserAccountConfirmation';
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
-import UpdateResetPassword from '../pages/UpdateResetPassword/UpdateResetPassword';
+import UpdatePassword from '../pages/UpdatePassword/UpdatePassword';
 import Congrats from '../pages/Congrats/Congrats';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import AddCircuit from '../pages/AddCircuit/AddCircuit';
@@ -84,7 +84,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/reset',
-        element: <UpdateResetPassword />,
+        element: <UpdatePassword />,
       },
       {
         path: '/admin',
