@@ -1,5 +1,4 @@
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
 import api from '../../service/axios';
 
 import { Profile } from '../../@types/user';
@@ -10,23 +9,19 @@ interface ProfileState {
   errorMessage: string | null;
 }
 
-// init states
 const intialState: ProfileState = {
   profile: null,
   loading: false,
   errorMessage: null,
 };
 
-export const getProfile = createAsyncThunk('user/getProfile', async () => {
+export const getProfile = createAsyncThunk('user/get-profile', async () => {
   try {
     const { data } = await api.get<Profile>('profile');
 
     return data;
-  } catch (error: unknown) {
-    /* Specify known AxiosError Type to solve eslint warning.
-      Typscript cannot predict server error but do it on AxiosError Instance */
-    const err = error as AxiosError;
-    throw err.response ? err.response.data : err.message;
+  } catch (error) {
+    throw error.response ? error.response.data : error.message;
   }
 });
 
