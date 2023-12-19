@@ -10,11 +10,11 @@ import TextInput from '../TextInput/TextInput';
 import TextArea from '../TextArea/TextArea';
 import formatUserDataForm from '../../utils/formatUserDataForm';
 
-interface ProfileFormProps {
+interface ProfileUserFormProps {
   setIsEdit: Dispatch<SetStateAction<boolean>>;
 }
 
-function ProfileForm({ setIsEdit }: ProfileFormProps) {
+function ProfileUserForm({ setIsEdit }: ProfileUserFormProps) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const profile = useAppSelector((state) => state.user.profile);
   const { pseudo, email, region, state, city, presentation } =
@@ -99,4 +99,4 @@ function ProfileForm({ setIsEdit }: ProfileFormProps) {
   );
 }
 
-export default ProfileForm;
+export default ProfileUserForm;

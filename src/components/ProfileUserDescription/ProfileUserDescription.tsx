@@ -1,7 +1,7 @@
 import { useAppSelector } from '../../hooks/redux';
 import { Profile } from '../../@types/user';
 
-function ProfileDescription() {
+function ProfileUserDescription() {
   const profile = useAppSelector((state) => state.user.profile);
   const { pseudo, email, region, state, city, presentation } =
     profile as Profile;
@@ -36,4 +36,4 @@ function ProfileDescription() {
   );
 }
 
-export default ProfileDescription;
+export default ProfileUserDescription;
