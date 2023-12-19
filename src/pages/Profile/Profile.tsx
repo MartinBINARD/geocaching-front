@@ -38,9 +38,9 @@ function Profile() {
             <div className="flex flex-col gap-2 p-4 text-primary shadow-lg rounded-lg self-stretch">
               <h3 className="font-semibold text-lg pt-5 pl-3">Mon profil</h3>
               {isEdit ? (
-                <ProfileForm {...profile} setIsEdit={setIsEdit} />
+                <ProfileForm setIsEdit={setIsEdit} />
               ) : (
-                <ProfileDescription {...profile} />
+                <ProfileDescription />
               )}
 
               <button

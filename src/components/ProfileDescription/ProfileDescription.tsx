@@ -1,5 +1,11 @@
-function ProfileDescription({ ...profile }) {
-  const { pseudo, email, region, state, city, presentation } = profile;
+import { useAppSelector } from '../../hooks/redux';
+import { Profile } from '../../@types/user';
+
+function ProfileDescription() {
+  const profile = useAppSelector((state) => state.user.profile);
+  const { pseudo, email, region, state, city, presentation } =
+    profile as Profile;
+
   return (
     <div className="flex flex-col gap-5 m-5">
       <p className="flex gap-2 items-baseline flex-wrap">
