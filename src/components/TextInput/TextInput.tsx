@@ -4,7 +4,7 @@ interface TextInputProps {
   label: string;
   placeholder: string;
   className: string;
-  defaultValue: string;
+  defaultValue: string | null;
   required: boolean;
 }
 
