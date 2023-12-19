@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Map } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import { getProfile } from '../../store/reducers/user';
 
 import ProfileDescription from '../../components/ProfileDescription/ProfileDescription';
 import ProfileForm from '../../components/ProfileForm/ProfileForm';
-import ProfileAward from '../../components/ProfileAward/ProfileAward';
+import ProfileCircuitsCard from '../../components/ProfileCircuitsCard/ProfileCircuitsCard';
+import ProfileAwardsCard from '../../components/ProfileAwardsCard/ProfileAwardsCard';
 
 function Profile() {
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -55,36 +55,9 @@ function Profile() {
             </div>
           </article>
 
-          <article className="m-auto">
-            <div className="flex flex-col gap-5 text-lg">
-              <Map className="w-12 h-12" />
-              <p className="flex justify-between items-center">
-                <span className="font-bold mr-3">
-                  Nombre de circuits terminés:
-                </span>
-                {profile.count_finished_circuits
-                  ? profile.count_finished_circuits
-                  : 0}
-              </p>
+          <ProfileCircuitsCard />
 
-              <p className="">
-                <span className="mr-3">Kilomètres parcouru: </span>
-                {profile.km_traveled ? profile.km_traveled : 0} km
-              </p>
-            </div>
-          </article>
-
-          <article className="flex flex-col gap-2 self-center p-4 text-primary shadow-lg rounded-lg w-full my-10">
-            <div className="flex flex-col gap-3">
-              {profile.circuits ? (
-                <ProfileAward circuits={profile.circuits} />
-              ) : (
-                <h3 className="text-center font-bold p-1">
-                  Réussisez des parcours pour débloquer des récompenses.
-                </h3>
-              )}
-            </div>
-          </article>
+          <ProfileAwardsCard />
         </section>
       </>
     )
