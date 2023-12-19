@@ -2,12 +2,13 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAppSelector } from '../../hooks/redux';
 
-import { Profile } from '../../@types/user';
+import { Profile, UpdateProfileForm } from '../../@types/user';
 
 import api from '../../service/axios';
 
 import TextInput from '../TextInput/TextInput';
 import TextArea from '../TextArea/TextArea';
+import formatUserDataForm from '../../utils/formatUserDataForm';
 
 interface ProfileFormProps {
   setIsEdit: Dispatch<SetStateAction<boolean>>;
@@ -29,18 +30,10 @@ function ProfileForm({ setIsEdit }: ProfileFormProps) {
     }
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: React.FormEvent<UpdateProfileForm>) {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const formData = new FormData(form) as unknown as HTMLFormElement;
-
-    const emailInput = formData.get('email') as string;
-    const emailToLowerCase = emailInput.toLowerCase();
-    formData.set('email', emailToLowerCase);
-
-    const objData = Object.fromEntries(
-      formData.entries()
-    ) as unknown as HTMLFormElement;
+    const form = e.target as UpdateProfileForm;
+    const objData = formatUserDataForm(form);
 
     updateProfile(objData);
   }
