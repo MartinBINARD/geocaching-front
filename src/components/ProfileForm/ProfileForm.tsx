@@ -14,35 +14,33 @@ interface ProfileFormProps {
 }
 
 function ProfileForm({ setIsEdit }: ProfileFormProps) {
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const profile = useAppSelector((state) => state.user.profile);
   const { pseudo, email, region, state, city, presentation } =
     profile as Profile;
 
-  const [errorMessage, setErrorMessage] = useState(null);
-
-  function updateProfile(data) {
-    api.patch('/profile', data).then(
-      () => {
-        setIsEdit(false);
-        toast.success('Votre profil a bien été mis à jour');
-      },
-      (err) => {
-        setErrorMessage(err.response.data.error);
-      }
-    );
+  async function updateProfile(newProfileForm: HTMLFormElement) {
+    try {
+      await api.patch('/profile', newProfileForm);
+      setIsEdit(false);
+      toast.success('Votre profil a bien été mis à jour');
+    } catch (err) {
+      setErrorMessage(err.response.data.error);
+    }
   }
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form) as unknown as HTMLFormElement;
 
-    // Making the email to lower case before checking at database
-    const emailInput = formData.get('email');
+    const emailInput = formData.get('email') as string;
     const emailToLowerCase = emailInput.toLowerCase();
     formData.set('email', emailToLowerCase);
 
-    const objData = Object.fromEntries(formData.entries());
+    const objData = Object.fromEntries(
+      formData.entries()
+    ) as unknown as HTMLFormElement;
 
     updateProfile(objData);
   }
