@@ -1,41 +1,35 @@
-import { Dispatch, SetStateAction, useState } from 'react';
-import { toast } from 'react-toastify';
-import { useAppSelector } from '../../hooks/redux';
+import { Dispatch, SetStateAction } from 'react';
+// import { toast } from 'react-toastify';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import { Profile, UpdateProfileForm } from '../../@types/user';
 
-import api from '../../service/axios';
+import { updateProfile } from '../../store/reducers/user';
 
 import TextInput from '../TextInput/TextInput';
 import TextArea from '../TextArea/TextArea';
-import formatUserDataForm from '../../utils/formatUserDataForm';
 
 interface ProfileUserFormProps {
   setIsEdit: Dispatch<SetStateAction<boolean>>;
 }
 
 function ProfileUserForm({ setIsEdit }: ProfileUserFormProps) {
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const errorMessage = useAppSelector((state) => state.user.errorMessage);
+  const isProfileEdit = useAppSelector((state) => state.user.isProfileEdit);
+
   const profile = useAppSelector((state) => state.user.profile);
+
   const { pseudo, email, region, state, city, presentation } =
     profile as Profile;
 
-  async function updateProfile(newProfileForm: HTMLFormElement) {
-    try {
-      await api.patch('/profile', newProfileForm);
-      setIsEdit(false);
-      toast.success('Votre profil a bien été mis à jour');
-    } catch (err) {
-      setErrorMessage(err.response.data.error);
-    }
-  }
+  const dispatch = useAppDispatch();
 
   function handleSubmit(e: React.FormEvent<UpdateProfileForm>) {
     e.preventDefault();
     const form = e.target as UpdateProfileForm;
-    const objData = formatUserDataForm(form);
 
-    updateProfile(objData);
+    dispatch(updateProfile(form));
+    setIsEdit(isProfileEdit);
   }
 
   return (
