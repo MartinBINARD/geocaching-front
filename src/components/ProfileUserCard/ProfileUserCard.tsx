@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 
 import ProfileUserDescription from '../ProfileUserDescription/ProfileUserDescription';
 import ProfileUserForm from '../ProfileUserForm/ProfileUserForm';
+import { useAppSelector } from '../../hooks/redux';
 
 interface ProfileUserCardProps {
   isEdit: boolean;
@@ -10,6 +11,8 @@ interface ProfileUserCardProps {
 }
 
 function ProfileUserCard({ isEdit, setIsEdit, onClick }: ProfileUserCardProps) {
+  const errorMessage = useAppSelector((state) => state.user.errorMessage);
+
   return (
     <article className="card flex-col items-center sm:p-4">
       <div className="flex flex-col gap-2 p-4 text-primary shadow-lg rounded-lg self-stretch">
@@ -26,6 +29,7 @@ function ProfileUserCard({ isEdit, setIsEdit, onClick }: ProfileUserCardProps) {
           className={`btn btn-primary ${
             isEdit ? 'btn-secondary' : 'btn-primary'
           }`}
+          disabled={!!errorMessage}
         >
           {isEdit ? 'Annuler' : 'Modifier'}
         </button>

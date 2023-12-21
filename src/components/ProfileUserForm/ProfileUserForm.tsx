@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction } from 'react';
-// import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import { Profile, UpdateProfileForm } from '../../@types/user';
@@ -14,9 +13,8 @@ interface ProfileUserFormProps {
 }
 
 function ProfileUserForm({ setIsEdit }: ProfileUserFormProps) {
+  const isUpdateLoading = useAppSelector((state) => state.user.isUpdateLoading);
   const errorMessage = useAppSelector((state) => state.user.errorMessage);
-  const isProfileEdit = useAppSelector((state) => state.user.isProfileEdit);
-
   const profile = useAppSelector((state) => state.user.profile);
 
   const { pseudo, email, region, state, city, presentation } =
@@ -29,7 +27,7 @@ function ProfileUserForm({ setIsEdit }: ProfileUserFormProps) {
     const form = e.target as UpdateProfileForm;
 
     dispatch(updateProfile(form));
-    setIsEdit(isProfileEdit);
+    setIsEdit(false);
   }
 
   return (
@@ -88,6 +86,7 @@ function ProfileUserForm({ setIsEdit }: ProfileUserFormProps) {
       />
       <button type="submit" className="btn btn-primary mt-3">
         sauvegarder
+        {isUpdateLoading && <span className="loading loading-spinner" />}
       </button>
     </form>
   );

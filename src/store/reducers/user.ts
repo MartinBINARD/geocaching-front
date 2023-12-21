@@ -8,16 +8,16 @@ import formatUserDataForm from '../../utils/formatUserDataForm';
 
 interface ProfileState {
   profile: Profile | null;
-  loading: boolean;
+  isProfileLoading: boolean;
   errorMessage: string | null;
-  isProfileEdit: boolean;
+  isUpdateLoading: boolean;
 }
 
 const intialState: ProfileState = {
   profile: null,
-  loading: false,
+  isProfileLoading: false,
   errorMessage: null,
-  isProfileEdit: false,
+  isUpdateLoading: false,
 };
 
 export const getProfile = createAsyncThunk('user/get-profile', async () => {
@@ -46,11 +46,11 @@ export const updateProfile = createAsyncThunk(
 const userReducer = createReducer(intialState, (builder) => {
   builder
     .addCase(getProfile.pending, (state) => {
-      state.loading = true;
+      state.isProfileLoading = true;
     })
     .addCase(getProfile.fulfilled, (state, action) => {
       state.profile = action.payload;
-      state.loading = false;
+      state.isProfileLoading = false;
     })
     .addCase(getProfile.rejected, (state, action) => {
       /* "!" post-fix expression operator for null and undefined compatibility 
@@ -58,18 +58,20 @@ const userReducer = createReducer(intialState, (builder) => {
       See documentation :
       https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator */
       state.errorMessage = action.error.message!;
-      state.loading = false;
+      state.isProfileLoading = false;
     })
     .addCase(updateProfile.pending, (state) => {
-      state.isProfileEdit = true;
+      state.isUpdateLoading = true;
     })
     .addCase(updateProfile.fulfilled, (state) => {
-      state.isProfileEdit = false;
+      state.isUpdateLoading = false;
+      state.errorMessage = null;
       toast.success('Votre profil a bien été mis à jour');
     })
     .addCase(updateProfile.rejected, (state, action) => {
-      state.isProfileEdit = true;
+      state.isUpdateLoading = false;
       state.errorMessage = action.error.message!;
+      toast.error(action.error.message!);
     });
 });
 
