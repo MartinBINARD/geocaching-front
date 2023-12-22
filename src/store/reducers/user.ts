@@ -1,43 +1,56 @@
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
-import api from '../../service/axios';
+import { toast } from 'react-toastify';
 
-import { Profile } from '../../@types/user';
+import { Profile, UpdateProfileForm } from '../../@types/user';
+
+import api from '../../service/axios';
+import formatUserDataForm from '../../utils/formatUserDataForm';
 
 interface ProfileState {
   profile: Profile | null;
-  loading: boolean;
+  isProfileLoading: boolean;
   errorMessage: string | null;
+  isUpdateLoading: boolean;
 }
 
-// init states
 const intialState: ProfileState = {
   profile: null,
-  loading: false,
+  isProfileLoading: false,
   errorMessage: null,
+  isUpdateLoading: false,
 };
 
-export const getProfile = createAsyncThunk('user/getProfile', async () => {
+export const getProfile = createAsyncThunk('user/get-profile', async () => {
   try {
     const { data } = await api.get<Profile>('profile');
 
     return data;
-  } catch (error: unknown) {
-    /* Specify known AxiosError Type to solve eslint warning.
-      Typscript cannot predict server error but do it on AxiosError Instance */
-    const err = error as AxiosError;
-    throw err.response ? err.response.data : err.message;
+  } catch (error) {
+    throw error.response ? error.response.data : error.message;
   }
 });
+
+export const updateProfile = createAsyncThunk(
+  'user/update-profile',
+  async (form: UpdateProfileForm): Promise<void> => {
+    try {
+      const objData = formatUserDataForm(form);
+
+      await api.patch('profile', objData);
+    } catch (error) {
+      throw error && `Une erreur s'est produite. Veuillez essayer de nouveau.`;
+    }
+  }
+);
 
 const userReducer = createReducer(intialState, (builder) => {
   builder
     .addCase(getProfile.pending, (state) => {
-      state.loading = true;
+      state.isProfileLoading = true;
     })
     .addCase(getProfile.fulfilled, (state, action) => {
       state.profile = action.payload;
-      state.loading = false;
+      state.isProfileLoading = false;
     })
     .addCase(getProfile.rejected, (state, action) => {
       /* "!" post-fix expression operator for null and undefined compatibility 
@@ -45,7 +58,20 @@ const userReducer = createReducer(intialState, (builder) => {
       See documentation :
       https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator */
       state.errorMessage = action.error.message!;
-      state.loading = false;
+      state.isProfileLoading = false;
+    })
+    .addCase(updateProfile.pending, (state) => {
+      state.isUpdateLoading = true;
+    })
+    .addCase(updateProfile.fulfilled, (state) => {
+      state.isUpdateLoading = false;
+      state.errorMessage = null;
+      toast.success('Votre profil a bien été mis à jour');
+    })
+    .addCase(updateProfile.rejected, (state, action) => {
+      state.isUpdateLoading = false;
+      state.errorMessage = action.error.message!;
+      toast.error(action.error.message!);
     });
 });
 
