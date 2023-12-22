@@ -2,9 +2,16 @@ interface TextAreaProps {
   name: string;
   label: string;
   placeholder: string;
+  className: string;
   defaultValue: string | null;
 }
-function TextArea({ name, label, placeholder, defaultValue }: TextAreaProps) {
+function TextArea({
+  name,
+  label,
+  placeholder,
+  className,
+  defaultValue,
+}: TextAreaProps) {
   return (
     <div className="form-control my-1">
       <label className="label">
@@ -14,7 +21,7 @@ function TextArea({ name, label, placeholder, defaultValue }: TextAreaProps) {
         name={name}
         defaultValue={defaultValue || ''}
         placeholder={placeholder}
-        className="textarea textarea-bordered h-24 w-full"
+        className={className}
       />
     </div>
   );

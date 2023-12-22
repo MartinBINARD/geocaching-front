@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
+import { XCircle } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import { Profile, UpdateProfileForm } from '../../@types/user';
@@ -32,23 +33,28 @@ function ProfileUserForm({ setIsEdit }: ProfileUserFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col">
-      {errorMessage && <h2>{errorMessage}</h2>}
+      {errorMessage && (
+        <p role="alert" className="alert alert-error">
+          <XCircle />
+          <span>{errorMessage}</span>
+        </p>
+      )}
       <TextInput
         name="pseudo"
         type="text"
         label="Pseudo"
         placeholder="Taper votre pseudo"
         defaultValue={pseudo}
-        className="input input-bordered w-full max-w-xs"
+        className="input input-bordered w-full max-w-md"
         required
       />
       <TextInput
         name="email"
-        type="email"
+        type="text"
         label="Email"
         placeholder="Tapez votre email"
         defaultValue={email}
-        className="input input-bordered w-full max-w-xs"
+        className="input input-bordered w-full max-w-md"
         required
       />
       <TextInput
@@ -57,7 +63,7 @@ function ProfileUserForm({ setIsEdit }: ProfileUserFormProps) {
         label="Région"
         placeholder="Tapez le nom de la région"
         defaultValue={region}
-        className="input input-bordered w-full max-w-xs"
+        className="input input-bordered w-full max-w-md"
         required={false}
       />
       <TextInput
@@ -66,7 +72,7 @@ function ProfileUserForm({ setIsEdit }: ProfileUserFormProps) {
         label="Département"
         placeholder="Tapez le nom du département"
         defaultValue={state}
-        className="input input-bordered w-full max-w-xs"
+        className="input input-bordered w-full max-w-md"
         required={false}
       />
       <TextInput
@@ -75,13 +81,14 @@ function ProfileUserForm({ setIsEdit }: ProfileUserFormProps) {
         label="Ville"
         placeholder="Tapez le nom de la ville"
         defaultValue={city}
-        className="input input-bordered w-full max-w-xs"
+        className="input input-bordered w-full max-w-md"
         required={false}
       />
       <TextArea
         name="presentation"
         label="Présentation "
         placeholder="Ecrivez votre Présentation"
+        className="textarea textarea-bordered h-24 max-w-md"
         defaultValue={presentation}
       />
       <button type="submit" className="btn btn-primary mt-3">

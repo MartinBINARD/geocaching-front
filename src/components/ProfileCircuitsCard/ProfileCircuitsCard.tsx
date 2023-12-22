@@ -9,7 +9,7 @@ function ProfileCircuitsCard() {
   const { count_finished_circuits, km_traveled } = profile as Profile;
 
   return (
-    <article className="m-auto">
+    <article className="m-10">
       <div className="flex flex-col gap-5 text-lg">
         <Map className="w-12 h-12" />
         <p className="flex justify-between items-center">
@@ -18,7 +18,7 @@ function ProfileCircuitsCard() {
         </p>
 
         <p className="">
-          <span className="mr-3">Kilomètres parcouru: </span>
+          <span className="font-bold mr-3">Kilomètres parcouru: </span>
           {km_traveled || 0} km
         </p>
       </div>

@@ -40,7 +40,7 @@ function Profile() {
             <span>Mon profil</span>
           </div>
         </h2>
-        <section className=" flex flex-row flex-wrap m-auto items-center justify-between max-w-4xl">
+        <section className=" flex flex-row flex-wrap m-auto items-center justify-center max-w-4xl">
           <ProfileUserCard
             isEdit={isEdit}
             setIsEdit={setIsEdit}
