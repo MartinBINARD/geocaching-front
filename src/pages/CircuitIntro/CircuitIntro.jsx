@@ -9,7 +9,7 @@ import Loader from '../../components/Loader/Loader';
 import CircuitDescriptionCard from '../../components/CircuitDescriptionCard/CircuitDescriptionCard';
 import CicuitLocationCard from '../../components/CircuitLocationCard/CircuitLocationCard';
 
-function Circuit() {
+function CircuitIntro() {
   /* state to know if the fetch API is already load. 
   Init it with false, fill it with noCircuit reducer state when we got the circuit
   The first goal is to prevent redirecting while we don't get API answer */
@@ -51,7 +51,7 @@ function Circuit() {
 
   if (circuit) {
     return (
-      <main className="flex flex-col gap-2 p-4 lg:w-1/2 lg:m-auto">
+      <>
         <CircuitDescriptionCard />
 
         <CicuitLocationCard />
@@ -71,9 +71,9 @@ function Circuit() {
             Se connecter
           </Link>
         )}
-      </main>
+      </>
     );
   }
 }
 
-export default Circuit;
+export default CircuitIntro;

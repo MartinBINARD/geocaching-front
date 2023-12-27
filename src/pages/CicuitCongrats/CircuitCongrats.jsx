@@ -11,7 +11,7 @@ function Congrats() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-6 m-auto justify-center items-center p-4 lg:w-1/3">
+    <>
       <h1 className="font-bold text-xl">Félicitations !</h1>
       <p className="text-center">
         Vous avez complêté ce parcours avec succès !
@@ -26,7 +26,7 @@ function Congrats() {
         <img className="h-10" src={logo} alt="logo CacheTrek" />
         Découvrir
       </Link>
-    </div>
+    </>
   );
 }
 

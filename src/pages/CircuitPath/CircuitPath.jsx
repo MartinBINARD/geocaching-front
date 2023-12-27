@@ -20,7 +20,7 @@ import { sendAnswers } from '../../store/reducers/circuits';
 // import some icon & logo
 import logo from '../../assets/logo/compass.png';
 
-function CircuitMap() {
+function CircuitPath() {
   // state to know the current step index of the user
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   // state to stock all the users answers
@@ -229,7 +229,7 @@ function CircuitMap() {
   }
 
   return (
-    <div className="flex flex-col px-8 justify-center items-center w-full h-full sm:max-w-xl sm:m-auto">
+    <>
       <div className="flex justify-center gap-2 font-bold lg:text-xl w-full border-t border-b text-center border-primary py-2 my-2">
         <Flag fill="#004f4a" />
         <h2>
@@ -460,8 +460,8 @@ function CircuitMap() {
       </div>
       {congrats ? <Navigate to={`/circuit/${id}/congrats`} /> : null}
       {alreadyDid ? <Navigate to="/profile" /> : null}
-    </div>
+    </>
   );
 }
 
-export default CircuitMap;
+export default CircuitPath;
