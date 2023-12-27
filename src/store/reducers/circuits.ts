@@ -59,7 +59,7 @@ export const fetchCircuitsList = createAsyncThunk(
 
 export const fetchCircuit = createAsyncThunk(
   'circuits/fetchCircuit',
-  async (id: number): Promise<Circuit> => {
+  async (id: string): Promise<Circuit> => {
     try {
       const response = await api.get<Circuit>(`circuits/${id}`);
       return response.data;

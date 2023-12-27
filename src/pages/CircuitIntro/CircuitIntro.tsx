@@ -1,7 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams, Link, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import { Compass } from 'lucide-react';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import { fetchCircuit } from '../../store/reducers/circuits';
 
@@ -10,21 +10,18 @@ import CircuitDescriptionCard from '../../components/CircuitDescriptionCard/Circ
 import CicuitLocationCard from '../../components/CircuitLocationCard/CircuitLocationCard';
 
 function CircuitIntro() {
-  /* state to know if the fetch API is already load. 
-  Init it with false, fill it with noCircuit reducer state when we got the circuit
-  The first goal is to prevent redirecting while we don't get API answer */
   const [alreadyLoad, setAlreadyLoad] = useState(false);
 
-  const { id } = useParams();
-  const loading = useSelector((state) => state.circuits.loading);
-  const noCircuit = useSelector((state) => state.circuits.noCircuit);
-  const user = useSelector((state) => state.settings.user);
-  const circuit = useSelector((state) => state.circuits.oneCircuit);
+  const { id } = useParams<Record<string, string | undefined>>();
+  const loading = useAppSelector((state) => state.circuits.loading);
+  const noCircuit = useAppSelector((state) => state.circuits.noCircuit);
+  const user = useAppSelector((state) => state.settings.user);
+  const circuit = useAppSelector((state) => state.circuits.oneCircuit);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchCircuit(id));
+    dispatch(fetchCircuit(id as string));
   }, [dispatch, id]);
 
   useEffect(() => {
@@ -61,7 +58,7 @@ function CircuitIntro() {
             className="flex gap-2 items-center  mt-2 btn btn-primary text-white m-auto"
             to={`/circuit/${id}/map`}
           >
-            <Compass className="w-7 h-7" alt="Logo CacheTrek" /> Commencer
+            <Compass className="w-7 h-7" /> Commencer
           </Link>
         ) : (
           <Link

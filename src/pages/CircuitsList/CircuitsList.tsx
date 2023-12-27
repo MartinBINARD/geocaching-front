@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
+import { fetchCircuitsList } from '../../store/reducers/circuits';
+
 import Map from '../../components/Map/Map';
 import Loader from '../../components/Loader/Loader';
-import { fetchCircuitsList } from '../../store/reducers/circuits';
 import FilterCircuitsList from '../../components/FilterCircuitsLists/FilterCircuitsList';
 import CircuitListCard from '../../components/CircuitsListCard/CircuitsListCard';
 
