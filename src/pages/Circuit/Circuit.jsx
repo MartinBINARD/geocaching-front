@@ -5,7 +5,6 @@ import { Compass } from 'lucide-react';
 
 import { fetchCircuit } from '../../store/reducers/circuits';
 
-// import MapCircuit from '../../components/MapCircuit/MapCircuit';
 import Loader from '../../components/Loader/Loader';
 import CircuitDescriptionCard from '../../components/CircuitDescriptionCard/CircuitDescriptionCard';
 import CicuitLocationCard from '../../components/CircuitLocationCard/CircuitLocationCard';
@@ -52,7 +51,7 @@ function Circuit() {
 
   if (circuit) {
     return (
-      <main className="lg:w-1/2 lg:m-auto p-4 flex flex-col gap-2">
+      <main className="flex flex-col gap-2 p-4 lg:w-1/2 lg:m-auto">
         <CircuitDescriptionCard />
 
         <CicuitLocationCard />

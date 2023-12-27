@@ -1,23 +1,30 @@
-import { useState } from 'react';
-import { MapPinned } from 'lucide-react';
+/* eslint-disable jsx-a11y/control-has-associated-label */
+import { useEffect, useState } from 'react';
+import { MapPinned, X } from 'lucide-react';
 import { useAppSelector } from '../../hooks/redux';
 
 import { Circuit } from '../../@types/circuit';
+
+import Map from '../Map/Map';
 
 function CicuitLocationCard() {
   const [showMap, setShowMap] = useState<boolean>(false);
 
   const circuit = useAppSelector((state) => state.circuits.oneCircuit);
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { parking_address } = circuit as Circuit;
+  const { parking_address, latitude, longitude } = circuit as Circuit;
 
   const handleClickMap = () => {
     setShowMap(!showMap);
   };
 
+  useEffect(() => {
+    document.body.style.overflow = showMap ? 'hidden' : 'unset';
+  }, [showMap]);
+
   return (
     <>
-      <section className="flex items-center gap-5 lg:gap-10 p-2 px-4 border-t border-b border-primary m-auto lg:w-3/4 lg:justify-center">
+      <section className="flex items-center justify-between gap-5 lg:gap-10 p-2 border-t border-b border-primary">
         <div className="flex flex-col">
           <p>Parking :</p>
           <p>{parking_address}</p>
@@ -33,18 +40,17 @@ function CicuitLocationCard() {
       </section>
 
       {showMap && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50">
-          <div className="relative w-4/5 h-4/5 bg-white">
-            <button
-              type="button"
-              className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4"
-              onClick={handleClickMap}
-            >
-              X
-            </button>
-            {/* TODO : Insert circuit map */}
-          </div>
-        </div>
+        <section className="fixed top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center bg-gray-800 bg-opacity-80 lg:px-10">
+          <button
+            type="button"
+            className="btn btn-circle btn-error bg-opacity-100 mb-4"
+            onClick={handleClickMap}
+          >
+            <X />
+          </button>
+
+          <Map oneMarker={[latitude, longitude]} className="h-[70vh] w-full" />
+        </section>
       )}
     </>
   );
