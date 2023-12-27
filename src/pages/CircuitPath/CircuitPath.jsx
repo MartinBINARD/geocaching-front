@@ -12,8 +12,7 @@ import { Flag, ChevronRight, ChevronLeft } from 'lucide-react';
 // import componants
 import MapCircuit from '../../components/MapCircuit/MapCircuit';
 import Loader from '../../components/Loader/Loader';
-// import JS file to animate the text
-import animationManager from '../../utils/animationManager';
+
 // import sendAnswers from circuits' reducer to send all the user's answer to the back servor
 import { sendAnswers } from '../../store/reducers/circuits';
 
@@ -198,15 +197,6 @@ function CircuitPath() {
   //   }
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, []);
-
-  // useEffect hook to use the animate text function
-  useEffect(() => {
-    if (showContent) {
-      animationManager.animateText();
-    } else if (!showContent) {
-      animationManager.animateText();
-    }
-  }, [showContent]);
 
   // if no circuit redirect they to the first page
   if (!localCircuit) {
