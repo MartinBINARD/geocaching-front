@@ -31,9 +31,12 @@ function CircuitDescriptionCard() {
 
   return (
     <article>
-      <img className="rounded-lg" src={url_image} alt={`circuit : ${name}`} />
-
       <section className="border-b border-primary m-auto">
+        <img
+          className="rounded-lg m-auto"
+          src={url_image}
+          alt={`circuit : ${name}`}
+        />
         <p className="text-center m-auto pt-3">
           {region}, {state} - {city}
         </p>
