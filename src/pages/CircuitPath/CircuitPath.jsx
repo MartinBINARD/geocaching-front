@@ -5,18 +5,13 @@ import { useState, useEffect } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-// import toast from toastify lib
 import { toast } from 'react-toastify';
-// import some icon from lucide lib
 import { Flag, ChevronRight, ChevronLeft } from 'lucide-react';
-// import componants
 import MapCircuit from '../../components/MapCircuit/MapCircuit';
 import Loader from '../../components/Loader/Loader';
 
-// import sendAnswers from circuits' reducer to send all the user's answer to the back servor
 import { sendAnswers } from '../../store/reducers/circuits';
 
-// import some icon & logo
 import logo from '../../assets/logo/compass.png';
 
 function CircuitPath() {
@@ -44,7 +39,6 @@ function CircuitPath() {
   // state to listening and show hint to the user
   const [showHint, setShowHint] = useState(false);
 
-  // init dispatch
   const dispatch = useDispatch();
   // looking for the id set in the URL and redirect the user if the id of URL isnt the same than the circuit id
   const { id } = useParams();
@@ -167,37 +161,6 @@ function CircuitPath() {
     setShowMap(!showMap);
   };
 
-  // useEffect hook to managing koala's picture depend of the circuit theme
-  // useEffect(() => {
-  //   const prehistory = {
-  //     happy: prehappy,
-  //     sad: presad,
-  //     talk: pretalk,
-  //     think: prethink,
-  //   };
-  //   const neutral = {
-  //     happy: neuhappy,
-  //     sad: neusad,
-  //     talk: neutalk,
-  //     think: neuthink,
-  //   };
-  //   const curiosity = {
-  //     happy: cuhappy,
-  //     sad: cusad,
-  //     talk: cutalk,
-  //     think: cuthink,
-  //   };
-
-  //   if (localCircuit.theme === 'Préhistoire') {
-  //     setPicture(prehistory);
-  //   } else if (localCircuit.theme === 'Curiosités') {
-  //     setPicture(curiosity);
-  //   } else {
-  //     setPicture(neutral);
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
   // if no circuit redirect they to the first page
   if (!localCircuit) {
     return <Navigate to={`/circuit/${id}`} />;
@@ -269,19 +232,6 @@ function CircuitPath() {
             </div>
           )}
 
-          {currentStepIndex % 2 && !endCircuit ? (
-            <img className="w-3/4" src={picture.talk} alt="koala qui parle" />
-          ) : null}
-          {currentStepIndex % 2 === 0 && !endCircuit ? (
-            <img className="w-3/4" src={picture.think} alt="koala qui pense" />
-          ) : null}
-          {endCircuit && !wrongMessages.length ? (
-            <img className="w-3/4" src={picture.happy} alt="koala content" />
-          ) : null}
-          {endCircuit && wrongMessages.length ? (
-            <img className="w-3/4" src={picture.sad} alt="koala triste" />
-          ) : null}
-
           <p className="m-auto p-3 text-sm lg:text-base animate-text leading-6">
             {localCircuit.step[currentStepIndex].paragraph}
           </p>
@@ -294,11 +244,6 @@ function CircuitPath() {
           </button>
           <div className="relative p-2">
             <div className="flex flex-col items-center border-3 border-secondary py-4">
-              {/* <img
-                className="h-12 absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/4"
-                src={question}
-                alt="icon de question"
-              /> */}
               <div className="flex flex-col p-4 gap-4">
                 <p className="font-bold">
                   {localCircuit.step[currentStepIndex].question}
