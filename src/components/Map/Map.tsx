@@ -6,7 +6,7 @@ import FindCenter from '../../utils/FindCenter';
 import ButtonLocateMe from '../ButtonLocateMe/ButtonLocateMe';
 
 import { Circuit } from '../../@types/circuit';
-import CircuitCardPopup from '../MapPopup/CirtuitCardPopup';
+import MapPopup from '../MapPopup/MapPopup';
 
 interface MapsProps {
   markersList?: Circuit[];
@@ -36,7 +36,7 @@ function Map({ markersList, oneMarker, className }: MapsProps) {
             title={marker.name}
             alt={marker.name}
           >
-            <CircuitCardPopup marker={marker} />
+            <MapPopup marker={marker} />
           </Marker>
         ))}
       <ButtonLocateMe />
