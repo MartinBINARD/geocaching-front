@@ -56,7 +56,7 @@ const router = createBrowserRouter([
             element: <CircuitIntro />,
           },
           {
-            path: 'map',
+            path: 'path',
             element: <CircuitPath />,
           },
           {

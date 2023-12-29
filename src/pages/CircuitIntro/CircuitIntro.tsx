@@ -56,7 +56,7 @@ function CircuitIntro() {
         {user ? (
           <Link
             className="flex gap-2 items-center  mt-2 btn btn-primary text-white m-auto"
-            to={`/circuit/${id}/map`}
+            to={`/circuit/${id}/path`}
           >
             <Compass className="w-7 h-7" /> Commencer
           </Link>
