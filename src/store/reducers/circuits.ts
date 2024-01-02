@@ -24,7 +24,6 @@ interface CircuitState {
   errorMessage: string | undefined;
   oneCircuit: Circuit | null;
   answers: AnswerState | null;
-  alreadyDid: boolean;
   isLoading: boolean;
   noCircuit: boolean;
 }
@@ -36,7 +35,6 @@ const initialState: CircuitState = {
   errorMessage: '',
   oneCircuit: null,
   answers: null,
-  alreadyDid: false,
   isLoading: false,
   noCircuit: false,
 };
@@ -138,9 +136,8 @@ const circuitsReducer = createReducer(initialState, (builder) => {
       state.isLoading = false;
     })
     .addCase(sendAnswers.rejected, (state) => {
-      state.alreadyDid = true;
-      toast(
-        'Toutes les réponses sont bonnes mais vous avez déjà terminé ce circuit'
+      toast.error(
+        `Une erreur s'est produite lors de l'envoie de vos réponse, Veuillez essayer de nouveau.`
       );
       state.isLoading = false;
     });

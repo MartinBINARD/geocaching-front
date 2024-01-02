@@ -13,7 +13,6 @@ import CircuitPathAnswerRecord from '../../components/CircuitPathAnswerRecord/Ci
 function CircuitPath() {
   // state to know the current step index of the user
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  // state to stock all the users answers
 
   // state to know if the user is at the end of the circuit
   const [endCircuit, setEndCircuit] = useState(false);
@@ -31,8 +30,6 @@ function CircuitPath() {
   const isLoading = useSelector((state) => state.circuits.isLoading);
   // variable to get the circuit that is in local storage
   const localCircuit = JSON.parse(localStorage.getItem('circuitData'));
-  // state to know if the user has already did this circuit
-  const alreadyDid = useSelector((state) => state.circuits.alreadyDid);
 
   // If there's a next step, add to the currentStepIndex + 1
   const handleNextStep = () => {
@@ -62,13 +59,6 @@ function CircuitPath() {
   // if the id of the url and the id of the circuit are not the same, redirect to the first page
   if (localCircuit.id_circuit.toString() !== id) {
     return <Navigate to={`/circuit/${id}`} />;
-  }
-
-  // if the circuit is already did, clear the local storage
-  if (alreadyDid) {
-    localStorage.clear();
-
-    return <Navigate to="/profile" />;
   }
 
   if (congrats) {
