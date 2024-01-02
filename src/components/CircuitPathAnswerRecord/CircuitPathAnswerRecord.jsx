@@ -8,7 +8,8 @@ import { sendAnswers } from '../../store/reducers/circuits';
 
 function CircuitPathAnswerRecord(setCongrats) {
   const [wrongMessages, setWrongMessages] = useState([]);
-  const localCircuit = JSON.parse(localStorage.getItem('circuitData'));
+  const circuit = useSelector((state) => state.circuits.oneCircuit);
+
   const userAnswers = JSON.parse(localStorage.getItem('answers'));
   const userCircuitAnswersResult = useSelector(
     (state) => state.circuits.userCircuitAnswersResult
@@ -45,7 +46,7 @@ function CircuitPathAnswerRecord(setCongrats) {
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(userAnswers)) {
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      const id_step = localCircuit.step[key].id;
+      const id_step = circuit.step[key].id;
       const answer = parseInt(value, 10);
 
       arrayAnswers.push({
@@ -58,7 +59,7 @@ function CircuitPathAnswerRecord(setCongrats) {
     const id_user = parseInt(user.id, 10);
     // eslint-disable-next-line @typescript-eslint/naming-convention
     const id_circuit = parseInt(id, 10);
-    if (arrayAnswers.length === localCircuit.step.length) {
+    if (arrayAnswers.length === circuit.step.length) {
       answerObject = {
         id_user,
         id_circuit,

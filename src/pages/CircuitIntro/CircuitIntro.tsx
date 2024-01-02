@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { Compass } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -10,11 +10,8 @@ import CircuitDescriptionCard from '../../components/CircuitDescriptionCard/Circ
 import CicuitLocationCard from '../../components/CircuitLocationCard/CircuitLocationCard';
 
 function CircuitIntro() {
-  const [alreadyLoad, setAlreadyLoad] = useState(false);
-
   const { id } = useParams<Record<string, string | undefined>>();
   const isLoading = useAppSelector((state) => state.circuits.isLoading);
-  const noCircuit = useAppSelector((state) => state.circuits.noCircuit);
   const user = useAppSelector((state) => state.settings.user);
   const circuit = useAppSelector((state) => state.circuits.oneCircuit);
 
@@ -24,25 +21,11 @@ function CircuitIntro() {
     dispatch(fetchCircuit(id as string));
   }, [dispatch, id]);
 
-  useEffect(() => {
-    if (circuit) {
-      setAlreadyLoad(noCircuit);
-    }
-  }, [circuit, noCircuit]);
-
-  useEffect(() => {
-    if (circuit) {
-      const circuitJSON = JSON.stringify(circuit);
-
-      localStorage.setItem('circuitData', circuitJSON);
-    }
-  }, [circuit]);
-
   if (isLoading) {
     return <Loader />;
   }
 
-  if (!circuit && alreadyLoad) {
+  if (!circuit) {
     return <Navigate to="/" />;
   }
 

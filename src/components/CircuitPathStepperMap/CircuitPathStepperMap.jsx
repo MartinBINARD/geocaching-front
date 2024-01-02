@@ -1,26 +1,27 @@
+import { useSelector } from 'react-redux';
 import { Compass } from 'lucide-react';
 
 import Map from '../Map/Map';
 
 function CircuitPathMap({ currentStepIndex, setShowContent, setEndCircuit }) {
-  const localCircuit = JSON.parse(localStorage.getItem('circuitData'));
+  const circuit = useSelector((state) => state.circuits.oneCircuit);
   const stepPosition = [
-    localCircuit.step[currentStepIndex].latitude,
-    localCircuit.step[currentStepIndex].longitude,
+    circuit.step[currentStepIndex].latitude,
+    circuit.step[currentStepIndex].longitude,
   ];
 
   const handleShowContent = () => {
     setShowContent(true);
-    if (currentStepIndex === parseInt(localCircuit.step.length - 1, 10)) {
+    if (currentStepIndex === parseInt(circuit.step.length - 1, 10)) {
       setEndCircuit(true);
     }
   };
 
   return (
     <section className="flex flex-col items-center">
-      {localCircuit.step[currentStepIndex - 1]?.transition && (
+      {circuit.step[currentStepIndex - 1]?.transition && (
         <p className="text-sm shadow-lg p-2 mt-2 mb-2">
-          {localCircuit.step[currentStepIndex - 1].transition}
+          {circuit.step[currentStepIndex - 1].transition}
         </p>
       )}
 

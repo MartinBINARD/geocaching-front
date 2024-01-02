@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Compass } from 'lucide-react';
 
@@ -16,10 +17,11 @@ function CircuitPathQuestion({
   const [userAnswers, setUserAnswers] = useState(
     JSON.parse(localStorage.getItem('answers')) || {}
   );
-  const localCircuit = JSON.parse(localStorage.getItem('circuitData'));
+  // const localCircuit = JSON.parse(localStorage.getItem('circuitData'));
+  const circuit = useSelector((state) => state.circuits.oneCircuit);
   const oneMarker = [
-    localCircuit.step[currentStepIndex].latitude,
-    localCircuit.step[currentStepIndex].longitude,
+    circuit.step[currentStepIndex].latitude,
+    circuit.step[currentStepIndex].longitude,
   ];
 
   useEffect(() => {
@@ -31,7 +33,7 @@ function CircuitPathQuestion({
   };
 
   const handleNext = () => {
-    if (currentStepIndex < localCircuit.step.length - 1) {
+    if (currentStepIndex < circuit.step.length - 1) {
       if (!document.getElementById('answerInput').value) {
         setInputError(true);
       } else {
@@ -42,7 +44,7 @@ function CircuitPathQuestion({
       }
     }
 
-    if (currentStepIndex === parseInt(localCircuit.step.length - 1, 10)) {
+    if (currentStepIndex === parseInt(circuit.step.length - 1, 10)) {
       setEndCircuit(true);
     }
   };
@@ -50,24 +52,22 @@ function CircuitPathQuestion({
   return (
     <section className="flex flex-col items-center">
       <p className="p-3 text-sm lg:text-base">
-        {localCircuit.step[currentStepIndex].paragraph}
+        {circuit.step[currentStepIndex].paragraph}
       </p>
 
       <CircuitMapHandleClick oneMarker={oneMarker} zoom={17} />
 
       <div className="flex flex-col items-center border-3 border-secondary py-4">
         <div className="flex flex-col p-4 gap-4">
-          <p className="font-bold">
-            {localCircuit.step[currentStepIndex].question}
-          </p>
-          {localCircuit.step[currentStepIndex].hint && (
+          <p className="font-bold">{circuit.step[currentStepIndex].question}</p>
+          {circuit.step[currentStepIndex].hint && (
             <button type="button" onClick={handleClickHint} className="text-sm">
               Indice ?
             </button>
           )}
           {showHint && (
             <p className="text-sm text-justify">
-              {localCircuit.step[currentStepIndex].hint}
+              {circuit.step[currentStepIndex].hint}
             </p>
           )}
           <input

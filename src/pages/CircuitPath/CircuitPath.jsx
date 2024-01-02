@@ -23,17 +23,13 @@ function CircuitPath() {
   // state to listening and show hint to the user
   const [showHint, setShowHint] = useState(false);
 
-  // looking for the id set in the URL and redirect the user if the id of URL isnt the same than the circuit id
   const { id } = useParams();
-
-  // state to know if we are in loading pending
   const isLoading = useSelector((state) => state.circuits.isLoading);
-  // variable to get the circuit that is in local storage
-  const localCircuit = JSON.parse(localStorage.getItem('circuitData'));
+  const circuit = useSelector((state) => state.circuits.oneCircuit);
 
   // If there's a next step, add to the currentStepIndex + 1
   const handleNextStep = () => {
-    if (currentStepIndex < localCircuit.step.length - 1) {
+    if (currentStepIndex < circuit.step.length - 1) {
       setCurrentStepIndex(currentStepIndex + 1);
       setShowHint(false);
     }
@@ -46,19 +42,9 @@ function CircuitPath() {
     }
   };
 
-  // if no circuit redirect they to the first page
-  if (!localCircuit) {
-    return <Navigate to={`/circuit/${id}`} />;
-  }
-
   // if loading, display loader
   if (isLoading) {
     return <Loader />;
-  }
-
-  // if the id of the url and the id of the circuit are not the same, redirect to the first page
-  if (localCircuit.id_circuit.toString() !== id) {
-    return <Navigate to={`/circuit/${id}`} />;
   }
 
   if (congrats) {
@@ -70,7 +56,7 @@ function CircuitPath() {
       <div className="flex justify-center gap-2 font-bold lg:text-xl w-full border-t border-b text-center border-primary py-2 my-2">
         <Flag />
         <h2>
-          Étape {currentStepIndex + 1} sur {localCircuit.step.length}
+          Étape {currentStepIndex + 1} sur {circuit.step.length}
         </h2>
       </div>
 
@@ -113,12 +99,12 @@ function CircuitPath() {
             Étape précédente
           </button>
         )}
-        {currentStepIndex < localCircuit.step.length - 1 && (
+        {currentStepIndex < circuit.step.length - 1 && (
           <button
             type="button"
             onClick={handleNextStep}
             className="btn btn-primary btn-outline"
-            disabled={currentStepIndex === localCircuit.step.length - 1}
+            disabled={currentStepIndex === circuit.step.length - 1}
           >
             Étape suivante
             <ChevronRight />
