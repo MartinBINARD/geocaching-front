@@ -10,7 +10,9 @@ function CircuitPathAnswerRecord(setCongrats) {
   const [wrongMessages, setWrongMessages] = useState([]);
   const localCircuit = JSON.parse(localStorage.getItem('circuitData'));
   const userAnswers = JSON.parse(localStorage.getItem('answers'));
-  const checkAnswer = useSelector((state) => state.circuits.answers);
+  const userCircuitAnswersResult = useSelector(
+    (state) => state.circuits.userCircuitAnswersResult
+  );
   const user = useSelector((state) => state.settings.user);
 
   // looking for the id set in the URL and redirect the user if the id of URL isnt the same than the circuit id
@@ -19,8 +21,8 @@ function CircuitPathAnswerRecord(setCongrats) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (checkAnswer) {
-      const incorrectAnswers = checkAnswer
+    if (userCircuitAnswersResult) {
+      const incorrectAnswers = userCircuitAnswersResult
         .map((reponse, index) => ({ index, reponse }))
         .filter((item) => item.reponse === false);
 
@@ -34,7 +36,7 @@ function CircuitPathAnswerRecord(setCongrats) {
         setWrongMessages(wrongMessagesList);
       }
     }
-  }, [checkAnswer, setCongrats]);
+  }, [userCircuitAnswersResult, setCongrats]);
 
   const transformAnswer = () => {
     const arrayAnswers = [];
@@ -80,7 +82,7 @@ function CircuitPathAnswerRecord(setCongrats) {
         <Compass className="w-7 h-7" />
         {!wrongMessages ? 'Clique ici' : 'Vérifier mes réponses'}
       </button>
-      {checkAnswer && checkAnswer.includes(false) && (
+      {userCircuitAnswersResult && userCircuitAnswersResult.includes(false) && (
         <>
           <p className="mt-2 mb-2 text-center">
             Arg ! Vous avez fait quelques erreurs d&apos;observation !
@@ -91,7 +93,7 @@ function CircuitPathAnswerRecord(setCongrats) {
           <table className="table-auto">
             <tbody>
               <tr>
-                {checkAnswer.map((item, index) => (
+                {userCircuitAnswersResult.map((item, index) => (
                   <td
                     key={`${item}-${Math.random()}`}
                     className="border font-semibold text-xl px-4 py-2 text-center"
@@ -101,7 +103,7 @@ function CircuitPathAnswerRecord(setCongrats) {
                 ))}
               </tr>
               <tr>
-                {checkAnswer.map((item) => (
+                {userCircuitAnswersResult.map((item) => (
                   <td
                     key={`${item}-${Math.random()}`}
                     className="border px-4 py-2"

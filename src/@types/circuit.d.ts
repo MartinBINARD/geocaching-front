@@ -39,3 +39,11 @@ export interface Step {
   answer: number;
   id_step: number;
 }
+
+export interface UserCircuitAnswersState {
+  id_user: number;
+  id_circuit: number;
+  steps: Step[];
+}
+
+export type UserCircuitAnswersResultState = boolean[];

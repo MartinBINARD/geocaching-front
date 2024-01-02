@@ -9,13 +9,12 @@ import { AxiosError } from 'axios';
 import api from '../../service/axios';
 import filteredList from '../../utils/FilteredList';
 
-import { Circuit, SearchState, Step } from '../../@types/circuit';
-
-interface AnswerState {
-  id_user: number;
-  id_circuit: number;
-  steps: Step[];
-}
+import {
+  Circuit,
+  SearchState,
+  UserCircuitAnswersState,
+  UserCircuitAnswersResultState,
+} from '../../@types/circuit';
 
 interface CircuitState {
   circuitsList: Circuit[];
@@ -23,7 +22,7 @@ interface CircuitState {
   isSearchResult: boolean;
   errorMessage: string | undefined;
   oneCircuit: Circuit | null;
-  answers: AnswerState | null;
+  userCircuitAnswersResult: UserCircuitAnswersResultState | null;
   isLoading: boolean;
   noCircuit: boolean;
 }
@@ -34,7 +33,7 @@ const initialState: CircuitState = {
   isSearchResult: true,
   errorMessage: '',
   oneCircuit: null,
-  answers: null,
+  userCircuitAnswersResult: null,
   isLoading: false,
   noCircuit: false,
 };
@@ -59,8 +58,9 @@ export const fetchCircuit = createAsyncThunk(
   'circuits/fetchCircuit',
   async (id: string): Promise<Circuit> => {
     try {
-      const response = await api.get<Circuit>(`circuits/${id}`);
-      return response.data;
+      const { data } = await api.get<Circuit>(`circuits/${id}`);
+
+      return data;
     } catch (error: unknown) {
       /* Specify known AxiosError Type to solve eslint warning.
       Typscript cannot predict server error but do it on AxiosError Instance */
@@ -72,13 +72,16 @@ export const fetchCircuit = createAsyncThunk(
 
 export const sendAnswers = createAsyncThunk(
   'circuits/sendAnswers',
-  async (answers: AnswerState): Promise<AnswerState> => {
+  async (
+    answers: UserCircuitAnswersState
+  ): Promise<UserCircuitAnswersResultState> => {
     try {
-      const response = await api.post<AnswerState>(
+      const { data } = await api.post<UserCircuitAnswersResultState>(
         `circuits/${answers.id_circuit}/answer`,
         answers
       );
-      return response.data;
+
+      return data;
     } catch (error: unknown) {
       /* Specify known AxiosError Type to solve eslint warning.
       Typscript cannot predict server error but do it on AxiosError Instance */
@@ -132,7 +135,7 @@ const circuitsReducer = createReducer(initialState, (builder) => {
       state.isLoading = true;
     })
     .addCase(sendAnswers.fulfilled, (state, action) => {
-      state.answers = action.payload;
+      state.userCircuitAnswersResult = action.payload;
       state.isLoading = false;
     })
     .addCase(sendAnswers.rejected, (state) => {
