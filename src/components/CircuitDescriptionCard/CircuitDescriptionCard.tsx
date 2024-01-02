@@ -31,7 +31,7 @@ function CircuitDescriptionCard() {
 
   return (
     <article>
-      <section className="border-b border-primary m-auto">
+      <section className="m-auto">
         <img
           className="rounded-lg m-auto"
           src={url_image}
