@@ -17,7 +17,6 @@ function CircuitIntro() {
   const noCircuit = useAppSelector((state) => state.circuits.noCircuit);
   const user = useAppSelector((state) => state.settings.user);
   const circuit = useAppSelector((state) => state.circuits.oneCircuit);
-  console.log('circuit', circuit);
 
   const dispatch = useAppDispatch();
 

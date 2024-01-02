@@ -53,7 +53,7 @@ function CircuitPathQuestion({
         {localCircuit.step[currentStepIndex].paragraph}
       </p>
 
-      <CircuitMapHandleClick oneMarker={oneMarker} />
+      <CircuitMapHandleClick oneMarker={oneMarker} zoom={17} />
 
       <div className="flex flex-col items-center border-3 border-secondary py-4">
         <div className="flex flex-col p-4 gap-4">

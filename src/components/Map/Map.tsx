@@ -11,17 +11,17 @@ import MapPopup from '../MapPopup/MapPopup';
 interface MapsProps {
   markersList?: Circuit[];
   oneMarker?: LatLngTuple;
+  zoom: number;
   className: string;
 }
 
-function Map({ markersList, oneMarker, className }: MapsProps) {
-  const zoomMap = markersList ? 6 : 12;
+function Map({ markersList, oneMarker, zoom, className }: MapsProps) {
   const centerMap = markersList ? FindCenter(markersList) : oneMarker;
 
   return (
     <MapContainer
       center={centerMap}
-      zoom={zoomMap}
+      zoom={zoom}
       className={className}
       attributionControl={false}
     >

@@ -7,9 +7,13 @@ import Map from '../Map/Map';
 
 interface CircuitMapHandleClickProps {
   oneMarker: LatLngTuple;
+  zoom: number;
 }
 
-function CircuitMapHandleClick({ oneMarker }: CircuitMapHandleClickProps) {
+function CircuitMapHandleClick({
+  oneMarker,
+  zoom,
+}: CircuitMapHandleClickProps) {
   const [showMap, setShowMap] = useState<boolean>(false);
 
   const handleClickMap = () => {
@@ -32,7 +36,7 @@ function CircuitMapHandleClick({ oneMarker }: CircuitMapHandleClickProps) {
             <X />
           </button>
 
-          <Map oneMarker={oneMarker} className="h-[70vh] w-full" />
+          <Map oneMarker={oneMarker} zoom={zoom} className="h-[70vh] w-full" />
         </section>
       )}
 

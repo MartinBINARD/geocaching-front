@@ -19,7 +19,7 @@ function CicuitLocationCard() {
         <p>{parking_address}</p>
       </div>
 
-      <CircuitMapHandleClick oneMarker={oneMarker} />
+      <CircuitMapHandleClick oneMarker={oneMarker} zoom={12} />
     </section>
   );
 }

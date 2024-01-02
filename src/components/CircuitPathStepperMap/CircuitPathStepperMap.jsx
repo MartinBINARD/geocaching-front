@@ -1,9 +1,13 @@
 import { Compass } from 'lucide-react';
 
-import MapCircuit from '../MapCircuit/MapCircuit';
+import Map from '../Map/Map';
 
 function CircuitPathMap({ currentStepIndex, setShowContent, setEndCircuit }) {
   const localCircuit = JSON.parse(localStorage.getItem('circuitData'));
+  const stepPosition = [
+    localCircuit.step[currentStepIndex].latitude,
+    localCircuit.step[currentStepIndex].longitude,
+  ];
 
   const handleShowContent = () => {
     setShowContent(true);
@@ -20,11 +24,12 @@ function CircuitPathMap({ currentStepIndex, setShowContent, setEndCircuit }) {
         </p>
       )}
 
-      <MapCircuit
-        longitude={localCircuit.step[currentStepIndex].longitude}
-        latitude={localCircuit.step[currentStepIndex].latitude}
+      <Map
+        oneMarker={stepPosition}
+        zoom={17}
         className="w-full h-[500px] lg:w-[500px] lg:h-[500px] grow m-auto self-center rounded-lg"
       />
+
       <button
         className="flex gap-2 justify-center items-center btn btn-primary normal-case text-lg font-medium text-white mt-5"
         type="button"
