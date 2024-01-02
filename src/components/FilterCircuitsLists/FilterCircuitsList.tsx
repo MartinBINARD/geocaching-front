@@ -23,7 +23,7 @@ function FilterCircuitsList({ list }: ListProps) {
 
   const dispatch = useAppDispatch();
 
-  const loading = useAppSelector((state) => state.circuits.loading);
+  const isLoading = useAppSelector((state) => state.circuits.isLoading);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -49,7 +49,7 @@ function FilterCircuitsList({ list }: ListProps) {
     setIsOpen(false);
   };
 
-  if (loading) {
+  if (isLoading) {
     return <Loader />;
   }
 

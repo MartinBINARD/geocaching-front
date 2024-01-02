@@ -25,7 +25,7 @@ interface CircuitState {
   oneCircuit: Circuit | null;
   answers: AnswerState | null;
   alreadyDid: boolean;
-  loading: boolean;
+  isLoading: boolean;
   noCircuit: boolean;
 }
 
@@ -37,7 +37,7 @@ const initialState: CircuitState = {
   oneCircuit: null,
   answers: null,
   alreadyDid: false,
-  loading: false,
+  isLoading: false,
   noCircuit: false,
 };
 
@@ -97,18 +97,18 @@ export const searchCircuitsList = createAction<SearchState>(
 const circuitsReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(fetchCircuitsList.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     })
     .addCase(fetchCircuitsList.fulfilled, (state, action) => {
       /* Reset isSearchResult to true in case of user navigating through
       application, previous negative search message must be not displayed */
       state.isSearchResult = true;
       state.circuitsList = action.payload;
-      state.loading = false;
+      state.isLoading = false;
     })
     .addCase(fetchCircuitsList.rejected, (state, action) => {
       state.errorMessage = action.error.message;
-      state.loading = false;
+      state.isLoading = false;
     })
     .addCase(searchCircuitsList, (state, action) => {
       const { search, list }: SearchState = action.payload;
@@ -118,31 +118,31 @@ const circuitsReducer = createReducer(initialState, (builder) => {
       state.searchList = searchListResult;
     })
     .addCase(fetchCircuit.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     })
     .addCase(fetchCircuit.fulfilled, (state, action) => {
       state.oneCircuit = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.noCircuit = false;
     })
     .addCase(fetchCircuit.rejected, (state, action) => {
       toast(action.error.message);
-      state.loading = false;
+      state.isLoading = false;
       state.noCircuit = true;
     })
     .addCase(sendAnswers.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     })
     .addCase(sendAnswers.fulfilled, (state, action) => {
       state.answers = action.payload;
-      state.loading = false;
+      state.isLoading = false;
     })
     .addCase(sendAnswers.rejected, (state) => {
       state.alreadyDid = true;
       toast(
         'Toutes les réponses sont bonnes mais vous avez déjà terminé ce circuit'
       );
-      state.loading = false;
+      state.isLoading = false;
     });
 });
 

@@ -10,7 +10,7 @@ import CircuitListCard from '../../components/CircuitsListCard/CircuitsListCard'
 
 function CircuitsList() {
   const errorMessage = useAppSelector((state) => state.circuits.errorMessage);
-  const loading = useAppSelector((state) => state.circuits.loading);
+  const isLoading = useAppSelector((state) => state.circuits.isLoading);
   /* First load all circuitsList by default or when empty search value is
   submitted. Replace all circuitsList prop by searchList when updating from store
   / submitting from FilterCircuitsList component */
@@ -35,7 +35,7 @@ function CircuitsList() {
     return <h2>{errorMessage}</h2>;
   }
 
-  return loading || !circuitsList.length ? (
+  return isLoading || !circuitsList.length ? (
     <Loader />
   ) : (
     <section className="flex-grow-1 flex flex-col m-auto max-lg:px-1">

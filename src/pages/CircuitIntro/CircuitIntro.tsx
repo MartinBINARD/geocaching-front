@@ -13,7 +13,7 @@ function CircuitIntro() {
   const [alreadyLoad, setAlreadyLoad] = useState(false);
 
   const { id } = useParams<Record<string, string | undefined>>();
-  const loading = useAppSelector((state) => state.circuits.loading);
+  const isLoading = useAppSelector((state) => state.circuits.isLoading);
   const noCircuit = useAppSelector((state) => state.circuits.noCircuit);
   const user = useAppSelector((state) => state.settings.user);
   const circuit = useAppSelector((state) => state.circuits.oneCircuit);
@@ -38,7 +38,7 @@ function CircuitIntro() {
     }
   }, [circuit]);
 
-  if (loading) {
+  if (isLoading) {
     return <Loader />;
   }
 

@@ -28,7 +28,7 @@ function CircuitPath() {
   const { id } = useParams();
 
   // state to know if we are in loading pending
-  const isLoading = useSelector((state) => state.circuits.loading);
+  const isLoading = useSelector((state) => state.circuits.isLoading);
   // variable to get the circuit that is in local storage
   const localCircuit = JSON.parse(localStorage.getItem('circuitData'));
   // state to know if the user has already did this circuit
