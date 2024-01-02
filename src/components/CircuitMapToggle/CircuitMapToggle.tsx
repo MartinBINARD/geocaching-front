@@ -5,18 +5,15 @@ import { MapPinned, X } from 'lucide-react';
 
 import Map from '../Map/Map';
 
-interface CircuitMapHandleClickProps {
+interface CircuitMapToggleProps {
   oneMarker: LatLngTuple;
   zoom: number;
 }
 
-function CircuitMapHandleClick({
-  oneMarker,
-  zoom,
-}: CircuitMapHandleClickProps) {
+function CircuitMapToggle({ oneMarker, zoom }: CircuitMapToggleProps) {
   const [showMap, setShowMap] = useState<boolean>(false);
 
-  const handleClickMap = () => {
+  const toggleMap = () => {
     setShowMap(!showMap);
   };
 
@@ -31,7 +28,7 @@ function CircuitMapHandleClick({
           <button
             type="button"
             className="btn btn-circle btn-error bg-opacity-100 mb-4"
-            onClick={handleClickMap}
+            onClick={toggleMap}
           >
             <X />
           </button>
@@ -42,7 +39,7 @@ function CircuitMapHandleClick({
 
       <button
         type="button"
-        onClick={handleClickMap}
+        onClick={toggleMap}
         className="btn btn-primary btn-outline normal-case font-medium text-white my-4"
       >
         <MapPinned className="w-8 h-8" />
@@ -52,4 +49,4 @@ function CircuitMapHandleClick({
   );
 }
 
-export default CircuitMapHandleClick;
+export default CircuitMapToggle;

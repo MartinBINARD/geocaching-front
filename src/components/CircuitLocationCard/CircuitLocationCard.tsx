@@ -4,7 +4,7 @@ import { useAppSelector } from '../../hooks/redux';
 
 import { Circuit } from '../../@types/circuit';
 
-import CircuitMapHandleClick from '../CircuitMapHandleClick/CircuitMapHandleClick';
+import CircuitMapToggle from '../CircuitMapToggle/CircuitMapToggle';
 
 function CicuitLocationCard() {
   const circuit = useAppSelector((state) => state.circuits.oneCircuit);
@@ -19,7 +19,7 @@ function CicuitLocationCard() {
         <p>{parking_address}</p>
       </div>
 
-      <CircuitMapHandleClick oneMarker={oneMarker} zoom={12} />
+      <CircuitMapToggle oneMarker={oneMarker} zoom={12} />
     </section>
   );
 }

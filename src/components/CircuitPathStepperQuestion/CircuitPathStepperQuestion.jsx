@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Compass } from 'lucide-react';
 
-import CircuitMapHandleClick from '../CircuitMapHandleClick/CircuitMapHandleClick';
+import CircuitMapToggle from '../CircuitMapToggle/CircuitMapToggle';
 
 function CircuitPathQuestion({
   currentStepIndex,
@@ -55,7 +55,7 @@ function CircuitPathQuestion({
         {circuit.step[currentStepIndex].paragraph}
       </p>
 
-      <CircuitMapHandleClick oneMarker={oneMarker} zoom={17} />
+      <CircuitMapToggle oneMarker={oneMarker} zoom={17} />
 
       <div className="flex flex-col items-center border-3 border-secondary py-4">
         <div className="flex flex-col p-4 gap-4">
