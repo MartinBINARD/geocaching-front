@@ -83,14 +83,8 @@ function CircuitPath() {
           Étape {currentStepIndex + 1} sur {localCircuit.step.length}
         </h2>
       </div>
-      {!showContent && (
-        <CircuitPathStepperMap
-          currentStepIndex={currentStepIndex}
-          setShowContent={setShowContent}
-          setEndCircuit={setEndCircuit}
-        />
-      )}
-      {showContent && (
+
+      {showContent ? (
         <>
           <CircuitPathStepperQuestion
             currentStepIndex={currentStepIndex}
@@ -103,7 +97,14 @@ function CircuitPath() {
           />
           {endCircuit && <CircuitPathAnswerRecord setCongrats={setCongrats} />}
         </>
+      ) : (
+        <CircuitPathStepperMap
+          currentStepIndex={currentStepIndex}
+          setShowContent={setShowContent}
+          setEndCircuit={setEndCircuit}
+        />
       )}
+
       <section
         className={
           currentStepIndex === 0

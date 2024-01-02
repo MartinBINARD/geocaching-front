@@ -1,11 +1,8 @@
+import { Compass } from 'lucide-react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-// import icons
-import logo from '../../assets/logo/compass.png';
-
 function Congrats() {
-  // useEffect hook to clear the local storage on the congrats page
   useEffect(() => {
     localStorage.clear();
   }, []);
@@ -23,7 +20,7 @@ function Congrats() {
         className="flex items-center gap-2 bg-primary rounded-lg px-4 py-2 text-white"
         to="/profile"
       >
-        <img className="h-10" src={logo} alt="logo CacheTrek" />
+        <Compass className="w-7 h-7" />
         Découvrir
       </Link>
     </>
