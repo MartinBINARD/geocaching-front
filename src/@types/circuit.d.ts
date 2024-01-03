@@ -47,3 +47,5 @@ export interface UserCircuitAnswersState {
 }
 
 export type UserCircuitAnswersResultState = boolean[];
+
+export type UserCircuitAnswersEntriesState = Record<string, string | undefined>;

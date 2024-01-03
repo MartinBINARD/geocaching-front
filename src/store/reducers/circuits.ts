@@ -14,6 +14,7 @@ import {
   SearchState,
   UserCircuitAnswersState,
   UserCircuitAnswersResultState,
+  UserCircuitAnswersEntriesState,
 } from '../../@types/circuit';
 
 interface CircuitState {
@@ -22,6 +23,7 @@ interface CircuitState {
   isSearchResult: boolean;
   errorMessage: string | undefined;
   oneCircuit: Circuit | null;
+  userCircuitAnswerEntries: UserCircuitAnswersEntriesState | null;
   userCircuitAnswersResult: UserCircuitAnswersResultState | null;
   isLoading: boolean;
   noCircuit: boolean;
@@ -33,13 +35,14 @@ const initialState: CircuitState = {
   isSearchResult: true,
   errorMessage: '',
   oneCircuit: null,
+  userCircuitAnswerEntries: null,
   userCircuitAnswersResult: null,
   isLoading: false,
   noCircuit: false,
 };
 
 export const fetchCircuitsList = createAsyncThunk(
-  'circuits/fetchCircuitsList',
+  'circuits/fetch-circuits-list',
   async (): Promise<Circuit[]> => {
     try {
       const { data } = await api.get<Circuit[]>('circuits');
@@ -54,8 +57,12 @@ export const fetchCircuitsList = createAsyncThunk(
   }
 );
 
+export const searchCircuitsList = createAction<SearchState>(
+  'circuits/search-circuits-list'
+);
+
 export const fetchCircuit = createAsyncThunk(
-  'circuits/fetchCircuit',
+  'circuits/fetch-circuit',
   async (id: string): Promise<Circuit> => {
     try {
       const { data } = await api.get<Circuit>(`circuits/${id}`);
@@ -70,15 +77,18 @@ export const fetchCircuit = createAsyncThunk(
   }
 );
 
+export const storeUserCircuitAnswers =
+  createAction<UserCircuitAnswersEntriesState>('circuits/store-user-answser');
+
 export const sendAnswers = createAsyncThunk(
-  'circuits/sendAnswers',
+  'circuits/send-answers',
   async (
-    answers: UserCircuitAnswersState
+    answersEntries: UserCircuitAnswersState
   ): Promise<UserCircuitAnswersResultState> => {
     try {
       const { data } = await api.post<UserCircuitAnswersResultState>(
-        `circuits/${answers.id_circuit}/answer`,
-        answers
+        `circuits/${answersEntries.id_circuit}/answer`,
+        answersEntries
       );
 
       return data;
@@ -89,10 +99,6 @@ export const sendAnswers = createAsyncThunk(
       throw err.response ? err.response.data : err.message;
     }
   }
-);
-
-export const searchCircuitsList = createAction<SearchState>(
-  'circuits/searchCircuits'
 );
 
 const circuitsReducer = createReducer(initialState, (builder) => {
@@ -130,6 +136,9 @@ const circuitsReducer = createReducer(initialState, (builder) => {
       toast(action.error.message);
       state.isLoading = false;
       state.noCircuit = true;
+    })
+    .addCase(storeUserCircuitAnswers, (state, action) => {
+      state.userCircuitAnswerEntries = action.payload;
     })
     .addCase(sendAnswers.pending, (state) => {
       state.isLoading = true;

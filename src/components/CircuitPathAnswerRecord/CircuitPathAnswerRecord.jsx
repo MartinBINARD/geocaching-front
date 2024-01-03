@@ -10,7 +10,9 @@ function CircuitPathAnswerRecord(setCongrats) {
   const [wrongMessages, setWrongMessages] = useState([]);
   const circuit = useSelector((state) => state.circuits.oneCircuit);
 
-  const userAnswers = JSON.parse(localStorage.getItem('answers'));
+  const userCircuitAnswerEntries = useSelector(
+    (state) => state.circuits.userCircuitAnswerEntries
+  );
   const userCircuitAnswersResult = useSelector(
     (state) => state.circuits.userCircuitAnswersResult
   );
@@ -44,7 +46,7 @@ function CircuitPathAnswerRecord(setCongrats) {
     let answerObject = {};
 
     // eslint-disable-next-line no-restricted-syntax
-    for (const [key, value] of Object.entries(userAnswers)) {
+    for (const [key, value] of Object.entries(userCircuitAnswerEntries)) {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       const id_step = circuit.step[key].id;
       const answer = parseInt(value, 10);

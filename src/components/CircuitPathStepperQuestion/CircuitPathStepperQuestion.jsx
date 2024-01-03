@@ -1,8 +1,9 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Compass } from 'lucide-react';
 
 import CircuitMapToggle from '../CircuitMapToggle/CircuitMapToggle';
+import { storeUserCircuitAnswers } from '../../store/reducers/circuits';
 
 function CircuitPathQuestion({
   currentStepIndex,
@@ -14,22 +15,27 @@ function CircuitPathQuestion({
   setEndCircuit,
 }) {
   const [inputError, setInputError] = useState(false);
-  const [userAnswers, setUserAnswers] = useState(
-    JSON.parse(localStorage.getItem('answers')) || {}
-  );
-  // const localCircuit = JSON.parse(localStorage.getItem('circuitData'));
+  const [userAnswers, setUserAnswers] = useState({});
   const circuit = useSelector((state) => state.circuits.oneCircuit);
   const oneMarker = [
     circuit.step[currentStepIndex].latitude,
     circuit.step[currentStepIndex].longitude,
   ];
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    localStorage.setItem('answers', JSON.stringify(userAnswers));
-  }, [userAnswers]);
+    dispatch(storeUserCircuitAnswers(userAnswers));
+  }, [userAnswers, dispatch]);
 
   const handleClickHint = () => {
     setShowHint(!showHint);
+  };
+
+  const handleChange = (e) => {
+    setUserAnswers({
+      ...userAnswers,
+      [currentStepIndex]: e.target.value,
+    });
   };
 
   const handleNext = () => {
@@ -76,12 +82,7 @@ function CircuitPathQuestion({
             type="number"
             placeholder="Votre réponse"
             value={userAnswers[currentStepIndex] || ''}
-            onChange={(e) =>
-              setUserAnswers({
-                ...userAnswers,
-                [currentStepIndex]: e.target.value,
-              })
-            }
+            onChange={handleChange}
             required
           />
         </div>
