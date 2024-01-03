@@ -138,7 +138,10 @@ const circuitsReducer = createReducer(initialState, (builder) => {
       state.noCircuit = true;
     })
     .addCase(storeUserCircuitAnswers, (state, action) => {
-      state.userCircuitAnswerEntries = action.payload;
+      state.userCircuitAnswerEntries = {
+        ...state.userCircuitAnswerEntries,
+        ...action.payload,
+      };
     })
     .addCase(sendAnswers.pending, (state) => {
       state.isLoading = true;

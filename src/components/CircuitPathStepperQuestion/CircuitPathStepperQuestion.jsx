@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Compass } from 'lucide-react';
 
 import CircuitMapToggle from '../CircuitMapToggle/CircuitMapToggle';
@@ -23,10 +23,6 @@ function CircuitPathQuestion({
   ];
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(storeUserCircuitAnswers(userAnswers));
-  }, [userAnswers, dispatch]);
-
   const handleClickHint = () => {
     setShowHint(!showHint);
   };
@@ -36,6 +32,8 @@ function CircuitPathQuestion({
       ...userAnswers,
       [currentStepIndex]: e.target.value,
     });
+    const payload = { [currentStepIndex]: e.target.value };
+    dispatch(storeUserCircuitAnswers(payload));
   };
 
   const handleNext = () => {
