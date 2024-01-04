@@ -15,7 +15,10 @@ import {
   UserCircuitAnswersState,
   UserCircuitAnswersResultState,
   UserCircuitAnswersEntriesState,
+  CircuitQuizStep,
+  CircuitPathStep,
 } from '../../@types/circuit';
+import createCircuitQuizStepper from '../../utils/createCircuitQuizStepper';
 
 interface CircuitState {
   circuitsList: Circuit[];
@@ -23,6 +26,7 @@ interface CircuitState {
   isSearchResult: boolean;
   errorMessage: string | undefined;
   oneCircuit: Circuit | null;
+  circuitQuiz: CircuitQuizStep[];
   userCircuitAnswerEntries: UserCircuitAnswersEntriesState | null;
   userCircuitAnswersResult: UserCircuitAnswersResultState | null;
   isLoading: boolean;
@@ -35,6 +39,7 @@ const initialState: CircuitState = {
   isSearchResult: true,
   errorMessage: '',
   oneCircuit: null,
+  circuitQuiz: [],
   userCircuitAnswerEntries: null,
   userCircuitAnswersResult: null,
   isLoading: false,
@@ -75,6 +80,10 @@ export const fetchCircuit = createAsyncThunk(
       throw err.response ? err.response.data : err.message;
     }
   }
+);
+
+export const storeCircuitQuiz = createAction<CircuitPathStep[]>(
+  'circuits/store-ciruit-quiz'
 );
 
 export const storeUserCircuitAnswers =
@@ -136,6 +145,13 @@ const circuitsReducer = createReducer(initialState, (builder) => {
       toast(action.error.message);
       state.isLoading = false;
       state.noCircuit = true;
+    })
+    .addCase(storeCircuitQuiz, (state, action) => {
+      const formatArrayStepper = createCircuitQuizStepper(
+        action.payload
+      ) as CircuitQuizStep[];
+
+      state.circuitQuiz = formatArrayStepper;
     })
     .addCase(storeUserCircuitAnswers, (state, action) => {
       state.userCircuitAnswerEntries = {
