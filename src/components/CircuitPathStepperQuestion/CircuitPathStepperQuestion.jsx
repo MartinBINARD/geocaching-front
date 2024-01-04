@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 
-import CircuitMapToggle from '../CircuitMapToggle/CircuitMapToggle';
 import { storeUserCircuitAnswers } from '../../store/reducers/circuits';
+
+import CircuitMapToggle from '../CircuitMapToggle/CircuitMapToggle';
 
 function CircuitPathQuestion({
   currentStepIndex,
@@ -31,15 +32,16 @@ function CircuitPathQuestion({
   }
 
   function handleChange(e) {
-    if (e.target.value.length > 0) {
-      setInvalidInput(false);
-    }
     setUserAnswers({
       ...userAnswers,
       [currentStepIndex]: e.target.value,
     });
-    const payload = { [currentStepIndex]: e.target.value };
-    dispatch(storeUserCircuitAnswers(payload));
+
+    if (e.target.value.length > 0) {
+      setInvalidInput(false);
+      const payload = { [currentStepIndex]: e.target.value };
+      dispatch(storeUserCircuitAnswers(payload));
+    }
   }
 
   return (
