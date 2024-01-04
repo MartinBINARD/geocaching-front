@@ -25,17 +25,22 @@ function CircuitPathQuestion({
     setShowHint(!showHint);
   }
 
-  function handleBlur(e) {
-    if (e.target.value.length === 0) {
+  function warnInvalidInput(value) {
+    if (value.length === 0) {
       setInvalidInput(true);
     }
   }
 
+  function handleBlur(e) {
+    warnInvalidInput(e.target.value);
+  }
+
   function handleChange(e) {
     setUserAnswers({
-      ...userAnswers,
       [currentStepIndex]: e.target.value,
     });
+
+    warnInvalidInput(e.target.value);
 
     if (e.target.value.length > 0) {
       setInvalidInput(false);
@@ -74,6 +79,7 @@ function CircuitPathQuestion({
             id="answerInput"
             type="number"
             placeholder="Votre réponse"
+            min="0"
             value={userAnswers[currentStepIndex] || ''}
             onChange={handleChange}
             onBlur={handleBlur}

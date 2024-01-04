@@ -3,7 +3,10 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { Compass } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-import { fetchCircuit } from '../../store/reducers/circuits';
+import {
+  fetchCircuit,
+  resetUserCircuitAnswers,
+} from '../../store/reducers/circuits';
 
 import Loader from '../../components/Loader/Loader';
 import CircuitDescriptionCard from '../../components/CircuitDescriptionCard/CircuitDescriptionCard';
@@ -20,6 +23,8 @@ function CircuitIntro() {
   useEffect(() => {
     dispatch(fetchCircuit(id as string));
   }, [dispatch, id]);
+
+  const handleClick = () => dispatch(resetUserCircuitAnswers());
 
   if (isLoading) {
     return <Loader />;
@@ -40,6 +45,7 @@ function CircuitIntro() {
           <Link
             className="flex gap-2 items-center  mt-2 btn btn-primary text-white m-auto"
             to={`/circuit/${id}/path`}
+            onClick={handleClick}
           >
             <Compass className="w-7 h-7" /> Commencer
           </Link>

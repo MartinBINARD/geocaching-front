@@ -27,7 +27,7 @@ interface CircuitState {
   errorMessage: string | undefined;
   oneCircuit: Circuit | null;
   circuitQuiz: CircuitQuizStep[];
-  userCircuitAnswerEntries: UserCircuitAnswersEntriesState | null;
+  userCircuitAnswersEntries: UserCircuitAnswersEntriesState | null;
   userCircuitAnswersResult: UserCircuitAnswersResultState | null;
   isLoading: boolean;
   noCircuit: boolean;
@@ -40,7 +40,7 @@ const initialState: CircuitState = {
   errorMessage: '',
   oneCircuit: null,
   circuitQuiz: [],
-  userCircuitAnswerEntries: null,
+  userCircuitAnswersEntries: null,
   userCircuitAnswersResult: null,
   isLoading: false,
   noCircuit: false,
@@ -86,8 +86,14 @@ export const storeCircuitQuiz = createAction<CircuitPathStep[]>(
   'circuits/store-ciruit-quiz'
 );
 
+export const resetUserCircuitAnswers = createAction(
+  'circuits/reset-ciruit-quiz'
+);
+
 export const storeUserCircuitAnswers =
-  createAction<UserCircuitAnswersEntriesState>('circuits/store-user-answser');
+  createAction<UserCircuitAnswersEntriesState | null>(
+    'circuits/store-user-answser'
+  );
 
 export const sendAnswers = createAsyncThunk(
   'circuits/send-answers',
@@ -154,10 +160,13 @@ const circuitsReducer = createReducer(initialState, (builder) => {
       state.circuitQuiz = formatArrayStepper;
     })
     .addCase(storeUserCircuitAnswers, (state, action) => {
-      state.userCircuitAnswerEntries = {
-        ...state.userCircuitAnswerEntries,
+      state.userCircuitAnswersEntries = {
+        ...state.userCircuitAnswersEntries,
         ...action.payload,
       };
+    })
+    .addCase(resetUserCircuitAnswers, (state) => {
+      state.userCircuitAnswersEntries = null;
     })
     .addCase(sendAnswers.pending, (state) => {
       state.isLoading = true;
