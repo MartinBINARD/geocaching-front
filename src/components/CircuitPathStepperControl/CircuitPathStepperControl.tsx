@@ -6,7 +6,9 @@ interface CircuitPathStepperControlProps {
   setCurrentStepIndex: (currentStepIndex: number) => number;
   currentStepContentIndex: number;
   setCurrentStepContentIndex: (currentStepContentIndex: number) => number;
-  setShowHint: (arg: boolean) => boolean;
+  setShowHint: (showHint: boolean) => boolean;
+  invalidInput: boolean;
+  setInvalidInput: (invalidInput: boolean) => boolean;
 }
 
 function CircuitPathStepperControl({
@@ -15,6 +17,8 @@ function CircuitPathStepperControl({
   currentStepContentIndex,
   setCurrentStepContentIndex,
   setShowHint,
+  invalidInput,
+  setInvalidInput,
 }: CircuitPathStepperControlProps) {
   const circuitQuiz = useAppSelector((state) => state.circuits.circuitQuiz);
 
@@ -38,6 +42,7 @@ function CircuitPathStepperControl({
   function decrementStepContentIndex() {
     if (currentStepContentIndex > 0) {
       setCurrentStepContentIndex(currentStepContentIndex - 1);
+      setInvalidInput(false);
     }
   }
 
@@ -61,11 +66,11 @@ function CircuitPathStepperControl({
 
   return (
     <section
-      className={
+      className={`flex w-full gap-10 justify-between text-sm my-5 ${
         currentStepIndex + currentStepContentIndex === 0
-          ? `flex flex-row-reverse w-full gap-10 justify-between text-sm my-5`
-          : `flex w-full gap-10 justify-between text-sm my-5`
-      }
+          ? 'flex-row-reverse'
+          : ''
+      }`}
     >
       {currentStepIndex + currentStepContentIndex > 0 && (
         <button
@@ -82,6 +87,7 @@ function CircuitPathStepperControl({
           type="button"
           onClick={handleNextStep}
           className="btn btn-primary"
+          disabled={invalidInput}
         >
           {currentStepContentIndex === 0 ? 'Je suis arrivé' : 'Étape suivante'}
           <ChevronRight />

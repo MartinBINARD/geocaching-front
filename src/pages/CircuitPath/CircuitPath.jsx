@@ -15,6 +15,7 @@ import CircuitPathStepperControl from '../../components/CircuitPathStepperContro
 function CircuitPath() {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [currentStepContentIndex, setCurrentStepContentIndex] = useState(0);
+  const [invalidInput, setInvalidInput] = useState(false);
 
   const [endCircuit, setEndCircuit] = useState(false);
   const [congrats, setCongrats] = useState(false);
@@ -54,6 +55,8 @@ function CircuitPath() {
             currentStepIndex={currentStepIndex}
             showHint={showHint}
             setShowHint={setShowHint}
+            invalidInput={invalidInput}
+            setInvalidInput={setInvalidInput}
           />
           {endCircuit && <CircuitPathAnswerRecord setCongrats={setCongrats} />}
         </>
@@ -67,6 +70,8 @@ function CircuitPath() {
         currentStepContentIndex={currentStepContentIndex}
         setCurrentStepContentIndex={setCurrentStepContentIndex}
         setShowHint={setShowHint}
+        invalidInput={invalidInput}
+        setInvalidInput={setInvalidInput}
       />
     </>
   );

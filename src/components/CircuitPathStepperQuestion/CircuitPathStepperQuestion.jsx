@@ -4,8 +4,13 @@ import { useState } from 'react';
 import CircuitMapToggle from '../CircuitMapToggle/CircuitMapToggle';
 import { storeUserCircuitAnswers } from '../../store/reducers/circuits';
 
-function CircuitPathQuestion({ currentStepIndex, showHint, setShowHint }) {
-  const [inputError, setInputError] = useState(false);
+function CircuitPathQuestion({
+  currentStepIndex,
+  showHint,
+  setShowHint,
+  invalidInput,
+  setInvalidInput,
+}) {
   const [userAnswers, setUserAnswers] = useState({});
   const circuitQuiz = useSelector((state) => state.circuits.circuitQuiz);
 
@@ -15,18 +20,27 @@ function CircuitPathQuestion({ currentStepIndex, showHint, setShowHint }) {
   ];
   const dispatch = useDispatch();
 
-  const handleClickHint = () => {
+  function handleClickHint() {
     setShowHint(!showHint);
-  };
+  }
 
-  const handleChange = (e) => {
+  function handleBlur(e) {
+    if (e.target.value.length === 0) {
+      setInvalidInput(true);
+    }
+  }
+
+  function handleChange(e) {
+    if (e.target.value.length > 0) {
+      setInvalidInput(false);
+    }
     setUserAnswers({
       ...userAnswers,
       [currentStepIndex]: e.target.value,
     });
     const payload = { [currentStepIndex]: e.target.value };
     dispatch(storeUserCircuitAnswers(payload));
-  };
+  }
 
   return (
     <section className="flex flex-col items-center">
@@ -52,16 +66,22 @@ function CircuitPathQuestion({ currentStepIndex, showHint, setShowHint }) {
             </p>
           )}
           <input
-            className="p-2 w-44 bg-blue self-center border border-primary"
+            className={`input input-bordered w-44 self-center ${
+              invalidInput ? 'input-error' : 'input-primary'
+            }`}
             id="answerInput"
             type="number"
             placeholder="Votre réponse"
             value={userAnswers[currentStepIndex] || ''}
             onChange={handleChange}
-            required
+            onBlur={handleBlur}
           />
         </div>
-        {inputError && <span className="text-red-500">Champ obligatoire</span>}
+        {invalidInput && (
+          <span className="font-bold text-error">
+            Veuillez répondre à la question
+          </span>
+        )}
       </div>
     </section>
   );
