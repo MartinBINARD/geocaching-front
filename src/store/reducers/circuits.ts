@@ -83,17 +83,15 @@ export const fetchCircuit = createAsyncThunk(
 );
 
 export const storeCircuitQuiz = createAction<CircuitPathStep[]>(
-  'circuits/store-ciruit-quiz'
+  'circuits/store-circuit-quiz'
 );
 
 export const resetUserCircuitAnswers = createAction(
-  'circuits/reset-ciruit-quiz'
+  'circuits/reset-user-answser'
 );
 
 export const storeUserCircuitAnswers =
-  createAction<UserCircuitAnswersEntriesState | null>(
-    'circuits/store-user-answser'
-  );
+  createAction<UserCircuitAnswersEntriesState>('circuits/store-user-answser');
 
 export const sendAnswers = createAsyncThunk(
   'circuits/send-answers',

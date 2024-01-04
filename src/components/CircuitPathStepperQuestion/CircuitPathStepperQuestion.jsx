@@ -14,6 +14,9 @@ function CircuitPathQuestion({
 }) {
   const [userAnswers, setUserAnswers] = useState({});
   const circuitQuiz = useSelector((state) => state.circuits.circuitQuiz);
+  const userCircuitAnswersEntries = useSelector(
+    (state) => state.circuits.userCircuitAnswersEntries
+  );
 
   const oneMarker = [
     circuitQuiz[currentStepIndex]?.latitude,
@@ -62,6 +65,7 @@ function CircuitPathQuestion({
           <p className="font-bold">
             {circuitQuiz[currentStepIndex]?.content[0].question}
           </p>
+
           {circuitQuiz[currentStepIndex].hint && (
             <button type="button" onClick={handleClickHint} className="text-sm">
               Indice ?
@@ -72,6 +76,7 @@ function CircuitPathQuestion({
               {circuitQuiz[currentStepIndex].hint}
             </p>
           )}
+
           <input
             className={`input input-bordered w-44 self-center ${
               invalidInput ? 'input-error' : 'input-primary'
@@ -80,7 +85,12 @@ function CircuitPathQuestion({
             type="number"
             placeholder="Votre réponse"
             min="0"
-            value={userAnswers[currentStepIndex] || ''}
+            value={
+              (userCircuitAnswersEntries &&
+                userCircuitAnswersEntries[currentStepIndex]) ||
+              userAnswers[currentStepIndex] ||
+              ''
+            }
             onChange={handleChange}
             onBlur={handleBlur}
           />
