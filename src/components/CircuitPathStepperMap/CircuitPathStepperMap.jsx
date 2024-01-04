@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import { Compass } from 'lucide-react';
 
 import Map from '../Map/Map';
 

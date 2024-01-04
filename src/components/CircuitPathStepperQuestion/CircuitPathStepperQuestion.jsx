@@ -7,7 +7,6 @@ import { storeUserCircuitAnswers } from '../../store/reducers/circuits';
 function CircuitPathQuestion({ currentStepIndex, showHint, setShowHint }) {
   const [inputError, setInputError] = useState(false);
   const [userAnswers, setUserAnswers] = useState({});
-  const circuit = useSelector((state) => state.circuits.oneCircuit);
   const circuitQuiz = useSelector((state) => state.circuits.circuitQuiz);
 
   const oneMarker = [
@@ -32,22 +31,24 @@ function CircuitPathQuestion({ currentStepIndex, showHint, setShowHint }) {
   return (
     <section className="flex flex-col items-center">
       <p className="p-3 text-sm lg:text-base">
-        {circuit.step[currentStepIndex].paragraph}
+        {circuitQuiz[currentStepIndex]?.content[0].paragraph}
       </p>
 
       {oneMarker && <CircuitMapToggle oneMarker={oneMarker} zoom={17} />}
 
       <div className="flex flex-col items-center border-3 border-secondary py-4">
         <div className="flex flex-col p-4 gap-4">
-          <p className="font-bold">{circuit.step[currentStepIndex].question}</p>
-          {circuit.step[currentStepIndex].hint && (
+          <p className="font-bold">
+            {circuitQuiz[currentStepIndex]?.content[0].question}
+          </p>
+          {circuitQuiz[currentStepIndex].hint && (
             <button type="button" onClick={handleClickHint} className="text-sm">
               Indice ?
             </button>
           )}
           {showHint && (
             <p className="text-sm text-justify">
-              {circuit.step[currentStepIndex].hint}
+              {circuitQuiz[currentStepIndex].hint}
             </p>
           )}
           <input
