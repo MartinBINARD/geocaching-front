@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   fetchCircuit,
   resetUserCircuitAnswers,
+  storeCircuitQuiz,
 } from '../../store/reducers/circuits';
 
 import Loader from '../../components/Loader/Loader';
@@ -24,7 +25,12 @@ function CircuitIntro() {
     dispatch(fetchCircuit(id as string));
   }, [dispatch, id]);
 
-  const handleClick = () => dispatch(resetUserCircuitAnswers());
+  const handleClick = () => {
+    dispatch(resetUserCircuitAnswers());
+    if (circuit) {
+      dispatch(storeCircuitQuiz(circuit.step));
+    }
+  };
 
   if (isLoading) {
     return <Loader />;

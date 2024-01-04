@@ -16,6 +16,7 @@ import {
   UserCircuitAnswersResultState,
   UserCircuitAnswersEntriesState,
   CircuitQuizStep,
+  CircuitPath,
   CircuitPathStep,
 } from '../../@types/circuit';
 import createCircuitQuizStepper from '../../utils/createCircuitQuizStepper';
@@ -25,7 +26,7 @@ interface CircuitState {
   searchList: Circuit[];
   isSearchResult: boolean;
   errorMessage: string | undefined;
-  oneCircuit: Circuit | null;
+  oneCircuit: CircuitPath | null;
   circuitQuiz: CircuitQuizStep[];
   userCircuitAnswersEntries: UserCircuitAnswersEntriesState | null;
   userCircuitAnswersResult: UserCircuitAnswersResultState | null;

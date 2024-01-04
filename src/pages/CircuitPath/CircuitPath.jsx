@@ -29,7 +29,9 @@ function CircuitPath() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(storeCircuitQuiz(circuit.step));
+    if (circuit) {
+      dispatch(storeCircuitQuiz(circuit.step));
+    }
   }, [circuit, dispatch]);
 
   if (isLoading) {
