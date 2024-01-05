@@ -35,8 +35,8 @@ export interface CircuitPathStep {
 }
 
 export interface CircuitPath extends Circuit {
-  postcode: number;
-  step: CircuitPathStep[];
+  postcode?: number;
+  step?: CircuitPathStep[];
 }
 
 export interface Search {

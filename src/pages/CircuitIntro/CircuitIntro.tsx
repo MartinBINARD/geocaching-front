@@ -18,6 +18,9 @@ function CircuitIntro() {
   const isLoading = useAppSelector((state) => state.circuits.isLoading);
   const user = useAppSelector((state) => state.settings.user);
   const circuit = useAppSelector((state) => state.circuits.oneCircuit);
+  const isFetchCircuitFailed = useAppSelector(
+    (state) => state.circuits.isFetchCircuitFailed
+  );
 
   const dispatch = useAppDispatch();
 
@@ -27,7 +30,7 @@ function CircuitIntro() {
 
   const handleClick = () => {
     dispatch(resetUserCircuitAnswers());
-    if (circuit) {
+    if (circuit && circuit.step) {
       dispatch(storeCircuitQuiz(circuit.step));
     }
   };
@@ -36,8 +39,8 @@ function CircuitIntro() {
     return <Loader />;
   }
 
-  if (!circuit) {
-    return <Navigate to="/" />;
+  if (isFetchCircuitFailed) {
+    return <Navigate to="/circuits" />;
   }
 
   if (circuit) {

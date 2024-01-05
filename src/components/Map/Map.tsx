@@ -26,9 +26,9 @@ function Map({ markersList, oneMarker, zoom, className }: MapsProps) {
       attributionControl={false}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png" />
-      {oneMarker && <Marker position={oneMarker} />}
+      {oneMarker?.length && <Marker position={oneMarker} />}
 
-      {markersList &&
+      {markersList?.length &&
         markersList.map((marker) => (
           <Marker
             key={marker.id_circuit}

@@ -31,7 +31,7 @@ interface CircuitState {
   userCircuitAnswersEntries: UserCircuitAnswersEntriesState | null;
   userCircuitAnswersResult: UserCircuitAnswersResultState | null;
   isLoading: boolean;
-  noCircuit: boolean;
+  isFetchCircuitFailed: boolean;
 }
 
 const initialState: CircuitState = {
@@ -44,7 +44,7 @@ const initialState: CircuitState = {
   userCircuitAnswersEntries: null,
   userCircuitAnswersResult: null,
   isLoading: false,
-  noCircuit: false,
+  isFetchCircuitFailed: false,
 };
 
 export const fetchCircuitsList = createAsyncThunk(
@@ -144,12 +144,12 @@ const circuitsReducer = createReducer(initialState, (builder) => {
     .addCase(fetchCircuit.fulfilled, (state, action) => {
       state.oneCircuit = action.payload;
       state.isLoading = false;
-      state.noCircuit = false;
+      state.isFetchCircuitFailed = false;
     })
     .addCase(fetchCircuit.rejected, (state, action) => {
-      toast(action.error.message);
+      toast.error(action.error.message);
       state.isLoading = false;
-      state.noCircuit = true;
+      state.isFetchCircuitFailed = true;
     })
     .addCase(storeCircuitQuiz, (state, action) => {
       const formatArrayStepper = createCircuitQuizStepper(
