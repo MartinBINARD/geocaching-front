@@ -2,24 +2,31 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useAppSelector } from '../../hooks/redux';
 
 interface CircuitPathStepperControlProps {
-  currentStepIndex: number;
-  setCurrentStepIndex: (currentStepIndex: number) => number;
-  currentStepContentIndex: number;
-  setCurrentStepContentIndex: (currentStepContentIndex: number) => number;
+  index: {
+    currentStepIndex: number;
+    setCurrentStepIndex: (currentStepIndex: number) => number;
+    currentStepContentIndex: number;
+    setCurrentStepContentIndex: (currentStepContentIndex: number) => number;
+  };
+  error: {
+    invalidInput: boolean;
+    setInvalidInput: (invalidInput: boolean) => boolean;
+  };
   setShowHint: (showHint: boolean) => boolean;
-  invalidInput: boolean;
-  setInvalidInput: (invalidInput: boolean) => boolean;
 }
 
 function CircuitPathStepperControl({
-  currentStepIndex,
-  setCurrentStepIndex,
-  currentStepContentIndex,
-  setCurrentStepContentIndex,
+  index,
   setShowHint,
-  invalidInput,
-  setInvalidInput,
+  error,
 }: CircuitPathStepperControlProps) {
+  const {
+    currentStepIndex,
+    setCurrentStepIndex,
+    currentStepContentIndex,
+    setCurrentStepContentIndex,
+  } = index;
+  const { invalidInput, setInvalidInput } = error;
   const circuitQuiz = useAppSelector((state) => state.circuits.circuitQuiz);
   const userCircuitAnswersEntries = useAppSelector(
     (state) => state.circuits.userCircuitAnswersEntries

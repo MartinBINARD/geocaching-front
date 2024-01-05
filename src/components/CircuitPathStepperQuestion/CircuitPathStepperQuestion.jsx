@@ -5,18 +5,16 @@ import { storeUserCircuitAnswers } from '../../store/reducers/circuits';
 
 import CircuitMapToggle from '../CircuitMapToggle/CircuitMapToggle';
 
-function CircuitPathQuestion({
-  currentStepIndex,
-  showHint,
-  setShowHint,
-  invalidInput,
-  setInvalidInput,
-}) {
-  const [userAnswers, setUserAnswers] = useState({});
-  const circuitQuiz = useSelector((state) => state.circuits.circuitQuiz);
+function CircuitPathQuestion({ currentStepIndex, hint, error }) {
+  const { showHint, setShowHint } = hint;
+  const { invalidInput, setInvalidInput } = error;
   const userCircuitAnswersEntries = useSelector(
     (state) => state.circuits.userCircuitAnswersEntries
   );
+  const [userAnswers, setUserAnswers] = useState(
+    userCircuitAnswersEntries || {}
+  );
+  const circuitQuiz = useSelector((state) => state.circuits.circuitQuiz);
 
   const oneMarker = [
     circuitQuiz[currentStepIndex]?.latitude,
@@ -39,16 +37,17 @@ function CircuitPathQuestion({
   }
 
   function handleChange(e) {
-    setUserAnswers({
+    const newObjectAnswsers = {
+      ...userAnswers,
       [currentStepIndex]: e.target.value,
-    });
+    };
 
+    setUserAnswers(newObjectAnswsers);
     warnInvalidInput(e.target.value);
 
     if (e.target.value.length > 0) {
       setInvalidInput(false);
-      const payload = { [currentStepIndex]: e.target.value };
-      dispatch(storeUserCircuitAnswers(payload));
+      dispatch(storeUserCircuitAnswers(newObjectAnswsers));
     }
   }
 
@@ -85,12 +84,7 @@ function CircuitPathQuestion({
             type="number"
             placeholder="Votre réponse"
             min="0"
-            value={
-              (userCircuitAnswersEntries &&
-                userCircuitAnswersEntries[currentStepIndex]) ||
-              userAnswers[currentStepIndex] ||
-              ''
-            }
+            value={userAnswers[currentStepIndex] || ''}
             onChange={handleChange}
             onBlur={handleBlur}
           />

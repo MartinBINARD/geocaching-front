@@ -15,11 +15,20 @@ import CircuitPathStepperControl from '../../components/CircuitPathStepperContro
 function CircuitPath() {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [currentStepContentIndex, setCurrentStepContentIndex] = useState(0);
+  const [showHint, setShowHint] = useState(false);
   const [invalidInput, setInvalidInput] = useState(false);
+
+  const index = {
+    currentStepIndex,
+    setCurrentStepIndex,
+    currentStepContentIndex,
+    setCurrentStepContentIndex,
+  };
+  const hint = { showHint, setShowHint };
+  const error = { invalidInput, setInvalidInput };
 
   const [endCircuit, setEndCircuit] = useState(false);
   const [congrats, setCongrats] = useState(false);
-  const [showHint, setShowHint] = useState(false);
 
   const { id } = useParams();
   const isLoading = useSelector((state) => state.circuits.isLoading);
@@ -55,10 +64,8 @@ function CircuitPath() {
         <>
           <CircuitPathStepperQuestion
             currentStepIndex={currentStepIndex}
-            showHint={showHint}
-            setShowHint={setShowHint}
-            invalidInput={invalidInput}
-            setInvalidInput={setInvalidInput}
+            hint={hint}
+            error={error}
           />
           {endCircuit && <CircuitPathAnswerRecord setCongrats={setCongrats} />}
         </>
@@ -67,13 +74,9 @@ function CircuitPath() {
       )}
 
       <CircuitPathStepperControl
-        currentStepIndex={currentStepIndex}
-        setCurrentStepIndex={setCurrentStepIndex}
-        currentStepContentIndex={currentStepContentIndex}
-        setCurrentStepContentIndex={setCurrentStepContentIndex}
+        index={index}
         setShowHint={setShowHint}
-        invalidInput={invalidInput}
-        setInvalidInput={setInvalidInput}
+        error={error}
       />
     </>
   );
