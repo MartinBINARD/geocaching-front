@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { storeUserCircuitAnswers } from '../../store/reducers/circuits';
 
 import CircuitMapToggle from '../CircuitMapToggle/CircuitMapToggle';
+import CircuitPathQuestionHint from '../CircuitPathQuestionHint/CircuitPathQuestionHint';
 
 interface CircuitPathQuestionProps {
   currentStepIndex: number;
@@ -24,7 +25,6 @@ function CircuitPathQuestion({
   hint,
   error,
 }: CircuitPathQuestionProps) {
-  const { showHint, setShowHint } = hint;
   const { invalidInput, setInvalidInput } = error;
   const userCircuitAnswersEntries = useAppSelector(
     (state) => state.circuits.userCircuitAnswersEntries
@@ -39,10 +39,6 @@ function CircuitPathQuestion({
     circuitQuiz[currentStepIndex]?.longitude,
   ] as LatLngTuple;
   const dispatch = useAppDispatch();
-
-  function handleClickHint() {
-    setShowHint(!showHint);
-  }
 
   function warnInvalidInput(value: string) {
     if (value.length === 0) {
@@ -83,16 +79,10 @@ function CircuitPathQuestion({
             {circuitQuiz[currentStepIndex]?.content[0].question}
           </p>
 
-          {circuitQuiz[currentStepIndex].content[0].hint && (
-            <button type="button" onClick={handleClickHint} className="text-sm">
-              Indice ?
-            </button>
-          )}
-          {showHint && (
-            <p className="text-sm text-justify">
-              {circuitQuiz[currentStepIndex].content[0].hint}
-            </p>
-          )}
+          <CircuitPathQuestionHint
+            currentStepIndex={currentStepIndex}
+            hint={hint}
+          />
 
           <input
             className={`input input-bordered w-44 self-center ${
