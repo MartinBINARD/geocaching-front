@@ -103,7 +103,7 @@ function CircuitPathStepperControl({
 
   return (
     <section
-      className={`flex w-full gap-10 justify-between text-sm my-5 ${
+      className={`flex flex-wrap-reverse w-full justify-between my-5 ${
         currentStepIndex + currentStepContentIndex === 0
           ? 'flex-row-reverse'
           : ''
@@ -113,7 +113,7 @@ function CircuitPathStepperControl({
         <button
           type="button"
           onClick={handlePreviousStep}
-          className="btn btn-primary btn-outline"
+          className="btn btn-primary btn-outline max-w-xs max-[425px]:w-full max-[425px]:mx-auto max-[425px]:mt-3"
         >
           <ChevronLeft />
           Étape précédente
@@ -123,7 +123,7 @@ function CircuitPathStepperControl({
         <button
           type="button"
           onClick={handleNextStep}
-          className="btn btn-primary"
+          className="btn btn-primary max-w-xs max-[425px]:w-full max-[425px]:mx-auto"
           disabled={invalidInput}
         >
           {currentStepContentIndex === 0 ? 'Je suis arrivé' : 'Étape suivante'}
