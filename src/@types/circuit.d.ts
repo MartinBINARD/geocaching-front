@@ -76,6 +76,7 @@ export interface CircuitQuizStep {
   content: [
     {
       paragraph: string;
+      hint: string | null;
       question: string;
     },
     {

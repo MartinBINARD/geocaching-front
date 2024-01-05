@@ -33,7 +33,13 @@ function CircuitMapToggle({ oneMarker, zoom }: CircuitMapToggleProps) {
             <X />
           </button>
 
-          <Map oneMarker={oneMarker} zoom={zoom} className="h-[70vh] w-full" />
+          {oneMarker?.length && (
+            <Map
+              oneMarker={oneMarker}
+              zoom={zoom}
+              className="h-[70vh] w-full"
+            />
+          )}
         </section>
       )}
 
