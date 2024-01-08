@@ -25,7 +25,7 @@ function CircuitPathMap({ currentStepIndex }) {
         <Map
           oneMarker={stepPosition}
           zoom={17}
-          className="w-full h-[42vh] min-[400px]:h-[65vh] m-auto rounded-lg"
+          className="z-0 w-full h-[42vh] min-[400px]:h-[65vh] m-auto rounded-lg"
         />
       )}
     </section>
