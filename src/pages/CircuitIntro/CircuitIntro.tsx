@@ -52,17 +52,14 @@ function CircuitIntro() {
 
         {user ? (
           <Link
-            className="flex gap-2 items-center  mt-2 btn btn-primary text-white m-auto"
+            className="btn btn-primary text-white my-4 mx-auto"
             to={`/circuit/${id}/path`}
             onClick={handleClick}
           >
             <Compass className="w-7 h-7" /> Commencer
           </Link>
         ) : (
-          <Link
-            className="flex gap-2 items-center  mt-2 btn btn-primary text-white m-auto"
-            to="/login"
-          >
+          <Link className="btn btn-primary text-white my-4 mx-auto" to="/login">
             Se connecter
           </Link>
         )}

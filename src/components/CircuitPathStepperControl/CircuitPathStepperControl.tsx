@@ -103,10 +103,10 @@ function CircuitPathStepperControl({
 
   return (
     <section
-      className={`flex flex-wrap-reverse w-full justify-between my-5 ${
+      className={`flex flex-wrap-reverse w-full px-1 my-2 ${
         currentStepIndex + currentStepContentIndex === 0
-          ? 'flex-row-reverse'
-          : ''
+          ? 'flex-row-reverse justify-center'
+          : 'justify-between'
       }`}
     >
       {currentStepIndex + currentStepContentIndex > 0 && (

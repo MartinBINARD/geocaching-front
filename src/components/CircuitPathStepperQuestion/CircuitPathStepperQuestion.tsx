@@ -73,7 +73,7 @@ function CircuitPathQuestion({
 
       <CircuitMapToggle oneMarker={oneMarker} zoom={17} />
 
-      <div className="flex flex-col items-center border-3 border-secondary py-4">
+      <div className="flex flex-col items-center border-3 border-secondary py-4 mx-1">
         <div className="flex flex-col p-4 gap-4">
           <p className="font-bold">
             {circuitQuiz[currentStepIndex]?.content[0].question}
