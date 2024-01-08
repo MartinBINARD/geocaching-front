@@ -43,45 +43,37 @@ function CircuitDescriptionCard() {
         <p className="text-center font-bold m-auto pb-3 pt-1">{theme}</p>
       </section>
 
-      <section className="flex justify-between item-center p-4 shadow-lg rounded-lg">
-        <div className="flex flex-col items-center gap-1">
+      <section className="grid grid-cols-2 shadow-lg rounded-lg xl:grid-cols-4">
+        <div className="flex flex-col items-center gap-1 m-4">
           <Brain className="w-8 h-8 text-secondary" />
-          <p>
-            Difficulté :<span className="font-bold ml-1">{difficulty}/5</span>
-          </p>
+          <p className="font-bold">Difficulté : {difficulty}/5</p>
         </div>
 
-        <div className="flex flex-col items-center gap-1">
+        <div className="flex flex-col items-center gap-1 m-4">
           <MountainSnow className="w-8 h-8 text-secondary" />
-          <p>
-            Terrain :<span className="font-bold ml-1">{terrain}/5</span>
-          </p>
+          <p className="font-bold">Terrain : {terrain}/5</p>
         </div>
 
-        <div className="flex flex-col items-center gap-1">
+        <div className="flex flex-col items-center gap-1 m-4">
           <DraftingCompass className="w-8 h-8 text-secondary" />
-          <p>
-            Distance :<span className="font-bold ml-1">{distance} km</span>
-          </p>
+          <p className="font-bold">Distance : {distance} km</p>
         </div>
 
-        <div className="flex flex-col items-center gap-1">
+        <div className="flex flex-col items-center gap-1 m-4">
           <Hourglass className="w-8 h-8 text-secondary" />
-          <p>
-            Durée :<span className="font-bold ml-1">{duration}</span>
-          </p>
+          <p className="font-bold">Durée : {duration}</p>
         </div>
       </section>
 
       <section className="flex flex-wrap justify-center items-center gap-3 m-auto mt-5 p-2">
         <div className="flex items-center gap-2">
           <Footprints className="w-24 h-24 text-secondary" />
-          <p>Mobilité :</p>
+          <p className="font-bold">Mobilité :</p>
         </div>
 
         <p>
           {Object.values(mobility).map((value, index) => (
-            <span key={value}>
+            <span className="font-bold" key={value}>
               {value}
               {index < mobility.length - 1 && ', '}
             </span>
