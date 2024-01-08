@@ -13,7 +13,7 @@ function CicuitLocationCard() {
   const oneMarker = [latitude, longitude] as LatLngTuple;
 
   return (
-    <section className="flex flex-wrap items-center justify-center border-t border-b border-primary p-2 min-[528px]:justify-between">
+    <section className="flex flex-wrap items-center gap-5 justify-center border-t border-b border-primary p-2 min-[528px]:justify-between">
       <div className="flex flex-col mr-1">
         <p>Parking :</p>
         <p>{parking_address}</p>
@@ -22,7 +22,7 @@ function CicuitLocationCard() {
       <CircuitMapToggle
         oneMarker={oneMarker}
         zoom={12}
-        className="btn btn-primary btn-outline normal-case font-medium text-white my-4"
+        className="btn btn-primary btn-outline normal-case font-medium text-white my-2"
       />
     </section>
   );
