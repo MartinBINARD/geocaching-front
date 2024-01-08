@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { HelpCircle } from 'lucide-react';
 import { LatLngTuple } from 'leaflet';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
@@ -71,10 +72,15 @@ function CircuitPathQuestion({
         {circuitQuiz[currentStepIndex]?.content[0].paragraph}
       </p>
 
-      <CircuitMapToggle oneMarker={oneMarker} zoom={17} />
+      <CircuitMapToggle
+        oneMarker={oneMarker}
+        zoom={17}
+        className="btn btn-primary btn-outline normal-case font-medium text-white mt-2 mb-8"
+      />
 
-      <div className="flex flex-col items-center border-3 border-secondary py-4 mx-1">
+      <div className="relative flex flex-col items-center border-3 border-secondary py-5 mx-1">
         <div className="flex flex-col p-4 gap-4">
+          <HelpCircle className="absolute top-[-20px] self-center w-10 h-10 text-secondary bg-white" />
           <p className="font-bold">
             {circuitQuiz[currentStepIndex]?.content[0].question}
           </p>

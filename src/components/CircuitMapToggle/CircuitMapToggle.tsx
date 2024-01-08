@@ -8,9 +8,14 @@ import Map from '../Map/Map';
 interface CircuitMapToggleProps {
   oneMarker: LatLngTuple;
   zoom: number;
+  className: string;
 }
 
-function CircuitMapToggle({ oneMarker, zoom }: CircuitMapToggleProps) {
+function CircuitMapToggle({
+  oneMarker,
+  zoom,
+  className,
+}: CircuitMapToggleProps) {
   const [showMap, setShowMap] = useState<boolean>(false);
 
   const toggleMap = () => {
@@ -43,11 +48,7 @@ function CircuitMapToggle({ oneMarker, zoom }: CircuitMapToggleProps) {
         </section>
       )}
 
-      <button
-        type="button"
-        onClick={toggleMap}
-        className="btn btn-primary btn-outline normal-case font-medium text-white my-4"
-      >
+      <button type="button" onClick={toggleMap} className={className}>
         <MapPinned className="w-8 h-8" />
         Voir sur la carte
       </button>
