@@ -16,14 +16,15 @@ function CircuitPathMap({ currentStepIndex }: CircuitPathMapProp) {
     circuitQuiz[currentStepIndex]?.longitude,
   ] as LatLngTuple;
 
+  const hintToLocateStepPostion =
+    circuitQuiz[currentStepIndex - 1]?.content[1].transition;
+
   return (
     <section className="flex flex-col items-center">
-      {circuitQuiz[currentStepIndex - 1]?.content[1].transition && (
+      {hintToLocateStepPostion && (
         <div>
           <AlertCircle className="float-left w-5 h-5 text-secondary mt-2 mx-1" />
-          <p className="text-sm shadow-lg p-1 m-1">
-            {circuitQuiz[currentStepIndex - 1]?.content[1].transition}
-          </p>
+          <p className="text-sm shadow-lg p-1 m-1">{hintToLocateStepPostion}</p>
         </div>
       )}
 
@@ -31,7 +32,9 @@ function CircuitPathMap({ currentStepIndex }: CircuitPathMapProp) {
         <Map
           oneMarker={stepPosition}
           zoom={17}
-          className="z-0 w-full h-[42vh] min-[400px]:h-[65vh] m-auto rounded-lg"
+          className={`z-0 w-full h-[42vh] min-[400px]:h-[65vh] m-auto rounded-lg ${
+            hintToLocateStepPostion ? '' : 'h-[62vh]'
+          }`}
         />
       )}
     </section>
