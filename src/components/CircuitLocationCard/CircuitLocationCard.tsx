@@ -13,8 +13,8 @@ function CicuitLocationCard() {
   const oneMarker = [latitude, longitude] as LatLngTuple;
 
   return (
-    <section className="flex items-center justify-between gap-5 lg:gap-10 p-2 border-t border-b border-primary">
-      <div className="flex flex-col">
+    <section className="flex flex-wrap justify-center border-t border-b border-primary p-2 min-[528px]:justify-between">
+      <div className="flex flex-col mr-1">
         <p>Parking :</p>
         <p>{parking_address}</p>
       </div>
