@@ -1,14 +1,20 @@
 import { AlertCircle } from 'lucide-react';
-import { useSelector } from 'react-redux';
+import { LatLngTuple } from 'leaflet';
+import { useAppSelector } from '../../hooks/redux';
 
 import Map from '../Map/Map';
 
-function CircuitPathMap({ currentStepIndex }) {
-  const circuitQuiz = useSelector((state) => state.circuits.circuitQuiz);
+interface CircuitPathMapProp {
+  currentStepIndex: number;
+}
+
+function CircuitPathMap({ currentStepIndex }: CircuitPathMapProp) {
+  const circuitQuiz = useAppSelector((state) => state.circuits.circuitQuiz);
+
   const stepPosition = [
     circuitQuiz[currentStepIndex]?.latitude,
     circuitQuiz[currentStepIndex]?.longitude,
-  ];
+  ] as LatLngTuple;
 
   return (
     <section className="flex flex-col items-center">
@@ -21,7 +27,7 @@ function CircuitPathMap({ currentStepIndex }) {
         </div>
       )}
 
-      {stepPosition && (
+      {stepPosition?.length && (
         <Map
           oneMarker={stepPosition}
           zoom={17}
