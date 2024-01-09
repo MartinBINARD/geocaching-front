@@ -9,7 +9,6 @@ import { storeCircuitQuiz } from '../../store/reducers/circuits';
 import Loader from '../../components/Loader/Loader';
 import CircuitPathStepperMap from '../../components/CircuitPathStepperMap/CircuitPathStepperMap';
 import CircuitPathStepperQuestion from '../../components/CircuitPathStepperQuestion/CircuitPathStepperQuestion';
-import CircuitPathAnswerRecord from '../../components/CircuitPathAnswerRecord/CircuitPathAnswerRecord';
 import CircuitPathStepperControl from '../../components/CircuitPathStepperControl/CircuitPathStepperControl';
 
 function CircuitPath() {
@@ -27,10 +26,6 @@ function CircuitPath() {
   const hint = { showHint, setShowHint };
   const error = { invalidInput, setInvalidInput };
 
-  const [endCircuit, setEndCircuit] = useState(false);
-  const [congrats, setCongrats] = useState(false);
-
-  const { id } = useParams();
   const isLoading = useSelector((state) => state.circuits.isLoading);
   const circuit = useSelector((state) => state.circuits.oneCircuit);
   const circuitQuiz = useSelector((state) => state.circuits.circuitQuiz);
@@ -47,10 +42,6 @@ function CircuitPath() {
     return <Loader />;
   }
 
-  if (congrats) {
-    return <Navigate to={`/circuit/${id}/congrats`} />;
-  }
-
   return (
     <>
       <title className="flex justify-center gap-2 font-bold lg:text-xl w-full border-t border-b text-center border-primary py-2 my-2">
@@ -61,14 +52,11 @@ function CircuitPath() {
       </title>
 
       {currentStepContentIndex === 1 ? (
-        <>
-          <CircuitPathStepperQuestion
-            currentStepIndex={currentStepIndex}
-            hint={hint}
-            error={error}
-          />
-          {endCircuit && <CircuitPathAnswerRecord setCongrats={setCongrats} />}
-        </>
+        <CircuitPathStepperQuestion
+          currentStepIndex={currentStepIndex}
+          hint={hint}
+          error={error}
+        />
       ) : (
         <CircuitPathStepperMap currentStepIndex={currentStepIndex} />
       )}

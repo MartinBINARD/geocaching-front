@@ -1,5 +1,6 @@
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Compass } from 'lucide-react';
 import { useAppSelector } from '../../hooks/redux';
+import CircuitPathAnswerRecord from '../CircuitPathAnswerRecord/CircuitPathAnswerRecord';
 
 interface CircuitPathStepperControlProps {
   index: {
@@ -119,6 +120,7 @@ function CircuitPathStepperControl({
           Étape précédente
         </button>
       )}
+
       {currentStepIndex + currentStepContentIndex < circuitQuiz.length && (
         <button
           type="button"
@@ -130,6 +132,11 @@ function CircuitPathStepperControl({
           <ChevronRight />
         </button>
       )}
+
+      <CircuitPathAnswerRecord
+        currentStepIndex={currentStepIndex}
+        currentStepContentIndex={currentStepContentIndex}
+      />
     </section>
   );
 }

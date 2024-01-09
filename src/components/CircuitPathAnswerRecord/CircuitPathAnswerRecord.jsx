@@ -1,27 +1,47 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { Compass } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 import { sendAnswers } from '../../store/reducers/circuits';
 
-function CircuitPathAnswerRecord(setCongrats) {
+function CircuitPathAnswerRecord({
+  currentStepIndex,
+  currentStepContentIndex,
+}) {
   const [wrongMessages, setWrongMessages] = useState([]);
-  const circuit = useSelector((state) => state.circuits.oneCircuit);
+  const [congrats, setCongrats] = useState(false);
 
-  const userCircuitAnswerEntries = useSelector(
-    (state) => state.circuits.userCircuitAnswerEntries
+  const circuit = useSelector((state) => state.circuits.oneCircuit);
+  const userCircuitAnswersEntries = useSelector(
+    (state) => state.circuits.userCircuitAnswersEntries
   );
   const userCircuitAnswersResult = useSelector(
     (state) => state.circuits.userCircuitAnswersResult
   );
   const user = useSelector((state) => state.settings.user);
+  const circuitQuiz = useSelector((state) => state.circuits.circuitQuiz);
 
-  // looking for the id set in the URL and redirect the user if the id of URL isnt the same than the circuit id
   const { id } = useParams();
 
   const dispatch = useDispatch();
+
+  function isUserAnswsersReadyForCheck() {
+    if (userCircuitAnswersEntries && circuitQuiz) {
+      const userAnswsersArrayLength = Object.keys(
+        userCircuitAnswersEntries
+      ).length;
+      const conditions = [currentStepIndex + 1, circuitQuiz.length];
+
+      if (currentStepContentIndex === 1) {
+        return conditions.every(
+          (condition) => condition === userAnswsersArrayLength
+        );
+      }
+    }
+    return false;
+  }
 
   useEffect(() => {
     if (userCircuitAnswersResult) {
@@ -46,7 +66,7 @@ function CircuitPathAnswerRecord(setCongrats) {
     let answerObject = {};
 
     // eslint-disable-next-line no-restricted-syntax
-    for (const [key, value] of Object.entries(userCircuitAnswerEntries)) {
+    for (const [key, value] of Object.entries(userCircuitAnswersEntries)) {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       const id_step = circuit.step[key].id;
       const answer = parseInt(value, 10);
@@ -75,18 +95,25 @@ function CircuitPathAnswerRecord(setCongrats) {
     return answerObject;
   };
 
+  if (congrats) {
+    return <Navigate to={`/circuit/${id}/congrats`} />;
+  }
+
   return (
-    <section className="flex flex-col items-center">
-      <button
-        type="button"
-        onClick={transformAnswer}
-        className="flex items-center gap-2 bg-primary rounded-lg text-white px-4 py-2 my-2 mx-auto"
-      >
-        <Compass className="w-7 h-7" />
-        {!wrongMessages ? 'Clique ici' : 'Vérifier mes réponses'}
-      </button>
+    <>
+      {isUserAnswsersReadyForCheck() && (
+        <button
+          type="button"
+          onClick={transformAnswer}
+          className="btn btn-primary max-w-xs max-[425px]:w-full max-[425px]:mx-auto"
+        >
+          <Compass className="w-7 h-7" />
+          Vérifier mes réponses
+        </button>
+      )}
+
       {userCircuitAnswersResult && userCircuitAnswersResult.includes(false) && (
-        <>
+        <section className="flex flex-col items-center">
           <p className="mt-2 mb-2 text-center">
             Arg ! Vous avez fait quelques erreurs d&apos;observation !
           </p>
@@ -147,9 +174,9 @@ function CircuitPathAnswerRecord(setCongrats) {
               </tr>
             </tbody>
           </table>
-        </>
+        </section>
       )}
-    </section>
+    </>
   );
 }
 
