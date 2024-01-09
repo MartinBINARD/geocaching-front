@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
-import { Compass } from 'lucide-react';
-import { toast } from 'react-toastify';
+import { AlertCircle, CheckCircle, Compass, XCircle } from 'lucide-react';
 
 import { sendAnswers } from '../../store/reducers/circuits';
-import formatUserCircuitEntries from '../../utils/formatUserCircuitEntries';
 
 function CircuitPathAnswerRecord({
   currentStepIndex,
@@ -79,67 +77,43 @@ function CircuitPathAnswerRecord({
             <h3 className="font-bold text-lg">
               Oups ! Tu as fait quelques erreurs d&apos;observation !
             </h3>
-            <p className="py-4">
-              Pas de panique, ferme cete fenêtre pour revenir en arrière et
-              corriger tes réponses.
-            </p>
-            <table className="table-auto">
-              <tbody>
-                <tr>
-                  {userCircuitAnswersResult.map((item, index) => (
-                    <td
-                      key={`${item}-${Math.random()}`}
-                      className="border font-semibold text-xl px-4 py-2 text-center"
-                    >
-                      {index + 1}
-                    </td>
-                  ))}
-                </tr>
-                <tr>
-                  {userCircuitAnswersResult.map((item) => (
-                    <td
-                      key={`${item}-${Math.random()}`}
-                      className="border px-4 py-2"
-                    >
-                      {item ? (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6 text-green-500"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                      ) : (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6 text-red-500"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              </tbody>
-            </table>
+            <div className="py-4">
+              <AlertCircle className="float-left w-6 h-6 text-secondary mr-2" />
+              <p>
+                Pas de panique, ferme cete fenêtre pour revenir en arrière et
+                corriger tes réponses.
+              </p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="table table-xs table-pin-rows table-pin-cols">
+                <tbody>
+                  <tr>
+                    {userCircuitAnswersResult.map((item, index) => (
+                      <td
+                        key={`${item}-${Math.random()}`}
+                        className="font-semibold text-xl text-center border"
+                      >
+                        {index + 1}
+                      </td>
+                    ))}
+                  </tr>
+                  <tr>
+                    {userCircuitAnswersResult.map((item) => (
+                      <td key={`${item}-${Math.random()}`} className="border">
+                        {item ? (
+                          <CheckCircle className="w-6 h-6 text-success mx-auto my-1" />
+                        ) : (
+                          <XCircle className="w-6 h-6 text-error mx-auto my-1" />
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <div className="modal-action">
               <form method="dialog">
-                <button type="submit" className="btn">
+                <button type="submit" className="btn btn-primary">
                   Fermer
                 </button>
               </form>
