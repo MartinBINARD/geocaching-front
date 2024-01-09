@@ -10,7 +10,6 @@ function CircuitPathAnswerRecord({
   currentStepIndex,
   currentStepContentIndex,
 }) {
-  const [wrongMessages, setWrongMessages] = useState([]);
   const [congrats, setCongrats] = useState(false);
 
   const circuit = useSelector((state) => state.circuits.oneCircuit);
@@ -51,12 +50,6 @@ function CircuitPathAnswerRecord({
 
       if (incorrectAnswers.length === 0) {
         setCongrats(true);
-        setWrongMessages([]);
-      } else {
-        const wrongMessagesList = incorrectAnswers.map(
-          (item) => `L'étape ${item.index + 1}`
-        );
-        setWrongMessages(wrongMessagesList);
       }
     }
   }, [userCircuitAnswersResult, setCongrats]);
@@ -88,8 +81,6 @@ function CircuitPathAnswerRecord({
         steps: arrayAnswers,
       };
       dispatch(sendAnswers(answerObject));
-    } else {
-      toast('Répondez à toutes questions !');
     }
 
     return answerObject;
@@ -113,7 +104,7 @@ function CircuitPathAnswerRecord({
       )}
 
       {userCircuitAnswersResult && userCircuitAnswersResult.includes(false) && (
-        <section className="flex flex-col items-center">
+        <dialog className="flex flex-col items-center">
           <p className="mt-2 mb-2 text-center">
             Arg ! Vous avez fait quelques erreurs d&apos;observation !
           </p>
@@ -174,7 +165,7 @@ function CircuitPathAnswerRecord({
               </tr>
             </tbody>
           </table>
-        </section>
+        </dialog>
       )}
     </>
   );
