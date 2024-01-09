@@ -39,24 +39,22 @@ function CircuitPathAnswerRecord({
     return false;
   }
 
-  useEffect(() => {
-    if (userCircuitAnswersResult) {
-      const incorrectAnswers = userCircuitAnswersResult
-        .map((reponse, index) => ({ index, reponse }))
-        .filter((item) => item.reponse === false);
-
-      if (incorrectAnswers.length === 0) {
-        setCongrats(true);
-      }
-    }
-  }, [userCircuitAnswersResult, setCongrats]);
-
   function handleClick() {
     const userId = user?.id;
     const circuitId = circuit?.id_circuit;
     const userCircuitEntries = { userId, circuitId, stepsEntries };
     dispatch(sendAnswers(userCircuitEntries));
   }
+
+  function openModal() {
+    document.getElementById('modal-answers-record').showModal();
+  }
+
+  useEffect(() => {
+    if (userCircuitAnswersResult && userCircuitAnswersResult.includes(false)) {
+      openModal();
+    }
+  }, [userCircuitAnswersResult]);
 
   if (congrats) {
     return <Navigate to={`/circuit/${id}/congrats`} />;
@@ -75,68 +73,78 @@ function CircuitPathAnswerRecord({
         </button>
       )}
 
-      {userCircuitAnswersResult && userCircuitAnswersResult.includes(false) && (
-        <dialog className="flex flex-col items-center">
-          <p className="mt-2 mb-2 text-center">
-            Arg ! Vous avez fait quelques erreurs d&apos;observation !
-          </p>
-          <p className="text-sm mb-2">
-            Pas de panique, revenez en arrière et corrigez vos réponses
-          </p>
-          <table className="table-auto">
-            <tbody>
-              <tr>
-                {userCircuitAnswersResult.map((item, index) => (
-                  <td
-                    key={`${item}-${Math.random()}`}
-                    className="border font-semibold text-xl px-4 py-2 text-center"
-                  >
-                    {index + 1}
-                  </td>
-                ))}
-              </tr>
-              <tr>
-                {userCircuitAnswersResult.map((item) => (
-                  <td
-                    key={`${item}-${Math.random()}`}
-                    className="border px-4 py-2"
-                  >
-                    {item ? (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 text-green-500"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                    ) : (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 text-red-500"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    )}
-                  </td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
+      {userCircuitAnswersResult?.length && (
+        <dialog id="modal-answers-record" className="modal">
+          <div className="modal-box">
+            <h3 className="font-bold text-lg">
+              Oups ! Tu as fait quelques erreurs d&apos;observation !
+            </h3>
+            <p className="py-4">
+              Pas de panique, ferme cete fenêtre pour revenir en arrière et
+              corriger tes réponses.
+            </p>
+            <table className="table-auto">
+              <tbody>
+                <tr>
+                  {userCircuitAnswersResult.map((item, index) => (
+                    <td
+                      key={`${item}-${Math.random()}`}
+                      className="border font-semibold text-xl px-4 py-2 text-center"
+                    >
+                      {index + 1}
+                    </td>
+                  ))}
+                </tr>
+                <tr>
+                  {userCircuitAnswersResult.map((item) => (
+                    <td
+                      key={`${item}-${Math.random()}`}
+                      className="border px-4 py-2"
+                    >
+                      {item ? (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 text-green-500"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      ) : (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 text-red-500"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
+            <div className="modal-action">
+              <form method="dialog">
+                <button type="submit" className="btn">
+                  Fermer
+                </button>
+              </form>
+            </div>
+          </div>
         </dialog>
       )}
     </>
