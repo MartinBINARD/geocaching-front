@@ -90,7 +90,7 @@ export const storeCircuitQuiz = createAction<CircuitPathStep[]>(
   'circuits/store-circuit-quiz'
 );
 
-export const resetStepEntries = createAction('circuits/reset-steps-entries');
+export const resetCircuitQuiz = createAction('circuits/reset-circuit-quiz');
 
 export const storeStepEntries = createAction<StepsEntriesState>(
   'circuits/store-steps-entries'
@@ -169,8 +169,9 @@ const circuitsReducer = createReducer(initialState, (builder) => {
         ...action.payload,
       };
     })
-    .addCase(resetStepEntries, (state) => {
+    .addCase(resetCircuitQuiz, (state) => {
       state.stepsEntries = null;
+      state.userCircuitAnswersResult = null;
     })
     .addCase(sendAnswers.pending, (state) => {
       state.isLoading = true;
