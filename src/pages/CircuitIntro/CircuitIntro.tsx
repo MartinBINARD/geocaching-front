@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import {
   fetchCircuit,
-  resetUserCircuitAnswers,
+  resetStepEntries,
   storeCircuitQuiz,
 } from '../../store/reducers/circuits';
 
@@ -29,7 +29,7 @@ function CircuitIntro() {
   }, [dispatch, id]);
 
   const handleClick = () => {
-    dispatch(resetUserCircuitAnswers());
+    dispatch(resetStepEntries());
     if (circuit && circuit.step) {
       dispatch(storeCircuitQuiz(circuit.step));
     }

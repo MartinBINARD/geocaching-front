@@ -54,21 +54,6 @@ export interface SearchState {
   list: Circuit[];
 }
 
-export interface Step {
-  answer: number;
-  id_step: number;
-}
-
-export interface UserCircuitAnswersState {
-  id_user: number;
-  id_circuit: number;
-  steps: Step[];
-}
-
-export type UserCircuitAnswersResultState = boolean[];
-
-export type UserCircuitAnswersEntriesState = Record<string, string | undefined>;
-
 export interface CircuitQuizStep {
   id: number;
   latitude: number;
@@ -84,3 +69,24 @@ export interface CircuitQuizStep {
     },
   ];
 }
+
+export type StepsEntriesState = Record<string, string | undefined>;
+
+export interface UserCircuitEntriesState {
+  userId: number;
+  circuitId: number;
+  stepsEntries: StepsEntriesState;
+}
+
+export interface Step {
+  id_step: number;
+  answer: number;
+}
+
+export interface UserCircuitFormatedAnswersState {
+  id_user: number;
+  id_circuit: number;
+  steps: Step[];
+}
+
+export type UserCircuitAnswersResultState = boolean[];

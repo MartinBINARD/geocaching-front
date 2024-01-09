@@ -5,6 +5,7 @@ import { Compass } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 import { sendAnswers } from '../../store/reducers/circuits';
+import formatUserCircuitEntries from '../../utils/formatUserCircuitEntries';
 
 function CircuitPathAnswerRecord({
   currentStepIndex,
@@ -12,14 +13,12 @@ function CircuitPathAnswerRecord({
 }) {
   const [congrats, setCongrats] = useState(false);
 
-  const circuit = useSelector((state) => state.circuits.oneCircuit);
-  const userCircuitAnswersEntries = useSelector(
-    (state) => state.circuits.userCircuitAnswersEntries
-  );
+  const stepsEntries = useSelector((state) => state.circuits.stepsEntries);
   const userCircuitAnswersResult = useSelector(
     (state) => state.circuits.userCircuitAnswersResult
   );
   const user = useSelector((state) => state.settings.user);
+  const circuit = useSelector((state) => state.circuits.oneCircuit);
   const circuitQuiz = useSelector((state) => state.circuits.circuitQuiz);
 
   const { id } = useParams();
@@ -27,10 +26,8 @@ function CircuitPathAnswerRecord({
   const dispatch = useDispatch();
 
   function isUserAnswsersReadyForCheck() {
-    if (userCircuitAnswersEntries && circuitQuiz) {
-      const userAnswsersArrayLength = Object.keys(
-        userCircuitAnswersEntries
-      ).length;
+    if (stepsEntries && circuitQuiz) {
+      const userAnswsersArrayLength = Object.keys(stepsEntries).length;
       const conditions = [currentStepIndex + 1, circuitQuiz.length];
 
       if (currentStepContentIndex === 1) {
@@ -54,37 +51,12 @@ function CircuitPathAnswerRecord({
     }
   }, [userCircuitAnswersResult, setCongrats]);
 
-  const transformAnswer = () => {
-    const arrayAnswers = [];
-    let answerObject = {};
-
-    // eslint-disable-next-line no-restricted-syntax
-    for (const [key, value] of Object.entries(userCircuitAnswersEntries)) {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      const id_step = circuit.step[key].id;
-      const answer = parseInt(value, 10);
-
-      arrayAnswers.push({
-        id_step,
-        answer,
-      });
-    }
-
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    const id_user = parseInt(user.id, 10);
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    const id_circuit = parseInt(id, 10);
-    if (arrayAnswers.length === circuit.step.length) {
-      answerObject = {
-        id_user,
-        id_circuit,
-        steps: arrayAnswers,
-      };
-      dispatch(sendAnswers(answerObject));
-    }
-
-    return answerObject;
-  };
+  function handleClick() {
+    const userId = user?.id;
+    const circuitId = circuit?.id_circuit;
+    const userCircuitEntries = { userId, circuitId, stepsEntries };
+    dispatch(sendAnswers(userCircuitEntries));
+  }
 
   if (congrats) {
     return <Navigate to={`/circuit/${id}/congrats`} />;
@@ -95,7 +67,7 @@ function CircuitPathAnswerRecord({
       {isUserAnswsersReadyForCheck() && (
         <button
           type="button"
-          onClick={transformAnswer}
+          onClick={handleClick}
           className="btn btn-primary max-w-xs max-[425px]:w-full max-[425px]:mx-auto"
         >
           <Compass className="w-7 h-7" />

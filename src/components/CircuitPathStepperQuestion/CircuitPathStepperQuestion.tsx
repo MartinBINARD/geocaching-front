@@ -3,7 +3,7 @@ import { HelpCircle } from 'lucide-react';
 import { LatLngTuple } from 'leaflet';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-import { storeUserCircuitAnswers } from '../../store/reducers/circuits';
+import { storeStepEntries } from '../../store/reducers/circuits';
 
 import CircuitMapToggle from '../CircuitMapToggle/CircuitMapToggle';
 import CircuitPathQuestionHint from '../CircuitPathQuestionHint/CircuitPathQuestionHint';
@@ -27,18 +27,16 @@ function CircuitPathQuestion({
   error,
 }: CircuitPathQuestionProps) {
   const { invalidInput, setInvalidInput } = error;
-  const userCircuitAnswersEntries = useAppSelector(
-    (state) => state.circuits.userCircuitAnswersEntries
-  );
-  const [userAnswers, setUserAnswers] = useState(
-    userCircuitAnswersEntries || {}
-  );
+  const stepsEntries = useAppSelector((state) => state.circuits.stepsEntries);
+
+  const [userEntries, setUserEntries] = useState(stepsEntries || {});
   const circuitQuiz = useAppSelector((state) => state.circuits.circuitQuiz);
 
   const oneMarker = [
     circuitQuiz[currentStepIndex]?.latitude,
     circuitQuiz[currentStepIndex]?.longitude,
   ] as LatLngTuple;
+
   const dispatch = useAppDispatch();
 
   function warnInvalidInput(value: string) {
@@ -52,17 +50,17 @@ function CircuitPathQuestion({
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const newObjectAnswsers = {
-      ...userAnswers,
+    const newObjectEntries = {
+      ...userEntries,
       [currentStepIndex]: e.target.value,
     };
 
-    setUserAnswers(newObjectAnswsers);
+    setUserEntries(newObjectEntries);
     warnInvalidInput(e.target.value);
 
     if (e.target.value.length > 0) {
       setInvalidInput(false);
-      dispatch(storeUserCircuitAnswers(newObjectAnswsers));
+      dispatch(storeStepEntries(newObjectEntries));
     }
   }
 
@@ -98,7 +96,7 @@ function CircuitPathQuestion({
             type="number"
             placeholder="Votre réponse"
             min="0"
-            value={userAnswers[currentStepIndex] || ''}
+            value={userEntries[currentStepIndex] || ''}
             onChange={handleChange}
             onBlur={handleBlur}
           />

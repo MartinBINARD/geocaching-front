@@ -12,14 +12,17 @@ import filteredList from '../../utils/FilteredList';
 import {
   Circuit,
   SearchState,
-  UserCircuitAnswersState,
+  StepsEntriesState,
+  UserCircuitEntriesState,
+  UserCircuitFormatedAnswersState,
   UserCircuitAnswersResultState,
-  UserCircuitAnswersEntriesState,
   CircuitQuizStep,
   CircuitPath,
   CircuitPathStep,
 } from '../../@types/circuit';
+
 import createCircuitQuizStepper from '../../utils/createCircuitQuizStepper';
+import formatUserCircuitEntries from '../../utils/formatUserCircuitEntries';
 
 interface CircuitState {
   circuitsList: Circuit[];
@@ -28,7 +31,7 @@ interface CircuitState {
   errorMessage: string | undefined;
   oneCircuit: CircuitPath | null;
   circuitQuiz: CircuitQuizStep[];
-  userCircuitAnswersEntries: UserCircuitAnswersEntriesState | null;
+  stepsEntries: StepsEntriesState | null;
   userCircuitAnswersResult: UserCircuitAnswersResultState | null;
   isLoading: boolean;
   isFetchCircuitFailed: boolean;
@@ -41,7 +44,7 @@ const initialState: CircuitState = {
   errorMessage: '',
   oneCircuit: null,
   circuitQuiz: [],
-  userCircuitAnswersEntries: null,
+  stepsEntries: null,
   userCircuitAnswersResult: null,
   isLoading: false,
   isFetchCircuitFailed: false,
@@ -87,22 +90,24 @@ export const storeCircuitQuiz = createAction<CircuitPathStep[]>(
   'circuits/store-circuit-quiz'
 );
 
-export const resetUserCircuitAnswers = createAction(
-  'circuits/reset-user-answser'
-);
+export const resetStepEntries = createAction('circuits/reset-steps-entries');
 
-export const storeUserCircuitAnswers =
-  createAction<UserCircuitAnswersEntriesState>('circuits/store-user-answser');
+export const storeStepEntries = createAction<StepsEntriesState>(
+  'circuits/store-steps-entries'
+);
 
 export const sendAnswers = createAsyncThunk(
   'circuits/send-answers',
   async (
-    answersEntries: UserCircuitAnswersState
+    userCircuitEntries: UserCircuitEntriesState
   ): Promise<UserCircuitAnswersResultState> => {
     try {
+      const { circuitId } = userCircuitEntries;
+      const objectData = formatUserCircuitEntries(userCircuitEntries);
+
       const { data } = await api.post<UserCircuitAnswersResultState>(
-        `circuits/${answersEntries.id_circuit}/answer`,
-        answersEntries
+        `circuits/${circuitId}/answer`,
+        objectData
       );
 
       return data;
@@ -158,14 +163,14 @@ const circuitsReducer = createReducer(initialState, (builder) => {
 
       state.circuitQuiz = formatArrayStepper;
     })
-    .addCase(storeUserCircuitAnswers, (state, action) => {
-      state.userCircuitAnswersEntries = {
-        ...state.userCircuitAnswersEntries,
+    .addCase(storeStepEntries, (state, action) => {
+      state.stepsEntries = {
+        ...state.stepsEntries,
         ...action.payload,
       };
     })
-    .addCase(resetUserCircuitAnswers, (state) => {
-      state.userCircuitAnswersEntries = null;
+    .addCase(resetStepEntries, (state) => {
+      state.stepsEntries = null;
     })
     .addCase(sendAnswers.pending, (state) => {
       state.isLoading = true;
