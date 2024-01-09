@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { AlertCircle, CheckCircle, Compass, XCircle } from 'lucide-react';
 
 import { sendAnswers } from '../../store/reducers/circuits';
@@ -112,7 +112,16 @@ function CircuitPathAnswerRecord({
               </table>
             </div>
             <div className="modal-action">
-              <form method="dialog">
+              <form method="dialog" className="flex justify-between">
+                <Link
+                  type="submit"
+                  role="button"
+                  className="btn btn-outline mr-8 max-[375px]:w-32"
+                  to="/circuits"
+                >
+                  Quitter le parcours
+                </Link>
+
                 <button type="submit" className="btn btn-primary">
                   Fermer
                 </button>
