@@ -12,12 +12,12 @@ interface CircuitPathQuestionProps {
   currentStepIndex: number;
   hint: {
     showHint: boolean;
-    setShowHint: (showHint: boolean) => boolean;
+    setShowHint: React.Dispatch<React.SetStateAction<boolean>>;
   };
 
   error: {
     invalidInput: boolean;
-    setInvalidInput: (invalidInput: boolean) => boolean;
+    setInvalidInput: React.Dispatch<React.SetStateAction<boolean>>;
   };
 }
 

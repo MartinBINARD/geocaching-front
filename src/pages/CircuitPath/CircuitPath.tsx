@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useParams } from 'react-router-dom';
 import { Flag } from 'lucide-react';
+
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import { storeCircuitQuiz } from '../../store/reducers/circuits';
 
@@ -12,10 +11,11 @@ import CircuitPathStepperQuestion from '../../components/CircuitPathStepperQuest
 import CircuitPathStepperControl from '../../components/CircuitPathStepperControl/CircuitPathStepperControl';
 
 function CircuitPath() {
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [currentStepContentIndex, setCurrentStepContentIndex] = useState(0);
-  const [showHint, setShowHint] = useState(false);
-  const [invalidInput, setInvalidInput] = useState(false);
+  const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
+  const [currentStepContentIndex, setCurrentStepContentIndex] =
+    useState<number>(0);
+  const [showHint, setShowHint] = useState<boolean>(false);
+  const [invalidInput, setInvalidInput] = useState<boolean>(false);
 
   const index = {
     currentStepIndex,
@@ -26,14 +26,14 @@ function CircuitPath() {
   const hint = { showHint, setShowHint };
   const error = { invalidInput, setInvalidInput };
 
-  const isLoading = useSelector((state) => state.circuits.isLoading);
-  const circuit = useSelector((state) => state.circuits.oneCircuit);
-  const circuitQuiz = useSelector((state) => state.circuits.circuitQuiz);
+  const isLoading = useAppSelector((state) => state.circuits.isLoading);
+  const circuit = useAppSelector((state) => state.circuits.oneCircuit);
+  const circuitQuiz = useAppSelector((state) => state.circuits.circuitQuiz);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (circuit) {
+    if (circuit?.step) {
       dispatch(storeCircuitQuiz(circuit.step));
     }
   }, [circuit, dispatch]);

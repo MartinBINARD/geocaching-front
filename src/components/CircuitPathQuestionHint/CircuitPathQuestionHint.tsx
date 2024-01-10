@@ -4,7 +4,7 @@ interface CircuitPathQuestionHintProps {
   currentStepIndex: number;
   hint: {
     showHint: boolean;
-    setShowHint: (showHint: boolean) => boolean;
+    setShowHint: React.Dispatch<React.SetStateAction<boolean>>;
   };
 }
 

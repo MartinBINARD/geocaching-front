@@ -1,25 +1,35 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { AlertCircle, CheckCircle, Compass, XCircle } from 'lucide-react';
 
+import { UserCircuitEntriesState } from '../../@types/circuit';
+
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+
 import { sendAnswers } from '../../store/reducers/circuits';
 
-function CircuitPathAnswerRecord({
+interface CircuitPatStepperControlAnswerRecordProps {
+  currentStepIndex: number;
+  currentStepContentIndex: number;
+}
+
+function CircuitPatStepperControlAnswerRecord({
   currentStepIndex,
   currentStepContentIndex,
-}) {
-  const stepsEntries = useSelector((state) => state.circuits.stepsEntries);
-  const userCircuitAnswersResult = useSelector(
+}: CircuitPatStepperControlAnswerRecordProps) {
+  const stepsEntries = useAppSelector((state) => state.circuits.stepsEntries);
+  const userCircuitAnswersResult = useAppSelector(
     (state) => state.circuits.userCircuitAnswersResult
   );
-  const user = useSelector((state) => state.settings.user);
-  const circuit = useSelector((state) => state.circuits.oneCircuit);
-  const circuitQuiz = useSelector((state) => state.circuits.circuitQuiz);
+  const user = useAppSelector((state) => state.settings.user);
+  const circuit = useAppSelector((state) => state.circuits.oneCircuit);
+  const circuitQuiz = useAppSelector((state) => state.circuits.circuitQuiz);
+
+  const modalAnswersRecord = useRef<HTMLDialogElement>(null);
 
   const { id } = useParams();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   function isUserAnswsersReadyForCheck() {
     if (stepsEntries && circuitQuiz) {
@@ -38,12 +48,16 @@ function CircuitPathAnswerRecord({
   function handleClick() {
     const userId = user?.id;
     const circuitId = circuit?.id_circuit;
-    const userCircuitEntries = { userId, circuitId, stepsEntries };
+    const userCircuitEntries = {
+      userId,
+      circuitId,
+      stepsEntries,
+    } as UserCircuitEntriesState;
     dispatch(sendAnswers(userCircuitEntries));
   }
 
   function openModal() {
-    document.getElementById('modal-answers-record').showModal();
+    modalAnswersRecord.current?.showModal();
   }
 
   useEffect(() => {
@@ -70,7 +84,7 @@ function CircuitPathAnswerRecord({
       )}
 
       {userCircuitAnswersResult?.length && (
-        <dialog id="modal-answers-record" className="modal">
+        <dialog ref={modalAnswersRecord} className="modal">
           <div className="modal-box">
             <h3 className="font-bold text-lg">
               Oups ! Tu as fait quelques erreurs d&apos;observation !
@@ -132,4 +146,4 @@ function CircuitPathAnswerRecord({
   );
 }
 
-export default CircuitPathAnswerRecord;
+export default CircuitPatStepperControlAnswerRecord;

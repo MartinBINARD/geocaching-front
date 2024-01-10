@@ -8,7 +8,7 @@ interface CircuitPathMapProp {
   currentStepIndex: number;
 }
 
-function CircuitPathMap({ currentStepIndex }: CircuitPathMapProp) {
+function CircuitPathStepperMap({ currentStepIndex }: CircuitPathMapProp) {
   const circuitQuiz = useAppSelector((state) => state.circuits.circuitQuiz);
 
   const stepPosition = [
@@ -41,4 +41,4 @@ function CircuitPathMap({ currentStepIndex }: CircuitPathMapProp) {
   );
 }
 
-export default CircuitPathMap;
+export default CircuitPathStepperMap;

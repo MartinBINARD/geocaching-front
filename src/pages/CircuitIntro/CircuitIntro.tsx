@@ -9,12 +9,12 @@ import {
   storeCircuitQuiz,
 } from '../../store/reducers/circuits';
 
-import Loader from '../../components/Loader/Loader';
+import Loader from '../../Loader/Loader';
 import CircuitDescriptionCard from '../../components/CircuitDescriptionCard/CircuitDescriptionCard';
 import CicuitLocationCard from '../../components/CircuitLocationCard/CircuitLocationCard';
 
 function CircuitIntro() {
-  const { id } = useParams<Record<string, string | undefined>>();
+  const { id } = useParams();
   const isLoading = useAppSelector((state) => state.circuits.isLoading);
   const user = useAppSelector((state) => state.settings.user);
   const circuit = useAppSelector((state) => state.circuits.oneCircuit);

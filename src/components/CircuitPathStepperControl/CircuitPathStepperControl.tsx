@@ -5,15 +5,15 @@ import CircuitPathStepperControlAnswersRecord from '../CircuitPathStepperControl
 interface CircuitPathStepperControlProps {
   index: {
     currentStepIndex: number;
-    setCurrentStepIndex: (currentStepIndex: number) => number;
+    setCurrentStepIndex: React.Dispatch<React.SetStateAction<number>>;
     currentStepContentIndex: number;
-    setCurrentStepContentIndex: (currentStepContentIndex: number) => number;
+    setCurrentStepContentIndex: React.Dispatch<React.SetStateAction<number>>;
   };
   error: {
     invalidInput: boolean;
-    setInvalidInput: (invalidInput: boolean) => boolean;
+    setInvalidInput: React.Dispatch<React.SetStateAction<boolean>>;
   };
-  setShowHint: (showHint: boolean) => boolean;
+  setShowHint: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function CircuitPathStepperControl({
