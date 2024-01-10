@@ -31,6 +31,10 @@ function CircuitPatStepperControlAnswerRecord({
 
   const dispatch = useAppDispatch();
 
+  const isCircuitQuizCorrect = !!userCircuitAnswersResult?.every(
+    (value) => value === true
+  );
+
   function isUserAnswsersReadyForCheck() {
     if (stepsEntries && circuitQuiz) {
       const userAnswsersArrayLength = Object.keys(stepsEntries).length;
@@ -66,7 +70,7 @@ function CircuitPatStepperControlAnswerRecord({
     }
   }, [userCircuitAnswersResult]);
 
-  if (userCircuitAnswersResult?.every((value) => value === true)) {
+  if (isCircuitQuizCorrect) {
     return <Navigate to={`/circuit/${id}/congrats`} />;
   }
 

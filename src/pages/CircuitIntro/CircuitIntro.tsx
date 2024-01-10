@@ -9,7 +9,7 @@ import {
   storeCircuitQuiz,
 } from '../../store/reducers/circuits';
 
-import Loader from '../../Loader/Loader';
+import Loader from '../../loader/Loader';
 import CircuitDescriptionCard from '../../components/CircuitDescriptionCard/CircuitDescriptionCard';
 import CicuitLocationCard from '../../components/CircuitLocationCard/CircuitLocationCard';
 

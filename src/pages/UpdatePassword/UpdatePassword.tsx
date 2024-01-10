@@ -4,7 +4,7 @@ import { updatePassword } from '../../store/reducers/auth';
 
 import { UpdateCredentials, UpdatePasswordForm } from '../../@types/auth';
 
-import Loader from '../../components/Loader/Loader';
+import Loader from '../../loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';
 
 function UpdatePassword() {

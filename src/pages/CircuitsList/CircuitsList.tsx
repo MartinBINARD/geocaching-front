@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchCircuitsList } from '../../store/reducers/circuits';
 
 import Map from '../../components/Map/Map';
-import Loader from '../../components/Loader/Loader';
+import Loader from '../../loader/Loader';
 import FilterCircuitsList from '../../components/FilterCircuitsLists/FilterCircuitsList';
 import CircuitListCard from '../../components/CircuitsListCard/CircuitsListCard';
 
