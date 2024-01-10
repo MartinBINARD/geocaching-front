@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Link, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCircuitsList } from '../../store/reducers/circuits';
-import Loader from '../../components/Loader/Loader';
+import Loader from '../../loader/Loader';
 
 import './PatchCircuits.scss';
 

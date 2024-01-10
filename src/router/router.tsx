@@ -1,29 +1,30 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-// import of all pages for our site
 import App from '../components/App/App';
-import Homepage from '../pages/Homepage/Homepage';
-import Informations from '../pages/Informations/Informations';
-import Presentation from '../pages/Presentation/Presentation';
-import CircuitsList from '../pages/CircuitsList/CircuitsList';
-import Circuit from '../pages/Circuit/Circuit';
-import CircuitMap from '../pages/CircuitMap/CircuitMap';
-import Privacy from '../pages/Privacy/Privacy';
-import Login from '../pages/Login/Login';
-import Register from '../pages/Register/Register';
-import Profile from '../pages/Profile/Profile';
-import CheckUserAccountConfirmation from '../pages/CheckUserAccountConfirmation/CheckUserAccountConfirmation';
-import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
-import UpdatePassword from '../pages/UpdatePassword/UpdatePassword';
-import Congrats from '../pages/Congrats/Congrats';
-import Dashboard from '../pages/Dashboard/Dashboard';
-import AddCircuit from '../pages/AddCircuit/AddCircuit';
-import PatchCircuits from '../pages/PatchCircuits/PatchCircuits';
-import PatchCircuit from '../pages/PatchCircuit/PatchCircuit';
-import DeleteCircuit from '../pages/DeleteCircuit/DeleteCircuit';
-import ErrorPage from '../pages/ErrorPage/ErrorPage';
+import {
+  Homepage,
+  Informations,
+  Presentation,
+  CircuitsList,
+  Circuit,
+  CircuitIntro,
+  CircuitPath,
+  CircuitCongrats,
+  Privacy,
+  Login,
+  Register,
+  Profile,
+  CheckUserAccountConfirmation,
+  ForgotPassword,
+  UpdatePassword,
+  Dashboard,
+  AddCircuit,
+  PatchCircuits,
+  PatchCircuit,
+  DeleteCircuit,
+  ErrorPage,
+} from '../pages';
 
-// create an array with react-router-dom with all the paths and elements we will render
 const router = createBrowserRouter([
   {
     path: '/',
@@ -49,14 +50,20 @@ const router = createBrowserRouter([
       {
         path: '/circuit/:id',
         element: <Circuit />,
-      },
-      {
-        path: '/circuit/:id/map',
-        element: <CircuitMap />,
-      },
-      {
-        path: '/circuit/:id/congrats',
-        element: <Congrats />,
+        children: [
+          {
+            index: true,
+            element: <CircuitIntro />,
+          },
+          {
+            path: 'path',
+            element: <CircuitPath />,
+          },
+          {
+            path: 'congrats',
+            element: <CircuitCongrats />,
+          },
+        ],
       },
       {
         path: '/privacy-policy',
@@ -110,5 +117,4 @@ const router = createBrowserRouter([
   },
 ]);
 
-// export of router array
 export default router;

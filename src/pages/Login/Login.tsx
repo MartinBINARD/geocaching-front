@@ -7,7 +7,7 @@ import { login } from '../../store/reducers/auth';
 import { LoginForm } from '../../@types/auth';
 
 import Footer from '../../components/Footer/Footer';
-import Loader from '../../components/Loader/Loader';
+import Loader from '../../loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';
 
 function Login() {

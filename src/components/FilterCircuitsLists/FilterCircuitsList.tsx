@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { searchCircuitsList } from '../../store/reducers/circuits';
 
 import SelectControl from '../SelectControl/SelectControl';
-import Loader from '../Loader/Loader';
+import Loader from '../../loader/Loader';
 
 import settings from '../../assets/icon/vertical_settings.svg';
 import chevronUp from '../../assets/icon/chevron-up.svg';
@@ -23,7 +23,7 @@ function FilterCircuitsList({ list }: ListProps) {
 
   const dispatch = useAppDispatch();
 
-  const loading = useAppSelector((state) => state.circuits.loading);
+  const isLoading = useAppSelector((state) => state.circuits.isLoading);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -49,7 +49,7 @@ function FilterCircuitsList({ list }: ListProps) {
     setIsOpen(false);
   };
 
-  if (loading) {
+  if (isLoading) {
     return <Loader />;
   }
 
