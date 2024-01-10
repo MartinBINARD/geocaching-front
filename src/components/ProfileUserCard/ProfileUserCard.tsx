@@ -1,12 +1,12 @@
-import { Dispatch, SetStateAction } from 'react';
+import { useAppSelector } from '../../hooks/redux';
 
 import ProfileUserDescription from '../ProfileUserDescription/ProfileUserDescription';
 import ProfileUserForm from '../ProfileUserForm/ProfileUserForm';
-import { useAppSelector } from '../../hooks/redux';
+import ProfileUserCardDeleteModal from '../ProfileUserCardDeleteModal/ProfileUserCardDeleteModal';
 
 interface ProfileUserCardProps {
   isEdit: boolean;
-  setIsEdit: Dispatch<SetStateAction<boolean>>;
+  setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -26,13 +26,13 @@ function ProfileUserCard({ isEdit, setIsEdit, onClick }: ProfileUserCardProps) {
         <button
           onClick={onClick}
           type="button"
-          className={`btn btn-primary ${
-            isEdit ? 'btn-secondary' : 'btn-primary'
-          }`}
+          className={`btn btn-primary ${isEdit ? 'btn-outline' : ''}`}
           disabled={!!errorMessage}
         >
           {isEdit ? 'Annuler' : 'Modifier'}
         </button>
+
+        <ProfileUserCardDeleteModal isEdit={isEdit} />
       </div>
     </article>
   );
