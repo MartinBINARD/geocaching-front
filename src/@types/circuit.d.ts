@@ -78,15 +78,4 @@ export interface UserCircuitEntriesState {
   stepsEntries: StepsEntriesState;
 }
 
-export interface Step {
-  id_step: number;
-  answer: number;
-}
-
-export interface UserCircuitFormatedAnswersState {
-  id_user: number;
-  id_circuit: number;
-  steps: Step[];
-}
-
 export type UserCircuitAnswersResultState = boolean[];

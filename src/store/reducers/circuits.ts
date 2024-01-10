@@ -14,7 +14,6 @@ import {
   SearchState,
   StepsEntriesState,
   UserCircuitEntriesState,
-  UserCircuitFormatedAnswersState,
   UserCircuitAnswersResultState,
   CircuitQuizStep,
   CircuitPath,
