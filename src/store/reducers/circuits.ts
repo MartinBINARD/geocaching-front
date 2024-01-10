@@ -9,24 +9,31 @@ import { AxiosError } from 'axios';
 import api from '../../service/axios';
 import filteredList from '../../utils/FilteredList';
 
-import { Circuit, SearchState, Step } from '../../@types/circuit';
+import {
+  Circuit,
+  SearchState,
+  StepsEntriesState,
+  UserCircuitEntriesState,
+  UserCircuitAnswersResultState,
+  CircuitQuizStep,
+  CircuitPath,
+  CircuitPathStep,
+} from '../../@types/circuit';
 
-interface AnswerState {
-  id_user: number;
-  id_circuit: number;
-  steps: Step[];
-}
+import createCircuitQuizStepper from '../../utils/createCircuitQuizStepper';
+import formatUserCircuitEntries from '../../utils/formatUserCircuitEntries';
 
 interface CircuitState {
   circuitsList: Circuit[];
   searchList: Circuit[];
   isSearchResult: boolean;
   errorMessage: string | undefined;
-  oneCircuit: Circuit | null;
-  answers: AnswerState | null;
-  alreadyDid: boolean;
-  loading: boolean;
-  noCircuit: boolean;
+  oneCircuit: CircuitPath | null;
+  circuitQuiz: CircuitQuizStep[];
+  stepsEntries: StepsEntriesState | null;
+  userCircuitAnswersResult: UserCircuitAnswersResultState | null;
+  isLoading: boolean;
+  isFetchCircuitFailed: boolean;
 }
 
 const initialState: CircuitState = {
@@ -35,14 +42,15 @@ const initialState: CircuitState = {
   isSearchResult: true,
   errorMessage: '',
   oneCircuit: null,
-  answers: null,
-  alreadyDid: false,
-  loading: false,
-  noCircuit: false,
+  circuitQuiz: [],
+  stepsEntries: null,
+  userCircuitAnswersResult: null,
+  isLoading: false,
+  isFetchCircuitFailed: false,
 };
 
 export const fetchCircuitsList = createAsyncThunk(
-  'circuits/fetchCircuitsList',
+  'circuits/fetch-circuits-list',
   async (): Promise<Circuit[]> => {
     try {
       const { data } = await api.get<Circuit[]>('circuits');
@@ -57,12 +65,17 @@ export const fetchCircuitsList = createAsyncThunk(
   }
 );
 
+export const searchCircuitsList = createAction<SearchState>(
+  'circuits/search-circuits-list'
+);
+
 export const fetchCircuit = createAsyncThunk(
-  'circuits/fetchCircuit',
-  async (id: number): Promise<Circuit> => {
+  'circuits/fetch-circuit',
+  async (id: string): Promise<Circuit> => {
     try {
-      const response = await api.get<Circuit>(`circuits/${id}`);
-      return response.data;
+      const { data } = await api.get<Circuit>(`circuits/${id}`);
+
+      return data;
     } catch (error: unknown) {
       /* Specify known AxiosError Type to solve eslint warning.
       Typscript cannot predict server error but do it on AxiosError Instance */
@@ -70,17 +83,33 @@ export const fetchCircuit = createAsyncThunk(
       throw err.response ? err.response.data : err.message;
     }
   }
+);
+
+export const storeCircuitQuiz = createAction<CircuitPathStep[]>(
+  'circuits/store-circuit-quiz'
+);
+
+export const resetCircuitQuiz = createAction('circuits/reset-circuit-quiz');
+
+export const storeStepEntries = createAction<StepsEntriesState>(
+  'circuits/store-steps-entries'
 );
 
 export const sendAnswers = createAsyncThunk(
-  'circuits/sendAnswers',
-  async (answers: AnswerState): Promise<AnswerState> => {
+  'circuits/send-answers',
+  async (
+    userCircuitEntries: UserCircuitEntriesState
+  ): Promise<UserCircuitAnswersResultState> => {
     try {
-      const response = await api.post<AnswerState>(
-        `circuits/${answers.id_circuit}/answer`,
-        answers
+      const { circuitId } = userCircuitEntries;
+      const objectData = formatUserCircuitEntries(userCircuitEntries);
+
+      const { data } = await api.post<UserCircuitAnswersResultState>(
+        `circuits/${circuitId}/answer`,
+        objectData
       );
-      return response.data;
+
+      return data;
     } catch (error: unknown) {
       /* Specify known AxiosError Type to solve eslint warning.
       Typscript cannot predict server error but do it on AxiosError Instance */
@@ -88,27 +117,23 @@ export const sendAnswers = createAsyncThunk(
       throw err.response ? err.response.data : err.message;
     }
   }
-);
-
-export const searchCircuitsList = createAction<SearchState>(
-  'circuits/searchCircuits'
 );
 
 const circuitsReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(fetchCircuitsList.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     })
     .addCase(fetchCircuitsList.fulfilled, (state, action) => {
       /* Reset isSearchResult to true in case of user navigating through
       application, previous negative search message must be not displayed */
       state.isSearchResult = true;
       state.circuitsList = action.payload;
-      state.loading = false;
+      state.isLoading = false;
     })
     .addCase(fetchCircuitsList.rejected, (state, action) => {
       state.errorMessage = action.error.message;
-      state.loading = false;
+      state.isLoading = false;
     })
     .addCase(searchCircuitsList, (state, action) => {
       const { search, list }: SearchState = action.payload;
@@ -118,31 +143,47 @@ const circuitsReducer = createReducer(initialState, (builder) => {
       state.searchList = searchListResult;
     })
     .addCase(fetchCircuit.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     })
     .addCase(fetchCircuit.fulfilled, (state, action) => {
       state.oneCircuit = action.payload;
-      state.loading = false;
-      state.noCircuit = false;
+      state.isLoading = false;
+      state.isFetchCircuitFailed = false;
     })
     .addCase(fetchCircuit.rejected, (state, action) => {
-      toast(action.error.message);
-      state.loading = false;
-      state.noCircuit = true;
+      toast.error(action.error.message);
+      state.isLoading = false;
+      state.isFetchCircuitFailed = true;
+    })
+    .addCase(storeCircuitQuiz, (state, action) => {
+      const formatArrayStepper = createCircuitQuizStepper(
+        action.payload
+      ) as CircuitQuizStep[];
+
+      state.circuitQuiz = formatArrayStepper;
+    })
+    .addCase(storeStepEntries, (state, action) => {
+      state.stepsEntries = {
+        ...state.stepsEntries,
+        ...action.payload,
+      };
+    })
+    .addCase(resetCircuitQuiz, (state) => {
+      state.stepsEntries = null;
+      state.userCircuitAnswersResult = null;
     })
     .addCase(sendAnswers.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     })
     .addCase(sendAnswers.fulfilled, (state, action) => {
-      state.answers = action.payload;
-      state.loading = false;
+      state.userCircuitAnswersResult = action.payload;
+      state.isLoading = false;
     })
     .addCase(sendAnswers.rejected, (state) => {
-      state.alreadyDid = true;
-      toast(
-        'Toutes les réponses sont bonnes mais vous avez déjà terminé ce circuit'
+      toast.error(
+        `Une erreur s'est produite lors de l'envoie de vos réponse, Veuillez essayer de nouveau.`
       );
-      state.loading = false;
+      state.isLoading = false;
     });
 });
 

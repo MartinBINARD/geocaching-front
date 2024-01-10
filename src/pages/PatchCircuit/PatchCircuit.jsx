@@ -9,7 +9,7 @@ import { fetchCircuit } from '../../store/reducers/circuits';
 // import patchCircuit from admin reducer to patch a circuit
 import { patchCircuit } from '../../store/reducers/admin';
 // import componants
-import Loader from '../../components/Loader/Loader';
+import Loader from '../../loader/Loader';
 import AdminInput from '../../components/AdminInput/AdminInput';
 import AdminTextArea from '../../components/AdminTextArea/AdminTextArea';
 // import scss file

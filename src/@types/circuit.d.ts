@@ -8,7 +8,7 @@ export interface Circuit {
   introduction: string;
   latitude: number;
   longitude: number;
-  maintenance: number;
+  maintenance: boolean;
   mobility: string[];
   name: string;
   parking_address: string;
@@ -18,6 +18,25 @@ export interface Circuit {
   theme: string;
   url_image: string;
   url_reward: string;
+}
+
+export interface CircuitPathStep {
+  id: number;
+  answer: string | null;
+  circuit_id: number;
+  hint: string | null;
+  latitude: number;
+  longitude: number;
+  order: number;
+  paragraph: string;
+  question: string;
+  transition: string;
+  updated_at: string;
+}
+
+export interface CircuitPath extends Circuit {
+  postcode?: number;
+  step?: CircuitPathStep[];
 }
 
 export interface Search {
@@ -35,7 +54,28 @@ export interface SearchState {
   list: Circuit[];
 }
 
-export interface Step {
-  answer: number;
-  id_step: number;
+export interface CircuitQuizStep {
+  id: number;
+  latitude: number;
+  longitude: number;
+  content: [
+    {
+      paragraph: string;
+      hint: string | null;
+      question: string;
+    },
+    {
+      transition: string;
+    },
+  ];
 }
+
+export type StepsEntriesState = Record<string, string | undefined>;
+
+export interface UserCircuitEntriesState {
+  userId: number;
+  circuitId: number;
+  stepsEntries: StepsEntriesState;
+}
+
+export type UserCircuitAnswersResultState = boolean[];

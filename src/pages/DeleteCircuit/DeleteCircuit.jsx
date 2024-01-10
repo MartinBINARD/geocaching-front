@@ -8,7 +8,7 @@ import { fetchCircuitsList } from '../../store/reducers/circuits';
 // import deleteCircuit from admin reducer to delete a circuit
 import { deleteCircuit } from '../../store/reducers/admin';
 // import Loader componant
-import Loader from '../../components/Loader/Loader';
+import Loader from '../../loader/Loader';
 
 // import scss file
 import './DeleteCircuit.scss';

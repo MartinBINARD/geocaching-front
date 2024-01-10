@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import settingsReducer from './reducers/settings';
+import authReducer from './reducers/auth';
 import circuitsReducer from './reducers/circuits';
 import userReducer from './reducers/user';
 import adminReducer from './reducers/admin';
 
 const store = configureStore({
   reducer: {
-    settings: settingsReducer,
+    settings: authReducer,
     circuits: circuitsReducer,
     user: userReducer,
     admin: adminReducer,

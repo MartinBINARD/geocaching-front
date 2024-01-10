@@ -7,7 +7,7 @@ import { LocateFixed } from 'lucide-react';
 import LeafletControl from '../LeafletControl/LeafletControl';
 
 function ButtonLocateMe() {
-  const zoom = 15;
+  const zoom = 17;
   const second = 2;
   const [position, setPosition] = useState<LatLngLiteral | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -37,7 +37,7 @@ function ButtonLocateMe() {
         </button>
       </LeafletControl>
 
-      {position === null ? null : (
+      {position && (
         <>
           <Circle
             center={{

@@ -1,3 +1,5 @@
+import { EmailForm } from './auth';
+
 export interface Profile {
   id: number;
   circuits: Circuit[] | null;
@@ -11,4 +13,12 @@ export interface Profile {
   role: string;
   state: string | null;
   verified: boolean;
+}
+
+export interface UpdateProfileForm extends EmailForm {
+  pseudo: HTMLInputElement;
+  region: HTMLInputElement;
+  state: HTMLInputElement;
+  city: HTMLInputElement;
+  presentation: HTMLTextAreaElement;
 }

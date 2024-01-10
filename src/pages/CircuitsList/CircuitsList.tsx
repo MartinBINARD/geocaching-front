@@ -1,15 +1,16 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-import Map from '../../components/Map/Map';
-import Loader from '../../components/Loader/Loader';
 import { fetchCircuitsList } from '../../store/reducers/circuits';
+
+import Map from '../../components/Map/Map';
+import Loader from '../../loader/Loader';
 import FilterCircuitsList from '../../components/FilterCircuitsLists/FilterCircuitsList';
 import CircuitListCard from '../../components/CircuitsListCard/CircuitsListCard';
 
 function CircuitsList() {
   const errorMessage = useAppSelector((state) => state.circuits.errorMessage);
-  const loading = useAppSelector((state) => state.circuits.loading);
+  const isLoading = useAppSelector((state) => state.circuits.isLoading);
   /* First load all circuitsList by default or when empty search value is
   submitted. Replace all circuitsList prop by searchList when updating from store
   / submitting from FilterCircuitsList component */
@@ -34,7 +35,7 @@ function CircuitsList() {
     return <h2>{errorMessage}</h2>;
   }
 
-  return loading || !circuitsList.length ? (
+  return isLoading || !circuitsList.length ? (
     <Loader />
   ) : (
     <section className="flex-grow-1 flex flex-col m-auto max-lg:px-1">
@@ -50,10 +51,13 @@ function CircuitsList() {
           </p>
         )}
         <div className="w-full overflow-y-hidden flex justify-between mt-4 max-lg:flex-wrap">
-          <Map
-            markers={list}
-            className="z-0 h-[60vh] w-full lg:w-1/2 rounded-lg shadow-xl max-md:h-[30vh] relative"
-          />
+          {list?.length && (
+            <Map
+              markersList={list}
+              zoom={6}
+              className="z-0 h-[60vh] w-full lg:w-1/2 rounded-lg shadow-xl max-md:h-[30vh] relative"
+            />
+          )}
           <CircuitListCard list={list} />
         </div>
       </div>
