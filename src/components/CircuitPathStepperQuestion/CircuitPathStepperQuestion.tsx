@@ -65,7 +65,7 @@ function CircuitPathQuestion({
   }
 
   return (
-    <section className="flex flex-col items-center">
+    <section className="flex flex-col justify-center">
       <p className="p-3 text-sm lg:text-base">
         {circuitQuiz[currentStepIndex]?.content[0].paragraph}
       </p>
@@ -73,7 +73,7 @@ function CircuitPathQuestion({
       <CircuitMapToggle
         oneMarker={oneMarker}
         zoom={17}
-        className="btn btn-primary btn-outline normal-case font-medium text-white mt-2 mb-8"
+        className="btn btn-primary btn-outline normal-case font-medium text-white mt-2 mb-8 mx-auto"
       />
 
       <div className="relative flex flex-col items-center border-3 border-secondary py-5 mx-1">
