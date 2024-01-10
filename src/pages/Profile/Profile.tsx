@@ -35,10 +35,8 @@ function Profile() {
   if (profile) {
     return (
       <>
-        <h2 className="text-center font-bold text-4xl p-4 relative m-auto mb-8">
-          <div>
-            <span>Mon profil</span>
-          </div>
+        <h2 className="text-center font-bold text-4xl p-4 relative m-auto sm:mb-8">
+          Mon profil
         </h2>
         <section className=" flex flex-row flex-wrap m-auto items-center justify-center max-w-4xl">
           <ProfileUserCard
