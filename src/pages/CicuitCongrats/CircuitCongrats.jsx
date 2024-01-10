@@ -1,29 +1,21 @@
-import { Compass } from 'lucide-react';
-import { useEffect } from 'react';
+import { Compass, Trophy } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 function Congrats() {
-  useEffect(() => {
-    localStorage.clear();
-  }, []);
-
   return (
-    <>
+    <section className="flex flex-col items-center gap-7">
       <h1 className="font-bold text-xl">Félicitations !</h1>
+      <Trophy className="w-32 h-32 text-yellow-400" />
+
+      <p className="text-center">Tu as complêté ce parcours avec succès !</p>
       <p className="text-center">
-        Vous avez complêté ce parcours avec succès !
+        Va découvrir ta récompense directement sur ta page de profil !
       </p>
-      <p className="text-center">
-        Allez découvrir votre récompense directement sur votre page de profil !
-      </p>
-      <Link
-        className="flex items-center gap-2 bg-primary rounded-lg px-4 py-2 text-white"
-        to="/profile"
-      >
+      <Link className="btn btn-primary" to="/profile">
         <Compass className="w-7 h-7" />
         Découvrir
       </Link>
-    </>
+    </section>
   );
 }
 
