@@ -9,8 +9,6 @@ function CircuitPathAnswerRecord({
   currentStepIndex,
   currentStepContentIndex,
 }) {
-  const [congrats, setCongrats] = useState(false);
-
   const stepsEntries = useSelector((state) => state.circuits.stepsEntries);
   const userCircuitAnswersResult = useSelector(
     (state) => state.circuits.userCircuitAnswersResult
@@ -49,12 +47,12 @@ function CircuitPathAnswerRecord({
   }
 
   useEffect(() => {
-    if (userCircuitAnswersResult && userCircuitAnswersResult.includes(false)) {
+    if (userCircuitAnswersResult?.includes(false)) {
       openModal();
     }
   }, [userCircuitAnswersResult]);
 
-  if (congrats) {
+  if (userCircuitAnswersResult?.every((value) => value === true)) {
     return <Navigate to={`/circuit/${id}/congrats`} />;
   }
 
