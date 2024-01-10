@@ -1,7 +1,19 @@
 import { Compass, Trophy } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, redirect, useParams } from 'react-router-dom';
+
+import { useAppSelector } from '../../hooks/redux';
 
 function Congrats() {
+  const { id } = useParams();
+  const userCircuitAnswersResult = useAppSelector(
+    (state) => state.circuits.userCircuitAnswersResult
+  );
+  const isCircuitQuizWrong = userCircuitAnswersResult?.includes(false);
+
+  if (!userCircuitAnswersResult || isCircuitQuizWrong) {
+    return redirect(`circuit/${id}`);
+  }
+
   return (
     <section className="flex flex-col items-center gap-7">
       <h1 className="font-bold text-xl">Félicitations !</h1>
