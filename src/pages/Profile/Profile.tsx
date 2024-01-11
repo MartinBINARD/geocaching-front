@@ -11,6 +11,7 @@ function Profile() {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const profile = useAppSelector((state) => state.user.profile);
   const errorMessage = useAppSelector((state) => state.user.errorMessage);
+  const isProfileDelete = useAppSelector((state) => state.user.isProfileDelete);
 
   const dispatch = useAppDispatch();
 
@@ -27,10 +28,10 @@ function Profile() {
   }, [setIsEdit, errorMessage]);
 
   useEffect(() => {
-    if (!isEdit) {
+    if (!isEdit && !isProfileDelete) {
       dispatch(getProfile());
     }
-  }, [dispatch, isEdit]);
+  }, [isEdit, isProfileDelete, dispatch]);
 
   if (profile) {
     return (
