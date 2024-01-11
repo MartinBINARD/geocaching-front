@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-import { session } from '../../store/reducers/auth';
+import { fetchSession } from '../../store/reducers/auth';
 
 import HeaderNavLink from '../HeaderNavLink/HeaderNavLink';
 import HeaderNavLinkLogin from '../HeaderNavLinkLogin/HeaderNavLinkLogin';
@@ -18,7 +18,7 @@ function Header() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(session());
+    dispatch(fetchSession());
   }, [dispatch]);
 
   const stopScrollingModal = (isModalOpen: boolean): void => {

@@ -82,7 +82,7 @@ export const login = createAsyncThunk(
   }
 );
 
-export const session = createAsyncThunk(
+export const fetchSession = createAsyncThunk(
   'settings/fetchSession',
   async (): Promise<Session> => {
     try {
@@ -182,10 +182,10 @@ const settingsReducer = createReducer(intialState, (builder) => {
       state.loginErrorMessage = action.error.message!;
       state.isLoading = false;
     })
-    .addCase(session.fulfilled, (state, action) => {
+    .addCase(fetchSession.fulfilled, (state, action) => {
       state.user = action.payload;
     })
-    .addCase(session.rejected, () => {
+    .addCase(fetchSession.rejected, () => {
       toast.error('Impossible de se connecté à la session');
     })
     .addCase(logout.fulfilled, (state, action) => {
