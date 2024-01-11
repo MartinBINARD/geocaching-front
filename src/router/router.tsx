@@ -24,6 +24,7 @@ import {
   DeleteCircuit,
   ErrorPage,
 } from '../pages';
+import ProtectedProfileRoute from '../guard/ProtectedProfileRoute';
 
 const router = createBrowserRouter([
   {
@@ -83,7 +84,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/profile',
-        element: <Profile />,
+        element: (
+          <ProtectedProfileRoute>
+            <Profile />
+          </ProtectedProfileRoute>
+        ),
       },
       {
         path: '/forgot-password',

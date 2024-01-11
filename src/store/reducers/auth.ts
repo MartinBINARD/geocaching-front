@@ -170,9 +170,8 @@ const settingsReducer = createReducer(intialState, (builder) => {
     })
     .addCase(login.fulfilled, (state, action) => {
       state.user = action.payload;
-
-      toast.success('Vous êtes connecté');
       state.isLoading = false;
+      toast.success('Vous êtes connecté');
     })
     .addCase(login.rejected, (state, action) => {
       /* "!" post-fix expression operator for null and undefined compatibility 
