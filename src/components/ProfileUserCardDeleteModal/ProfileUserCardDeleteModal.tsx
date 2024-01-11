@@ -1,6 +1,10 @@
 import { useRef } from 'react';
 import { HeartCrack } from 'lucide-react';
 
+import { useAppDispatch } from '../../hooks/redux';
+
+import { deleteProfile } from '../../store/reducers/user';
+
 interface ProfileUserCardDeleteModalProp {
   isEdit: boolean;
 }
@@ -10,8 +14,14 @@ function ProfileUserCardDeleteModal({
 }: ProfileUserCardDeleteModalProp) {
   const modal = useRef<HTMLDialogElement>(null);
 
+  const dispatch = useAppDispatch();
+
   function onClickOpenModal() {
     modal.current?.showModal();
+  }
+
+  function onClickDeleteProfile() {
+    dispatch(deleteProfile());
   }
 
   return (
@@ -35,6 +45,7 @@ function ProfileUserCardDeleteModal({
           <div className="modal-action">
             <form method="dialog" className="flex justify-between">
               <button
+                onClick={onClickDeleteProfile}
                 type="submit"
                 className="btn btn-error  mr-8 max-[375px]:w-32"
               >

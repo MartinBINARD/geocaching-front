@@ -3,7 +3,7 @@ import { Link, redirect, useParams } from 'react-router-dom';
 
 import { useAppSelector } from '../../hooks/redux';
 
-function Congrats() {
+function CircuitCongrats() {
   const { id } = useParams();
   const userCircuitAnswersResult = useAppSelector(
     (state) => state.circuits.userCircuitAnswersResult
@@ -31,4 +31,4 @@ function Congrats() {
   );
 }
 
-export default Congrats;
+export default CircuitCongrats;
