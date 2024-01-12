@@ -13,11 +13,11 @@ import TextInput from '../../components/TextInput/TextInput';
 function Register() {
   const dispatch = useAppDispatch();
 
-  const isRegistered = useAppSelector((state) => state.settings.isRegistered);
+  const isRegistered = useAppSelector((state) => state.auth.isRegistered);
   const registerErrorMessage = useAppSelector(
-    (state) => state.settings.registerErrorMessage
+    (state) => state.auth.registerErrorMessage
   );
-  const isLoading = useAppSelector((state) => state.settings.isLoading);
+  const isLoading = useAppSelector((state) => state.auth.isLoading);
 
   const handleSubmit = (e: React.FormEvent<RegisterForm>): void => {
     e.preventDefault();

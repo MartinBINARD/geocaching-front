@@ -11,7 +11,7 @@ interface ProtectedRouteProp {
 
 function ProtectedRoute({ children }: ProtectedRouteProp) {
   const isProfileDelete = useAppSelector((state) => state.user.isProfileDelete);
-  const user = useAppSelector((state) => state.settings.user);
+  const user = useAppSelector((state) => state.auth.user);
 
   const dispatch = useAppDispatch();
 

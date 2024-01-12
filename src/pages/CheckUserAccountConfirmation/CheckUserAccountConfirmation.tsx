@@ -11,7 +11,7 @@ function CheckUserAccountConfirmation() {
   const token: string | null = searchParams.get('token');
 
   const isAccountConfirmed = useAppSelector(
-    (state) => state.settings.isAccountConfirmed
+    (state) => state.auth.isAccountConfirmed
   );
 
   useEffect(() => {

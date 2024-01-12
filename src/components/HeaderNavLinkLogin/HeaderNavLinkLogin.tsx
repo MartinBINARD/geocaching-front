@@ -13,7 +13,7 @@ function HeaderNavLinkLogin({
   handleClickLink,
   setIsOpen,
 }: HeaderNavLinkLoginProps) {
-  const user = useAppSelector((state) => state.settings.user);
+  const user = useAppSelector((state) => state.auth.user);
 
   const dispatch = useAppDispatch();
 
