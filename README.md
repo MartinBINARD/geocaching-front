@@ -1,7 +1,5 @@
 # :world_map: :hiking_boot: CacheTrek
 
-# :construction: DEV BRANCH => CLEAN CODE IN PROGRESS... :construction:
-
 ## :clipboard: Description
 
 - Rebuilding a fork of cooperative project. See dev and other branches
@@ -18,10 +16,6 @@
 - vite
 - eslint
 - tailwind
-
-## :computer: Important information
-
-- I contributed to the traks map and i am refactoring and converting this vanilla React in to React TypeScript.
 
 # :rocket: Soon deployed ...
 
