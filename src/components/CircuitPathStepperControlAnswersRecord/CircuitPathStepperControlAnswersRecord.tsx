@@ -21,7 +21,7 @@ function CircuitPatStepperControlAnswerRecord({
   const userCircuitAnswersResult = useAppSelector(
     (state) => state.circuits.userCircuitAnswersResult
   );
-  const user = useAppSelector((state) => state.settings.user);
+  const user = useAppSelector((state) => state.auth.user);
   const circuit = useAppSelector((state) => state.circuits.oneCircuit);
   const circuitQuiz = useAppSelector((state) => state.circuits.circuitQuiz);
 

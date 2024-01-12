@@ -16,7 +16,7 @@ import CicuitLocationCard from '../../components/CircuitLocationCard/CircuitLoca
 function CircuitIntro() {
   const { id } = useParams();
   const isLoading = useAppSelector((state) => state.circuits.isLoading);
-  const user = useAppSelector((state) => state.settings.user);
+  const user = useAppSelector((state) => state.auth.user);
   const circuit = useAppSelector((state) => state.circuits.oneCircuit);
   const isFetchCircuitFailed = useAppSelector(
     (state) => state.circuits.isFetchCircuitFailed

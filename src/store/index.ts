@@ -7,7 +7,7 @@ import adminReducer from './reducers/admin';
 
 const store = configureStore({
   reducer: {
-    settings: authReducer,
+    auth: authReducer,
     circuits: circuitsReducer,
     user: userReducer,
     admin: adminReducer,

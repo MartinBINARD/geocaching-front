@@ -14,7 +14,7 @@ import Loader from '../../loader/Loader';
 import './DeleteCircuit.scss';
 
 function DeleteCircuit() {
-  const user = useSelector((state) => state.settings.user);
+  const user = useSelector((state) => state.auth.user);
   // init dispatch
   const dispatch = useDispatch();
 

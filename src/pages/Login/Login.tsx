@@ -13,11 +13,11 @@ import TextInput from '../../components/TextInput/TextInput';
 function Login() {
   const dispatch = useAppDispatch();
 
-  const user = useAppSelector((state) => state.settings.user);
+  const user = useAppSelector((state) => state.auth.user);
   const loginErrorMessage = useAppSelector(
-    (state) => state.settings.loginErrorMessage
+    (state) => state.auth.loginErrorMessage
   );
-  const isLoading = useAppSelector((state) => state.settings.isLoading);
+  const isLoading = useAppSelector((state) => state.auth.isLoading);
 
   const handleSubmit = (e: React.FormEvent<LoginForm>): void => {
     e.preventDefault();

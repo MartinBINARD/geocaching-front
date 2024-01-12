@@ -13,7 +13,7 @@ import close from '../../assets/menu/close.svg';
 
 function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const user = useAppSelector((state) => state.settings.user);
+  const user = useAppSelector((state) => state.auth.user);
 
   const dispatch = useAppDispatch();
 

@@ -16,7 +16,7 @@ import {
 import formatUserDataForm from '../../utils/formatUserDataForm';
 import formatUserUpdateCredentials from '../../utils/formatUserUpdateCredentials';
 
-interface SettingState {
+interface AuthState {
   user: User | null;
   loginErrorMessage: string | null;
   isRegistered: boolean | null;
@@ -26,7 +26,7 @@ interface SettingState {
   isLoading: boolean;
 }
 
-const intialState: SettingState = {
+const intialState: AuthState = {
   user: null,
   loginErrorMessage: null,
   isRegistered: null,
@@ -147,7 +147,7 @@ export const updatePassword = createAsyncThunk(
   }
 );
 
-const settingsReducer = createReducer(intialState, (builder) => {
+const authReducer = createReducer(intialState, (builder) => {
   builder
     .addCase(register.pending, (state) => {
       state.isLoading = true;
@@ -234,4 +234,4 @@ const settingsReducer = createReducer(intialState, (builder) => {
     });
 });
 
-export default settingsReducer;
+export default authReducer;

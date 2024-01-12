@@ -10,8 +10,8 @@ import TextInput from '../../components/TextInput/TextInput';
 function UpdatePassword() {
   const dispatch = useAppDispatch();
 
-  const isRegistered = useAppSelector((state) => state.settings.isRegistered);
-  const isLoading = useAppSelector((state) => state.settings.isLoading);
+  const isRegistered = useAppSelector((state) => state.auth.isRegistered);
+  const isLoading = useAppSelector((state) => state.auth.isLoading);
 
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);

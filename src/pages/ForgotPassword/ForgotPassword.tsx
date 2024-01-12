@@ -10,7 +10,7 @@ import TextInput from '../../components/TextInput/TextInput';
 function ForgotPassword() {
   const dispatch = useAppDispatch();
 
-  const isLoading = useAppSelector((state) => state.settings.isLoading);
+  const isLoading = useAppSelector((state) => state.auth.isLoading);
 
   const handleSubmit = (e: React.FormEvent<EmailForm>): void => {
     e.preventDefault();
