@@ -11,6 +11,7 @@ interface ProfileState {
   isProfileLoading: boolean;
   errorMessage: string | null;
   isUpdateLoading: boolean;
+  isProfileDelete: boolean;
 }
 
 const intialState: ProfileState = {
@@ -18,6 +19,7 @@ const intialState: ProfileState = {
   isProfileLoading: false,
   errorMessage: null,
   isUpdateLoading: false,
+  isProfileDelete: false,
 };
 
 export const getProfile = createAsyncThunk('user/get-profile', async () => {
@@ -39,6 +41,17 @@ export const updateProfile = createAsyncThunk(
       await api.patch('profile', objData);
     } catch (error) {
       throw error && `Une erreur s'est produite. Veuillez essayer de nouveau.`;
+    }
+  }
+);
+
+export const deleteProfile = createAsyncThunk(
+  'user/delete-profile',
+  async (): Promise<void> => {
+    try {
+      await api.delete('profile');
+    } catch (error) {
+      throw error.response ? error.response.data : error.message;
     }
   }
 );
@@ -71,6 +84,21 @@ const userReducer = createReducer(intialState, (builder) => {
     .addCase(updateProfile.rejected, (state, action) => {
       state.isUpdateLoading = false;
       state.errorMessage = action.error.message!;
+      toast.error(action.error.message!);
+    })
+    .addCase(deleteProfile.pending, (state) => {
+      state.isProfileLoading = true;
+      state.isProfileDelete = false;
+    })
+    .addCase(deleteProfile.fulfilled, (state) => {
+      state.isProfileLoading = false;
+      state.profile = null;
+      state.isProfileDelete = true;
+      toast.success('Votre compte utilisateur a bien été supprimé');
+    })
+    .addCase(deleteProfile.rejected, (state, action) => {
+      state.isProfileLoading = false;
+      state.isProfileDelete = false;
       toast.error(action.error.message!);
     });
 });

@@ -7,7 +7,7 @@ function ProfileUserDescription() {
     profile as Profile;
 
   return (
-    <div className="flex flex-col gap-5 m-5">
+    <div className="flex flex-col gap-5 text-sm p-3 sm:text-base">
       <p className="flex gap-2 items-baseline flex-wrap">
         <span className="font-bold">Pseudo: </span>
         <span className="align-center">{pseudo}</span>

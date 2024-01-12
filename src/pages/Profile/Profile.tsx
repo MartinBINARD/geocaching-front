@@ -30,17 +30,15 @@ function Profile() {
     if (!isEdit) {
       dispatch(getProfile());
     }
-  }, [dispatch, isEdit]);
+  }, [isEdit, dispatch]);
 
   if (profile) {
     return (
       <>
-        <h2 className="text-center font-bold text-4xl p-4 relative m-auto mb-8">
-          <div>
-            <span>Mon profil</span>
-          </div>
+        <h2 className="text-center font-bold text-4xl p-4 m-auto sm:mb-8">
+          Mon profil
         </h2>
-        <section className=" flex flex-row flex-wrap m-auto items-center justify-center max-w-4xl">
+        <section className="flex flex-row items-center justify-center flex-wrap gap-5 max-w-4xl m-auto">
           <ProfileUserCard
             isEdit={isEdit}
             setIsEdit={setIsEdit}

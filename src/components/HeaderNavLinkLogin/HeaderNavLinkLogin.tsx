@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import { logout } from '../../store/reducers/auth';
@@ -15,22 +13,14 @@ function HeaderNavLinkLogin({
   handleClickLink,
   setIsOpen,
 }: HeaderNavLinkLoginProps) {
-  const [logOut, setLogOut] = useState<boolean>(false);
-
   const user = useAppSelector((state) => state.settings.user);
 
   const dispatch = useAppDispatch();
 
   const handleLogOut = () => {
-    setLogOut(true);
-    localStorage.clear();
     dispatch(logout());
     setIsOpen(false);
   };
-
-  if (logOut) {
-    return <Navigate to="/" />;
-  }
 
   return (
     <>
@@ -51,7 +41,7 @@ function HeaderNavLinkLogin({
         label="Profil"
       />
       <HeaderNavLink
-        to="/register"
+        to="/login"
         onClick={handleLogOut}
         className="lg:px-4 max-lg:my-1"
         classNameActive="active"
