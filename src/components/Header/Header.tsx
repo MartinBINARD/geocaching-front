@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Menu, Plus } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import { fetchSession } from '../../store/reducers/auth';
@@ -8,8 +9,6 @@ import HeaderNavLink from '../HeaderNavLink/HeaderNavLink';
 import HeaderNavLinkLogin from '../HeaderNavLinkLogin/HeaderNavLinkLogin';
 
 import logo from '../../assets/logo/compass.png';
-import burger from '../../assets/menu/hamburger-menu.svg';
-import close from '../../assets/menu/close.svg';
 
 function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -48,18 +47,18 @@ function Header() {
   return (
     <header className="flex justify-between px-5 z-20 items-center text-primary text-lg">
       <NavLink to="/">
-        <img className="lg:h-20 h-14 mb-2.5" src={logo} alt="caching'o logo" />
+        <img className="h-14 my-2" src={logo} alt="caching'o logo" />
       </NavLink>
       <button
         type="button"
         onClick={handleClickHamburgerMenu}
-        className="xl:hidden cursor-pointer"
+        className="btn btn-primary btn-ghost btn-circle xl:hidden cursor-pointer"
       >
-        <img
-          className="xl:h-20 h-10"
-          src={isOpen ? close : burger}
-          alt="burger menu icon"
-        />
+        {isOpen ? (
+          <Plus className="w-10 h-10 text-primary rotate-45 xl:w-10 xl:h-10" />
+        ) : (
+          <Menu className="w-10 h-10 text-primary xl:w-10 xl:h-10" />
+        )}
       </button>
       <nav
         className={
