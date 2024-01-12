@@ -17,11 +17,6 @@ import {
   CheckUserAccountConfirmation,
   ForgotPassword,
   UpdatePassword,
-  Dashboard,
-  AddCircuit,
-  PatchCircuits,
-  PatchCircuit,
-  DeleteCircuit,
   ErrorPage,
 } from '../pages';
 import ProtectedProfileRoute from '../guard/ProtectedProfileRoute';
@@ -97,26 +92,6 @@ const router = createBrowserRouter([
       {
         path: '/reset',
         element: <UpdatePassword />,
-      },
-      {
-        path: '/admin',
-        element: <Dashboard />,
-      },
-      {
-        path: '/admin/create',
-        element: <AddCircuit />,
-      },
-      {
-        path: '/admin/patch',
-        element: <PatchCircuits />,
-      },
-      {
-        path: '/admin/patch/:id',
-        element: <PatchCircuit />,
-      },
-      {
-        path: '/admin/delete',
-        element: <DeleteCircuit />,
       },
     ],
   },
