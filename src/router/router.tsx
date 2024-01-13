@@ -20,6 +20,7 @@ import {
   ErrorPage,
 } from '../pages';
 import ProtectedProfileRoute from '../guard/ProtectedProfileRoute';
+import ProtectedCircuitRoute from '../guard/ProtectedCircuitRoute';
 
 const router = createBrowserRouter([
   {
@@ -53,11 +54,19 @@ const router = createBrowserRouter([
           },
           {
             path: 'path',
-            element: <CircuitPath />,
+            element: (
+              <ProtectedCircuitRoute>
+                <CircuitPath />
+              </ProtectedCircuitRoute>
+            ),
           },
           {
             path: 'congrats',
-            element: <CircuitCongrats />,
+            element: (
+              <ProtectedCircuitRoute>
+                <CircuitCongrats />
+              </ProtectedCircuitRoute>
+            ),
           },
         ],
       },
