@@ -1,5 +1,5 @@
 import { Compass, Trophy } from 'lucide-react';
-import { Link, redirect, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 
 import { useAppSelector } from '../../hooks/redux';
 
@@ -11,7 +11,7 @@ function CircuitCongrats() {
   const isCircuitQuizWrong = userCircuitAnswersResult?.includes(false);
 
   if (!userCircuitAnswersResult || isCircuitQuizWrong) {
-    return redirect(`circuit/${id}`);
+    return <Navigate to={`circuit/${id}`} />;
   }
 
   return (
