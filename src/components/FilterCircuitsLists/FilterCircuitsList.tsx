@@ -1,11 +1,6 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { useCallback, useState } from 'react';
-import {
-  ChevronDown,
-  ChevronUp,
-  Search,
-  SlidersHorizontal,
-} from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
+import { MoveLeft, Plus, Search, SlidersHorizontal } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import { Circuit } from '../../@types/circuit';
@@ -23,10 +18,17 @@ function FilterCircuitsList({ list }: ListProps) {
   const [search, setSearch] = useState<object>({});
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const circuitsList = useAppSelector((state) => state.circuits.circuitsList);
+  const isLoading = useAppSelector((state) => state.circuits.isLoading);
 
   const dispatch = useAppDispatch();
 
-  const isLoading = useAppSelector((state) => state.circuits.isLoading);
+  const stopScrollingModal = (isModalOpen: boolean): void => {
+    document.body.style.overflow = isModalOpen ? 'hidden' : 'unset';
+  };
+
+  useEffect(() => {
+    stopScrollingModal(isOpen);
+  }, [isOpen]);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -48,7 +50,6 @@ function FilterCircuitsList({ list }: ListProps) {
     e.preventDefault();
     dispatch(searchCircuitsList({ search, list: circuitsList }));
 
-    // Close filter dropdown menu when submitted (mobile screen)
     setIsOpen(false);
   };
 
@@ -57,109 +58,122 @@ function FilterCircuitsList({ list }: ListProps) {
   }
 
   return (
-    <section className="w-full shadow-lg rounded-lg text-primary p-4 ">
-      <form
-        onSubmit={handleSubmit}
-        className="form-control flex-row flex-nowrap justify-between items-start"
+    <section className="w-full shadow-lg rounded-lg text-primary xl:p-4">
+      <button
+        type="button"
+        onClick={handleClick}
+        className="btn btn-primary btn-outline flex flex-row flex-nowrap items-center justify-between cursor-pointer w-full xl:hidden"
       >
-        <div className="w-full mt-2">
-          <button
-            type="button"
-            onClick={handleClick}
-            className="flex flex-row flex-nowrap items-center justify-between cursor-pointer w-full lg:hidden"
-          >
-            <div className="flex flex-row flex-nowrap">
-              <SlidersHorizontal className="w-5 h-5 text-primary" />
-              <p className="ml-4">Filtres</p>
-            </div>
-            {isOpen ? (
-              <ChevronDown className="w-5 h-5 text-primary" />
-            ) : (
-              <ChevronUp className="w-5 h-5 text-primary" />
-            )}
+        <SlidersHorizontal className="w-5 h-5" />
+        <h3 className="font-bold text-base">Filtres</h3>
+      </button>
+
+      <aside
+        className={`absolute z-50 top-0 left-0 right-0 bottom-0 flex flex-col justify-start bg-white ease-in-out duration-200 ${
+          isOpen
+            ? 'translate-x-0'
+            : '-translate-x-full xl:translate-x-0 xl:static'
+        }`}
+      >
+        <div
+          className={`w-full flex flex-row items-center justify-between p-4 ${
+            isOpen ? '' : 'xl:hidden'
+          }`}
+        >
+          <button type="button" onClick={handleClick}>
+            <MoveLeft className="w-7 h-7" />
           </button>
-
-          <div
-            className={isOpen ? 'flex flex-row items-start' : 'hidden lg:flex'}
-          >
-            <ul className="flex flex-row flex-wrap">
-              <li>
-                <SelectControl
-                  keyName="region"
-                  label="Région"
-                  placeholder="Toutes"
-                  list={list}
-                  onSelect={handleChange}
-                />
-              </li>
-
-              <li>
-                <SelectControl
-                  keyName="state"
-                  label="Département"
-                  placeholder="Tous"
-                  list={list}
-                  onSelect={handleChange}
-                />
-              </li>
-
-              <li>
-                <SelectControl
-                  keyName="city"
-                  label="Ville"
-                  placeholder="Toutes"
-                  list={list}
-                  onSelect={handleChange}
-                />
-              </li>
-
-              <li>
-                <SelectControl
-                  keyName="theme"
-                  label="Thématique"
-                  placeholder="Toutes"
-                  list={list}
-                  onSelect={handleChange}
-                />
-              </li>
-
-              <li>
-                <SelectControl
-                  keyName="difficulty"
-                  label="Difficulté"
-                  placeholder="Toutes"
-                  list={list}
-                  onSelect={handleChange}
-                />
-              </li>
-
-              <li>
-                <SelectControl
-                  keyName="distance"
-                  label="Distance en kilomètre"
-                  placeholder="Toutes"
-                  list={list}
-                  onSelect={handleChange}
-                />
-              </li>
-
-              <li>
-                <SelectControl
-                  keyName="mobility"
-                  label="Mobilité"
-                  placeholder="Toutes"
-                  list={list}
-                  onSelect={handleChange}
-                />
-              </li>
-            </ul>
-
-            <button type="submit" className="btn btn-ghost btn-circle mt-9">
-              <Search className="w-5 h-5 text-primary" />
-            </button>
-          </div>
+          <h3 className="font-bold text-lg">Filtres</h3>
+          <button type="button" onClick={handleClick}>
+            <Plus className="w-7 h-7 rotate-45" />
+          </button>
         </div>
-      </form>
+
+        <div className="w-full bg-slate-300 h-1 mb-2 xl:hidden">
+          <div className=" w-11/12 bg-primary h-1" />
+        </div>
+
+        <form
+          onSubmit={handleSubmit}
+          className="form-control w-full flex-row justify-center overflow-y-auto"
+        >
+          <ul className={`flex flex-col ${isOpen ? 'gap-2' : 'xl:flex-row'}`}>
+            <li>
+              <SelectControl
+                keyName="region"
+                label="Région"
+                placeholder="Toutes"
+                list={list}
+                onSelect={handleChange}
+              />
+            </li>
+
+            <li>
+              <SelectControl
+                keyName="state"
+                label="Département"
+                placeholder="Tous"
+                list={list}
+                onSelect={handleChange}
+              />
+            </li>
+
+            <li>
+              <SelectControl
+                keyName="city"
+                label="Ville"
+                placeholder="Toutes"
+                list={list}
+                onSelect={handleChange}
+              />
+            </li>
+
+            <li>
+              <SelectControl
+                keyName="theme"
+                label="Thématique"
+                placeholder="Toutes"
+                list={list}
+                onSelect={handleChange}
+              />
+            </li>
+
+            <li>
+              <SelectControl
+                keyName="difficulty"
+                label="Difficulté"
+                placeholder="Toutes"
+                list={list}
+                onSelect={handleChange}
+              />
+            </li>
+
+            <li>
+              <SelectControl
+                keyName="distance"
+                label="Distance en kilomètre"
+                placeholder="Toutes"
+                list={list}
+                onSelect={handleChange}
+              />
+            </li>
+
+            <li>
+              <SelectControl
+                keyName="mobility"
+                label="Mobilité"
+                placeholder="Toutes"
+                list={list}
+                onSelect={handleChange}
+              />
+            </li>
+          </ul>
+
+          <button type="submit" className="btn btn-ghost btn-circle mt-9">
+            <Search className="w-5 h-5 text-primary" />
+          </button>
+        </form>
+      </aside>
     </section>
   );
 }
