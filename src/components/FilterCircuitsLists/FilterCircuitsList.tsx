@@ -1,6 +1,12 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { useCallback, useEffect, useState } from 'react';
-import { MoveLeft, Plus, Search, SlidersHorizontal } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  MoveLeft,
+  Plus,
+  Search,
+  SlidersHorizontal,
+  Trash2,
+} from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import { Circuit } from '../../@types/circuit';
@@ -19,6 +25,8 @@ function FilterCircuitsList({ list }: ListProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const circuitsList = useAppSelector((state) => state.circuits.circuitsList);
   const isLoading = useAppSelector((state) => state.circuits.isLoading);
+  const filter = useRef<HTMLFormElement>(null);
+  const isSearch = Object.values(search).some((v) => v.length > 0);
 
   const dispatch = useAppDispatch();
 
@@ -49,8 +57,13 @@ function FilterCircuitsList({ list }: ListProps) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(searchCircuitsList({ search, list: circuitsList }));
-
     setIsOpen(false);
+  };
+
+  const handleReset = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    filter.current?.reset();
+    setSearch({});
   };
 
   if (isLoading) {
@@ -94,6 +107,7 @@ function FilterCircuitsList({ list }: ListProps) {
         </div>
 
         <form
+          ref={filter}
           onSubmit={handleSubmit}
           className="form-control w-full flex-row justify-center overflow-y-auto"
         >
@@ -169,9 +183,25 @@ function FilterCircuitsList({ list }: ListProps) {
             </li>
           </ul>
 
-          <button type="submit" className="btn btn-ghost btn-circle mt-9">
-            <Search className="w-5 h-5 text-primary" />
-          </button>
+          <div className="flex flex-col items-center justify-start">
+            <button
+              type="submit"
+              className={`btn btn-ghost btn-circle ${
+                isSearch ? '' : 'xl:mt-9'
+              }`}
+            >
+              <Search className="w-5 h-5 text-primary" />
+            </button>
+            {isSearch && (
+              <button
+                type="reset"
+                onClick={handleReset}
+                className="btn btn-ghost btn-circle"
+              >
+                <Trash2 className="w-5 h-5 text-error" />
+              </button>
+            )}
+          </div>
         </form>
       </aside>
     </section>
