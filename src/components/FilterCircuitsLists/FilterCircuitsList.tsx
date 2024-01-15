@@ -60,7 +60,7 @@ function FilterCircuitsList({ list }: ListProps) {
     setIsOpen(false);
   };
 
-  const handleReset = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleReset = (e: React.MouseEvent) => {
     e.preventDefault();
     filter.current?.reset();
     setSearch({});
@@ -194,7 +194,7 @@ function FilterCircuitsList({ list }: ListProps) {
             </button>
             {isSearch && (
               <button
-                type="reset"
+                type="button"
                 onClick={handleReset}
                 className="btn btn-ghost btn-circle"
               >
