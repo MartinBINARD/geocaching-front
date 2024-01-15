@@ -11,7 +11,10 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import { Circuit } from '../../@types/circuit';
 
-import { searchCircuitsList } from '../../store/reducers/circuits';
+import {
+  resetSearchCircuitsList,
+  searchCircuitsList,
+} from '../../store/reducers/circuits';
 
 import SelectControl from '../SelectControl/SelectControl';
 import Loader from '../../loader/Loader';
@@ -64,6 +67,8 @@ function FilterCircuitsList({ list }: ListProps) {
     e.preventDefault();
     filter.current?.reset();
     setSearch({});
+    dispatch(resetSearchCircuitsList());
+    setIsOpen(false);
   };
 
   if (isLoading) {

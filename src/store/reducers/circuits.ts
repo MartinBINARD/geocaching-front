@@ -69,6 +69,10 @@ export const searchCircuitsList = createAction<SearchState>(
   'circuits/search-circuits-list'
 );
 
+export const resetSearchCircuitsList = createAction(
+  'circuits/reset-search-circuits-list'
+);
+
 export const fetchCircuit = createAsyncThunk(
   'circuits/fetch-circuit',
   async (id: string): Promise<Circuit> => {
@@ -141,6 +145,10 @@ const circuitsReducer = createReducer(initialState, (builder) => {
 
       state.isSearchResult = !!searchListResult.length;
       state.searchList = searchListResult;
+    })
+    .addCase(resetSearchCircuitsList, (state) => {
+      state.isSearchResult = true;
+      state.searchList = [];
     })
     .addCase(fetchCircuit.pending, (state) => {
       state.isLoading = true;
