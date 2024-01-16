@@ -41,7 +41,7 @@ function SelectControl({
       <select
         name={keyName}
         className="select select-primary select-bordered"
-        value={previousValue || currentValue || ''}
+        value={currentValue || previousValue || ''}
         onChange={onSelect}
       >
         <option>{placeholder}</option>

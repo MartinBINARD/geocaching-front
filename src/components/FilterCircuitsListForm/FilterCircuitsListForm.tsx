@@ -31,7 +31,7 @@ function FilterCircuitsListForm({
   const searchSelectorsFilterEntries = useAppSelector(
     (state) => state.circuits.searchSelectorsFilterEntries
   );
-  const isSearch = Object.values(search).some((v) => v.length > 0);
+  const isCurrentSearch = Object.values(search).some((v) => v.length > 0);
 
   const filter = useRef<HTMLFormElement>(null);
 
@@ -149,12 +149,12 @@ function FilterCircuitsListForm({
         <button
           type="submit"
           className={`btn btn-ghost btn-circle ${
-            isSearch || searchSelectorsFilterEntries ? '' : 'xl:mt-9'
+            isCurrentSearch || searchSelectorsFilterEntries ? '' : 'xl:mt-9'
           }`}
         >
           <Search className="w-5 h-5 text-primary" />
         </button>
-        {(isSearch || searchSelectorsFilterEntries) && (
+        {(isCurrentSearch || searchSelectorsFilterEntries) && (
           <button type="reset" className="btn btn-ghost btn-circle">
             <Trash2 className="w-5 h-5 text-error" />
           </button>
