@@ -1,4 +1,6 @@
-import { Circuit } from '../../@types/circuit';
+import { Circuit, Search } from '../../@types/circuit';
+import { useAppSelector } from '../../hooks/redux';
+import getSelectorValueFromSearch from '../../utils/getSelectorValueFromSearch';
 import GetSelectValueArray from '../../utils/getSelectValueArray';
 
 type OnSelectType = (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -8,6 +10,7 @@ interface SelectProps {
   label: string;
   placeholder: string;
   list: Circuit[];
+  search: Search;
   onSelect: OnSelectType;
 }
 
@@ -16,9 +19,18 @@ function SelectControl({
   label,
   placeholder,
   list,
+  search,
   onSelect,
 }: SelectProps) {
-  const defaultValue = '';
+  const searchSelectorsFilterEntries = useAppSelector(
+    (state) => state.circuits.searchSelectorsFilterEntries
+  );
+  const previousValue = getSelectorValueFromSearch(
+    searchSelectorsFilterEntries,
+    keyName
+  );
+  const currentValue = getSelectorValueFromSearch(search, keyName);
+
   const listValue = GetSelectValueArray(keyName, list);
 
   return (
@@ -28,11 +40,11 @@ function SelectControl({
       </label>
       <select
         name={keyName}
-        className="select  select-primary select-bordered"
-        defaultValue={defaultValue}
+        className="select select-primary select-bordered"
+        value={currentValue || previousValue || ''}
         onChange={onSelect}
       >
-        <option value={defaultValue}>{placeholder}</option>
+        <option>{placeholder}</option>
         {listValue.map((value) => {
           return <option key={listValue.indexOf(value)}>{value}</option>;
         })}

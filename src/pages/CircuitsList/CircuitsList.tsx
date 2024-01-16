@@ -19,9 +19,6 @@ function CircuitsList() {
   /* If no search result, so show warning message but show all markers on map and
   list because center point calculated with markers coordonates is required
   to build map */
-  const isSearchResult = useAppSelector(
-    (state) => state.circuits.isSearchResult
-  );
 
   const list = searchList.length ? searchList : circuitsList;
 
@@ -44,12 +41,8 @@ function CircuitsList() {
       </h2>
 
       <div className="overflow-hidden w-full flex flex-col content-center items-center">
-        <FilterCircuitsList list={circuitsList} />
-        {!isSearchResult && (
-          <p className="text-center break-words text-lg text-secondary font-extrabold pt-2 lg:pt-4">
-            Aucun résulat ne correspond à votre recherche !
-          </p>
-        )}
+        <FilterCircuitsList />
+
         <div className="w-full overflow-y-hidden flex justify-between mt-4 max-lg:flex-wrap">
           {list?.length && (
             <Map

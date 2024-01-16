@@ -18,6 +18,7 @@ import {
   CircuitQuizStep,
   CircuitPath,
   CircuitPathStep,
+  Search,
 } from '../../@types/circuit';
 
 import createCircuitQuizStepper from '../../utils/createCircuitQuizStepper';
@@ -25,8 +26,9 @@ import formatUserCircuitEntries from '../../utils/formatUserCircuitEntries';
 
 interface CircuitState {
   circuitsList: Circuit[];
+  searchSelectorsFilterEntries: Search | null;
   searchList: Circuit[];
-  isSearchResult: boolean;
+  isSearchNoResult: boolean;
   errorMessage: string | undefined;
   oneCircuit: CircuitPath | null;
   circuitQuiz: CircuitQuizStep[];
@@ -38,8 +40,9 @@ interface CircuitState {
 
 const initialState: CircuitState = {
   circuitsList: [],
+  searchSelectorsFilterEntries: null,
   searchList: [],
-  isSearchResult: true,
+  isSearchNoResult: false,
   errorMessage: '',
   oneCircuit: null,
   circuitQuiz: [],
@@ -67,6 +70,10 @@ export const fetchCircuitsList = createAsyncThunk(
 
 export const searchCircuitsList = createAction<SearchState>(
   'circuits/search-circuits-list'
+);
+
+export const resetSearchCircuitsList = createAction(
+  'circuits/reset-search-circuits-list'
 );
 
 export const fetchCircuit = createAsyncThunk(
@@ -127,7 +134,6 @@ const circuitsReducer = createReducer(initialState, (builder) => {
     .addCase(fetchCircuitsList.fulfilled, (state, action) => {
       /* Reset isSearchResult to true in case of user navigating through
       application, previous negative search message must be not displayed */
-      state.isSearchResult = true;
       state.circuitsList = action.payload;
       state.isLoading = false;
     })
@@ -139,8 +145,21 @@ const circuitsReducer = createReducer(initialState, (builder) => {
       const { search, list }: SearchState = action.payload;
       const searchListResult = filteredList(search, list);
 
-      state.isSearchResult = !!searchListResult.length;
+      if (!searchListResult.length) {
+        toast.error('Aucun résulat ne correspond à votre recherche !');
+      }
+
+      state.isSearchNoResult = !searchListResult.length;
+      state.searchSelectorsFilterEntries = {
+        ...state.searchSelectorsFilterEntries,
+        ...search,
+      };
       state.searchList = searchListResult;
+    })
+    .addCase(resetSearchCircuitsList, (state) => {
+      state.isSearchNoResult = false;
+      state.searchSelectorsFilterEntries = null;
+      state.searchList = [];
     })
     .addCase(fetchCircuit.pending, (state) => {
       state.isLoading = true;
