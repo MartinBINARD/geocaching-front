@@ -1,9 +1,6 @@
 import { Search } from '../@types/circuit';
 
-function getCurrentSelectorValueFromSearch(
-  search: Search | null,
-  keyName: string
-) {
+function getSelectorValueFromSearch(search: Search | null, keyName: string) {
   if (search) {
     const arrayEntrieSelector = Object.entries(search).find(
       ([key]) => key === keyName
@@ -15,4 +12,4 @@ function getCurrentSelectorValueFromSearch(
   return '';
 }
 
-export default getCurrentSelectorValueFromSearch;
+export default getSelectorValueFromSearch;

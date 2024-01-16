@@ -1,6 +1,6 @@
-import { Circuit } from '../../@types/circuit';
+import { Circuit, Search } from '../../@types/circuit';
 import { useAppSelector } from '../../hooks/redux';
-import getCurrentSelectorValueFromSearch from '../../utils/getCurrentSelectorValueFromSearch';
+import getSelectorValueFromSearch from '../../utils/getSelectorValueFromSearch';
 import GetSelectValueArray from '../../utils/getSelectValueArray';
 
 type OnSelectType = (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -10,6 +10,7 @@ interface SelectProps {
   label: string;
   placeholder: string;
   list: Circuit[];
+  search: Search;
   onSelect: OnSelectType;
 }
 
@@ -18,17 +19,19 @@ function SelectControl({
   label,
   placeholder,
   list,
+  search,
   onSelect,
 }: SelectProps) {
-  const listValue = GetSelectValueArray(keyName, list);
   const searchSelectorsFilterEntries = useAppSelector(
     (state) => state.circuits.searchSelectorsFilterEntries
   );
-
-  const currentValue = getCurrentSelectorValueFromSearch(
+  const previousValue = getSelectorValueFromSearch(
     searchSelectorsFilterEntries,
     keyName
   );
+  const currentValue = getSelectorValueFromSearch(search, keyName);
+
+  const listValue = GetSelectValueArray(keyName, list);
 
   return (
     <div className="form-control m-1 lg:m-2">
@@ -38,7 +41,7 @@ function SelectControl({
       <select
         name={keyName}
         className="select select-primary select-bordered"
-        defaultValue={currentValue}
+        value={previousValue || currentValue || ''}
         onChange={onSelect}
       >
         <option>{placeholder}</option>

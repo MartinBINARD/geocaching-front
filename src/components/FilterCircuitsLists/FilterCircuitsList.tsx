@@ -33,6 +33,9 @@ function FilterCircuitsList({ list }: ListProps) {
   const searchSelectorsFilterEntries = useAppSelector(
     (state) => state.circuits.searchSelectorsFilterEntries
   );
+  const isSearchResult = useAppSelector(
+    (state) => state.circuits.isSearchResult
+  );
 
   const dispatch = useAppDispatch();
 
@@ -40,9 +43,20 @@ function FilterCircuitsList({ list }: ListProps) {
     document.body.style.overflow = isModalOpen ? 'hidden' : 'unset';
   };
 
+  const resetSelectorsFilterWhenNoResult = () => {
+    if (!isSearchResult) {
+      setSearch({});
+      dispatch(resetSearchCircuitsList());
+    }
+  };
+
   useEffect(() => {
     stopScrollingModal(isOpen);
   }, [isOpen]);
+
+  useEffect(() => {
+    resetSelectorsFilterWhenNoResult();
+  }, [dispatch, isSearchResult]);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -126,6 +140,7 @@ function FilterCircuitsList({ list }: ListProps) {
                 label="Région"
                 placeholder="Toutes"
                 list={list}
+                search={search}
                 onSelect={handleChange}
               />
             </li>
@@ -136,6 +151,7 @@ function FilterCircuitsList({ list }: ListProps) {
                 label="Département"
                 placeholder="Tous"
                 list={list}
+                search={search}
                 onSelect={handleChange}
               />
             </li>
@@ -146,6 +162,7 @@ function FilterCircuitsList({ list }: ListProps) {
                 label="Ville"
                 placeholder="Toutes"
                 list={list}
+                search={search}
                 onSelect={handleChange}
               />
             </li>
@@ -156,6 +173,7 @@ function FilterCircuitsList({ list }: ListProps) {
                 label="Thématique"
                 placeholder="Toutes"
                 list={list}
+                search={search}
                 onSelect={handleChange}
               />
             </li>
@@ -166,6 +184,7 @@ function FilterCircuitsList({ list }: ListProps) {
                 label="Difficulté"
                 placeholder="Toutes"
                 list={list}
+                search={search}
                 onSelect={handleChange}
               />
             </li>
@@ -176,6 +195,7 @@ function FilterCircuitsList({ list }: ListProps) {
                 label="Distance en kilomètre"
                 placeholder="Toutes"
                 list={list}
+                search={search}
                 onSelect={handleChange}
               />
             </li>
@@ -186,6 +206,7 @@ function FilterCircuitsList({ list }: ListProps) {
                 label="Mobilité"
                 placeholder="Toutes"
                 list={list}
+                search={search}
                 onSelect={handleChange}
               />
             </li>
