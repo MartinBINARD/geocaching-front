@@ -17,6 +17,10 @@ function FilterCircuitsList() {
   const isSearchNoResult = useAppSelector(
     (state) => state.circuits.isSearchNoResult
   );
+  const searchSelectorsFilterEntries = useAppSelector(
+    (state) => state.circuits.searchSelectorsFilterEntries
+  );
+  const isCurrentSearch = Object.values(search).some((v) => v.length > 0);
 
   const dispatch = useAppDispatch();
 
@@ -55,7 +59,15 @@ function FilterCircuitsList() {
         className="btn btn-primary btn-outline flex flex-row flex-nowrap items-center justify-between cursor-pointer w-full xl:hidden"
       >
         <SlidersHorizontal className="w-5 h-5" />
-        <h3 className="font-bold text-base">Filtres</h3>
+
+        {isCurrentSearch || searchSelectorsFilterEntries ? (
+          <div className="indicator">
+            <span className="indicator-item badge badge-secondary" />
+            <h3 className="font-bold text-base">Filtres</h3>
+          </div>
+        ) : (
+          <h3 className="font-bold text-base">Filtres</h3>
+        )}
       </button>
 
       <aside
