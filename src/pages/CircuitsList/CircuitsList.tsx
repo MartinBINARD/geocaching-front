@@ -44,12 +44,14 @@ function CircuitsList() {
       </h2>
 
       <div className="overflow-hidden w-full flex flex-col content-center items-center">
-        <FilterCircuitsList list={circuitsList} />
+        <FilterCircuitsList />
+
         {!isSearchResult && (
           <p className="text-center break-words text-lg text-secondary font-extrabold pt-2 lg:pt-4">
             Aucun résulat ne correspond à votre recherche !
           </p>
         )}
+
         <div className="w-full overflow-y-hidden flex justify-between mt-4 max-lg:flex-wrap">
           {list?.length && (
             <Map

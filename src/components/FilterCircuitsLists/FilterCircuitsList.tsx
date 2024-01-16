@@ -1,38 +1,19 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { useCallback, useEffect, useRef, useState } from 'react';
-import {
-  MoveLeft,
-  Plus,
-  Search,
-  SlidersHorizontal,
-  Trash2,
-} from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { MoveLeft, Plus, SlidersHorizontal } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-import { Circuit } from '../../@types/circuit';
+import { resetSearchCircuitsList } from '../../store/reducers/circuits';
 
-import {
-  resetSearchCircuitsList,
-  searchCircuitsList,
-} from '../../store/reducers/circuits';
-
-import SelectControl from '../SelectControl/SelectControl';
 import Loader from '../../loader/Loader';
+import FilterCircuitsListForm from '../FilterCircuitsListForm/FilterCircuitsListForm';
 
-interface ListProps {
-  list: Circuit[];
-}
-
-function FilterCircuitsList({ list }: ListProps) {
+function FilterCircuitsList() {
   const [search, setSearch] = useState<object>({});
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const circuitsList = useAppSelector((state) => state.circuits.circuitsList);
+  const openState = { isOpen, setIsOpen };
+  const searchState = { search, setSearch };
   const isLoading = useAppSelector((state) => state.circuits.isLoading);
-  const filter = useRef<HTMLFormElement>(null);
-  const isSearch = Object.values(search).some((v) => v.length > 0);
-  const searchSelectorsFilterEntries = useAppSelector(
-    (state) => state.circuits.searchSelectorsFilterEntries
-  );
   const isSearchResult = useAppSelector(
     (state) => state.circuits.isSearchResult
   );
@@ -65,28 +46,6 @@ function FilterCircuitsList({ list }: ListProps) {
   /* Catch all multiselects event list in an object with name as key 
      and value option as value and useCallback function props function handler
      to avoid too much rerendering */
-
-  const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLSelectElement>) => {
-      e.preventDefault();
-      setSearch({ ...search, [e.target.name]: e.target.value });
-    },
-    [search]
-  );
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    dispatch(searchCircuitsList({ search, list: circuitsList }));
-    setIsOpen(false);
-  };
-
-  const handleReset = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    filter.current?.reset();
-    setSearch({});
-    dispatch(resetSearchCircuitsList());
-    setIsOpen(false);
-  };
 
   if (isLoading) {
     return <Loader />;
@@ -128,107 +87,10 @@ function FilterCircuitsList({ list }: ListProps) {
           <div className=" w-11/12 bg-primary h-1" />
         </div>
 
-        <form
-          ref={filter}
-          onSubmit={handleSubmit}
-          onReset={handleReset}
-          className="form-control w-full flex-row justify-center overflow-y-auto"
-        >
-          <ul className={`flex flex-col ${isOpen ? 'gap-2' : 'xl:flex-row'}`}>
-            <li>
-              <SelectControl
-                keyName="region"
-                label="Région"
-                placeholder="Toutes"
-                list={list}
-                search={search}
-                onSelect={handleChange}
-              />
-            </li>
-
-            <li>
-              <SelectControl
-                keyName="state"
-                label="Département"
-                placeholder="Tous"
-                list={list}
-                search={search}
-                onSelect={handleChange}
-              />
-            </li>
-
-            <li>
-              <SelectControl
-                keyName="city"
-                label="Ville"
-                placeholder="Toutes"
-                list={list}
-                search={search}
-                onSelect={handleChange}
-              />
-            </li>
-
-            <li>
-              <SelectControl
-                keyName="theme"
-                label="Thématique"
-                placeholder="Toutes"
-                list={list}
-                search={search}
-                onSelect={handleChange}
-              />
-            </li>
-
-            <li>
-              <SelectControl
-                keyName="difficulty"
-                label="Difficulté"
-                placeholder="Toutes"
-                list={list}
-                search={search}
-                onSelect={handleChange}
-              />
-            </li>
-
-            <li>
-              <SelectControl
-                keyName="distance"
-                label="Distance en kilomètre"
-                placeholder="Toutes"
-                list={list}
-                search={search}
-                onSelect={handleChange}
-              />
-            </li>
-
-            <li>
-              <SelectControl
-                keyName="mobility"
-                label="Mobilité"
-                placeholder="Toutes"
-                list={list}
-                search={search}
-                onSelect={handleChange}
-              />
-            </li>
-          </ul>
-
-          <div className="flex flex-col items-center justify-start">
-            <button
-              type="submit"
-              className={`btn btn-ghost btn-circle ${
-                isSearch || searchSelectorsFilterEntries ? '' : 'xl:mt-9'
-              }`}
-            >
-              <Search className="w-5 h-5 text-primary" />
-            </button>
-            {(isSearch || searchSelectorsFilterEntries) && (
-              <button type="reset" className="btn btn-ghost btn-circle">
-                <Trash2 className="w-5 h-5 text-error" />
-              </button>
-            )}
-          </div>
-        </form>
+        <FilterCircuitsListForm
+          searchState={searchState}
+          openState={openState}
+        />
       </aside>
     </section>
   );
