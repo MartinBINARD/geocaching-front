@@ -28,7 +28,7 @@ interface CircuitState {
   circuitsList: Circuit[];
   searchSelectorsFilterEntries: Search | null;
   searchList: Circuit[];
-  isSearchResult: boolean;
+  isSearchNoResult: boolean;
   errorMessage: string | undefined;
   oneCircuit: CircuitPath | null;
   circuitQuiz: CircuitQuizStep[];
@@ -42,7 +42,7 @@ const initialState: CircuitState = {
   circuitsList: [],
   searchSelectorsFilterEntries: null,
   searchList: [],
-  isSearchResult: true,
+  isSearchNoResult: false,
   errorMessage: '',
   oneCircuit: null,
   circuitQuiz: [],
@@ -134,7 +134,6 @@ const circuitsReducer = createReducer(initialState, (builder) => {
     .addCase(fetchCircuitsList.fulfilled, (state, action) => {
       /* Reset isSearchResult to true in case of user navigating through
       application, previous negative search message must be not displayed */
-      state.isSearchResult = true;
       state.circuitsList = action.payload;
       state.isLoading = false;
     })
@@ -146,16 +145,20 @@ const circuitsReducer = createReducer(initialState, (builder) => {
       const { search, list }: SearchState = action.payload;
       const searchListResult = filteredList(search, list);
 
+      if (!searchListResult.length) {
+        toast.error('Aucun résulat ne correspond à votre recherche !');
+      }
+
+      state.isSearchNoResult = !searchListResult.length;
       state.searchSelectorsFilterEntries = {
         ...state.searchSelectorsFilterEntries,
         ...search,
       };
-      state.isSearchResult = !!searchListResult.length;
       state.searchList = searchListResult;
     })
     .addCase(resetSearchCircuitsList, (state) => {
+      state.isSearchNoResult = false;
       state.searchSelectorsFilterEntries = null;
-      state.isSearchResult = true;
       state.searchList = [];
     })
     .addCase(fetchCircuit.pending, (state) => {

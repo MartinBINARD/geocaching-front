@@ -14,8 +14,8 @@ function FilterCircuitsList() {
   const openState = { isOpen, setIsOpen };
   const searchState = { search, setSearch };
   const isLoading = useAppSelector((state) => state.circuits.isLoading);
-  const isSearchResult = useAppSelector(
-    (state) => state.circuits.isSearchResult
+  const isSearchNoResult = useAppSelector(
+    (state) => state.circuits.isSearchNoResult
   );
 
   const dispatch = useAppDispatch();
@@ -25,7 +25,7 @@ function FilterCircuitsList() {
   };
 
   const resetSelectorsFilterWhenNoResult = () => {
-    if (!isSearchResult) {
+    if (isSearchNoResult) {
       setSearch({});
       dispatch(resetSearchCircuitsList());
     }
@@ -37,15 +37,11 @@ function FilterCircuitsList() {
 
   useEffect(() => {
     resetSelectorsFilterWhenNoResult();
-  }, [dispatch, isSearchResult]);
+  }, [dispatch, isSearchNoResult]);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
-
-  /* Catch all multiselects event list in an object with name as key 
-     and value option as value and useCallback function props function handler
-     to avoid too much rerendering */
 
   if (isLoading) {
     return <Loader />;
