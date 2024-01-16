@@ -30,6 +30,9 @@ function FilterCircuitsList({ list }: ListProps) {
   const isLoading = useAppSelector((state) => state.circuits.isLoading);
   const filter = useRef<HTMLFormElement>(null);
   const isSearch = Object.values(search).some((v) => v.length > 0);
+  const searchSelectorsFilterEntries = useAppSelector(
+    (state) => state.circuits.searchSelectorsFilterEntries
+  );
 
   const dispatch = useAppDispatch();
 
@@ -192,12 +195,12 @@ function FilterCircuitsList({ list }: ListProps) {
             <button
               type="submit"
               className={`btn btn-ghost btn-circle ${
-                isSearch ? '' : 'xl:mt-9'
+                isSearch || searchSelectorsFilterEntries ? '' : 'xl:mt-9'
               }`}
             >
               <Search className="w-5 h-5 text-primary" />
             </button>
-            {isSearch && (
+            {(isSearch || searchSelectorsFilterEntries) && (
               <button
                 type="button"
                 onClick={handleReset}

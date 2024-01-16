@@ -18,6 +18,7 @@ import {
   CircuitQuizStep,
   CircuitPath,
   CircuitPathStep,
+  Search,
 } from '../../@types/circuit';
 
 import createCircuitQuizStepper from '../../utils/createCircuitQuizStepper';
@@ -25,6 +26,7 @@ import formatUserCircuitEntries from '../../utils/formatUserCircuitEntries';
 
 interface CircuitState {
   circuitsList: Circuit[];
+  searchSelectorsFilterEntries: Search | null;
   searchList: Circuit[];
   isSearchResult: boolean;
   errorMessage: string | undefined;
@@ -38,6 +40,7 @@ interface CircuitState {
 
 const initialState: CircuitState = {
   circuitsList: [],
+  searchSelectorsFilterEntries: null,
   searchList: [],
   isSearchResult: true,
   errorMessage: '',
@@ -143,10 +146,15 @@ const circuitsReducer = createReducer(initialState, (builder) => {
       const { search, list }: SearchState = action.payload;
       const searchListResult = filteredList(search, list);
 
+      state.searchSelectorsFilterEntries = {
+        ...state.searchSelectorsFilterEntries,
+        ...search,
+      };
       state.isSearchResult = !!searchListResult.length;
       state.searchList = searchListResult;
     })
     .addCase(resetSearchCircuitsList, (state) => {
+      state.searchSelectorsFilterEntries = null;
       state.isSearchResult = true;
       state.searchList = [];
     })
