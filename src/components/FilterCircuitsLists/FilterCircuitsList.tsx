@@ -80,7 +80,7 @@ function FilterCircuitsList({ list }: ListProps) {
     setIsOpen(false);
   };
 
-  const handleReset = (e: React.MouseEvent) => {
+  const handleReset = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     filter.current?.reset();
     setSearch({});
@@ -131,6 +131,7 @@ function FilterCircuitsList({ list }: ListProps) {
         <form
           ref={filter}
           onSubmit={handleSubmit}
+          onReset={handleReset}
           className="form-control w-full flex-row justify-center overflow-y-auto"
         >
           <ul className={`flex flex-col ${isOpen ? 'gap-2' : 'xl:flex-row'}`}>
@@ -222,11 +223,7 @@ function FilterCircuitsList({ list }: ListProps) {
               <Search className="w-5 h-5 text-primary" />
             </button>
             {(isSearch || searchSelectorsFilterEntries) && (
-              <button
-                type="button"
-                onClick={handleReset}
-                className="btn btn-ghost btn-circle"
-              >
+              <button type="reset" className="btn btn-ghost btn-circle">
                 <Trash2 className="w-5 h-5 text-error" />
               </button>
             )}
