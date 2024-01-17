@@ -28,7 +28,7 @@ function HeaderNavLinkLogin({
         <HeaderNavLink
           to="/admin"
           onClick={handleClickLink}
-          className="lg:px-4 max-lg:my-1"
+          className="lg:px-4"
           classNameActive="active"
           label="Dashboard"
         />
@@ -36,14 +36,14 @@ function HeaderNavLinkLogin({
       <HeaderNavLink
         to="/profile"
         onClick={handleClickLink}
-        className="lg:px-4 max-lg:my-1"
+        className="lg:px-4"
         classNameActive="active"
         label="Profil"
       />
       <HeaderNavLink
         to="/login"
         onClick={handleLogOut}
-        className="lg:px-4 max-lg:my-1"
+        className="lg:px-4"
         classNameActive="active"
         label="Déconnexion"
       />

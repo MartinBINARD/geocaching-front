@@ -67,25 +67,25 @@ function Header() {
             : 'hidden xl:block'
         }
       >
-        <ul className="menu menu-vertical xl:menu-horizontal rounded-box">
+        <ul className="menu menu-vertical rounded-box max-xl:gap-4 xl:menu-horizontal">
           <HeaderNavLink
             to="/presentation"
             onClick={handleClickLink}
-            className="lg:px-4 max-lg:my-1"
+            className="lg:px-4"
             classNameActive="active"
             label="Comment jouer ?"
           />
           <HeaderNavLink
             to="/circuits"
             onClick={handleClickLink}
-            className="lg:px-4 max-lg:my-1"
+            className="lg:px-4"
             classNameActive="active"
             label="Parcours"
           />
           <HeaderNavLink
             to="/info"
             onClick={handleClickLink}
-            className="lg:px-4 max-lg:my-1"
+            className="lg:px-4"
             classNameActive="active"
             label="Informations pratiques"
           />
@@ -99,14 +99,14 @@ function Header() {
               <HeaderNavLink
                 to="/login"
                 onClick={handleClickLink}
-                className="lg:px-4 max-lg:my-1"
+                className="lg:px-4"
                 classNameActive="active"
                 label="Connexion"
               />
               <HeaderNavLink
                 to="/register"
                 onClick={handleClickLink}
-                className="link font-extrabold lg:px-4 max-lg:my-1"
+                className="link font-extrabold lg:px-4"
                 classNameActive="active"
                 label="S'inscrire"
               />
