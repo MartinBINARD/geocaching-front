@@ -43,12 +43,12 @@ function CircuitsList() {
       <div className="overflow-hidden w-full flex flex-col content-center items-center">
         <FilterCircuitsList />
 
-        <div className="w-full overflow-y-hidden flex justify-between mt-4 max-lg:flex-wrap">
+        <div className="w-full flex flex-col gap-4 items-center overflow-y-hidden mt-4 xl:flex-row">
           {list?.length && (
             <Map
               markersList={list}
               zoom={6}
-              className="z-0 h-[60vh] w-full lg:w-1/2 rounded-lg shadow-xl max-md:h-[30vh] relative"
+              className="z-0 h-[30vh] w-full rounded-lg shadow-xl xl:h-[60vh]"
             />
           )}
           <CircuitListCard list={list} />
