@@ -45,7 +45,11 @@ function Header() {
   };
 
   return (
-    <header className="flex justify-between px-5 z-20 items-center text-primary text-lg">
+    <header
+      className={`top-0 w-full flex justify-between px-5 z-20 items-center text-primary text-lg bg-white shadow-lg ${
+        isOpen ? '' : 'sticky'
+      }`}
+    >
       <NavLink to="/">
         <img className="h-14 my-2" src={logo} alt="caching'o logo" />
       </NavLink>
