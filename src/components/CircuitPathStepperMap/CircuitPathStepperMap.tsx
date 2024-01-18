@@ -20,11 +20,11 @@ function CircuitPathStepperMap({ currentStepIndex }: CircuitPathMapProp) {
     circuitQuiz[currentStepIndex - 1]?.content[1].transition;
 
   return (
-    <section className="flex flex-col items-center">
+    <section className="flex flex-col items-center min-[375px]:min-h-[62vh] min-[400px]:min-h-[72vh]">
       {hintToLocateStepPostion && (
-        <div>
-          <AlertCircle className="float-left w-5 h-5 text-secondary mt-2 mx-1" />
-          <p className="text-sm shadow-lg p-1 m-1">{hintToLocateStepPostion}</p>
+        <div className="w-full rounded-lg shadow-lg p-2 my-1">
+          <AlertCircle className="float-left w-5 h-5 text-secondary mx-1" />
+          <p className="text-sm">{hintToLocateStepPostion}</p>
         </div>
       )}
 

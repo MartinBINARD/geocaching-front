@@ -65,8 +65,8 @@ function CircuitPathQuestion({
   }
 
   return (
-    <section className="flex flex-col justify-center">
-      <p className="p-3 text-sm lg:text-base">
+    <section className="flex flex-col md:py-10 md:gap-10 min-[375px]:min-h-[62vh] min-[400px]:min-h-[72vh]">
+      <p className="text-sm p-3 lg:text-base md:text-lg xl:text-xl md:leading-relaxed">
         {circuitQuiz[currentStepIndex]?.content[0].paragraph}
       </p>
 
@@ -76,18 +76,18 @@ function CircuitPathQuestion({
         className="btn btn-primary btn-outline normal-case font-medium text-white mt-2 mb-8 mx-auto"
       />
 
-      <div className="relative flex flex-col items-center border-3 border-secondary py-5 mx-1">
-        <div className="flex flex-col p-4 gap-4">
-          <HelpCircle className="absolute top-[-20px] self-center w-10 h-10 text-secondary bg-white" />
-          <p className="font-bold">
-            {circuitQuiz[currentStepIndex]?.content[0].question}
-          </p>
+      <div className="relative flex flex-1 flex-col gap-4 items-center justify-evenly border-3 border-secondary p-5 mx-1">
+        <HelpCircle className="absolute top-[-20px] self-center w-10 h-10 text-secondary bg-white" />
+        <p className="font-bold text-sm my-2 lg:text-base md:text-lg xl:text-xl">
+          {circuitQuiz[currentStepIndex]?.content[0].question}
+        </p>
 
-          <CircuitPathQuestionHint
-            currentStepIndex={currentStepIndex}
-            hint={hint}
-          />
+        <CircuitPathQuestionHint
+          currentStepIndex={currentStepIndex}
+          hint={hint}
+        />
 
+        <div>
           <input
             className={`input input-bordered w-44 self-center ${
               invalidInput ? 'input-error' : 'input-primary'
@@ -102,7 +102,7 @@ function CircuitPathQuestion({
           />
         </div>
         {invalidInput && (
-          <span className="font-bold text-error">
+          <span className="self-center font-bold text-error text-sm sm:text-base">
             Veuillez répondre à la question
           </span>
         )}
