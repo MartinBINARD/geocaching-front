@@ -111,7 +111,7 @@ function Presentation() {
         </section>
         <div className="flex justify-end">
           <Link
-            className="flex items-center btn normal-case m-auto w-72 mt-10"
+            className="flex items-center btn btn-primary normal-case m-auto w-72 mt-10"
             to="/circuits"
           >
             <Compass className="w-9 h-9" />
