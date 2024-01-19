@@ -78,16 +78,16 @@ function FilterCircuitsList() {
         }`}
       >
         <div
-          className={`w-full flex flex-row items-center justify-between p-4 ${
+          className={`w-full flex flex-row items-center justify-between p-2 ${
             isOpen ? '' : 'xl:hidden'
           }`}
         >
           <button type="button" onClick={handleClick}>
-            <MoveLeft className="w-7 h-7" />
+            <MoveLeft className="w-10 h-10" />
           </button>
-          <h3 className="font-bold text-lg">Filtres</h3>
+          <h3 className="font-bold text-xl my-3">Filtres</h3>
           <button type="button" onClick={handleClick}>
-            <Plus className="w-7 h-7 rotate-45" />
+            <Plus className="w-10 h-10 rotate-45" />
           </button>
         </div>
 

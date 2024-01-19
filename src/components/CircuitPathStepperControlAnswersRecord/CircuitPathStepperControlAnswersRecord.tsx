@@ -88,7 +88,10 @@ function CircuitPatStepperControlAnswerRecord({
       )}
 
       {userCircuitAnswersResult?.length && (
-        <dialog ref={modalAnswersRecord} className="modal">
+        <dialog
+          ref={modalAnswersRecord}
+          className="modal text-sm lg:text-base md:text-lg xl:text-xl"
+        >
           <div className="modal-box">
             <h3 className="font-bold text-lg">
               Oups ! Tu as fait quelques erreurs d&apos;observation !
@@ -132,13 +135,16 @@ function CircuitPatStepperControlAnswerRecord({
                 <Link
                   type="submit"
                   role="button"
-                  className="btn btn-outline mr-8 max-[375px]:w-32"
+                  className="btn btn-primary btn-outline text-sm lg:text-base md:text-lg xl:text-xl mr-8 max-[375px]:w-32"
                   to="/circuits"
                 >
                   Quitter le parcours
                 </Link>
 
-                <button type="submit" className="btn btn-primary">
+                <button
+                  type="submit"
+                  className="btn btn-primary text-sm lg:text-base md:text-lg xl:text-xl"
+                >
                   Fermer
                 </button>
               </form>

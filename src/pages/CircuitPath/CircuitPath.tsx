@@ -44,8 +44,8 @@ function CircuitPath() {
 
   return (
     <>
-      <title className="flex justify-center gap-2 font-bold lg:text-xl w-full border-t border-b text-center border-primary py-2 my-2">
-        <Flag />
+      <title className="flex items-center justify-center gap-2 font-bold border-t border-b text-center border-primary py-2 my-2 lg:text-xl md:text-2xl">
+        <Flag className="fill-current md:w-8 md:h-8" />
         <h2>
           Étape {currentStepIndex + 1} sur {circuitQuiz.length}
         </h2>

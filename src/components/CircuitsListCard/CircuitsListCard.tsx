@@ -7,7 +7,7 @@ interface ListProps {
 
 function CircuitListCard({ list }: ListProps) {
   return (
-    <section className="overflow-y-auto w-full h-full text-primary max-lg:mt-4 lg:ml-4 md:h-[60vh]">
+    <section className="w-full h-full overflow-y-auto text-primary md:h-[60vh]">
       {list.map((item) => (
         <Link key={item.id_circuit} to={`/circuit/${item.id_circuit}`}>
           <div className="card card-side h-24 shadow-lg rounded-lg mb-2 sm:h-32">

@@ -39,7 +39,9 @@ function Login() {
       <div className="flex flex-col items-center justify-center w-full gap-5 p-4 m-auto lg:flex-row ">
         <MountainSnow className="w-12 h-12 lg:w-44 lg:h-44 m-2 lg:m-20" />
         <div className="lg:w-1/3 flex flex-col items-center lg:items-start lg:border-l lg:border-primary lg:pl-20">
-          <h2 className="font-bold text-xl my-2 lg:my-5">Connexion</h2>
+          <h2 className="font-bold text-xl text-center my-2 sm:my-5 lg:text-4xl">
+            Connexion
+          </h2>
           {loginErrorMessage && (
             <h4 className="text-red-500 font-semibold">{loginErrorMessage}</h4>
           )}
