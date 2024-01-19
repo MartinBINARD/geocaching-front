@@ -35,7 +35,7 @@ function Profile() {
   if (profile) {
     return (
       <>
-        <h2 className="text-center font-bold text-4xl p-4 m-auto sm:mb-8">
+        <h2 className="font-bold text-xl text-center my-5 lg:text-4xl">
           Mon profil
         </h2>
         <section className="flex flex-row items-center justify-center flex-wrap gap-5 max-w-4xl m-auto">

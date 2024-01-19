@@ -8,23 +8,25 @@ function Presentation() {
   return (
     <div className="flex-grow-1 flex flex-col">
       <section className="flex flex-col m-auto p-4">
-        <div className="flex self-center gap-2">
-          <h2 className="font-bold text-4xl text-center mb-20">
-            Comment jouer à CacheTrek?
-          </h2>
-        </div>
+        <h2 className="font-bold text-2xl text-center mt-10 mb-20 lg:text-4xl">
+          Comment jouer à CacheTrek?
+        </h2>
         <section className="flex flex-col xl:flex-row items-center xl:items-start text-lg gap-20 mb-5 pb-10 align-top">
           <section className="max-w-sm flex flex-col items-center">
             <MapPinned className="w-24 h-24 text-blue-700" />
-            <h3 className="font-bold text-2xl my-3">Choisis un parcours !</h3>
-            <p className="text-base text">
+            <h3 className="font-bold text-xl my-3 lg:text-2xl">
+              Choisis un parcours !
+            </h3>
+            <p className="text-base">
               Chacun d’entre eux est lié à un thème (histoire, art, etc.) et à
               un niveau de difficulté.
             </p>
           </section>
           <section className="max-w-sm flex flex-col items-center">
             <Map className="w-24 h-24 text-secondary" />
-            <h3 className="font-bold text-2xl my-3">Laisse toi guider</h3>
+            <h3 className="font-bold text-xl my-3 lg:text-2xl">
+              Laisse toi guider
+            </h3>
             <p className="text-base">
               Suis la carte jusqu&apos;aux différentes étapes. À chaque point on
               te pose une question dont la réponse se trouve là où tu es.
@@ -32,7 +34,9 @@ function Presentation() {
           </section>
           <section className="max-w-sm flex flex-col items-center">
             <Trophy className="w-24 h-24 text-yellow-400" />
-            <h3 className="font-bold text-2xl my-3">Vérifie tes réponses</h3>
+            <h3 className="font-bold text-xl my-3 lg:text-2xl">
+              Vérifie tes réponses
+            </h3>
             <p className="text-base">
               Tu as faux ? Tu as la possibilité de proposer d’autres réponses.
               Tu as tout juste ? Félicitations, tu as validé le parcours et
@@ -46,7 +50,7 @@ function Presentation() {
         <section className="self-center p-4 m-1 text-primary shadow-lg rounded-lg">
           <div className="flex items-center gap-2">
             <Lightbulb className="w-12 h-12 text-yellow-400" />
-            <h3 className="font-bold">À savoir</h3>
+            <h3 className="font-bold text-xl my-3 lg:text-2xl">À savoir</h3>
           </div>
           <section className="lg:flex gap-20 p-4">
             <section className="px-5 lg:border-r border-b lg:border-b-0 border-primary lg:pr-10">

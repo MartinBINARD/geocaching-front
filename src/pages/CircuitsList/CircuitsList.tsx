@@ -38,7 +38,7 @@ function CircuitsList() {
     <Loader />
   ) : (
     <section className="flex-grow-1 flex flex-col m-auto max-lg:px-1">
-      <h2 className="font-bold text-4xl text-center mb-5 lg:p-4 max-lg:text-xl">
+      <h2 className="font-bold text-xl text-center my-5 lg:text-4xl">
         Choisis ton parcours
       </h2>
 
