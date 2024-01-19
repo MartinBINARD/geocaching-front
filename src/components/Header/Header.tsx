@@ -46,32 +46,34 @@ function Header() {
 
   return (
     <header
-      className={`top-0 w-full flex justify-between px-5 z-20 items-center text-primary text-lg bg-white shadow-lg ${
-        isOpen ? '' : 'sticky'
+      className={`top-0 sticky w-full flex flex-col z-20 items-center text-primary text-lg bg-white shadow-md xl:flex-row ${
+        isOpen ? 'inset-0 h-screen' : ''
       }`}
     >
-      <NavLink to="/">
-        <img className="h-14 my-2" src={logo} alt="caching'o logo" />
-      </NavLink>
-      <button
-        type="button"
-        onClick={handleClickHamburgerMenu}
-        className="btn btn-primary btn-ghost btn-circle xl:hidden cursor-pointer"
-      >
-        {isOpen ? (
-          <Plus className="w-10 h-10 text-primary rotate-45 xl:w-10 xl:h-10" />
-        ) : (
-          <Menu className="w-10 h-10 text-primary xl:w-10 xl:h-10" />
-        )}
-      </button>
+      <section className="w-full flex items-center justify-between px-5">
+        <NavLink to="/">
+          <img className="h-14 my-2" src={logo} alt="caching'o logo" />
+        </NavLink>
+        <button
+          type="button"
+          onClick={handleClickHamburgerMenu}
+          className="btn btn-primary btn-ghost btn-circle xl:hidden cursor-pointer"
+        >
+          {isOpen ? (
+            <Plus className="w-10 h-10 text-primary rotate-45 xl:w-10 xl:h-10" />
+          ) : (
+            <Menu className="w-10 h-10 text-primary xl:w-10 xl:h-10" />
+          )}
+        </button>
+      </section>
       <nav
         className={
           isOpen
-            ? 'absolute inset-0 z-50 mt-16 flex flex-col justify-center items-center p-8 bg-white'
+            ? 'z-50 flex flex-col items-center bg-white p-8 my-auto'
             : 'hidden xl:block'
         }
       >
-        <ul className="menu menu-vertical rounded-box max-xl:gap-4 xl:menu-horizontal">
+        <ul className="w-max menu menu-vertical rounded-box max-xl:gap-4 xl:menu-horizontal">
           <HeaderNavLink
             to="/presentation"
             onClick={handleClickLink}
