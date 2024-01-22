@@ -1,4 +1,4 @@
-import ProfileAwardsList from '../ProfileAwardsList/ProfileAwardsList';
+import ProfileAwardsList from './components/ProfileAwardsList/ProfileAwardsList';
 
 function ProfileAwardsCard() {
   return (

@@ -1,7 +1,7 @@
 import { Map } from 'lucide-react';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppSelector } from '../../../../hooks/redux';
 
-import { Profile } from '../../@types/user';
+import { Profile } from '../../../../@types/user';
 
 function ProfileCircuitsCard() {
   const profile = useAppSelector((state) => state.user.profile);

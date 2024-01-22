@@ -1,8 +1,8 @@
-import { useAppSelector } from '../../hooks/redux';
+import { useAppSelector } from '../../../../hooks/redux';
 
-import ProfileUserDescription from '../ProfileUserDescription/ProfileUserDescription';
-import ProfileUserForm from '../ProfileUserForm/ProfileUserForm';
-import ProfileUserCardDeleteModal from '../ProfileUserCardDeleteModal/ProfileUserCardDeleteModal';
+import ProfileUserDescription from './components/ProfileUserDescription/ProfileUserDescription';
+import ProfileUserForm from './components/ProfileUserForm/ProfileUserForm';
+import ProfileUserCardDeleteModal from './components/ProfileUserCardDeleteModal/ProfileUserCardDeleteModal';
 
 interface ProfileUserCardProps {
   isEdit: boolean;
