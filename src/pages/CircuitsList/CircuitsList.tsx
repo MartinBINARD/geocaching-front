@@ -5,8 +5,8 @@ import { fetchCircuitsList } from '../../store/reducers/circuits';
 
 import Map from '../../components/Map/Map';
 import Loader from '../../loader/Loader';
-import FilterCircuitsList from '../../components/FilterCircuitsLists/FilterCircuitsList';
-import CircuitListCard from '../../components/CircuitsListCard/CircuitsListCard';
+import FilterCircuitsList from './components/FilterCircuitsLists/FilterCircuitsList';
+import CircuitListCard from './components/CircuitsListCard/CircuitsListCard';
 
 /* First load all circuitsList by default or when empty search value is
 submitted. Replace all circuitsList prop by searchList when updating from store

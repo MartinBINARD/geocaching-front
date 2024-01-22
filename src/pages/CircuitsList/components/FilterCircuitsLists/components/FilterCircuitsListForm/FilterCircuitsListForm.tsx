@@ -1,13 +1,13 @@
 import { useCallback, useRef } from 'react';
 import { Search, Trash2 } from 'lucide-react';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../../../../hooks/redux';
 
 import {
   resetSearchCircuitsList,
   searchCircuitsList,
-} from '../../store/reducers/circuits';
+} from '../../../../../../store/reducers/circuits';
 
-import SelectControl from '../SelectControl/SelectControl';
+import SelectControl from '../../../../../../components/SelectControl/SelectControl';
 
 interface FilterCircuitsListFormProps {
   searchState: {

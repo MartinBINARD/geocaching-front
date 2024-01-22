@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { useEffect, useState } from 'react';
 import { MoveLeft, Plus, SlidersHorizontal } from 'lucide-react';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 
-import { resetSearchCircuitsList } from '../../store/reducers/circuits';
+import { resetSearchCircuitsList } from '../../../../store/reducers/circuits';
 
-import Loader from '../../loader/Loader';
-import FilterCircuitsListForm from '../FilterCircuitsListForm/FilterCircuitsListForm';
+import Loader from '../../../../loader/Loader';
+import FilterCircuitsListForm from './components/FilterCircuitsListForm/FilterCircuitsListForm';
 
 function FilterCircuitsList() {
   const [search, setSearch] = useState<object>({});
