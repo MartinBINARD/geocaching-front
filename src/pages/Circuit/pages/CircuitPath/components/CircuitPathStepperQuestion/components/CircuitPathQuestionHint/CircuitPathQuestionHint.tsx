@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../hooks/redux';
+import { useAppSelector } from '../../../../../../../../hooks/redux';
 
 interface CircuitPathQuestionHintProps {
   currentStepIndex: number;

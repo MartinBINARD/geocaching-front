@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useAppSelector } from '../../hooks/redux';
-import CircuitPathStepperControlAnswersRecord from '../CircuitPathStepperControlAnswersRecord/CircuitPathStepperControlAnswersRecord';
+import { useAppSelector } from '../../../../../../hooks/redux';
+import CircuitPathStepperControlAnswersRecord from './components/CircuitPathStepperControlAnswersRecord/CircuitPathStepperControlAnswersRecord';
 
 interface CircuitPathStepperControlProps {
   index: {

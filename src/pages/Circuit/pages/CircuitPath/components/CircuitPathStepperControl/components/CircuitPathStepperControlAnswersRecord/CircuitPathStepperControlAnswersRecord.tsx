@@ -2,11 +2,14 @@ import { useEffect, useRef } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { AlertCircle, CheckCircle, Compass, XCircle } from 'lucide-react';
 
-import { UserCircuitEntriesState } from '../../@types/circuit';
+import { UserCircuitEntriesState } from '../../../../../../../../@types/circuit';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../../../../../../hooks/redux';
 
-import { sendAnswers } from '../../store/reducers/circuits';
+import { sendAnswers } from '../../../../../../../../store/reducers/circuits';
 
 interface CircuitPatStepperControlAnswerRecordProps {
   currentStepIndex: number;

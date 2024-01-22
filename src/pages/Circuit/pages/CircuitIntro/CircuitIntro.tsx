@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { Compass } from 'lucide-react';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 
 import {
   fetchCircuit,
   resetCircuitQuiz,
   storeCircuitQuiz,
-} from '../../store/reducers/circuits';
+} from '../../../../store/reducers/circuits';
 
-import Loader from '../../loader/Loader';
-import CircuitDescriptionCard from '../../components/CircuitDescriptionCard/CircuitDescriptionCard';
-import CicuitLocationCard from '../../components/CircuitLocationCard/CircuitLocationCard';
+import Loader from '../../../../loader/Loader';
+import CircuitDescriptionCard from './components/CircuitDescriptionCard/CircuitDescriptionCard';
+import CicuitLocationCard from './components/CircuitLocationCard/CircuitLocationCard';
 
 function CircuitIntro() {
   const { id } = useParams();

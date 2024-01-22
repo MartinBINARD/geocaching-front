@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Flag } from 'lucide-react';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 
-import { storeCircuitQuiz } from '../../store/reducers/circuits';
+import { storeCircuitQuiz } from '../../../../store/reducers/circuits';
 
-import Loader from '../../loader/Loader';
-import CircuitPathStepperMap from '../../components/CircuitPathStepperMap/CircuitPathStepperMap';
-import CircuitPathStepperQuestion from '../../components/CircuitPathStepperQuestion/CircuitPathStepperQuestion';
-import CircuitPathStepperControl from '../../components/CircuitPathStepperControl/CircuitPathStepperControl';
+import Loader from '../../../../loader/Loader';
+import CircuitPathStepperMap from './components/CircuitPathStepperMap/CircuitPathStepperMap';
+import CircuitPathStepperQuestion from './components/CircuitPathStepperQuestion/CircuitPathStepperQuestion';
+import CircuitPathStepperControl from './components/CircuitPathStepperControl/CircuitPathStepperControl';
 
 function CircuitPath() {
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);

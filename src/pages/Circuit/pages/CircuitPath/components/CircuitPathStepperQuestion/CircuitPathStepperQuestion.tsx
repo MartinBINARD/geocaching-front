@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { HelpCircle } from 'lucide-react';
 import { LatLngTuple } from 'leaflet';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../../../../hooks/redux';
 
-import { storeStepEntries } from '../../store/reducers/circuits';
+import { storeStepEntries } from '../../../../../../store/reducers/circuits';
 
-import CircuitMapToggle from '../CircuitMapToggle/CircuitMapToggle';
-import CircuitPathQuestionHint from '../CircuitPathQuestionHint/CircuitPathQuestionHint';
+import CircuitMapToggle from '../../../../../../components//CircuitMapToggle/CircuitMapToggle';
+import CircuitPathQuestionHint from './components/CircuitPathQuestionHint/CircuitPathQuestionHint';
 
 interface CircuitPathQuestionProps {
   currentStepIndex: number;
