@@ -1,8 +1,8 @@
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch } from '../../../../hooks/redux';
 
-import { logout } from '../../../store/reducers/auth';
+import { logout } from '../../../../store/reducers/auth';
 
-import HeaderNavLink from '../../Header/HeaderNavLink/HeaderNavLink';
+import HeaderNavLink from '../HeaderNavLink/HeaderNavLink';
 
 interface HeaderNavLinkLoginProps {
   setIsOpen: (isOpen: boolean) => void;
@@ -13,8 +13,6 @@ function HeaderNavLinkLogin({
   handleClickLink,
   setIsOpen,
 }: HeaderNavLinkLoginProps) {
-  const user = useAppSelector((state) => state.auth.user);
-
   const dispatch = useAppDispatch();
 
   const handleLogOut = () => {
@@ -24,15 +22,6 @@ function HeaderNavLinkLogin({
 
   return (
     <>
-      {user?.role === 'admin' && (
-        <HeaderNavLink
-          to="/admin"
-          onClick={handleClickLink}
-          className="lg:px-4"
-          classNameActive="active"
-          label="Dashboard"
-        />
-      )}
       <HeaderNavLink
         to="/profile"
         onClick={handleClickLink}

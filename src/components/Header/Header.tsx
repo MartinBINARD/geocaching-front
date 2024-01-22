@@ -5,8 +5,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import { fetchSession } from '../../store/reducers/auth';
 
-import HeaderNavLink from './HeaderNavLink/HeaderNavLink';
-import HeaderNavLinkLogin from './HeaderNavLinkLogin/HeaderNavLinkLogin';
+import HeaderNavLink from './components/HeaderNavLink/HeaderNavLink';
+import HeaderNavLinkLogin from './components/HeaderNavLinkLogin/HeaderNavLinkLogin';
 
 import logo from '../../assets/logo/compass.png';
 
