@@ -21,7 +21,7 @@ function Homepage() {
           </h3>
           <p className="text-xl">
             Rejoins la communauté des explorateurs de
-            <span className="font-bold italic ml-2">CachTrek</span>, parcours
+            <span className="font-bold italic ml-2">CacheTrek</span>, parcours
             des endroits étonnants et apprend tout en t&apos;amusant !
           </p>
           <Link

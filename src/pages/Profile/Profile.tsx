@@ -3,9 +3,9 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import { getProfile } from '../../store/reducers/user';
 
-import ProfileCircuitsCard from '../../components/ProfileCircuitsCard/ProfileCircuitsCard';
-import ProfileAwardsCard from '../../components/ProfileAwardsCard/ProfileAwardsCard';
-import ProfileUserCard from '../../components/ProfileUserCard/ProfileUserCard';
+import ProfileCircuitsCard from './components/ProfileCircuitsCard/ProfileCircuitsCard';
+import ProfileAwardsCard from './components/ProfileAwardsCard/ProfileAwardsCard';
+import ProfileUserCard from './components/ProfileUserCard/ProfileUserCard';
 
 function Profile() {
   const [isEdit, setIsEdit] = useState<boolean>(false);
