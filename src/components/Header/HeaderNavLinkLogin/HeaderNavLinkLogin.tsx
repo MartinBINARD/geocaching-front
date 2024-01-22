@@ -1,8 +1,8 @@
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 
-import { logout } from '../../store/reducers/auth';
+import { logout } from '../../../store/reducers/auth';
 
-import HeaderNavLink from '../HeaderNavLink/HeaderNavLink';
+import HeaderNavLink from '../../Header/HeaderNavLink/HeaderNavLink';
 
 interface HeaderNavLinkLoginProps {
   setIsOpen: (isOpen: boolean) => void;
