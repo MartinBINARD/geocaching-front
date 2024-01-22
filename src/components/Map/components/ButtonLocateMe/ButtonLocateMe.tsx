@@ -4,7 +4,7 @@ import { Circle, CircleMarker, useMapEvents } from 'react-leaflet';
 
 import { LocateFixed } from 'lucide-react';
 
-import LeafletControl from '../LeafletControl/LeafletControl';
+import LeafletControl from './components/LeafletControl/LeafletControl';
 
 function ButtonLocateMe() {
   const zoom = 17;

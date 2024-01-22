@@ -2,11 +2,11 @@ import { LatLngTuple } from 'leaflet';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
-import FindCenter from '../../utils/FindCenter';
-import ButtonLocateMe from '../ButtonLocateMe/ButtonLocateMe';
-
 import { Circuit } from '../../@types/circuit';
-import MapPopup from '../MapPopup/MapPopup';
+
+import FindCenter from '../../utils/FindCenter';
+import ButtonLocateMe from './components/ButtonLocateMe/ButtonLocateMe';
+import MapPopup from './components/MapPopup/MapPopup';
 
 interface MapsProps {
   markersList?: Circuit[];
