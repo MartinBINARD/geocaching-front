@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../../../../../hooks/redux';
 import { storeStepEntries } from '../../../../../../store/reducers/circuits';
 
 import CircuitMapToggle from '../../../../../../components//CircuitMapToggle/CircuitMapToggle';
-import CircuitPathQuestionHint from './components/CircuitPathQuestionHint/CircuitPathQuestionHint';
+import CircuitPathStepperQuestionHint from './components/CircuitPathStepperQuestionHint/CircuitPathStepperQuestionHint';
 
 interface CircuitPathQuestionProps {
   currentStepIndex: number;
@@ -82,7 +82,7 @@ function CircuitPathQuestion({
           {circuitQuiz[currentStepIndex]?.content[0].question}
         </p>
 
-        <CircuitPathQuestionHint
+        <CircuitPathStepperQuestionHint
           currentStepIndex={currentStepIndex}
           hint={hint}
         />
