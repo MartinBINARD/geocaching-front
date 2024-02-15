@@ -9,7 +9,7 @@ function Presentation() {
     <div className="flex-grow-1 flex flex-col">
       <section className="flex flex-col m-auto p-4">
         <h2 className="font-bold text-2xl text-center mt-10 mb-20 lg:text-4xl">
-          Comment jouer à CacheTrek?
+          Comment jouer à GeoCacheTrek?
         </h2>
         <section className="flex flex-col xl:flex-row items-center xl:items-start text-lg gap-20 mb-5 pb-10 align-top">
           <section className="max-w-sm flex flex-col items-center">

@@ -100,7 +100,7 @@ function Register() {
         <section className="flex flex-col">
           <Globe2 className="w-12 h-12 lg:w-44 lg:h-44 mx-auto" />
           <h2 className="font-bold text-lg text-center mt-2 py-2 border-b border-primary lg:text-2xl">
-            Rejoins la communauté CacheTrek !
+            Rejoins la communauté GeoCacheTrek !
           </h2>
         </section>
       </article>

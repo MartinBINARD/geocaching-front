@@ -1,4 +1,4 @@
-# :world_map: :hiking_boot: CacheTrek
+# :world_map: :hiking_boot: GeoCacheTrek
 
 ## :clipboard: Description
 

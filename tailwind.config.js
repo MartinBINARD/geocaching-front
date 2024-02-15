@@ -16,7 +16,7 @@ export default {
     themes: [
       'emerald',
       {
-        cachetrek: {
+        geocachetrek: {
           primary: '#004F4A',
           secondary: '#854B48',
           accent: '#00c94f',
