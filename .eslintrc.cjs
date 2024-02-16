@@ -57,10 +57,13 @@ module.exports = {
           'Use typed hooks `useAppDispatch` and `useAppSelector` instead.',
       },
     ],
-    "react/button-has-type": [<enabled>, {
-      "button": <boolean>,
-      "submit": <boolean>,
-      "reset": <boolean>
-    }]
+    'react/button-has-type': [
+      enabled,
+      {
+        button: boolean,
+        submit: boolean,
+        reset: boolean,
+      },
+    ],
   },
 };

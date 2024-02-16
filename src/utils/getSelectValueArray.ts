@@ -40,7 +40,11 @@ function GetSelectValueArray(
     return [];
   }
   // Search for values from key selector
-  const getSelectorValuesList = getValuesArray(key, arr);
+  const getSelectorValuesList = getValuesArray(key, arr) as (
+    | string
+    | number
+    | string[]
+  )[];
 
   // Concat of any array value
 
