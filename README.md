@@ -2,7 +2,7 @@
 
 ## :clipboard: Description
 
-- Rebuilding a fork of cooperative project. See dev and other branches
+- On the way to implement clean architecture :recycle: for unit testing :test_tube: in frontend app.
 - Only the react application is shown, this project is running with a private backend server and is not displayed for secruity reasons. :european_castle:
 - The reason why I'm showing the frontend of this project is to show my React typescript skills to potential recruiters with developper skills :briefcase:
 
@@ -17,7 +17,7 @@
 - eslint
 - tailwind
 
-# :rocket: Soon deployed ...
+# :rocket: Deployed now !!! :tada: [GeoCacheTrek](https://geocachetrek.online)
 
 ## :computer: Use
 
