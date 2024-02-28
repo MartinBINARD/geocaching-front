@@ -34,3 +34,9 @@ then
 ```
 npm run dev
 ```
+
+## License
+
+Source code is licensed under the [GNU Affero General Public License v3.0](https://www.gnu.org/licenses/agpl-3.0.fr.html).
+
+Contents of this site are © Copyright 2024 GeoCacheTrek. All rights reserved.
