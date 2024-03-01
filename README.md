@@ -35,6 +35,10 @@ then
 npm run dev
 ```
 
+# :camera_flash: DEMO
+
+<img src="./geoacachetrek_mobile.gif" width="300"/>
+
 ## License
 
 Source code is licensed under the [GNU Affero General Public License v3.0](https://www.gnu.org/licenses/agpl-3.0.fr.html).
