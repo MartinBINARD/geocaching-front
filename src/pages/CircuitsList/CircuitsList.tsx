@@ -37,7 +37,7 @@ function CircuitsList() {
   return isLoading || !circuitsList.length ? (
     <Loader />
   ) : (
-    <section className="flex-grow-1 flex flex-col m-auto max-lg:px-1">
+    <section className="flex-grow-1 flex flex-col justify-start mx-auto max-lg:px-1">
       <h2 className="font-bold text-xl text-center my-5 lg:text-4xl">
         Choisis ton parcours
       </h2>
