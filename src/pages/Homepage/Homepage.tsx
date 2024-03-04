@@ -10,7 +10,7 @@ function Homepage() {
     <>
       <div className="flex flex-col justify-center z-10 items-center lg:flex-row m-auto lg:gap-20">
         <img
-          className="max-h-[35vh] m-auto lg:m-5 sm:max-h-[50vh] lg:max-h-[75vh]"
+          className="max-h-[35vh] m-auto lg:m-5 sm:max-h-[50vh] lg:max-h-[75vh] my-2"
           src={illustration}
           alt="illustration de l'application"
         />

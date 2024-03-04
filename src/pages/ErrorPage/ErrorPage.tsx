@@ -6,7 +6,7 @@ function ErrorPage() {
   return (
     <div className="flex flex-col justify-center items-center h-screen text-primary">
       <h1 className="text-xl sm:text-4xl md:text-5xl">
-        Oups... Tu t&apos;es perdu papillon ?
+        Oups... une erreur est survenue !
       </h1>
       <p className="mt-5 text-lg">Cette page n&apos;existe pas</p>
 
