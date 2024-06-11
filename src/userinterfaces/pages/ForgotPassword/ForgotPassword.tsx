@@ -4,7 +4,7 @@ import { forgotPassword } from '../../../store/reducers/auth';
 
 import { EmailForm } from '../../../domain/entities/auth';
 
-import Loader from '../../../loader/Loader';
+import Loader from '../../components/loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';
 
 function ForgotPassword() {

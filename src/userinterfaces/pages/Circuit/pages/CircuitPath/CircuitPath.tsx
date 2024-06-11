@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../../../hooks/redux';
 
 import { storeCircuitQuiz } from '../../../../../store/reducers/circuits';
 
-import Loader from '../../../../../loader/Loader';
+import Loader from '../../../../components/loader/Loader';
 import CircuitPathStepperMap from './components/CircuitPathStepperMap/CircuitPathStepperMap';
 import CircuitPathStepperQuestion from './components/CircuitPathStepperQuestion/CircuitPathStepperQuestion';
 import CircuitPathStepperControl from './components/CircuitPathStepperControl/CircuitPathStepperControl';

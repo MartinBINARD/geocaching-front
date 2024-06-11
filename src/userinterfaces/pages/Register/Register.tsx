@@ -7,7 +7,7 @@ import { register } from '../../../store/reducers/auth';
 import { RegisterForm } from '../../../domain/entities/auth';
 
 import Footer from '../../components/Footer/Footer';
-import Loader from '../../../loader/Loader';
+import Loader from '../../components/loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';
 
 function Register() {

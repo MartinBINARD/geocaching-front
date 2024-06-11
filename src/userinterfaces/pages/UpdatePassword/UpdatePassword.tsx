@@ -7,7 +7,7 @@ import {
   UpdatePasswordForm,
 } from '../../../domain/entities/auth';
 
-import Loader from '../../../loader/Loader';
+import Loader from '../../components/loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';
 
 function UpdatePassword() {

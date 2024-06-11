@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../../../hooks/redux';
 
 import { resetSearchCircuitsList } from '../../../../../store/reducers/circuits';
 
-import Loader from '../../../../../loader/Loader';
+import Loader from '../../../../components/loader/Loader';
 import FilterCircuitsListForm from './components/FilterCircuitsListForm/FilterCircuitsListForm';
 
 function FilterCircuitsList() {
