@@ -6,7 +6,7 @@ import {
 
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
-import api from '../../service/axios';
+import api from '../../services/axios';
 import filteredList from '../../utils/FilteredList';
 
 import {

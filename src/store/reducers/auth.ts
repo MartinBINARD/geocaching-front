@@ -1,7 +1,7 @@
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import api from '../../service/axios';
+import api from '../../services/axios';
 
 import {
   EmailForm,

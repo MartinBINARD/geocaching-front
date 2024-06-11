@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 import { Profile, UpdateProfileForm } from '../../@types/user';
 
-import api from '../../service/axios';
+import api from '../../services/axios';
 import formatUserDataForm from '../../utils/formatUserDataForm';
 
 interface ProfileState {
