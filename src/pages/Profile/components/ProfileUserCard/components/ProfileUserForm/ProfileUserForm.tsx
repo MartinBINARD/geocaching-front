@@ -1,13 +1,10 @@
 import { Dispatch, SetStateAction } from 'react';
 import { XCircle } from 'lucide-react';
-import {
-  useAppDispatch,
-  useAppSelector,
-} from '../../../../../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../../../../hooks/redux';
 
-import { Profile, UpdateProfileForm } from '../../../../../../../@types/user';
+import { Profile, UpdateProfileForm } from '../../../../../../@types/user';
 
-import { updateProfile } from '../../../../../../../domain/usecases/user';
+import { updateProfile } from '../../../../../../domain/usecases/user';
 
 import TextInput from '../../../../../../components/TextInput/TextInput';
 import TextArea from '../../../../../../components/TextArea/TextArea';

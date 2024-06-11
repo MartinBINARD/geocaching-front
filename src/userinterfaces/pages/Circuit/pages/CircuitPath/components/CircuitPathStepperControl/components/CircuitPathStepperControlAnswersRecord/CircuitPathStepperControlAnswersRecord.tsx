@@ -9,7 +9,7 @@ import {
   useAppSelector,
 } from '../../../../../../../../../hooks/redux';
 
-import { sendAnswers } from '../../../../../../../../../store/reducers/circuits';
+import { sendAnswers } from '../../../../../../../../../domain/usecases/circuits';
 
 interface CircuitPatStepperControlAnswerRecordProps {
   currentStepIndex: number;

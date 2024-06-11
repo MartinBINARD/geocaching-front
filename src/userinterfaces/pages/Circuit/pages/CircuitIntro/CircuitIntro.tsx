@@ -7,7 +7,7 @@ import {
   fetchCircuit,
   resetCircuitQuiz,
   storeCircuitQuiz,
-} from '../../../../../store/reducers/circuits';
+} from '../../../../../domain/usecases/circuits';
 
 import Loader from '../../../../components/loader/Loader';
 import CircuitDescriptionCard from './components/CircuitDescriptionCard/CircuitDescriptionCard';

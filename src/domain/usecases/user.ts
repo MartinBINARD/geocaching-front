@@ -1,10 +1,10 @@
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { Profile, UpdateProfileForm } from '../../@types/user';
+import { Profile, UpdateProfileForm } from '../entities/user';
 
 import api from '../../services/axios';
-import formatUserDataForm from '../../utils/formatUserDataForm';
+import formatUserDataForm from './utils/formatUserDataForm';
 
 interface ProfileState {
   profile: Profile | null;

@@ -1,13 +1,13 @@
 import { Compass, Globe2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-import { register } from '../../../domain/usecases/auth';
+import { register } from '../../domain/usecases/auth';
 
-import { RegisterForm } from '../../../domain/entities/auth';
+import { RegisterForm } from '../../domain/entities/auth';
 
 import Footer from '../../components/Footer/Footer';
-import Loader from '../../components/loader/Loader';
+import Loader from '../../userinterfaces/components/loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';
 
 function Register() {

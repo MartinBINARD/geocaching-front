@@ -1,14 +1,11 @@
 import { useCallback, useRef } from 'react';
 import { Search, Trash2 } from 'lucide-react';
-import {
-  useAppDispatch,
-  useAppSelector,
-} from '../../../../../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../../../../hooks/redux';
 
 import {
   resetSearchCircuitsList,
   searchCircuitsList,
-} from '../../../../../../../domain/usecases/circuits';
+} from '../../../../../../domain/usecases/circuits';
 
 import SelectControl from '../../../../../../components/SelectControl/SelectControl';
 

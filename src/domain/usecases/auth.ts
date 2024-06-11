@@ -11,10 +11,10 @@ import {
   UpdateCredentials,
   Session,
   User,
-} from '../../domain/entities/auth';
+} from '../entities/auth';
 
-import formatUserDataForm from '../../utils/formatUserDataForm';
-import formatUserUpdateCredentials from '../../utils/formatUserUpdateCredentials';
+import formatUserDataForm from './utils/formatUserDataForm';
+import formatUserUpdateCredentials from './utils/formatUserUpdateCredentials';
 
 interface AuthState {
   user: User | null;

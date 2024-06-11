@@ -7,7 +7,7 @@ import {
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
 import api from '../../services/axios';
-import filteredList from '../../utils/FilteredList';
+import filteredList from './utils/FilteredList';
 
 import {
   Circuit,
@@ -19,10 +19,10 @@ import {
   CircuitPath,
   CircuitPathStep,
   Search,
-} from '../../domain/entities/circuit';
+} from '../entities/circuit';
 
-import createCircuitQuizStepper from '../../utils/createCircuitQuizStepper';
-import formatUserCircuitEntries from '../../utils/formatUserCircuitEntries';
+import createCircuitQuizStepper from './utils/createCircuitQuizStepper';
+import formatUserCircuitEntries from './utils/formatUserCircuitEntries';
 
 interface CircuitState {
   circuitsList: Circuit[];

@@ -1,10 +1,10 @@
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-import { forgotPassword } from '../../../domain/usecases/auth';
+import { forgotPassword } from '../../domain/usecases/auth';
 
-import { EmailForm } from '../../../domain/entities/auth';
+import { EmailForm } from '../../domain/entities/auth';
 
-import Loader from '../../components/loader/Loader';
+import Loader from '../../userinterfaces/components/loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';
 
 function ForgotPassword() {
