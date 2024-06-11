@@ -1,13 +1,13 @@
 import { useLocation, Navigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { updatePassword } from '../../../store/reducers/auth';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { updatePassword } from '../../store/reducers/auth';
 
 import {
   UpdateCredentials,
   UpdatePasswordForm,
-} from '../../../domain/entities/auth';
+} from '../../domain/entities/auth';
 
-import Loader from '../../../loader/Loader';
+import Loader from '../../loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';
 
 function UpdatePassword() {

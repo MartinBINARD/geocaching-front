@@ -1,4 +1,4 @@
-import { EmailForm } from './auth';
+import { EmailForm } from '../domain/entities/auth';
 
 export interface Profile {
   id: number;

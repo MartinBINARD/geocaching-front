@@ -1,4 +1,4 @@
-import { UserCircuitEntriesState } from '../@types/circuit';
+import { UserCircuitEntriesState } from '../domain/entities/circuit';
 
 function formatUserCircuitEntries(userCircuitEntries: UserCircuitEntriesState) {
   const { userId, circuitId, stepsEntries } = userCircuitEntries;

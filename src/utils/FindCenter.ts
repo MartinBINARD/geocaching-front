@@ -1,5 +1,5 @@
 import { LatLngTuple } from 'leaflet';
-import { Circuit } from '../@types/circuit';
+import { Circuit } from '../domain/entities/circuit';
 
 function FindCenter(markers: Circuit[]): LatLngTuple {
   const lats = markers.map((m) => m.latitude);

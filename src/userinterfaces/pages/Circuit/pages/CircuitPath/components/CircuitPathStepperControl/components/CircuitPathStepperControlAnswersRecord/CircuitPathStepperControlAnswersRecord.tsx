@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { AlertCircle, CheckCircle, Compass, XCircle } from 'lucide-react';
 
-import { UserCircuitEntriesState } from '../../../../../../../../../@types/circuit';
+import { UserCircuitEntriesState } from '../../../../../../../../../domain/entities/circuit';
 
 import {
   useAppDispatch,

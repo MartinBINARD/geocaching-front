@@ -1,4 +1,4 @@
-import { EmailForm, LoginForm } from '../@types/auth';
+import { EmailForm, LoginForm } from '../domain/entities/auth';
 import { UpdateProfileForm } from '../@types/user';
 
 function setLowerCaseEmail(formData: EmailForm) {

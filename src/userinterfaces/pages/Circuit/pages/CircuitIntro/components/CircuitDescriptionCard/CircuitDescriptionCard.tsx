@@ -8,7 +8,7 @@ import {
 
 import { useAppSelector } from '../../../../../../../hooks/redux';
 
-import { Circuit } from '../../../../../../../@types/circuit';
+import { Circuit } from '../../../../../../../domain/entities/circuit';
 
 function CircuitDescriptionCard() {
   const circuit = useAppSelector((state) => state.circuits.oneCircuit);

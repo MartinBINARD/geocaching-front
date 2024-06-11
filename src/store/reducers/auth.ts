@@ -11,7 +11,7 @@ import {
   UpdateCredentials,
   Session,
   User,
-} from '../../@types/auth';
+} from '../../domain/entities/auth';
 
 import formatUserDataForm from '../../utils/formatUserDataForm';
 import formatUserUpdateCredentials from '../../utils/formatUserUpdateCredentials';

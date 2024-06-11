@@ -19,7 +19,7 @@ import {
   CircuitPath,
   CircuitPathStep,
   Search,
-} from '../../@types/circuit';
+} from '../../domain/entities/circuit';
 
 import createCircuitQuizStepper from '../../utils/createCircuitQuizStepper';
 import formatUserCircuitEntries from '../../utils/formatUserCircuitEntries';

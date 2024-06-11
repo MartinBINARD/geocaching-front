@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { LatLngTuple } from 'leaflet';
-import { useAppSelector } from '../../../../../../../hooks/redux';
+import { useAppSelector } from '../../../../../../hooks/redux';
 
-import { Circuit } from '../../../../../../../domain/entities/circuit';
+import { Circuit } from '../../../../../../domain/entities/circuit';
 
 import CircuitMapToggle from '../../../../../../components/CircuitMapToggle/CircuitMapToggle';
 

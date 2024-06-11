@@ -1,13 +1,13 @@
 import { Link, Navigate } from 'react-router-dom';
 import { Compass, MountainSnow } from 'lucide-react';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-import { login } from '../../../store/reducers/auth';
+import { login } from '../../store/reducers/auth';
 
-import { LoginForm } from '../../../domain/entities/auth';
+import { LoginForm } from '../../domain/entities/auth';
 
 import Footer from '../../components/Footer/Footer';
-import Loader from '../../../loader/Loader';
+import Loader from '../../loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';
 
 function Login() {
