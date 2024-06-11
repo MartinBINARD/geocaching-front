@@ -3,9 +3,12 @@ import { XCircle } from 'lucide-react';
 import {
   useAppDispatch,
   useAppSelector,
-} from '../../../../../../../hooks/redux';
+} from '../../../../../../../services/hooks/redux';
 
-import { Profile, UpdateProfileForm } from '../../../../../../../@types/user';
+import {
+  Profile,
+  UpdateProfileForm,
+} from '../../../../../../../domain/entities/user';
 
 import { updateProfile } from '../../../../../../../domain/usecases/user';
 

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 
-import { useAppSelector } from '../hooks/redux';
+import { useAppSelector } from '../../services/hooks/redux';
 
 interface ProtectedCircuitRouteProp {
   children: ReactNode;

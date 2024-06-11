@@ -6,7 +6,7 @@ import {
   MountainSnow,
 } from 'lucide-react';
 
-import { useAppSelector } from '../../../../../../../hooks/redux';
+import { useAppSelector } from '../../../../../../../services/hooks/redux';
 
 import { Circuit } from '../../../../../../../domain/entities/circuit';
 

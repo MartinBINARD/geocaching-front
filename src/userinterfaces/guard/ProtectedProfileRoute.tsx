@@ -1,9 +1,9 @@
 import { ReactNode, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../services/hooks/redux';
 
-import { logout } from '../store/reducers/auth';
+import { logout } from '../../domain/usecases/auth';
 
 interface ProtectedRouteProp {
   children: ReactNode;

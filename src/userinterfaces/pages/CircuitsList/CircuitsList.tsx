@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../services/hooks/redux';
 
 import { fetchCircuitsList } from '../../../domain/usecases/circuits';
 

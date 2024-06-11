@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../services/hooks/redux';
 
 import { getProfile } from '../../../domain/usecases/user';
 

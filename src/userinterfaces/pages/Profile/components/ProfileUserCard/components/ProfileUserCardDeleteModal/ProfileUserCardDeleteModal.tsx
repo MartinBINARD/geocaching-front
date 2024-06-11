@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { HeartCrack } from 'lucide-react';
 
-import { useAppDispatch } from '../../../../../../../hooks/redux';
+import { useAppDispatch } from '../../../../../../../services/hooks/redux';
 
 import { deleteProfile } from '../../../../../../../domain/usecases/user';
 

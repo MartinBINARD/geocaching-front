@@ -1,7 +1,7 @@
 import { Compass, Trophy } from 'lucide-react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 
-import { useAppSelector } from '../../../../../hooks/redux';
+import { useAppSelector } from '../../../../../services/hooks/redux';
 
 function CircuitCongrats() {
   const { id } = useParams();

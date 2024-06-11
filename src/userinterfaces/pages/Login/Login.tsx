@@ -1,6 +1,6 @@
 import { Link, Navigate } from 'react-router-dom';
 import { Compass, MountainSnow } from 'lucide-react';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../services/hooks/redux';
 
 import { login } from '../../../domain/usecases/auth';
 

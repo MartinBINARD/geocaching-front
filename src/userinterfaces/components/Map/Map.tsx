@@ -2,9 +2,9 @@ import { LatLngTuple } from 'leaflet';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
-import { Circuit } from '../../@types/circuit';
+import { Circuit } from '../../../domain/entities/circuit';
 
-import FindCenter from '../../utils/FindCenter';
+import FindCenter from '../../../domain/usecases/utils/FindCenter';
 import ButtonLocateMe from './components/ButtonLocateMe/ButtonLocateMe';
 import MapPopup from './components/MapPopup/MapPopup';
 

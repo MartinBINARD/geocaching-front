@@ -1,7 +1,8 @@
-import { Circuit, Search } from '../../@types/circuit';
-import { useAppSelector } from '../../hooks/redux';
-import getSelectorValueFromSearch from '../../utils/getSelectorValueFromSearch';
-import GetSelectValueArray from '../../utils/getSelectValueArray';
+import { Circuit, Search } from '../../../domain/entities/circuit';
+import { useAppSelector } from '../../../services/hooks/redux';
+
+import GetSelectValueArray from '../../../domain/usecases/utils/getSelectValueArray';
+import getSelectorValueFromSearch from '../../../domain/usecases/utils/getSelectorValueFromSearch';
 
 type OnSelectType = (e: React.ChangeEvent<HTMLSelectElement>) => void;
 

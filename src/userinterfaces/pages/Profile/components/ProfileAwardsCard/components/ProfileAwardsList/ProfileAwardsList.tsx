@@ -1,6 +1,6 @@
-import { useAppSelector } from '../../../../../../../hooks/redux';
+import { Profile } from '../../../../../../../domain/entities/user';
 
-import { Profile } from '../../../../../../../@types/user';
+import { useAppSelector } from '../../../../../../../services/hooks/redux';
 
 function ProfileAwardsList() {
   const profile = useAppSelector((state) => state.user.profile);

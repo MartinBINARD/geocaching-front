@@ -19,8 +19,8 @@ import {
   UpdatePassword,
   ErrorPage,
 } from '../pages';
-import ProtectedProfileRoute from '../../guard/ProtectedProfileRoute';
-import ProtectedCircuitRoute from '../../guard/ProtectedCircuitRoute';
+import ProtectedProfileRoute from '../guard/ProtectedProfileRoute';
+import ProtectedCircuitRoute from '../guard/ProtectedCircuitRoute';
 
 const router = createBrowserRouter([
   {

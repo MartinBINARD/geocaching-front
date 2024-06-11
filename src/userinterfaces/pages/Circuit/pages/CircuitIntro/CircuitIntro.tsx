@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { Compass } from 'lucide-react';
-import { useAppDispatch, useAppSelector } from '../../../../../hooks/redux';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../../../services/hooks/redux';
 
 import {
   fetchCircuit,

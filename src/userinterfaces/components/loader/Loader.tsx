@@ -1,4 +1,4 @@
-import logo from '../assets/logo/compass.png';
+import logo from '../../assets/logo/compass.png';
 
 function Loader() {
   return (

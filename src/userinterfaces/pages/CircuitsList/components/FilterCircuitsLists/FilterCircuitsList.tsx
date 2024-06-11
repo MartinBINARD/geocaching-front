@@ -1,7 +1,10 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { useEffect, useState } from 'react';
 import { MoveLeft, Plus, SlidersHorizontal } from 'lucide-react';
-import { useAppDispatch, useAppSelector } from '../../../../../hooks/redux';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../../../services/hooks/redux';
 
 import { resetSearchCircuitsList } from '../../../../../domain/usecases/circuits';
 

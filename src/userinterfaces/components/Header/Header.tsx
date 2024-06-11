@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu, Plus } from 'lucide-react';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../services/hooks/redux';
 
-import { fetchSession } from '../../store/reducers/auth';
+import { fetchSession } from '../../../domain/usecases/auth';
 
 import HeaderNavLink from './components/HeaderNavLink/HeaderNavLink';
 import HeaderNavLinkLogin from './components/HeaderNavLinkLogin/HeaderNavLinkLogin';

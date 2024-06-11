@@ -7,7 +7,7 @@ import { UserCircuitEntriesState } from '../../../../../../../../../domain/entit
 import {
   useAppDispatch,
   useAppSelector,
-} from '../../../../../../../../../hooks/redux';
+} from '../../../../../../../../../services/hooks/redux';
 
 import { sendAnswers } from '../../../../../../../../../domain/usecases/circuits';
 

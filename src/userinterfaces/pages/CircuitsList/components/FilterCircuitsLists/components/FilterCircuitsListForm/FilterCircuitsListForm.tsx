@@ -3,7 +3,7 @@ import { Search, Trash2 } from 'lucide-react';
 import {
   useAppDispatch,
   useAppSelector,
-} from '../../../../../../../hooks/redux';
+} from '../../../../../../../services/hooks/redux';
 
 import {
   resetSearchCircuitsList,

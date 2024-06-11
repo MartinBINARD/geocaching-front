@@ -1,6 +1,6 @@
 import { AlertCircle } from 'lucide-react';
 import { LatLngTuple } from 'leaflet';
-import { useAppSelector } from '../../../../../../../hooks/redux';
+import { useAppSelector } from '../../../../../../../services/hooks/redux';
 
 import Map from '../../../../../../components/Map/Map';
 

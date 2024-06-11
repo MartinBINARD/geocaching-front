@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../../../../hooks/redux';
+import { useAppSelector } from '../../../../../services/hooks/redux';
 
 import ProfileUserDescription from './components/ProfileUserDescription/ProfileUserDescription';
 import ProfileUserForm from './components/ProfileUserForm/ProfileUserForm';

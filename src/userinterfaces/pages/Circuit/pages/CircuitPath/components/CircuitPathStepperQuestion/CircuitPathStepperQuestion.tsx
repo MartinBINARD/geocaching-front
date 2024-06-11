@@ -4,7 +4,7 @@ import { LatLngTuple } from 'leaflet';
 import {
   useAppDispatch,
   useAppSelector,
-} from '../../../../../../../hooks/redux';
+} from '../../../../../../../services/hooks/redux';
 
 import { storeStepEntries } from '../../../../../../../domain/usecases/circuits';
 

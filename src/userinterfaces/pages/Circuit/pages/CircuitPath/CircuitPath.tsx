@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Flag } from 'lucide-react';
 
-import { useAppDispatch, useAppSelector } from '../../../../../hooks/redux';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../../../services/hooks/redux';
 
 import { storeCircuitQuiz } from '../../../../../domain/usecases/circuits';
 

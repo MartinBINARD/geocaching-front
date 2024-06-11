@@ -1,6 +1,6 @@
 import { Compass, Globe2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../services/hooks/redux';
 
 import { register } from '../../../domain/usecases/auth';
 
