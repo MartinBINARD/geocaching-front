@@ -5,6 +5,11 @@ export default {
     '^.+\\.(js|ts|tsx)$': 'ts-jest',
     // process `*.tsx` files with `ts-jest`
   },
+  transformIgnorePatterns: ['<rootDir>/node_modules/'],
+  modulePathIgnorePatterns: [
+    '<rootDir>/src/services',
+    '<rootDir>/src/userinterface/',
+  ],
   moduleNameMapper: {
     setupFilesAfterEnv: ['./jest.setup.ts'],
   },
