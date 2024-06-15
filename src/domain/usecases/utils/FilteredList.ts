@@ -1,4 +1,4 @@
-import { Circuit, Search } from '../domain/entities/circuit';
+import { Circuit, Search } from '../../entities/circuit';
 import FilteredObjectKeys from './FilteredObjectKeys';
 
 function stringifyObjectValues(obj: Circuit, key: string, value: string) {

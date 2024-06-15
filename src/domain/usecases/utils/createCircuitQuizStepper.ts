@@ -1,4 +1,4 @@
-import { CircuitPathStep } from '../domain/entities/circuit';
+import { CircuitPathStep } from '../../entities/circuit';
 
 function createCircuitQuizStepper(steps: CircuitPathStep[]) {
   return steps.map((step) => {

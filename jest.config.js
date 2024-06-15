@@ -5,6 +5,7 @@ export default {
     '^.+\\.(js|ts|tsx)$': 'ts-jest',
     // process `*.tsx` files with `ts-jest`
   },
+  transformIgnorePatterns: ['/node_modules/'],
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
   modulePathIgnorePatterns: [
     '<rootDir>/src/services',

@@ -1,4 +1,4 @@
-import { UpdateCredentials } from '../domain/entities/auth';
+import { UpdateCredentials } from '../../entities/auth';
 
 function formatUserUpdateCredentials(credentials: UpdateCredentials) {
   const { form, token, userId } = credentials;

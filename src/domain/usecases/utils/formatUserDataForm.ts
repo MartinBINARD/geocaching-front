@@ -1,25 +1,21 @@
-import { EmailForm, LoginForm } from '../domain/entities/auth';
-import { UpdateProfileForm } from '../@types/user';
+import { EmailForm } from '../../entities/auth';
+import { UpdateProfileForm } from '../../entities/user';
 
 function setLowerCaseEmail(formData: EmailForm) {
-  const emailInput = formData.get('email') as string;
+  const emailInput = formData.get('email');
   const emailToLowerCase = emailInput.toLowerCase();
 
   return formData.set('email', emailToLowerCase);
 }
 
-function formatUserDataForm(form: LoginForm | EmailForm | UpdateProfileForm) {
-  const formData = new FormData(form) as unknown as
-    | LoginForm
-    | EmailForm
-    | UpdateProfileForm;
+function formatUserDataForm(form: EmailForm | UpdateProfileForm) {
+  const formData = new FormData(form);
 
-  setLowerCaseEmail(formData);
+  const formDataToLowerCase = setLowerCaseEmail(
+    formData as unknown as EmailForm
+  );
 
-  return Object.fromEntries(formData.entries()) as unknown as
-    | LoginForm
-    | EmailForm
-    | UpdateProfileForm;
+  return Object.fromEntries(formDataToLowerCase.entries());
 }
 
 export default formatUserDataForm;

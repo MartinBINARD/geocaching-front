@@ -15,7 +15,7 @@ export interface Profile {
   verified: boolean;
 }
 
-export interface UpdateProfileForm extends EmailForm {
+export interface UpdateProfileForm extends EmailForm, HTMLFormElement {
   pseudo: HTMLInputElement;
   region: HTMLInputElement;
   state: HTMLInputElement;

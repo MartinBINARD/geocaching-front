@@ -1,4 +1,4 @@
-import { Search } from '../domain/entities/circuit';
+import { Search } from '../../entities/circuit';
 // Remove any object keys with empty string values
 
 /* Use built-in utility Record types to spécify an object
