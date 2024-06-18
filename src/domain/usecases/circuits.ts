@@ -38,7 +38,7 @@ interface CircuitState {
   isFetchCircuitFailed: boolean;
 }
 
-const initialState: CircuitState = {
+export const initialCircuitsState: CircuitState = {
   circuitsList: [],
   searchSelectorsFilterEntries: null,
   searchList: [],
@@ -126,7 +126,7 @@ export const sendAnswers = createAsyncThunk(
   }
 );
 
-const circuitsReducer = createReducer(initialState, (builder) => {
+const circuitsReducer = createReducer(initialCircuitsState, (builder) => {
   builder
     .addCase(fetchCircuitsList.pending, (state) => {
       state.isLoading = true;

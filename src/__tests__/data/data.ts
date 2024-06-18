@@ -1,13 +1,4 @@
-import { RootState } from '../../store';
-import { fetchCircuitsList } from '../../domain/usecases/circuits';
-
-jest.mock('../../services/axios', () => ({
-  api: {
-    baseUrl: 'http://localhost:3000',
-  },
-}));
-
-const circuitsList = [
+export const ciruitsListResponse = [
   {
     id_circuit: 1,
     name: 'Carnac',
@@ -77,44 +68,3 @@ const circuitsList = [
     url_reward: 'http://localhost:3000/images/undefined',
   },
 ];
-
-describe('circuit function', () => {
-  it('should GET circuits list', async () => {
-    const dispatch = jest.fn();
-    const state: RootState = {
-      circuits: {
-        circuitsList: circuitsList,
-        searchSelectorsFilterEntries: null,
-        searchList: [],
-        isSearchNoResult: false,
-        errorMessage: undefined,
-        oneCircuit: null,
-        circuitQuiz: [],
-        stepsEntries: null,
-        userCircuitAnswersResult: null,
-        isLoading: false,
-        isFetchCircuitFailed: false,
-      },
-      auth: {
-        user: null,
-        loginErrorMessage: null,
-        isRegistered: null,
-        registerErrorMessage: '',
-        isAccountConfirmed: false,
-        isReset: false,
-        isLoading: false,
-      },
-      user: {
-        profile: null,
-        isProfileLoading: false,
-        errorMessage: null,
-        isUpdateLoading: false,
-        isProfileDelete: false,
-      },
-    };
-
-    const thunk = fetchCircuitsList();
-    await thunk(dispatch, () => state, undefined);
-    console.log(dispatch.mock.calls);
-  });
-});

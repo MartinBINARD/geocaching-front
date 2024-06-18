@@ -10,6 +10,7 @@ export default {
   modulePathIgnorePatterns: [
     '<rootDir>/src/services',
     '<rootDir>/src/userinterface/',
+    '<rootDir>/src/__tests__/data',
   ],
   moduleNameMapper: {
     setupFilesAfterEnv: ['./jest.setup.ts'],
