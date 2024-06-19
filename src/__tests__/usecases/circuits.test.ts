@@ -1,9 +1,10 @@
 import { Circuit } from '../../domain/entities/circuit';
 import circuitsReducer, {
+  fetchCircuit,
   fetchCircuitsList,
   initialCircuitsState,
 } from '../../domain/usecases/circuits';
-import { ciruitsListResponse } from '../data/data';
+import { ciruitsListResponse, oneCircuitResponse } from '../data/data';
 
 const fakeRequestId = 'fakeRequestId';
 
@@ -13,13 +14,15 @@ jest.mock('../../services/axios', () => ({
   },
 }));
 
-describe('Circuits list state test', () => {
+describe('Circuits store', () => {
   it('Should return the initial circuits state on first call', () => {
     expect(circuitsReducer(undefined, { type: '@@INIT' })).toBe(
       initialCircuitsState
     );
   });
+});
 
+describe('Circuits list state test', () => {
   it('Should GET circuits list', async () => {
     const fakePayload: Circuit[] = ciruitsListResponse;
 
@@ -56,6 +59,51 @@ describe('Circuits list state test', () => {
     });
     expect(state.circuitsList).toHaveLength(0);
 
+    expect(state.isLoading).toBe(false);
+  });
+});
+
+describe('Fetch one circuit state test', () => {
+  it('Should GET ONE circuit', async () => {
+    const fakePayload: Circuit = oneCircuitResponse;
+
+    const action = fetchCircuit.fulfilled(
+      fakePayload,
+      fakeRequestId,
+      'circuits/1'
+    );
+    const state = circuitsReducer(initialCircuitsState, action);
+
+    expect(action.type).toEqual('circuits/fetch-circuit/fulfilled');
+    expect(action.payload).toEqual(fakePayload);
+    expect(action.meta.requestId).toEqual(fakeRequestId);
+
+    expect(state).toEqual({
+      ...initialCircuitsState,
+      oneCircuit: fakePayload,
+    });
+    expect(state.isLoading).toBe(false);
+  });
+
+  it('Should FAIL to return ONE circuit', () => {
+    const fakePayload = [] as any;
+
+    const action = fetchCircuit.rejected(
+      fakePayload,
+      fakeRequestId,
+      'circuits/1'
+    );
+    const state = circuitsReducer(initialCircuitsState, action);
+
+    expect(action.type).toEqual('circuits/fetch-circuit/rejected');
+    expect(action.payload).toEqual(undefined);
+    expect(action.meta.requestId).toEqual(fakeRequestId);
+
+    expect(state).toEqual({
+      ...initialCircuitsState,
+      isFetchCircuitFailed: true,
+      oneCircuit: null,
+    });
     expect(state.isLoading).toBe(false);
   });
 });
