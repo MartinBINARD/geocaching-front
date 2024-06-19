@@ -54,20 +54,24 @@ export interface SearchState {
   list: Circuit[];
 }
 
+export interface CircuitQuizContentParagraph {
+  paragraph: string;
+  hint: string | null;
+  question: string;
+}
+
+export interface CircuitQuizContentTransition {
+  transition: string;
+}
+
+export interface CircuitQuizContentArray
+  extends Array<CircuitQuizContentParagraph, CircuitQuizContentTransition> {}
+
 export interface CircuitQuizStep {
   id: number;
   latitude: number;
   longitude: number;
-  content: [
-    {
-      paragraph: string;
-      hint: string | null;
-      question: string;
-    },
-    {
-      transition: string;
-    },
-  ];
+  content: CircuitQuizContentArray;
 }
 
 export type StepsEntriesState = Record<string, string | undefined>;
