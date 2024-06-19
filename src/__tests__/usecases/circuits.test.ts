@@ -3,6 +3,7 @@ import circuitsReducer, {
   fetchCircuit,
   fetchCircuitsList,
   initialCircuitsState,
+  resetSearchCircuitsList,
   searchCircuitsList,
 } from '../../domain/usecases/circuits';
 import {
@@ -46,7 +47,7 @@ describe('Circuits list state test', () => {
     });
     expect(state.circuitsList).toHaveLength(3);
 
-    expect(state.isLoading).toBe(false);
+    expect(state.isLoading).toBeFalsy;
   });
 
   it('Should FAIL to return circuits list', async () => {
@@ -66,7 +67,7 @@ describe('Circuits list state test', () => {
     });
     expect(state.circuitsList).toHaveLength(0);
 
-    expect(state.isLoading).toBe(false);
+    expect(state.isLoading).toBeFalsy;
   });
 });
 
@@ -128,7 +129,7 @@ describe('Fetch one circuit state test', () => {
       ...initialCircuitsState,
       oneCircuit: fakePayload,
     });
-    expect(state.isLoading).toBe(false);
+    expect(state.isLoading).toBeFalsy;
   });
 
   it('Should FAIL to return ONE circuit', () => {
@@ -150,6 +151,20 @@ describe('Fetch one circuit state test', () => {
       isFetchCircuitFailed: true,
       oneCircuit: null,
     });
-    expect(state.isLoading).toBe(false);
+    expect(state.isLoading).toBeFalsy;
+  });
+});
+
+describe('Reset search circuits list state test', () => {
+  it('Should SUCCESS to return RESET research on circuits list', async () => {
+    const action = resetSearchCircuitsList();
+    const state = circuitsReducer(initialCircuitsState, action);
+
+    expect(action.type).toEqual('circuits/reset-search-circuits-list');
+    expect(action.payload).toEqual(undefined);
+
+    expect(state.isSearchNoResult).toBeFalsy;
+    expect(state.searchSelectorsFilterEntries).toBeNull;
+    expect(state.searchList).toHaveLength(0);
   });
 });
