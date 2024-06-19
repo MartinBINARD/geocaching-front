@@ -1,10 +1,17 @@
-import { Circuit } from '../../domain/entities/circuit';
+import { Circuit, SearchState } from '../../domain/entities/circuit';
 import circuitsReducer, {
   fetchCircuit,
   fetchCircuitsList,
   initialCircuitsState,
+  searchCircuitsList,
 } from '../../domain/usecases/circuits';
-import { ciruitsListResponse, oneCircuitResponse } from '../data/data';
+import {
+  ciruitsListResponse,
+  oneCircuitResponse,
+  searchCircuitsListResponse,
+  goodSearchEntries,
+  wrongSearchEntries,
+} from '../data/data';
 
 const fakeRequestId = 'fakeRequestId';
 
@@ -60,6 +67,45 @@ describe('Circuits list state test', () => {
     expect(state.circuitsList).toHaveLength(0);
 
     expect(state.isLoading).toBe(false);
+  });
+});
+
+describe('Search circuits list state test', () => {
+  it('Should SUCCESS to return research on circuits list', async () => {
+    const fakePayload: Circuit[] = searchCircuitsListResponse;
+    const fakeSearchEntries: SearchState = goodSearchEntries;
+
+    const action = searchCircuitsList(fakeSearchEntries);
+    const state = circuitsReducer(initialCircuitsState, action);
+
+    expect(action.type).toEqual('circuits/search-circuits-list');
+    expect(action.payload).toEqual(fakeSearchEntries);
+
+    expect(state).toEqual({
+      ...initialCircuitsState,
+      searchList: fakePayload,
+      searchSelectorsFilterEntries: fakeSearchEntries.search,
+    });
+    expect(state.searchList).toHaveLength(2);
+  });
+
+  it('Should FAILED to return research on circuits list', async () => {
+    const fakePayload: Circuit[] = [];
+    const fakeSearchEntries: SearchState = wrongSearchEntries;
+
+    const action = searchCircuitsList(fakeSearchEntries);
+    const state = circuitsReducer(initialCircuitsState, action);
+
+    expect(action.type).toEqual('circuits/search-circuits-list');
+    expect(action.payload).toEqual(fakeSearchEntries);
+
+    expect(state).toEqual({
+      ...initialCircuitsState,
+      isSearchNoResult: true,
+      searchList: fakePayload,
+      searchSelectorsFilterEntries: fakeSearchEntries.search,
+    });
+    expect(state.searchList).toHaveLength(0);
   });
 });
 

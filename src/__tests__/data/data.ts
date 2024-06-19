@@ -21,7 +21,7 @@ export const oneCircuitResponse = {
   url_reward: 'http://localhost:3000/images/undefined',
 };
 
-export const ciruitsListResponse = [
+export const searchCircuitsListResponse = [
   oneCircuitResponse,
   {
     id_circuit: 2,
@@ -46,6 +46,10 @@ export const ciruitsListResponse = [
     mobility: ['À pied', 'À vélo'],
     url_reward: 'http://localhost:3000/images/undefined',
   },
+];
+
+export const ciruitsListResponse = [
+  ...searchCircuitsListResponse,
   {
     id_circuit: 3,
     name: 'Chantilly',
@@ -70,3 +74,23 @@ export const ciruitsListResponse = [
     url_reward: 'http://localhost:3000/images/undefined',
   },
 ];
+
+const goodSearch = {
+  region: 'Bretagne',
+  mobility: 'À pied',
+};
+
+const wrongSearch = {
+  region: 'Bretagne',
+  city: 'Chantilly',
+};
+
+export const goodSearchEntries = {
+  search: goodSearch,
+  list: ciruitsListResponse,
+};
+
+export const wrongSearchEntries = {
+  search: wrongSearch,
+  list: ciruitsListResponse,
+};
