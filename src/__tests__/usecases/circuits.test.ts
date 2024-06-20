@@ -2,7 +2,7 @@ import {
   Circuit,
   CircuitPathStep,
   SearchState,
-  UserCircuitEntriesState,
+  StepsEntriesState,
 } from '../../domain/entities/circuit';
 import circuitsReducer, {
   fetchCircuit,
@@ -22,6 +22,7 @@ import {
   wrongSearchEntries,
   oneCircuitQuizResponse,
   oneCircuitStepResponse,
+  wrongStepsEntriesResponse,
 } from '../data/data';
 
 const fakeRequestId = 'fakeRequestId';
@@ -208,6 +209,22 @@ describe('RESET circuit quiz state test', () => {
       ...initialCircuitsState,
       stepsEntries: null,
       userCircuitAnswersResult: null,
+    });
+  });
+});
+
+describe('Store step entries from circuit quiz state test', () => {
+  it('Should SUCESS to store step entries', () => {
+    const fakePayload: StepsEntriesState = wrongStepsEntriesResponse;
+    const action = storeStepEntries(fakePayload);
+    const state = circuitsReducer(initialCircuitsState, action);
+
+    expect(action.type).toEqual('circuits/store-steps-entries');
+    expect(action.payload).toEqual(fakePayload);
+
+    expect(state).toEqual({
+      ...initialCircuitsState,
+      stepsEntries: fakePayload,
     });
   });
 });
