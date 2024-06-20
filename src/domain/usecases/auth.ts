@@ -26,7 +26,7 @@ interface AuthState {
   isLoading: boolean;
 }
 
-const intialState: AuthState = {
+export const intialAuthState: AuthState = {
   user: null,
   loginErrorMessage: null,
   isRegistered: null,
@@ -147,7 +147,7 @@ export const updatePassword = createAsyncThunk(
   }
 );
 
-const authReducer = createReducer(intialState, (builder) => {
+const authReducer = createReducer(intialAuthState, (builder) => {
   builder
     .addCase(register.pending, (state) => {
       state.isLoading = true;
