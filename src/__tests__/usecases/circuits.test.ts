@@ -7,6 +7,7 @@ import circuitsReducer, {
   fetchCircuit,
   fetchCircuitsList,
   initialCircuitsState,
+  resetCircuitQuiz,
   resetSearchCircuitsList,
   searchCircuitsList,
   storeCircuitQuiz,
@@ -189,6 +190,22 @@ describe('Store circuit quiz state test', () => {
     expect(state).toEqual({
       ...initialCircuitsState,
       circuitQuiz: oneCircuitQuizResponse,
+    });
+  });
+});
+
+describe('RESET circuit quiz state test', () => {
+  it('Should SUCESS to RESET circuit quiz answers', () => {
+    const action = resetCircuitQuiz();
+    const state = circuitsReducer(initialCircuitsState, action);
+
+    expect(action.type).toEqual('circuits/reset-circuit-quiz');
+    expect(action.payload).toEqual(undefined);
+
+    expect(state).toEqual({
+      ...initialCircuitsState,
+      stepsEntries: null,
+      userCircuitAnswersResult: null,
     });
   });
 });

@@ -31,10 +31,8 @@ function CircuitPath() {
 
   const isLoading = useAppSelector((state) => state.circuits.isLoading);
   const circuit = useAppSelector((state) => state.circuits.oneCircuit);
-  // console.log('circuit', circuit);
 
   const circuitQuiz = useAppSelector((state) => state.circuits.circuitQuiz);
-  console.log('circuitQuiz', circuitQuiz);
 
   const dispatch = useAppDispatch();
 
