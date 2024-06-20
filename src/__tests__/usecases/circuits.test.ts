@@ -2,6 +2,7 @@ import {
   Circuit,
   CircuitPathStep,
   SearchState,
+  UserCircuitEntriesState,
 } from '../../domain/entities/circuit';
 import circuitsReducer, {
   fetchCircuit,
@@ -11,6 +12,7 @@ import circuitsReducer, {
   resetSearchCircuitsList,
   searchCircuitsList,
   storeCircuitQuiz,
+  storeStepEntries,
 } from '../../domain/usecases/circuits';
 import {
   ciruitsListResponse,
@@ -178,7 +180,7 @@ describe('Fetch one circuit state test', () => {
 });
 
 describe('Store circuit quiz state test', () => {
-  it('Should SUCESS To store circuit quiz answers', () => {
+  it('Should SUCESS To store circuit quiz questions', () => {
     const fakePayload: CircuitPathStep[] = oneCircuitStepResponse;
 
     const action = storeCircuitQuiz(fakePayload);
@@ -195,7 +197,7 @@ describe('Store circuit quiz state test', () => {
 });
 
 describe('RESET circuit quiz state test', () => {
-  it('Should SUCESS to RESET circuit quiz answers', () => {
+  it('Should SUCESS to RESET circuit quiz questions', () => {
     const action = resetCircuitQuiz();
     const state = circuitsReducer(initialCircuitsState, action);
 

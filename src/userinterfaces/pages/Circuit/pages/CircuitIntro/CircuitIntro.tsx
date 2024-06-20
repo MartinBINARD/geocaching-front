@@ -21,7 +21,6 @@ function CircuitIntro() {
   const isLoading = useAppSelector((state) => state.circuits.isLoading);
   const user = useAppSelector((state) => state.auth.user);
   const circuit = useAppSelector((state) => state.circuits.oneCircuit);
-  console.log('circuit', circuit);
 
   const isFetchCircuitFailed = useAppSelector(
     (state) => state.circuits.isFetchCircuitFailed
