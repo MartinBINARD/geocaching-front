@@ -28,7 +28,7 @@ import {
   userCircuitEntriesResponse,
   userCircuitAnswerResultResponse,
   stepsEntriesResponse,
-} from '../data/data';
+} from '../data/circuits.data';
 
 const fakeRequestId = 'fakeRequestId';
 
