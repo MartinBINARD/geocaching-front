@@ -25,9 +25,9 @@ import {
   wrongSearchEntries,
   oneCircuitQuizResponse,
   oneCircuitStepResponse,
-  rightUserCircuitEntriesResponse,
-  rightUserCircuitAnswerResultResponse,
-  rightStepsEntriesResponse,
+  userCircuitEntriesResponse,
+  userCircuitAnswerResultResponse,
+  stepsEntriesResponse,
 } from '../data/data';
 
 const fakeRequestId = 'fakeRequestId';
@@ -220,7 +220,7 @@ describe('RESET circuit quiz state test', () => {
 
 describe('Store step entries from circuit quiz state test', () => {
   it('Should SUCESS to store step entries', () => {
-    const fakePayload: StepsEntriesState = rightStepsEntriesResponse;
+    const fakePayload: StepsEntriesState = stepsEntriesResponse;
     const action = storeStepEntries(fakePayload);
     const state = circuitsReducer(initialCircuitsState, action);
 
@@ -237,9 +237,8 @@ describe('Store step entries from circuit quiz state test', () => {
 describe('Send user answers from circuit quiz state test', () => {
   it('Should SUCCESS to send user answers', async () => {
     const fakePayload: UserCircuitAnswersResultState =
-      rightUserCircuitAnswerResultResponse;
-    const fakeEntries: UserCircuitEntriesState =
-      rightUserCircuitEntriesResponse;
+      userCircuitAnswerResultResponse;
+    const fakeEntries: UserCircuitEntriesState = userCircuitEntriesResponse;
 
     const action = sendAnswers.fulfilled(
       fakePayload,
@@ -261,8 +260,7 @@ describe('Send user answers from circuit quiz state test', () => {
 
   it('Should FAILED to send user answers', async () => {
     const fakePayload = null;
-    const fakeEntries: UserCircuitEntriesState =
-      rightUserCircuitEntriesResponse;
+    const fakeEntries: UserCircuitEntriesState = userCircuitEntriesResponse;
 
     const action = sendAnswers.rejected(
       fakePayload,

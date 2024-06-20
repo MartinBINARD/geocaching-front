@@ -234,7 +234,7 @@ export const oneCircuitQuizResponse = [
   },
 ];
 
-export const rightStepsEntriesResponse = {
+export const stepsEntriesResponse = {
   0: '15',
   1: '4',
   2: '8',
@@ -243,13 +243,13 @@ export const rightStepsEntriesResponse = {
   5: '16',
 };
 
-export const rightUserCircuitEntriesResponse = {
+export const userCircuitEntriesResponse = {
   userId: 1,
   circuitId: 1,
-  stepsEntries: rightStepsEntriesResponse,
+  stepsEntries: stepsEntriesResponse,
 };
 
-export const rightUserCircuitAnswerResultResponse = [
+export const userCircuitAnswerResultResponse = [
   true,
   true,
   true,
