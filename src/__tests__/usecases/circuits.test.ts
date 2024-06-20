@@ -3,6 +3,8 @@ import {
   CircuitPathStep,
   SearchState,
   StepsEntriesState,
+  UserCircuitAnswersResultState,
+  UserCircuitEntriesState,
 } from '../../domain/entities/circuit';
 import circuitsReducer, {
   fetchCircuit,
@@ -11,6 +13,7 @@ import circuitsReducer, {
   resetCircuitQuiz,
   resetSearchCircuitsList,
   searchCircuitsList,
+  sendAnswers,
   storeCircuitQuiz,
   storeStepEntries,
 } from '../../domain/usecases/circuits';
@@ -22,7 +25,9 @@ import {
   wrongSearchEntries,
   oneCircuitQuizResponse,
   oneCircuitStepResponse,
-  wrongStepsEntriesResponse,
+  rightUserCircuitEntriesResponse,
+  rightUserCircuitAnswerResultResponse,
+  rightStepsEntriesResponse,
 } from '../data/data';
 
 const fakeRequestId = 'fakeRequestId';
@@ -138,17 +143,19 @@ describe('Reset search circuits list state test', () => {
 describe('Fetch one circuit state test', () => {
   it('Should GET ONE circuit', async () => {
     const fakePayload: Circuit = oneCircuitResponse;
+    const fakeParam = 'circuits/1';
 
     const action = fetchCircuit.fulfilled(
       fakePayload,
       fakeRequestId,
-      'circuits/1'
+      fakeParam
     );
     const state = circuitsReducer(initialCircuitsState, action);
 
     expect(action.type).toEqual('circuits/fetch-circuit/fulfilled');
     expect(action.payload).toEqual(fakePayload);
     expect(action.meta.requestId).toEqual(fakeRequestId);
+    expect(action.meta.arg).toEqual(fakeParam);
 
     expect(state).toEqual({
       ...initialCircuitsState,
@@ -159,17 +166,15 @@ describe('Fetch one circuit state test', () => {
 
   it('Should FAIL to return ONE circuit', () => {
     const fakePayload = [] as any;
+    const fakeParam = 'circuits/1';
 
-    const action = fetchCircuit.rejected(
-      fakePayload,
-      fakeRequestId,
-      'circuits/1'
-    );
+    const action = fetchCircuit.rejected(fakePayload, fakeRequestId, fakeParam);
     const state = circuitsReducer(initialCircuitsState, action);
 
     expect(action.type).toEqual('circuits/fetch-circuit/rejected');
     expect(action.payload).toEqual(undefined);
     expect(action.meta.requestId).toEqual(fakeRequestId);
+    expect(action.meta.arg).toEqual(fakeParam);
 
     expect(state).toEqual({
       ...initialCircuitsState,
@@ -215,7 +220,7 @@ describe('RESET circuit quiz state test', () => {
 
 describe('Store step entries from circuit quiz state test', () => {
   it('Should SUCESS to store step entries', () => {
-    const fakePayload: StepsEntriesState = wrongStepsEntriesResponse;
+    const fakePayload: StepsEntriesState = rightStepsEntriesResponse;
     const action = storeStepEntries(fakePayload);
     const state = circuitsReducer(initialCircuitsState, action);
 
@@ -226,5 +231,55 @@ describe('Store step entries from circuit quiz state test', () => {
       ...initialCircuitsState,
       stepsEntries: fakePayload,
     });
+  });
+});
+
+describe('Send user answers from circuit quiz state test', () => {
+  it('Should SUCCESS to send user answers', async () => {
+    const fakePayload: UserCircuitAnswersResultState =
+      rightUserCircuitAnswerResultResponse;
+    const fakeEntries: UserCircuitEntriesState =
+      rightUserCircuitEntriesResponse;
+
+    const action = sendAnswers.fulfilled(
+      fakePayload,
+      fakeRequestId,
+      fakeEntries
+    );
+    const state = circuitsReducer(initialCircuitsState, action);
+
+    expect(action.type).toEqual('circuits/send-answers/fulfilled');
+    expect(action.payload).toEqual(fakePayload);
+    expect(action.meta.arg).toEqual(fakeEntries);
+
+    expect(state).toEqual({
+      ...initialCircuitsState,
+      userCircuitAnswersResult: fakePayload,
+    });
+    expect(state.isLoading).toBeFalsy;
+  });
+
+  it('Should FAILED to send user answers', async () => {
+    const fakePayload = null;
+    const fakeEntries: UserCircuitEntriesState =
+      rightUserCircuitEntriesResponse;
+
+    const action = sendAnswers.rejected(
+      fakePayload,
+      fakeRequestId,
+      fakeEntries
+    );
+    const state = circuitsReducer(initialCircuitsState, action);
+
+    expect(action.type).toEqual('circuits/send-answers/rejected');
+    expect(action.payload).toEqual(undefined);
+    expect(action.meta.arg).toEqual(fakeEntries);
+    expect(action.error).toEqual({ message: 'Rejected' });
+
+    expect(state).toEqual({
+      ...initialCircuitsState,
+      userCircuitAnswersResult: null,
+    });
+    expect(state.isLoading).toBeFalsy;
   });
 });

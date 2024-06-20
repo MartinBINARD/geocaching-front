@@ -234,14 +234,29 @@ export const oneCircuitQuizResponse = [
   },
 ];
 
-export const wrongStepsEntriesResponse = {
-  0: '1',
-  1: '1',
-  2: '1',
-  3: '1',
-  4: '1',
-  5: '1',
+export const rightStepsEntriesResponse = {
+  0: '15',
+  1: '4',
+  2: '8',
+  3: '350',
+  4: '2',
+  5: '16',
 };
+
+export const rightUserCircuitEntriesResponse = {
+  userId: 1,
+  circuitId: 1,
+  stepsEntries: rightStepsEntriesResponse,
+};
+
+export const rightUserCircuitAnswerResultResponse = [
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+];
 
 export const searchCircuitsListResponse = [
   oneCircuitResponse,
