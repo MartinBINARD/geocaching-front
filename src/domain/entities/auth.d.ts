@@ -4,8 +4,8 @@ export interface LoginForm extends HTMLFormElement {
 }
 
 export interface RegisterForm extends LoginForm {
-  confirmation: string;
-  pseudo: string;
+  confirmation: HTMLInputElement;
+  pseudo: HTMLInputElement;
 }
 
 export interface RegisterSucces {
