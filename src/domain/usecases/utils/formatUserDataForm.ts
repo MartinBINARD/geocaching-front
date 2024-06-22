@@ -1,4 +1,4 @@
-import { EmailForm } from '../../entities/auth';
+import { EmailForm, LoginForm } from '../../entities/auth';
 import { UpdateProfileForm } from '../../entities/user';
 
 function setLowerCaseEmail(formData: EmailForm) {
@@ -8,14 +8,15 @@ function setLowerCaseEmail(formData: EmailForm) {
   return formData.set('email', emailToLowerCase);
 }
 
-function formatUserDataForm(form: EmailForm | UpdateProfileForm) {
-  const formData = new FormData(form);
+function formatUserDataForm(form: LoginForm | EmailForm | UpdateProfileForm) {
+  const formData = new FormData(form) as unknown as
+    | LoginForm
+    | EmailForm
+    | UpdateProfileForm;
 
-  const formDataToLowerCase = setLowerCaseEmail(
-    formData as unknown as EmailForm
-  );
+  setLowerCaseEmail(formData as EmailForm);
 
-  return Object.fromEntries(formDataToLowerCase.entries());
+  return Object.fromEntries(formData.entries());
 }
 
 export default formatUserDataForm;
