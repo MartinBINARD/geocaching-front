@@ -1,7 +1,13 @@
 import { AxiosError } from 'axios';
-import { RegisterForm, RegisterSucces } from '../../domain/entities/auth';
+import {
+  LoginForm,
+  RegisterForm,
+  RegisterSucces,
+  User,
+} from '../../domain/entities/auth';
 import authReducer, {
   intialAuthState,
+  login,
   register,
 } from '../../domain/usecases/auth';
 import {
@@ -11,6 +17,9 @@ import {
   wrongRegisterFormEntries,
   registerErrorPseudoResponse,
   registerErrorGenericResponse,
+  loginEntries,
+  rightLoginResponse,
+  loginErrorResponse,
 } from '../data/auth.data';
 
 const fakeRequestId = 'fakeRequestId';
@@ -28,7 +37,7 @@ describe('Authentication store', () => {
 });
 
 describe('Register state test', () => {
-  it('Should SUCESS to register', async () => {
+  it('Should SUCCESS to register', async () => {
     const fakeEntries = rightRegisterFormEntries as unknown as RegisterForm;
     const fakePayload: RegisterSucces = registerMessageResponse;
 
@@ -100,6 +109,45 @@ describe('Register state test', () => {
       ...intialAuthState,
       registerErrorMessage: 'Request failed with status code 500',
     });
+    expect(state.isLoading).toBeFalsy;
+  });
+});
+
+describe('Login state test', () => {
+  it('Should SUCCESS to login', async () => {
+    const fakeEntries = loginEntries as unknown as LoginForm;
+    const fakePayload: User = rightLoginResponse;
+
+    const action = login.fulfilled(fakePayload, fakeRequestId, fakeEntries);
+    const state = authReducer(intialAuthState, action);
+
+    expect(action.type).toEqual('settings/login/fulfilled');
+    expect(action.payload).toEqual(fakePayload);
+    expect(action.meta.requestId).toEqual(fakeRequestId);
+    expect(action.meta.arg).toEqual(fakeEntries);
+
+    expect(state).toEqual({ ...intialAuthState, user: fakePayload });
+    expect(state.isLoading).toBeFalsy;
+    expect(state.loginErrorMessage).toBeNull;
+  });
+
+  it('Should FAIL to login', async () => {
+    const fakeEntries = loginEntries as unknown as LoginForm;
+    const fakePayload = loginErrorResponse as unknown as AxiosError;
+
+    const action = login.rejected(fakePayload, fakeRequestId, fakeEntries);
+    const state = authReducer(intialAuthState, action);
+
+    expect(action.type).toEqual('settings/login/rejected');
+    expect(action.payload).toEqual(undefined);
+    expect(action.meta.requestId).toEqual(fakeRequestId);
+    expect(action.meta.arg).toEqual(fakeEntries);
+
+    expect(state).toEqual({
+      ...intialAuthState,
+      loginErrorMessage: fakePayload.message,
+    });
+    expect(state.user).toBeNull;
     expect(state.isLoading).toBeFalsy;
   });
 });

@@ -186,7 +186,7 @@ describe('Fetch one circuit state test', () => {
 });
 
 describe('Store circuit quiz state test', () => {
-  it('Should SUCESS To store circuit quiz questions', () => {
+  it('Should SUCCESS To store circuit quiz questions', () => {
     const fakePayload: CircuitPathStep[] = oneCircuitStepResponse;
 
     const action = storeCircuitQuiz(fakePayload);
@@ -203,7 +203,7 @@ describe('Store circuit quiz state test', () => {
 });
 
 describe('RESET circuit quiz state test', () => {
-  it('Should SUCESS to RESET circuit quiz questions', () => {
+  it('Should SUCCESS to RESET circuit quiz questions', () => {
     const action = resetCircuitQuiz();
     const state = circuitsReducer(initialCircuitsState, action);
 
@@ -219,7 +219,7 @@ describe('RESET circuit quiz state test', () => {
 });
 
 describe('Store step entries from circuit quiz state test', () => {
-  it('Should SUCESS to store step entries', () => {
+  it('Should SUCCESS to store step entries', () => {
     const fakePayload: StepsEntriesState = stepsEntriesResponse;
     const action = storeStepEntries(fakePayload);
     const state = circuitsReducer(initialCircuitsState, action);
