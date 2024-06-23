@@ -58,7 +58,7 @@ describe('Register state test', () => {
 
   it('Should FAIL to register ==> INVALID EMAIL', async () => {
     const fakeEntries = wrongRegisterFormEntries as unknown as RegisterForm;
-    const fakePayload = registerErrorEmailResponse as unknown as AxiosError;
+    const fakePayload = registerErrorEmailResponse as AxiosError;
 
     const action = register.rejected(fakePayload, fakeRequestId, fakeEntries);
     const state = authReducer(intialAuthState, action);
@@ -77,7 +77,7 @@ describe('Register state test', () => {
   });
   it('Should FAIL to register ==> INVALID PSEUDO', async () => {
     const fakeEntries = wrongRegisterFormEntries as unknown as RegisterForm;
-    const fakePayload = registerErrorPseudoResponse as unknown as AxiosError;
+    const fakePayload = registerErrorPseudoResponse as AxiosError;
 
     const action = register.rejected(fakePayload, fakeRequestId, fakeEntries);
     const state = authReducer(intialAuthState, action);
@@ -96,7 +96,7 @@ describe('Register state test', () => {
   });
   it('Should FAIL to register ==> GENERIC ERROR', async () => {
     const fakeEntries = wrongRegisterFormEntries as unknown as RegisterForm;
-    const fakePayload = registerErrorGenericResponse as unknown as AxiosError;
+    const fakePayload = registerErrorGenericResponse as AxiosError;
 
     const action = register.rejected(fakePayload, fakeRequestId, fakeEntries);
     const state = authReducer(intialAuthState, action);
@@ -135,7 +135,7 @@ describe('Login state test', () => {
 
   it('Should FAIL to login', async () => {
     const fakeEntries = loginEntries as unknown as LoginForm;
-    const fakePayload = loginErrorResponse as unknown as AxiosError;
+    const fakePayload = loginErrorResponse as AxiosError;
 
     const action = login.rejected(fakePayload, fakeRequestId, fakeEntries);
     const state = authReducer(intialAuthState, action);
