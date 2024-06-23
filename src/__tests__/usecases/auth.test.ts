@@ -21,7 +21,6 @@ import {
   loginEntries,
   rightLoginResponse,
   loginErrorResponse,
-  sessionErrorResponse,
 } from '../data/auth.data';
 
 const fakeRequestId = 'fakeRequestId';
