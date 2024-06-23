@@ -88,7 +88,7 @@ describe('Circuits list state test', () => {
 });
 
 describe('Search circuits list state test', () => {
-  it('Should SUCCESS to return research on circuits list', async () => {
+  it('Should SUCCEED to return research on circuits list', async () => {
     const fakePayload: Circuit[] = searchCircuitsListResponse;
     const fakeSearchEntries: SearchState = goodSearchEntries;
 
@@ -127,7 +127,7 @@ describe('Search circuits list state test', () => {
 });
 
 describe('Reset search circuits list state test', () => {
-  it('Should SUCCESS to return RESET research on circuits list', async () => {
+  it('Should SUCCEED to return RESET research on circuits list', async () => {
     const action = resetSearchCircuitsList();
     const state = circuitsReducer(initialCircuitsState, action);
 
@@ -186,7 +186,7 @@ describe('Fetch one circuit state test', () => {
 });
 
 describe('Store circuit quiz state test', () => {
-  it('Should SUCCESS To store circuit quiz questions', () => {
+  it('Should SUCCEED To store circuit quiz questions', () => {
     const fakePayload: CircuitPathStep[] = oneCircuitStepResponse;
 
     const action = storeCircuitQuiz(fakePayload);
@@ -203,7 +203,7 @@ describe('Store circuit quiz state test', () => {
 });
 
 describe('RESET circuit quiz state test', () => {
-  it('Should SUCCESS to RESET circuit quiz questions', () => {
+  it('Should SUCCEED to RESET circuit quiz questions', () => {
     const action = resetCircuitQuiz();
     const state = circuitsReducer(initialCircuitsState, action);
 
@@ -219,7 +219,7 @@ describe('RESET circuit quiz state test', () => {
 });
 
 describe('Store step entries from circuit quiz state test', () => {
-  it('Should SUCCESS to store step entries', () => {
+  it('Should SUCCEED to store step entries', () => {
     const fakePayload: StepsEntriesState = stepsEntriesResponse;
     const action = storeStepEntries(fakePayload);
     const state = circuitsReducer(initialCircuitsState, action);
@@ -235,7 +235,7 @@ describe('Store step entries from circuit quiz state test', () => {
 });
 
 describe('Send user answers from circuit quiz state test', () => {
-  it('Should SUCCESS to send user answers', async () => {
+  it('Should SUCCEED to send user answers', async () => {
     const fakePayload: UserCircuitAnswersResultState =
       userCircuitAnswerResultResponse;
     const fakeEntries: UserCircuitEntriesState = userCircuitEntriesResponse;

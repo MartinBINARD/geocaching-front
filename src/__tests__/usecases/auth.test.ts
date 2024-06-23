@@ -39,7 +39,7 @@ describe('Authentication store', () => {
 });
 
 describe('Register state test', () => {
-  it('Should SUCCESS to register', async () => {
+  it('Should SUCCEED to register', async () => {
     const fakeEntries = rightRegisterFormEntries as unknown as RegisterForm;
     const fakePayload: RegisterSucces = registerMessageResponse;
 
@@ -116,7 +116,7 @@ describe('Register state test', () => {
 });
 
 describe('Login state test', () => {
-  it('Should SUCCESS to login', async () => {
+  it('Should SUCCEED to login', async () => {
     const fakeEntries = loginEntries as unknown as LoginForm;
     const fakePayload: User = rightLoginResponse;
 
