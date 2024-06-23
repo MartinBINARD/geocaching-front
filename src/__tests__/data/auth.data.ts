@@ -70,3 +70,8 @@ export const loginErrorResponse = {
   },
   message: 'Request failed with status code 401',
 };
+
+export const sessionErrorResponse = {
+  name: 'AxiosError',
+  message: 'Network Error',
+};

@@ -6,6 +6,7 @@ import {
   User,
 } from '../../domain/entities/auth';
 import authReducer, {
+  fetchSession,
   intialAuthState,
   login,
   register,
@@ -20,6 +21,7 @@ import {
   loginEntries,
   rightLoginResponse,
   loginErrorResponse,
+  sessionErrorResponse,
 } from '../data/auth.data';
 
 const fakeRequestId = 'fakeRequestId';
@@ -149,5 +151,35 @@ describe('Login state test', () => {
     });
     expect(state.user).toBeNull;
     expect(state.isLoading).toBeFalsy;
+  });
+});
+
+describe('Fetch session state test', () => {
+  it('Should SUCCEED to fetch session user', () => {
+    const fakePayload = rightLoginResponse;
+
+    const action = fetchSession.fulfilled(fakePayload, fakeRequestId);
+    const state = authReducer(intialAuthState, action);
+    expect(action.type).toEqual('settings/fetchSession/fulfilled');
+    expect(action.payload).toEqual(fakePayload);
+    expect(action.meta.requestId).toEqual(fakeRequestId);
+    expect(action.meta.arg).toEqual(undefined);
+
+    expect(state).toEqual({ ...intialAuthState, user: fakePayload });
+  });
+
+  it('Should FAIL to fetch session user', () => {
+    const fakePayload = null;
+
+    const action = fetchSession.rejected(fakePayload, fakeRequestId);
+    const state = authReducer(intialAuthState, action);
+
+    expect(action.type).toEqual('settings/fetchSession/rejected');
+    expect(action.payload).toEqual(undefined);
+    expect(action.meta.requestId).toEqual(fakeRequestId);
+    expect(action.meta.arg).toEqual(undefined);
+    expect(action.error).toEqual({ message: 'Rejected' });
+
+    expect(state).toEqual({ ...intialAuthState, user: null });
   });
 });
