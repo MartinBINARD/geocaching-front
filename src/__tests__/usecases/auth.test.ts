@@ -10,6 +10,7 @@ import authReducer, {
   fetchSession,
   intialAuthState,
   login,
+  logout,
   register,
 } from '../../domain/usecases/auth';
 import {
@@ -229,5 +230,44 @@ describe('Check user account confirmation state test', () => {
       isAccountConfirmed: false,
     });
     expect(state.isLoading).toBeFalsy;
+  });
+});
+
+describe('Logout state test', () => {
+  it('Should SUCCEED to logout', () => {
+    const fakePayload = null;
+
+    const action = logout.fulfilled(fakePayload, fakeRequestId);
+    const filledInitialAuthState = {
+      ...intialAuthState,
+      user: rightLoginResponse,
+    };
+    const state = authReducer(filledInitialAuthState, action);
+
+    expect(action.type).toEqual('settings/logout/fulfilled');
+    expect(action.payload).toEqual(fakePayload);
+    expect(action.meta.requestId).toEqual(fakeRequestId);
+    expect(action.meta.arg).toEqual(undefined);
+
+    expect(state).toEqual({ ...intialAuthState, user: fakePayload });
+    expect(state.loginErrorMessage).toBeNull;
+  });
+  it('Should FAIL to logout', () => {
+    const fakePayload = null;
+
+    const action = logout.rejected(fakePayload, fakeRequestId);
+    const filledInitialAuthState = {
+      ...intialAuthState,
+      user: rightLoginResponse,
+    };
+    const state = authReducer(filledInitialAuthState, action);
+
+    expect(action.type).toEqual('settings/logout/rejected');
+    expect(action.payload).toEqual(undefined);
+    expect(action.meta.requestId).toEqual(fakeRequestId);
+    expect(action.meta.arg).toEqual(undefined);
+
+    expect(state).toEqual(filledInitialAuthState);
+    expect(state.loginErrorMessage).toBeNull;
   });
 });
