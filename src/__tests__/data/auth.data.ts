@@ -48,12 +48,7 @@ export const rightLoginResponse = {
 
 export const loginErrorResponse = {
   name: 'AxiosError',
-  response: {
-    data: {
-      error: 'Vous devez valider votre compte avant de vous connecter',
-    },
-  },
-  message: 'Request failed with status code 401',
+  message: 'Informations erronées',
 };
 
 export const forgotPasswordEntrie = {
