@@ -14,7 +14,7 @@ interface ProfileState {
   isProfileDelete: boolean;
 }
 
-const intialState: ProfileState = {
+export const intialUserState: ProfileState = {
   profile: null,
   isProfileLoading: false,
   errorMessage: null,
@@ -56,7 +56,7 @@ export const deleteProfile = createAsyncThunk(
   }
 );
 
-const userReducer = createReducer(intialState, (builder) => {
+const userReducer = createReducer(intialUserState, (builder) => {
   builder
     .addCase(getProfile.pending, (state) => {
       state.isProfileLoading = true;
