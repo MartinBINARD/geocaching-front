@@ -123,11 +123,13 @@ export const logout = createAsyncThunk(
 
 export const forgotPassword = createAsyncThunk(
   'settings/forgot-password',
-  async (form: EmailForm): Promise<void> => {
+  async (form: EmailForm): Promise<boolean> => {
     try {
       const objData = formatUserDataForm(form);
 
       await api.post('ask-password', objData);
+
+      return true;
     } catch (error) {
       throw error.response ? error.response.data : error.message;
     }

@@ -70,3 +70,12 @@ export const loginErrorResponse = {
   },
   message: 'Request failed with status code 401',
 };
+
+export const forgotPasswordEntrie = {
+  email: 'testuser@email.com',
+};
+
+export const forgotPasswordErrorResponse = {
+  name: 'AxiosError',
+  message: 'Request failed with status code 500',
+};
