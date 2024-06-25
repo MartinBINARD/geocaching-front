@@ -17,6 +17,7 @@ function Register() {
   const registerErrorMessage = useAppSelector(
     (state) => state.auth.registerErrorMessage
   );
+
   const isLoading = useAppSelector((state) => state.auth.isLoading);
 
   const handleSubmit = (e: React.FormEvent<RegisterForm>): void => {

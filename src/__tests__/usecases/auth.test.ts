@@ -80,7 +80,7 @@ describe('Register state test', () => {
 
     expect(state).toEqual({
       ...intialAuthState,
-      registerErrorMessage: 'Request failed with status code 500',
+      registerErrorMessage: fakePayload.message,
     });
     expect(state.isLoading).toBeFalsy;
   });
@@ -99,7 +99,7 @@ describe('Register state test', () => {
 
     expect(state).toEqual({
       ...intialAuthState,
-      registerErrorMessage: 'Request failed with status code 500',
+      registerErrorMessage: fakePayload.message,
     });
     expect(state.isLoading).toBeFalsy;
   });
@@ -118,7 +118,7 @@ describe('Register state test', () => {
 
     expect(state).toEqual({
       ...intialAuthState,
-      registerErrorMessage: 'Request failed with status code 500',
+      registerErrorMessage: fakePayload.message,
     });
     expect(state.isLoading).toBeFalsy;
   });

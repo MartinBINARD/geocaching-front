@@ -19,33 +19,18 @@ export const registerMessageResponse = {
 
 export const registerErrorEmailResponse = {
   name: 'AxiosError',
-  response: {
-    data: {
-      error: `Cette adresse email n'est pas valide`,
-    },
-  },
-  message: 'Request failed with status code 500',
+  message: "Cette adresse email n'est pas valide",
 };
 
 export const registerErrorPseudoResponse = {
   name: 'AxiosError',
-  response: {
-    data: {
-      error: `Ce pseudo n'est pas valide`,
-    },
-  },
-  message: 'Request failed with status code 500',
+  message: "Ce pseudo n'est pas valide",
 };
 
 export const registerErrorGenericResponse = {
   name: 'AxiosError',
-  response: {
-    data: {
-      error:
-        'Désolé, nous rencontrons quelques problèmes techniques. Veuillez essayer de nouveau.',
-    },
-  },
-  message: 'Request failed with status code 500',
+  message:
+    'Désolé, nous rencontrons quelques problèmes techniques. Veuillez essayer de nouveau.',
 };
 
 export const loginEntries = {
