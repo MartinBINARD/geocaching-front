@@ -4,6 +4,7 @@ import {
   LoginForm,
   RegisterForm,
   RegisterSucces,
+  UpdateCredentials,
   User,
 } from '../../domain/entities/auth';
 import authReducer, {
@@ -14,6 +15,7 @@ import authReducer, {
   login,
   logout,
   register,
+  updatePassword,
 } from '../../domain/usecases/auth';
 import {
   rightRegisterFormEntries,
@@ -27,6 +29,8 @@ import {
   loginErrorResponse,
   forgotPasswordEntrie,
   forgotPasswordErrorResponse,
+  updateCredentialsEntries,
+  updateCredentialsErrorResponse,
 } from '../data/auth.data';
 
 const fakeRequestId = 'fakeRequestId';
@@ -314,6 +318,50 @@ describe('Forgot paswword state test', () => {
     expect(action.error).toEqual(fakePayload);
 
     expect(state).toEqual(intialAuthState);
+    expect(state.isLoading).toBeFalsy;
+  });
+});
+
+describe('Update password state test', () => {
+  it('Should SUCCEED to update password', () => {
+    const fakeEntries =
+      updateCredentialsEntries as unknown as UpdateCredentials;
+    const fakePayload = true;
+
+    const action = updatePassword.fulfilled(
+      fakePayload,
+      fakeRequestId,
+      fakeEntries
+    );
+    const state = authReducer(intialAuthState, action);
+
+    expect(action.type).toEqual('settings/update-password/fulfilled');
+    expect(action.payload).toBeTruthy;
+    expect(action.meta.requestId).toEqual(fakeRequestId);
+    expect(action.meta.arg).toEqual(fakeEntries);
+
+    expect(state).toEqual({ ...intialAuthState, isRegistered: true });
+    expect(state.isLoading).toBeFalsy;
+  });
+  it('Should FAIL to update password', () => {
+    const fakeEntries =
+      updateCredentialsEntries as unknown as UpdateCredentials;
+    const fakePayload = updateCredentialsErrorResponse as AxiosError;
+
+    const action = updatePassword.rejected(
+      fakePayload,
+      fakeRequestId,
+      fakeEntries
+    );
+    const state = authReducer(intialAuthState, action);
+
+    expect(action.type).toEqual('settings/update-password/rejected');
+    expect(action.payload).toEqual(undefined);
+    expect(action.meta.requestId).toEqual(fakeRequestId);
+    expect(action.meta.arg).toEqual(fakeEntries);
+    expect(action.error).toEqual(fakePayload);
+
+    expect(state).toEqual({ ...intialAuthState, isRegistered: false });
     expect(state.isLoading).toBeFalsy;
   });
 });

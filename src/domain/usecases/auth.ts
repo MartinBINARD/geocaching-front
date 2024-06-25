@@ -138,11 +138,13 @@ export const forgotPassword = createAsyncThunk(
 
 export const updatePassword = createAsyncThunk(
   'settings/update-password',
-  async (credentials: UpdateCredentials): Promise<void> => {
+  async (credentials: UpdateCredentials): Promise<boolean> => {
     try {
       const objData = formatUserUpdateCredentials(credentials);
 
       await api.patch('reset-password', objData);
+
+      return true;
     } catch (error) {
       throw error.response ? error.response.data : error.message;
     }
@@ -227,12 +229,13 @@ const authReducer = createReducer(intialAuthState, (builder) => {
     })
     .addCase(updatePassword.fulfilled, (state) => {
       state.isRegistered = true;
-      toast('Réinitialisation effectuée !');
       state.isLoading = false;
+      toast('Réinitialisation effectuée !');
     })
     .addCase(updatePassword.rejected, (state) => {
-      toast('Erreur de mot de passe !');
+      state.isRegistered = false;
       state.isLoading = false;
+      toast('Erreur de mot de passe !');
     });
 });
 

@@ -79,3 +79,17 @@ export const forgotPasswordErrorResponse = {
   name: 'AxiosError',
   message: 'Request failed with status code 500',
 };
+
+export const updateCredentialsEntries = {
+  form: {
+    password: 'Y#UJY3{43sgr',
+    confirmation: 'Y#UJY3{43sgr',
+  },
+  token: 'secret_token',
+  userId: 'user_id',
+};
+
+export const updateCredentialsErrorResponse = {
+  name: 'AxiosError',
+  message: 'Request failed with status code 500',
+};
