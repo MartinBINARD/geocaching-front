@@ -1,4 +1,5 @@
 import { EmailForm } from '../domain/entities/auth';
+import { Circuit } from './circuit';
 
 export interface Profile {
   id: number;
