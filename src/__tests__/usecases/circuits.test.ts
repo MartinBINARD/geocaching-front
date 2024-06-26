@@ -165,7 +165,7 @@ describe('Fetch one circuit state test', () => {
   });
 
   it('Should FAIL to return ONE circuit', () => {
-    const fakePayload = [] as any;
+    const fakePayload = null;
     const fakeParam = 'circuits/1';
 
     const action = fetchCircuit.rejected(fakePayload, fakeRequestId, fakeParam);
