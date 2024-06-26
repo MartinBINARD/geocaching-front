@@ -34,11 +34,13 @@ export const getProfile = createAsyncThunk('user/get-profile', async () => {
 
 export const updateProfile = createAsyncThunk(
   'user/update-profile',
-  async (form: UpdateProfileForm): Promise<void> => {
+  async (form: UpdateProfileForm): Promise<Profile> => {
     try {
       const objData = formatUserDataForm(form);
 
-      await api.patch('profile', objData);
+      const { data } = await api.patch('profile', objData);
+
+      return data;
     } catch (error) {
       throw error && `Une erreur s'est produite. Veuillez essayer de nouveau.`;
     }
@@ -76,12 +78,14 @@ const userReducer = createReducer(intialUserState, (builder) => {
     .addCase(updateProfile.pending, (state) => {
       state.isUpdateLoading = true;
     })
-    .addCase(updateProfile.fulfilled, (state) => {
+    .addCase(updateProfile.fulfilled, (state, action) => {
+      state.profile = action.payload;
       state.isUpdateLoading = false;
       state.errorMessage = null;
       toast.success('Votre profil a bien été mis à jour');
     })
     .addCase(updateProfile.rejected, (state, action) => {
+      state.profile = null;
       state.isUpdateLoading = false;
       state.errorMessage = action.error.message!;
       toast.error(action.error.message!);

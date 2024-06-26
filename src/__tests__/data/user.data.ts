@@ -14,3 +14,17 @@ export const userProfileResponse = {
   state: 'Morbihan',
   verified: true,
 };
+
+export const userProfileFormEntries = {
+  pseudo: 'newTestUser',
+  region: 'Île-de-France',
+  state: 'Paris',
+  city: 'Paris',
+  presentation: 'myPresentation',
+  email: 'testuser@email.com',
+};
+
+export const userProfileFormErrorResponse = {
+  name: 'AxiosError',
+  message: "Une erreur s'est produite. Veuillez essayer de nouveau.",
+};
