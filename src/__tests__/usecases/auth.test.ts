@@ -18,14 +18,14 @@ import authReducer, {
   updatePassword,
 } from '../../domain/usecases/auth';
 import {
-  rightRegisterFormEntries,
+  validRegisterFormEntries,
   registerMessageResponse,
   registerErrorEmailResponse,
-  wrongRegisterFormEntries,
+  invalidRegisterFormEntries,
   registerErrorPseudoResponse,
   registerErrorGenericResponse,
   loginEntries,
-  rightLoginResponse,
+  validLoginResponse,
   loginErrorResponse,
   forgotPasswordEntrie,
   forgotPasswordErrorResponse,
@@ -49,7 +49,7 @@ describe('Authentication store', () => {
 
 describe('Register state test', () => {
   it('Should SUCCEED to register', async () => {
-    const fakeEntries = rightRegisterFormEntries as unknown as RegisterForm;
+    const fakeEntries = validRegisterFormEntries as unknown as RegisterForm;
     const fakePayload: RegisterSucces = registerMessageResponse;
 
     const action = register.fulfilled(fakePayload, fakeRequestId, fakeEntries);
@@ -66,7 +66,7 @@ describe('Register state test', () => {
   });
 
   it('Should FAIL to register ==> INVALID EMAIL', async () => {
-    const fakeEntries = wrongRegisterFormEntries as unknown as RegisterForm;
+    const fakeEntries = invalidRegisterFormEntries as unknown as RegisterForm;
     const fakePayload = registerErrorEmailResponse as AxiosError;
 
     const action = register.rejected(fakePayload, fakeRequestId, fakeEntries);
@@ -84,8 +84,9 @@ describe('Register state test', () => {
     });
     expect(state.isLoading).toBeFalsy;
   });
+
   it('Should FAIL to register ==> INVALID PSEUDO', async () => {
-    const fakeEntries = wrongRegisterFormEntries as unknown as RegisterForm;
+    const fakeEntries = invalidRegisterFormEntries as unknown as RegisterForm;
     const fakePayload = registerErrorPseudoResponse as AxiosError;
 
     const action = register.rejected(fakePayload, fakeRequestId, fakeEntries);
@@ -103,8 +104,9 @@ describe('Register state test', () => {
     });
     expect(state.isLoading).toBeFalsy;
   });
+
   it('Should FAIL to register ==> GENERIC ERROR', async () => {
-    const fakeEntries = wrongRegisterFormEntries as unknown as RegisterForm;
+    const fakeEntries = invalidRegisterFormEntries as unknown as RegisterForm;
     const fakePayload = registerErrorGenericResponse as AxiosError;
 
     const action = register.rejected(fakePayload, fakeRequestId, fakeEntries);
@@ -127,7 +129,7 @@ describe('Register state test', () => {
 describe('Login state test', () => {
   it('Should SUCCEED to login', async () => {
     const fakeEntries = loginEntries as unknown as LoginForm;
-    const fakePayload: User = rightLoginResponse;
+    const fakePayload: User = validLoginResponse;
 
     const action = login.fulfilled(fakePayload, fakeRequestId, fakeEntries);
     const state = authReducer(intialAuthState, action);
@@ -165,7 +167,7 @@ describe('Login state test', () => {
 
 describe('Fetch session state test', () => {
   it('Should SUCCEED to fetch session user', () => {
-    const fakePayload = rightLoginResponse;
+    const fakePayload = validLoginResponse;
 
     const action = fetchSession.fulfilled(fakePayload, fakeRequestId);
     const state = authReducer(intialAuthState, action);
@@ -248,7 +250,7 @@ describe('Logout state test', () => {
     const action = logout.fulfilled(fakePayload, fakeRequestId);
     const filledInitialAuthState = {
       ...intialAuthState,
-      user: rightLoginResponse,
+      user: validLoginResponse,
     };
     const state = authReducer(filledInitialAuthState, action);
 
@@ -266,7 +268,7 @@ describe('Logout state test', () => {
     const action = logout.rejected(fakePayload, fakeRequestId);
     const filledInitialAuthState = {
       ...intialAuthState,
-      user: rightLoginResponse,
+      user: validLoginResponse,
     };
     const state = authReducer(filledInitialAuthState, action);
 
@@ -300,6 +302,7 @@ describe('Forgot paswword state test', () => {
     expect(state).toEqual(intialAuthState);
     expect(state.isLoading).toBeFalsy;
   });
+
   it('Should FAIL to send Email to restore password', () => {
     const fakeEntries = forgotPasswordEntrie as unknown as EmailForm;
     const fakePayload = forgotPasswordErrorResponse as AxiosError;
@@ -343,6 +346,7 @@ describe('Update password state test', () => {
     expect(state).toEqual({ ...intialAuthState, isRegistered: true });
     expect(state.isLoading).toBeFalsy;
   });
+
   it('Should FAIL to update password', () => {
     const fakeEntries =
       updateCredentialsEntries as unknown as UpdateCredentials;

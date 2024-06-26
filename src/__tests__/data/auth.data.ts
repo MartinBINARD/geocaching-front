@@ -1,11 +1,11 @@
-export const rightRegisterFormEntries = {
+export const validRegisterFormEntries = {
   pseudo: 'TestUser',
   email: 'testuser@email.com',
   password: 'Y#UJY3{43sgr!454=5',
   confirmation: 'Y#UJY3{43sgr!454=5',
 };
 
-export const wrongRegisterFormEntries = {
+export const invalidRegisterFormEntries = {
   pseudo: 'TestUser',
   email: 'testuser@email.com',
   password: 'Y#UJY3{43sgr!454=5',
@@ -38,7 +38,7 @@ export const loginEntries = {
   password: 'Y#UJY3{43sgr!454=5',
 };
 
-export const rightLoginResponse = {
+export const validLoginResponse = {
   id: 1,
   pseudo: 'TestUser',
   email: 'testuser@email.com',
