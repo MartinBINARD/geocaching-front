@@ -1,4 +1,4 @@
-import { oneCircuitResponse } from './circuits.data';
+import { oneCircuitResponse } from './circuits.mocks';
 
 export const userProfileResponse = {
   id: 1,

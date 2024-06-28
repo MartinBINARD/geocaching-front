@@ -10,7 +10,7 @@ import {
   userProfileFormEntries,
   userProfileFormErrorResponse,
   userProfileResponse,
-} from '../data/user.data';
+} from '../../__mocks__/user.mocks';
 
 const fakeRequestId = 'fakeRequestId';
 

@@ -28,7 +28,7 @@ import {
   userCircuitEntriesResponse,
   userCircuitAnswerResultResponse,
   stepsEntriesResponse,
-} from '../data/circuits.data';
+} from '../../__mocks__/circuits.mocks';
 
 const fakeRequestId = 'fakeRequestId';
 

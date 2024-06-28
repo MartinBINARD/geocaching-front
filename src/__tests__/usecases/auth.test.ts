@@ -31,7 +31,7 @@ import {
   forgotPasswordErrorResponse,
   updateCredentialsEntries,
   updateCredentialsErrorResponse,
-} from '../data/auth.data';
+} from '../../__mocks__/auth.mocks';
 
 const fakeRequestId = 'fakeRequestId';
 
