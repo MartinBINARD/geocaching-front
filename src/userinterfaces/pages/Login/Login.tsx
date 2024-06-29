@@ -2,9 +2,9 @@ import { Link, Navigate } from 'react-router-dom';
 import { Compass, MountainSnow } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../../../services/hooks/redux';
 
-import { login } from '../../../domain/usecases/auth';
-
 import { LoginForm } from '../../../domain/entities/auth';
+
+import { login } from '../../../domain/usecases/auth/loginUseCase';
 
 import Footer from '../../components/Footer/Footer';
 import Loader from '../../components/loader/Loader';
