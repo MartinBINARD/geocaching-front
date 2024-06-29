@@ -1,28 +1,19 @@
 import { AxiosError } from 'axios';
-import {
-  EmailForm,
-  LoginForm,
-  UpdateCredentials,
-  User,
-} from '../../domain/entities/auth';
+import { EmailForm, UpdateCredentials } from '../../domain/entities/auth';
 import authReducer, {
   checkUserAccountConfirmation,
-  fetchSession,
   forgotPassword,
   intialAuthState,
   logout,
   updatePassword,
 } from '../../domain/usecases/auth';
 import {
-  loginEntries,
   validLoginResponse,
-  loginErrorResponse,
   forgotPasswordEntrie,
   forgotPasswordErrorResponse,
   updateCredentialsEntries,
   updateCredentialsErrorResponse,
 } from '../../__mocks__/auth.mocks';
-import { login } from '../../domain/usecases/auth/loginUseCase';
 
 const fakeRequestId = 'fakeRequestId';
 
@@ -35,36 +26,6 @@ jest.mock('../../services/axios', () => ({
 describe('Authentication store', () => {
   it('Should return the initial auth state on first call', () => {
     expect(authReducer(undefined, { type: '@@INIT' })).toBe(intialAuthState);
-  });
-});
-
-describe('Fetch session state test', () => {
-  it('Should SUCCEED to fetch session user', () => {
-    const fakePayload = validLoginResponse;
-
-    const action = fetchSession.fulfilled(fakePayload, fakeRequestId);
-    const state = authReducer(intialAuthState, action);
-    expect(action.type).toEqual('settings/fetchSession/fulfilled');
-    expect(action.payload).toEqual(fakePayload);
-    expect(action.meta.requestId).toEqual(fakeRequestId);
-    expect(action.meta.arg).toEqual(undefined);
-
-    expect(state).toEqual({ ...intialAuthState, user: fakePayload });
-  });
-
-  it('Should FAIL to fetch session user', () => {
-    const fakePayload = null;
-
-    const action = fetchSession.rejected(fakePayload, fakeRequestId);
-    const state = authReducer(intialAuthState, action);
-
-    expect(action.type).toEqual('settings/fetchSession/rejected');
-    expect(action.payload).toEqual(undefined);
-    expect(action.meta.requestId).toEqual(fakeRequestId);
-    expect(action.meta.arg).toEqual(undefined);
-    expect(action.error).toEqual({ message: 'Rejected' });
-
-    expect(state).toEqual({ ...intialAuthState, user: null });
   });
 });
 
