@@ -3,12 +3,13 @@ import { toast } from 'react-toastify';
 
 import api from '../../services/axios';
 
-import { EmailForm, UpdateCredentials, Session, User } from '../entities/auth';
+import { EmailForm, UpdateCredentials, User } from '../entities/auth';
 
 import formatUserDataForm from './utils/formatUserDataForm';
 import formatUserUpdateCredentials from './utils/formatUserUpdateCredentials';
 import { register } from './auth/registerUseCase';
 import { login } from './auth/loginUseCase';
+import { fetchSession } from './auth/fetchSessionUseCase';
 
 interface AuthState {
   user: User | null;
@@ -29,19 +30,6 @@ export const intialAuthState: AuthState = {
   isReset: false,
   isLoading: false,
 };
-
-export const fetchSession = createAsyncThunk(
-  'settings/fetchSession',
-  async (): Promise<Session> => {
-    try {
-      const { data } = await api.get<Session>('session');
-
-      return data;
-    } catch (error) {
-      throw error.response ? error.response.data : error.message;
-    }
-  }
-);
 
 export const checkUserAccountConfirmation = createAsyncThunk(
   'settings/confirm-user-account',
