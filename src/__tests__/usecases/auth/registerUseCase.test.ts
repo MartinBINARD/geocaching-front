@@ -12,7 +12,7 @@ import {
 import { RegisterForm, RegisterSucces } from '../../../domain/entities/auth';
 import authReducer, { intialAuthState } from '../../../domain/usecases/auth';
 
-import { register } from '../../../domain/usecases/registerUseCase';
+import { register } from '../../../domain/usecases/auth/registerUseCase';
 
 const fakeRequestId = 'fakeRequestId';
 

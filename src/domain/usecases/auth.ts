@@ -3,17 +3,12 @@ import { toast } from 'react-toastify';
 
 import api from '../../services/axios';
 
-import {
-  EmailForm,
-  LoginForm,
-  UpdateCredentials,
-  Session,
-  User,
-} from '../entities/auth';
+import { EmailForm, UpdateCredentials, Session, User } from '../entities/auth';
 
 import formatUserDataForm from './utils/formatUserDataForm';
 import formatUserUpdateCredentials from './utils/formatUserUpdateCredentials';
-import { register } from './registerUseCase';
+import { register } from './auth/registerUseCase';
+import { login } from './auth/loginUseCase';
 
 interface AuthState {
   user: User | null;
@@ -34,21 +29,6 @@ export const intialAuthState: AuthState = {
   isReset: false,
   isLoading: false,
 };
-
-export const login = createAsyncThunk(
-  'settings/login',
-  async (form: LoginForm): Promise<User> => {
-    try {
-      const objData = formatUserDataForm(form);
-
-      const { data } = await api.post<User>('login', objData);
-
-      return data;
-    } catch (error) {
-      throw error.response.data.error;
-    }
-  }
-);
 
 export const fetchSession = createAsyncThunk(
   'settings/fetchSession',

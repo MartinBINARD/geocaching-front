@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import api from '../../services/axios';
+import api from '../../../services/axios';
 
-import { RegisterForm, RegisterSucces } from '../entities/auth';
+import { RegisterForm, RegisterSucces } from '../../entities/auth';
 
 export const register = createAsyncThunk(
   'settings/register',

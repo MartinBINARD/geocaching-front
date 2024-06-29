@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../services/hooks/redux';
 
 import { RegisterForm } from '../../../domain/entities/auth';
-import { register } from '../../../domain/usecases/registerUseCase';
+import { register } from '../../../domain/usecases/auth/registerUseCase';
 
 import Footer from '../../components/Footer/Footer';
 import Loader from '../../components/loader/Loader';
