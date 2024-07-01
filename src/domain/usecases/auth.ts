@@ -7,7 +7,7 @@ import { EmailForm, UpdateCredentials, User } from '../entities/auth';
 
 import formatUserDataForm from './utils/formatUserDataForm';
 import formatUserUpdateCredentials from './utils/formatUserUpdateCredentials';
-import { register, login, fetchSession, checkAccount } from '..';
+import { register, login, fetchSession, checkAccount, logout } from '..';
 
 interface AuthState {
   user: User | null;
@@ -28,19 +28,6 @@ export const intialAuthState: AuthState = {
   isReset: false,
   isLoading: false,
 };
-
-export const logout = createAsyncThunk(
-  'settings/logout',
-  async (): Promise<null> => {
-    try {
-      const { data } = await api.get(`/logout`);
-
-      return data?.message;
-    } catch (error) {
-      throw error.response ? error.response.data : error.message;
-    }
-  }
-);
 
 export const forgotPassword = createAsyncThunk(
   'settings/forgot-password',

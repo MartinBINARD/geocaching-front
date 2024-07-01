@@ -1,6 +1,4 @@
-import authReducer, {
-  intialAuthState,
-} from '../../../domain/usecases/auth/auth';
+import authReducer, { intialAuthState } from '../../../domain/usecases/auth';
 import { checkAccount } from '../../../domain/usecases/auth/checkAccountUseCase';
 
 const fakeRequestId = 'fakeRequestId';
