@@ -7,9 +7,12 @@ import { EmailForm, UpdateCredentials, User } from '../entities/auth';
 
 import formatUserDataForm from './utils/formatUserDataForm';
 import formatUserUpdateCredentials from './utils/formatUserUpdateCredentials';
-import { register } from './auth/registerUseCase';
-import { login } from './auth/loginUseCase';
-import { fetchSession } from './auth/fetchSessionUseCase';
+import {
+  register,
+  login,
+  fetchSession,
+  checkUserAccountConfirmation,
+} from '..';
 
 interface AuthState {
   user: User | null;
@@ -30,19 +33,6 @@ export const intialAuthState: AuthState = {
   isReset: false,
   isLoading: false,
 };
-
-export const checkUserAccountConfirmation = createAsyncThunk(
-  'settings/confirm-user-account',
-  async (token: string): Promise<boolean> => {
-    try {
-      const { data } = await api.get(`verify?token=${token}`);
-
-      return data;
-    } catch (error) {
-      throw error.response ? error.response.data : error.message;
-    }
-  }
-);
 
 export const logout = createAsyncThunk(
   'settings/logout',
