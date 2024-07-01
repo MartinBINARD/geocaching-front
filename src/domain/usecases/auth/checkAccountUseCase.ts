@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../../../services/axios';
 
-export const checkUserAccountConfirmation = createAsyncThunk(
+export const checkAccount = createAsyncThunk(
   'settings/confirm-user-account',
   async (token: string): Promise<boolean> => {
     try {

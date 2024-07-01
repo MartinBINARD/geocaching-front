@@ -7,12 +7,7 @@ import { EmailForm, UpdateCredentials, User } from '../entities/auth';
 
 import formatUserDataForm from './utils/formatUserDataForm';
 import formatUserUpdateCredentials from './utils/formatUserUpdateCredentials';
-import {
-  register,
-  login,
-  fetchSession,
-  checkUserAccountConfirmation,
-} from '..';
+import { register, login, fetchSession, checkAccount } from '..';
 
 interface AuthState {
   user: User | null;
@@ -126,15 +121,15 @@ const authReducer = createReducer(intialAuthState, (builder) => {
         'Impossible de vous déconnecté, veuillez essayer ultérieurement'
       );
     })
-    .addCase(checkUserAccountConfirmation.pending, (state) => {
+    .addCase(checkAccount.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(checkUserAccountConfirmation.fulfilled, (state) => {
+    .addCase(checkAccount.fulfilled, (state) => {
       state.isAccountConfirmed = true;
       toast.success('Compte approuvé !');
       state.isLoading = false;
     })
-    .addCase(checkUserAccountConfirmation.rejected, (state) => {
+    .addCase(checkAccount.rejected, (state) => {
       state.isAccountConfirmed = false;
       toast.error('Une erreur est survenue');
       state.isLoading = false;
