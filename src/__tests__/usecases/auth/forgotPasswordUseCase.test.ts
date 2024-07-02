@@ -6,8 +6,7 @@ import {
   forgotPasswordEntrie,
   forgotPasswordErrorResponse,
 } from '../../../__mocks__/auth.mocks';
-
-const fakeRequestId = 'fakeRequestId';
+import { fakeRequestId } from '../../../__mocks__/request.mocks';
 
 jest.mock('../../../services/axios', () => ({
   api: {

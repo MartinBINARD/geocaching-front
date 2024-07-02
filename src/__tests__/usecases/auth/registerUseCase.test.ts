@@ -13,8 +13,7 @@ import { RegisterForm, RegisterSucces } from '../../../domain/entities/auth';
 import authReducer, { intialAuthState } from '../../../domain/usecases/auth';
 
 import { register } from '../../../domain/usecases/auth/registerUseCase';
-
-const fakeRequestId = 'fakeRequestId';
+import { fakeRequestId } from '../../../__mocks__/request.mocks';
 
 jest.mock('../../../services/axios', () => ({
   api: {

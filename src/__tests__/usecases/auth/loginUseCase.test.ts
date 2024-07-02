@@ -9,8 +9,7 @@ import {
 
 import authReducer, { intialAuthState } from '../../../domain/usecases/auth';
 import { login } from '../../../domain/usecases/auth/loginUseCase';
-
-const fakeRequestId = 'fakeRequestId';
+import { fakeRequestId } from '../../../__mocks__/request.mocks';
 
 jest.mock('../../../services/axios', () => ({
   api: {
