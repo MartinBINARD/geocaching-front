@@ -1,8 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../../../services/hooks/redux';
 
-import { forgotPassword } from '../../../domain/usecases/auth';
-
 import { EmailForm } from '../../../domain/entities/auth';
+import { forgotPassword } from '../../../domain';
 
 import Loader from '../../components/loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';
