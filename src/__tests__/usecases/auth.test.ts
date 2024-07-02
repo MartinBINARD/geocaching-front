@@ -1,17 +1,11 @@
 import { AxiosError } from 'axios';
-import { EmailForm, UpdateCredentials } from '../../domain/entities/auth';
-import authReducer, {
-  intialAuthState,
-  updatePassword,
-} from '../../domain/usecases/auth';
+import { UpdateCredentials } from '../../domain/entities/auth';
+import authReducer, { intialAuthState } from '../../domain/usecases/auth';
 import {
-  forgotPasswordEntrie,
-  forgotPasswordErrorResponse,
   updateCredentialsEntries,
   updateCredentialsErrorResponse,
-  validLoginResponse,
 } from '../../__mocks__/auth.mocks';
-import { forgotPassword } from '../../domain';
+import { updatePassword } from '../../domain';
 
 const fakeRequestId = 'fakeRequestId';
 

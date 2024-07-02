@@ -1,11 +1,8 @@
-import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
+import { createReducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import api from '../../services/axios';
+import { User } from '../entities/auth';
 
-import { UpdateCredentials, User } from '../entities/auth';
-
-import formatUserUpdateCredentials from './utils/formatUserUpdateCredentials';
 import {
   register,
   login,
@@ -13,6 +10,7 @@ import {
   checkAccount,
   logout,
   forgotPassword,
+  updatePassword,
 } from '..';
 
 interface AuthState {
@@ -34,21 +32,6 @@ export const intialAuthState: AuthState = {
   isReset: false,
   isLoading: false,
 };
-
-export const updatePassword = createAsyncThunk(
-  'settings/update-password',
-  async (credentials: UpdateCredentials): Promise<boolean> => {
-    try {
-      const objData = formatUserUpdateCredentials(credentials);
-
-      await api.patch('reset-password', objData);
-
-      return true;
-    } catch (error) {
-      throw error.response ? error.response.data : error.message;
-    }
-  }
-);
 
 const authReducer = createReducer(intialAuthState, (builder) => {
   builder

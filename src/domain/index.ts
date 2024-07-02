@@ -4,3 +4,4 @@ export * from './usecases/auth/fetchSessionUseCase';
 export * from './usecases/auth/checkAccountUseCase';
 export * from './usecases/auth/logoutUseCase';
 export * from './usecases/auth/forgotPasswordUseCase';
+export * from './usecases/auth/updatePasswordUseCase';
