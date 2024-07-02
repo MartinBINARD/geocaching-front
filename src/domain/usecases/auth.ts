@@ -3,11 +3,11 @@ import { toast } from 'react-toastify';
 
 import api from '../../services/axios';
 
-import { EmailForm, UpdateCredentials, User } from '../entities/auth';
+import { UpdateCredentials, User } from '../entities/auth';
 
-import formatUserDataForm from './utils/formatUserDataForm';
 import formatUserUpdateCredentials from './utils/formatUserUpdateCredentials';
 import { register, login, fetchSession, checkAccount, logout } from '..';
+import { forgotPassword } from './auth/forgotPasswordUseCase';
 
 interface AuthState {
   user: User | null;
@@ -28,21 +28,6 @@ export const intialAuthState: AuthState = {
   isReset: false,
   isLoading: false,
 };
-
-export const forgotPassword = createAsyncThunk(
-  'settings/forgot-password',
-  async (form: EmailForm): Promise<boolean> => {
-    try {
-      const objData = formatUserDataForm(form);
-
-      await api.post('ask-password', objData);
-
-      return true;
-    } catch (error) {
-      throw error.response ? error.response.data : error.message;
-    }
-  }
-);
 
 export const updatePassword = createAsyncThunk(
   'settings/update-password',

@@ -1,7 +1,6 @@
 import { AxiosError } from 'axios';
 import { EmailForm, UpdateCredentials } from '../../domain/entities/auth';
 import authReducer, {
-  forgotPassword,
   intialAuthState,
   updatePassword,
 } from '../../domain/usecases/auth';
@@ -12,7 +11,7 @@ import {
   updateCredentialsErrorResponse,
   validLoginResponse,
 } from '../../__mocks__/auth.mocks';
-import { logout } from '../../domain';
+import { forgotPassword } from '../../domain';
 
 const fakeRequestId = 'fakeRequestId';
 
