@@ -4,7 +4,7 @@ import authReducer, { intialAuthState } from '../../../domain/usecases/auth';
 
 const fakeRequestId = 'fakeRequestId';
 
-jest.mock('../../services/axios', () => ({
+jest.mock('../../../services/axios', () => ({
   api: {
     baseUrl: 'http://localhost:3000',
   },

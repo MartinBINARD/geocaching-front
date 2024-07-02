@@ -6,8 +6,14 @@ import api from '../../services/axios';
 import { UpdateCredentials, User } from '../entities/auth';
 
 import formatUserUpdateCredentials from './utils/formatUserUpdateCredentials';
-import { register, login, fetchSession, checkAccount, logout } from '..';
-import { forgotPassword } from './auth/forgotPasswordUseCase';
+import {
+  register,
+  login,
+  fetchSession,
+  checkAccount,
+  logout,
+  forgotPassword,
+} from '..';
 
 interface AuthState {
   user: User | null;
