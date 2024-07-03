@@ -5,10 +5,8 @@ import {
   useAppSelector,
 } from '../../../../../../../services/hooks/redux';
 
-import {
-  resetSearchCircuitsList,
-  searchCircuitsList,
-} from '../../../../../../../domain/usecases/circuits';
+import { searchCircuitsList } from '../../../../../../../domain/usecases/circuits/searchCircuitsListUseCase';
+import { resetSearchCircuitsList } from '../../../../../../../domain/usecases/circuits/resetSearchCircuitsListUseCase';
 
 import SelectControl from '../../../../../../components/SelectControl/SelectControl';
 

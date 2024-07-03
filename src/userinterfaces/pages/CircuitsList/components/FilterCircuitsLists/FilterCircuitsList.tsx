@@ -6,7 +6,7 @@ import {
   useAppSelector,
 } from '../../../../../services/hooks/redux';
 
-import { resetSearchCircuitsList } from '../../../../../domain/usecases/circuits';
+import { resetSearchCircuitsList } from '../../../../../domain/usecases/circuits/resetSearchCircuitsListUseCase';
 
 import Loader from '../../../../components/loader/Loader';
 import FilterCircuitsListForm from './components/FilterCircuitsListForm/FilterCircuitsListForm';

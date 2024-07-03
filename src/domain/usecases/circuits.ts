@@ -54,10 +54,6 @@ export const initialCircuitsState: CircuitState = {
   isFetchCircuitFailed: false,
 };
 
-export const resetSearchCircuitsList = createAction(
-  'circuits/reset-search-circuits-list'
-);
-
 export const fetchCircuit = createAsyncThunk(
   'circuits/fetch-circuit',
   async (id: string): Promise<Circuit> => {
