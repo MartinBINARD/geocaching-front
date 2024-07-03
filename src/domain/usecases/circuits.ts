@@ -26,6 +26,7 @@ import formatUserCircuitEntries from './utils/formatUserCircuitEntries';
 import { fetchCircuitsList } from './circuits/fetchCircuitsListUseCase';
 import { searchCircuitsList } from './circuits/searchCircuitsListUseCase';
 import { resetSearchCircuitsList } from './circuits/resetSearchCircuitsListUseCase';
+import { fetchCircuit } from './circuits/fetchCircuitUseCase';
 
 interface CircuitState {
   circuitsList: Circuit[];
@@ -54,22 +55,6 @@ export const initialCircuitsState: CircuitState = {
   isLoading: false,
   isFetchCircuitFailed: false,
 };
-
-export const fetchCircuit = createAsyncThunk(
-  'circuits/fetch-circuit',
-  async (id: string): Promise<Circuit> => {
-    try {
-      const { data } = await api.get<Circuit>(`circuits/${id}`);
-
-      return data;
-    } catch (error: unknown) {
-      /* Specify known AxiosError Type to solve eslint warning.
-      Typscript cannot predict server error but do it on AxiosError Instance */
-      const err = error as AxiosError;
-      throw err.response ? err.response.data : err.message;
-    }
-  }
-);
 
 export const storeCircuitQuiz = createAction<CircuitPathStep[]>(
   'circuits/store-circuit-quiz'
