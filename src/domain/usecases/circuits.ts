@@ -1,8 +1,4 @@
-import {
-  createAction,
-  createAsyncThunk,
-  createReducer,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
 
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
@@ -28,6 +24,7 @@ import { resetSearchCircuitsList } from './circuits/resetSearchCircuitsListUseCa
 import { fetchCircuit } from './circuits/fetchCircuitUseCase';
 import { storeCircuitQuiz } from './circuits/storeCircuitQuizUseCase';
 import { resetCircuitQuiz } from './circuits/resetCircuitQuizUseCase';
+import { storeStepEntries } from './circuits/storeStepEntriesUseCase';
 
 interface CircuitState {
   circuitsList: Circuit[];
@@ -56,10 +53,6 @@ export const initialCircuitsState: CircuitState = {
   isLoading: false,
   isFetchCircuitFailed: false,
 };
-
-export const storeStepEntries = createAction<StepsEntriesState>(
-  'circuits/store-steps-entries'
-);
 
 export const sendAnswers = createAsyncThunk(
   'circuits/send-answers',
