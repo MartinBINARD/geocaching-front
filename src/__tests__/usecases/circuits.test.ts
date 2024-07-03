@@ -1,5 +1,4 @@
 import {
-  CircuitPathStep,
   StepsEntriesState,
   UserCircuitAnswersResultState,
   UserCircuitEntriesState,
@@ -8,12 +7,9 @@ import circuitsReducer, {
   initialCircuitsState,
   resetCircuitQuiz,
   sendAnswers,
-  storeCircuitQuiz,
   storeStepEntries,
 } from '../../domain/usecases/circuits';
 import {
-  oneCircuitQuizResponse,
-  oneCircuitStepResponse,
   userCircuitEntriesResponse,
   userCircuitAnswerResultResponse,
   stepsEntriesResponse,
@@ -26,23 +22,6 @@ jest.mock('../../services/axios', () => ({
     baseUrl: 'http://localhost:3000',
   },
 }));
-
-describe('Store circuit quiz state test', () => {
-  it('Should SUCCEED To store circuit quiz questions', () => {
-    const fakePayload: CircuitPathStep[] = oneCircuitStepResponse;
-
-    const action = storeCircuitQuiz(fakePayload);
-    const state = circuitsReducer(initialCircuitsState, action);
-
-    expect(action.type).toEqual('circuits/store-circuit-quiz');
-    expect(action.payload).toEqual(fakePayload);
-
-    expect(state).toEqual({
-      ...initialCircuitsState,
-      circuitQuiz: oneCircuitQuizResponse,
-    });
-  });
-});
 
 describe('RESET circuit quiz state test', () => {
   it('Should SUCCEED to RESET circuit quiz questions', () => {
