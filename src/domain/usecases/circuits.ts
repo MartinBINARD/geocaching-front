@@ -24,6 +24,7 @@ import {
 import createCircuitQuizStepper from './utils/createCircuitQuizStepper';
 import formatUserCircuitEntries from './utils/formatUserCircuitEntries';
 import { fetchCircuitsList } from './circuits/fetchCircuitsListUseCase';
+import { searchCircuitsList } from './circuits/searchCircuitsListUseCase';
 
 interface CircuitState {
   circuitsList: Circuit[];
@@ -52,10 +53,6 @@ export const initialCircuitsState: CircuitState = {
   isLoading: false,
   isFetchCircuitFailed: false,
 };
-
-export const searchCircuitsList = createAction<SearchState>(
-  'circuits/search-circuits-list'
-);
 
 export const resetSearchCircuitsList = createAction(
   'circuits/reset-search-circuits-list'
