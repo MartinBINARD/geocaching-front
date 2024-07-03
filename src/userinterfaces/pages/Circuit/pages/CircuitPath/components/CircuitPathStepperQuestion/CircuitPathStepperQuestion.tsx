@@ -6,7 +6,7 @@ import {
   useAppSelector,
 } from '../../../../../../../services/hooks/redux';
 
-import { storeStepEntries } from '../../../../../../../domain/usecases/circuits';
+import { storeStepEntries } from '../../../../../../../domain/usecases/circuits/storeStepEntriesUseCase';
 
 import CircuitMapToggle from '../../../../../../components//CircuitMapToggle/CircuitMapToggle';
 import CircuitPathStepperQuestionHint from './components/CircuitPathStepperQuestionHint/CircuitPathStepperQuestionHint';
