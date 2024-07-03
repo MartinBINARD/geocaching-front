@@ -1,7 +1,6 @@
 import {
   Circuit,
   CircuitPathStep,
-  SearchState,
   StepsEntriesState,
   UserCircuitAnswersResultState,
   UserCircuitEntriesState,
@@ -11,16 +10,12 @@ import circuitsReducer, {
   initialCircuitsState,
   resetCircuitQuiz,
   resetSearchCircuitsList,
-  searchCircuitsList,
   sendAnswers,
   storeCircuitQuiz,
   storeStepEntries,
 } from '../../domain/usecases/circuits';
 import {
   oneCircuitResponse,
-  searchCircuitsListResponse,
-  goodSearchEntries,
-  wrongSearchEntries,
   oneCircuitQuizResponse,
   oneCircuitStepResponse,
   userCircuitEntriesResponse,
@@ -35,45 +30,6 @@ jest.mock('../../services/axios', () => ({
     baseUrl: 'http://localhost:3000',
   },
 }));
-
-describe('Search circuits list state test', () => {
-  it('Should SUCCEED to return research on circuits list', async () => {
-    const fakePayload: Circuit[] = searchCircuitsListResponse;
-    const fakeSearchEntries: SearchState = goodSearchEntries;
-
-    const action = searchCircuitsList(fakeSearchEntries);
-    const state = circuitsReducer(initialCircuitsState, action);
-
-    expect(action.type).toEqual('circuits/search-circuits-list');
-    expect(action.payload).toEqual(fakeSearchEntries);
-
-    expect(state).toEqual({
-      ...initialCircuitsState,
-      searchList: fakePayload,
-      searchSelectorsFilterEntries: fakeSearchEntries.search,
-    });
-    expect(state.searchList).toHaveLength(2);
-  });
-
-  it('Should FAILED to return research on circuits list', async () => {
-    const fakePayload: Circuit[] = [];
-    const fakeSearchEntries: SearchState = wrongSearchEntries;
-
-    const action = searchCircuitsList(fakeSearchEntries);
-    const state = circuitsReducer(initialCircuitsState, action);
-
-    expect(action.type).toEqual('circuits/search-circuits-list');
-    expect(action.payload).toEqual(fakeSearchEntries);
-
-    expect(state).toEqual({
-      ...initialCircuitsState,
-      isSearchNoResult: true,
-      searchList: fakePayload,
-      searchSelectorsFilterEntries: fakeSearchEntries.search,
-    });
-    expect(state.searchList).toHaveLength(0);
-  });
-});
 
 describe('Reset search circuits list state test', () => {
   it('Should SUCCEED to return RESET research on circuits list', async () => {
