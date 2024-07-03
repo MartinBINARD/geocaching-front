@@ -23,7 +23,7 @@ import {
 
 import createCircuitQuizStepper from './utils/createCircuitQuizStepper';
 import formatUserCircuitEntries from './utils/formatUserCircuitEntries';
-import { fetchCircuitsList } from './circuits/fetchCircuitListUseCase';
+import { fetchCircuitsList } from './circuits/fetchCircuitsListUseCase';
 
 interface CircuitState {
   circuitsList: Circuit[];
