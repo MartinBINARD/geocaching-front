@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import authReducer from '../domain/usecases/auth';
+import authReducer from './reducers/auth';
 import circuitsReducer from '../domain/usecases/circuits';
 import userReducer from '../domain/usecases/user';
 

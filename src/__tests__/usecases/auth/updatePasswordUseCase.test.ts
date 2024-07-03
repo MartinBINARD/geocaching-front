@@ -5,7 +5,7 @@ import {
 } from '../../../__mocks__/auth.mocks';
 import { updatePassword } from '../../../domain';
 import { UpdateCredentials } from '../../../domain/entities/auth';
-import authReducer, { intialAuthState } from '../../../domain/usecases/auth';
+import authReducer, { intialAuthState } from '../../../store/reducers/auth';
 import { fakeRequestId } from '../../../__mocks__/request.mocks';
 
 jest.mock('../../../services/axios', () => ({

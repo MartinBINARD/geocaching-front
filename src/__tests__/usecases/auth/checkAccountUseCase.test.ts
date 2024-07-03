@@ -1,5 +1,5 @@
 import { fakeRequestId } from '../../../__mocks__/request.mocks';
-import authReducer, { intialAuthState } from '../../../domain/usecases/auth';
+import authReducer, { intialAuthState } from '../../../store/reducers/auth';
 import { checkAccount } from '../../../domain/usecases/auth/checkAccountUseCase';
 
 jest.mock('../../../services/axios', () => ({

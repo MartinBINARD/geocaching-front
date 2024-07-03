@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { User } from '../entities/auth';
+import { User } from '../../domain/entities/auth';
 
 import {
   register,
@@ -11,7 +11,7 @@ import {
   logout,
   forgotPassword,
   updatePassword,
-} from '..';
+} from '../../domain';
 
 interface AuthState {
   user: User | null;

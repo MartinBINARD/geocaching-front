@@ -7,7 +7,7 @@ import {
   validLoginResponse,
 } from '../../../__mocks__/auth.mocks';
 
-import authReducer, { intialAuthState } from '../../../domain/usecases/auth';
+import authReducer, { intialAuthState } from '../../../store/reducers/auth';
 import { login } from '../../../domain/usecases/auth/loginUseCase';
 import { fakeRequestId } from '../../../__mocks__/request.mocks';
 
