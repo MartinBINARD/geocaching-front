@@ -6,11 +6,9 @@ import {
   useAppSelector,
 } from '../../../../../services/hooks/redux';
 
-import {
-  resetCircuitQuiz,
-  storeCircuitQuiz,
-} from '../../../../../domain/usecases/circuits';
+import { resetCircuitQuiz } from '../../../../../domain/usecases/circuits';
 import { fetchCircuit } from '../../../../../domain/usecases/circuits/fetchCircuitUseCase';
+import { storeCircuitQuiz } from '../../../../../domain/usecases/circuits/storeCircuitQuizUseCase';
 
 import Loader from '../../../../components/loader/Loader';
 import CircuitDescriptionCard from './components/CircuitDescriptionCard/CircuitDescriptionCard';
