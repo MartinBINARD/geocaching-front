@@ -25,6 +25,7 @@ import createCircuitQuizStepper from './utils/createCircuitQuizStepper';
 import formatUserCircuitEntries from './utils/formatUserCircuitEntries';
 import { fetchCircuitsList } from './circuits/fetchCircuitsListUseCase';
 import { searchCircuitsList } from './circuits/searchCircuitsListUseCase';
+import { resetSearchCircuitsList } from './circuits/resetSearchCircuitsListUseCase';
 
 interface CircuitState {
   circuitsList: Circuit[];

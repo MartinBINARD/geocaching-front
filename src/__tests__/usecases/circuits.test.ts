@@ -9,7 +9,6 @@ import circuitsReducer, {
   fetchCircuit,
   initialCircuitsState,
   resetCircuitQuiz,
-  resetSearchCircuitsList,
   sendAnswers,
   storeCircuitQuiz,
   storeStepEntries,
@@ -30,20 +29,6 @@ jest.mock('../../services/axios', () => ({
     baseUrl: 'http://localhost:3000',
   },
 }));
-
-describe('Reset search circuits list state test', () => {
-  it('Should SUCCEED to return RESET research on circuits list', async () => {
-    const action = resetSearchCircuitsList();
-    const state = circuitsReducer(initialCircuitsState, action);
-
-    expect(action.type).toEqual('circuits/reset-search-circuits-list');
-    expect(action.payload).toEqual(undefined);
-
-    expect(state.isSearchNoResult).toBeFalsy;
-    expect(state.searchSelectorsFilterEntries).toBeNull;
-    expect(state.searchList).toHaveLength(0);
-  });
-});
 
 describe('Fetch one circuit state test', () => {
   it('Should GET ONE circuit', async () => {
