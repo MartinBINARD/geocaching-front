@@ -1,12 +1,10 @@
 import {
-  Circuit,
   CircuitPathStep,
   StepsEntriesState,
   UserCircuitAnswersResultState,
   UserCircuitEntriesState,
 } from '../../domain/entities/circuit';
 import circuitsReducer, {
-  fetchCircuit,
   initialCircuitsState,
   resetCircuitQuiz,
   sendAnswers,
@@ -14,7 +12,6 @@ import circuitsReducer, {
   storeStepEntries,
 } from '../../domain/usecases/circuits';
 import {
-  oneCircuitResponse,
   oneCircuitQuizResponse,
   oneCircuitStepResponse,
   userCircuitEntriesResponse,
@@ -29,51 +26,6 @@ jest.mock('../../services/axios', () => ({
     baseUrl: 'http://localhost:3000',
   },
 }));
-
-describe('Fetch one circuit state test', () => {
-  it('Should GET ONE circuit', async () => {
-    const fakePayload: Circuit = oneCircuitResponse;
-    const fakeParam = 'circuits/1';
-
-    const action = fetchCircuit.fulfilled(
-      fakePayload,
-      fakeRequestId,
-      fakeParam
-    );
-    const state = circuitsReducer(initialCircuitsState, action);
-
-    expect(action.type).toEqual('circuits/fetch-circuit/fulfilled');
-    expect(action.payload).toEqual(fakePayload);
-    expect(action.meta.requestId).toEqual(fakeRequestId);
-    expect(action.meta.arg).toEqual(fakeParam);
-
-    expect(state).toEqual({
-      ...initialCircuitsState,
-      oneCircuit: fakePayload,
-    });
-    expect(state.isLoading).toBeFalsy;
-  });
-
-  it('Should FAIL to return ONE circuit', () => {
-    const fakePayload = null;
-    const fakeParam = 'circuits/1';
-
-    const action = fetchCircuit.rejected(fakePayload, fakeRequestId, fakeParam);
-    const state = circuitsReducer(initialCircuitsState, action);
-
-    expect(action.type).toEqual('circuits/fetch-circuit/rejected');
-    expect(action.payload).toEqual(undefined);
-    expect(action.meta.requestId).toEqual(fakeRequestId);
-    expect(action.meta.arg).toEqual(fakeParam);
-
-    expect(state).toEqual({
-      ...initialCircuitsState,
-      isFetchCircuitFailed: true,
-      oneCircuit: null,
-    });
-    expect(state.isLoading).toBeFalsy;
-  });
-});
 
 describe('Store circuit quiz state test', () => {
   it('Should SUCCEED To store circuit quiz questions', () => {
