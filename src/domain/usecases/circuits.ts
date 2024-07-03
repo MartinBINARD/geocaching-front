@@ -17,7 +17,6 @@ import {
   UserCircuitAnswersResultState,
   CircuitQuizStep,
   CircuitPath,
-  CircuitPathStep,
   Search,
 } from '../entities/circuit';
 
@@ -27,6 +26,7 @@ import { fetchCircuitsList } from './circuits/fetchCircuitsListUseCase';
 import { searchCircuitsList } from './circuits/searchCircuitsListUseCase';
 import { resetSearchCircuitsList } from './circuits/resetSearchCircuitsListUseCase';
 import { fetchCircuit } from './circuits/fetchCircuitUseCase';
+import { storeCircuitQuiz } from './circuits/storeCircuitQuizUseCase';
 
 interface CircuitState {
   circuitsList: Circuit[];
@@ -55,10 +55,6 @@ export const initialCircuitsState: CircuitState = {
   isLoading: false,
   isFetchCircuitFailed: false,
 };
-
-export const storeCircuitQuiz = createAction<CircuitPathStep[]>(
-  'circuits/store-circuit-quiz'
-);
 
 export const resetCircuitQuiz = createAction('circuits/reset-circuit-quiz');
 
