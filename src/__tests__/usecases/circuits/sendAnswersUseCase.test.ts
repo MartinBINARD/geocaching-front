@@ -1,23 +1,30 @@
 import {
+  userCircuitAnswerResultResponse,
+  userCircuitEntriesResponse,
+} from '../../../__mocks__/circuits.mocks';
+import { fakeRequestId } from '../../../__mocks__/request.mocks';
+import {
   UserCircuitAnswersResultState,
   UserCircuitEntriesState,
-} from '../../domain/entities/circuit';
+} from '../../../domain/entities/circuit';
 import circuitsReducer, {
   initialCircuitsState,
-  sendAnswers,
-} from '../../domain/usecases/circuits';
-import {
-  userCircuitEntriesResponse,
-  userCircuitAnswerResultResponse,
-} from '../../__mocks__/circuits.mocks';
+} from '../../../domain/usecases/circuits';
+import { sendAnswers } from '../../../domain/usecases/circuits/sendAnswersUseCase';
 
-const fakeRequestId = 'fakeRequestId';
-
-jest.mock('../../services/axios', () => ({
+jest.mock('../../../services/axios', () => ({
   api: {
     baseUrl: 'http://localhost:3000',
   },
 }));
+
+describe('Circuits store', () => {
+  it('Should return the initial circuits state on first call', () => {
+    expect(circuitsReducer(undefined, { type: '@@INIT' })).toBe(
+      initialCircuitsState
+    );
+  });
+});
 
 describe('Send user answers from circuit quiz state test', () => {
   it('Should SUCCEED to send user answers', async () => {
