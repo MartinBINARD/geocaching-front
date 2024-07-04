@@ -3,6 +3,8 @@ import { toast } from 'react-toastify';
 
 import { Profile, UpdateProfileForm } from '../entities/user';
 
+import { getProfile } from '..';
+
 import api from '../../services/axios';
 import formatUserDataForm from './utils/formatUserDataForm';
 
@@ -21,16 +23,6 @@ export const intialUserState: ProfileState = {
   isUpdateLoading: false,
   isProfileDelete: false,
 };
-
-export const getProfile = createAsyncThunk('user/get-profile', async () => {
-  try {
-    const { data } = await api.get<Profile>('profile');
-
-    return data;
-  } catch (error) {
-    throw error.response ? error.response.data : error.message;
-  }
-});
 
 export const updateProfile = createAsyncThunk(
   'user/update-profile',

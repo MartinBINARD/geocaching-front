@@ -14,3 +14,5 @@ export * from './usecases/circuits/storeCircuitQuizUseCase';
 export * from './usecases/circuits/resetCircuitQuizUseCase';
 export * from './usecases/circuits/storeStepEntriesUseCase';
 export * from './usecases/circuits/sendAnswersUseCase';
+
+export * from './usecases/user/getProfileUseCase';
