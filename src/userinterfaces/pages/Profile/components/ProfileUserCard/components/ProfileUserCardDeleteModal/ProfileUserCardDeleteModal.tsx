@@ -3,7 +3,7 @@ import { HeartCrack } from 'lucide-react';
 
 import { useAppDispatch } from '../../../../../../../services/hooks/redux';
 
-import { deleteProfile } from '../../../../../../../domain/usecases/user';
+import { deleteProfile } from '../../../../../../../domain';
 
 interface ProfileUserCardDeleteModalProp {
   isEdit: boolean;
