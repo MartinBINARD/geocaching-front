@@ -15,6 +15,14 @@ jest.mock('../../../services/axios', () => ({
   },
 }));
 
+describe('Circuits store', () => {
+  it('Should return the initial circuits state on first call', () => {
+    expect(circuitsReducer(undefined, { type: '@@INIT' })).toBe(
+      initialCircuitsState
+    );
+  });
+});
+
 describe('Store circuit quiz state test', () => {
   it('Should SUCCEED To store circuit quiz questions', () => {
     const fakePayload: CircuitPathStep[] = oneCircuitStepResponse;

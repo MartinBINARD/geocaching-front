@@ -9,6 +9,14 @@ jest.mock('../../../services/axios', () => ({
   },
 }));
 
+describe('Circuits store', () => {
+  it('Should return the initial circuits state on first call', () => {
+    expect(circuitsReducer(undefined, { type: '@@INIT' })).toBe(
+      initialCircuitsState
+    );
+  });
+});
+
 describe('Reset search circuits list state test', () => {
   it('Should SUCCEED to return RESET research on circuits list', async () => {
     const action = resetSearchCircuitsList();
