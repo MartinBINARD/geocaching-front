@@ -17,3 +17,4 @@ export * from './usecases/circuits/sendAnswersUseCase';
 
 export * from './usecases/user/getProfileUseCase';
 export * from './usecases/user/updateProfileUseCase';
+export * from './usecases/user/deleteProfileUseCase';

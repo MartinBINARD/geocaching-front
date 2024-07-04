@@ -1,11 +1,9 @@
-import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
+import { createReducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 import { Profile } from '../entities/user';
 
-import { getProfile, updateProfile } from '..';
-
-import api from '../../services/axios';
+import { deleteProfile, getProfile, updateProfile } from '..';
 
 interface ProfileState {
   profile: Profile | null;
@@ -22,21 +20,6 @@ export const intialUserState: ProfileState = {
   isUpdateLoading: false,
   isProfileDelete: false,
 };
-
-export const deleteProfile = createAsyncThunk(
-  'user/delete-profile',
-  async (): Promise<boolean> => {
-    try {
-      await api.delete('profile');
-
-      return true;
-    } catch (error) {
-      console.log(error);
-
-      throw error.response ? error.response.data : error.message;
-    }
-  }
-);
 
 const userReducer = createReducer(intialUserState, (builder) => {
   builder
