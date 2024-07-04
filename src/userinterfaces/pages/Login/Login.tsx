@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../../services/hooks/redux';
 
 import { LoginForm } from '../../../domain/entities/auth';
 
-import { login } from '../../../domain/usecases/auth/loginUseCase';
+import { login } from '../../../domain';
 
 import Footer from '../../components/Footer/Footer';
 import Loader from '../../components/loader/Loader';

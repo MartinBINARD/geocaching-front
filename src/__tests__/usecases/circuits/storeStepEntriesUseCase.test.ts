@@ -4,7 +4,7 @@ import { StepsEntriesState } from '../../../domain/entities/circuit';
 import circuitsReducer, {
   initialCircuitsState,
 } from '../../../domain/usecases/circuits';
-import { storeStepEntries } from '../../../domain/usecases/circuits/storeStepEntriesUseCase';
+import { storeStepEntries } from '../../../domain';
 
 jest.mock('../../../services/axios', () => ({
   api: {

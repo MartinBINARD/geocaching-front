@@ -5,7 +5,7 @@ import { Circuit } from '../../../domain/entities/circuit';
 import circuitsReducer, {
   initialCircuitsState,
 } from '../../../domain/usecases/circuits';
-import { fetchCircuit } from '../../../domain/usecases/circuits/fetchCircuitUseCase';
+import { fetchCircuit } from '../../../domain';
 
 jest.mock('../../../services/axios', () => ({
   api: {

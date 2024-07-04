@@ -1,7 +1,7 @@
 import { validLoginResponse } from '../../../__mocks__/auth.mocks';
 import { fakeRequestId } from '../../../__mocks__/request.mocks';
 import authReducer, { intialAuthState } from '../../../store/reducers/auth';
-import { fetchSession } from '../../../domain/usecases/auth/fetchSessionUseCase';
+import { fetchSession } from '../../../domain';
 
 jest.mock('../../../services/axios', () => ({
   api: {

@@ -6,7 +6,7 @@ import {
   useAppSelector,
 } from '../../../../../services/hooks/redux';
 
-import { storeCircuitQuiz } from '../../../../../domain/usecases/circuits/storeCircuitQuizUseCase';
+import { storeCircuitQuiz } from '../../../../../domain';
 
 import Loader from '../../../../components/loader/Loader';
 import CircuitPathStepperMap from './components/CircuitPathStepperMap/CircuitPathStepperMap';

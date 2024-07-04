@@ -10,7 +10,7 @@ import {
 import circuitsReducer, {
   initialCircuitsState,
 } from '../../../domain/usecases/circuits';
-import { sendAnswers } from '../../../domain/usecases/circuits/sendAnswersUseCase';
+import { sendAnswers } from '../../../domain';
 
 jest.mock('../../../services/axios', () => ({
   api: {

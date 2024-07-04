@@ -13,15 +13,18 @@ import {
   Search,
 } from '../entities/circuit';
 
+import {
+  fetchCircuitsList,
+  searchCircuitsList,
+  resetSearchCircuitsList,
+  fetchCircuit,
+  storeCircuitQuiz,
+  resetCircuitQuiz,
+  storeStepEntries,
+  sendAnswers,
+} from '..';
+
 import createCircuitQuizStepper from './utils/createCircuitQuizStepper';
-import { fetchCircuitsList } from './circuits/fetchCircuitsListUseCase';
-import { searchCircuitsList } from './circuits/searchCircuitsListUseCase';
-import { resetSearchCircuitsList } from './circuits/resetSearchCircuitsListUseCase';
-import { fetchCircuit } from './circuits/fetchCircuitUseCase';
-import { storeCircuitQuiz } from './circuits/storeCircuitQuizUseCase';
-import { resetCircuitQuiz } from './circuits/resetCircuitQuizUseCase';
-import { storeStepEntries } from './circuits/storeStepEntriesUseCase';
-import { sendAnswers } from './circuits/sendAnswersUseCase';
 
 interface CircuitState {
   circuitsList: Circuit[];
