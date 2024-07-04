@@ -1,4 +1,4 @@
-import userReducer, { intialUserState } from '../../../domain/usecases/user';
+import userReducer, { intialUserState } from '../../../store/reducers/user';
 import { userProfileResponse } from '../../../__mocks__/user.mocks';
 import { deleteProfile } from '../../../domain';
 

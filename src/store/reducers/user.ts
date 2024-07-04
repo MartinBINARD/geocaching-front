@@ -1,9 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { Profile } from '../entities/user';
+import { Profile } from '../../domain/entities/user';
 
-import { deleteProfile, getProfile, updateProfile } from '..';
+import { deleteProfile, getProfile, updateProfile } from '../../domain';
 
 interface ProfileState {
   profile: Profile | null;

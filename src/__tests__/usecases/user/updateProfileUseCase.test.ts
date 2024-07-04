@@ -1,4 +1,5 @@
 import { AxiosError } from 'axios';
+import userReducer, { intialUserState } from '../../../store/reducers/user';
 import { fakeRequestId } from '../../../__mocks__/request.mocks';
 import {
   userProfileFormEntries,
@@ -7,7 +8,6 @@ import {
 } from '../../../__mocks__/user.mocks';
 import { Profile, UpdateProfileForm } from '../../../domain/entities/user';
 import { updateProfile } from '../../../domain';
-import userReducer, { intialUserState } from '../../../domain/usecases/user';
 
 jest.mock('../../../services/axios', () => ({
   api: {
