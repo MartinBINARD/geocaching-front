@@ -1,7 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 
 import { toast } from 'react-toastify';
-import filteredList from './utils/FilteredList';
 
 import {
   Circuit,
@@ -11,7 +10,7 @@ import {
   CircuitQuizStep,
   CircuitPath,
   Search,
-} from '../entities/circuit';
+} from '../../domain/entities/circuit';
 
 import {
   fetchCircuitsList,
@@ -22,9 +21,10 @@ import {
   resetCircuitQuiz,
   storeStepEntries,
   sendAnswers,
-} from '..';
+} from '../../domain';
 
-import createCircuitQuizStepper from './utils/createCircuitQuizStepper';
+import createCircuitQuizStepper from '../../domain/usecases/utils/createCircuitQuizStepper';
+import filteredList from '../../domain/usecases/utils/FilteredList';
 
 interface CircuitState {
   circuitsList: Circuit[];

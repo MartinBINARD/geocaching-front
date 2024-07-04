@@ -9,7 +9,7 @@ import {
 } from '../../../domain/entities/circuit';
 import circuitsReducer, {
   initialCircuitsState,
-} from '../../../domain/usecases/circuits';
+} from '../../../store/reducers/circuits';
 import { sendAnswers } from '../../../domain';
 
 jest.mock('../../../services/axios', () => ({
