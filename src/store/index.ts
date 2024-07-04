@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import authReducer from '../domain/usecases/auth';
-import circuitsReducer from '../domain/usecases/circuits';
-import userReducer from '../domain/usecases/user';
+import authReducer from './reducers/auth';
+import circuitsReducer from './reducers/circuits';
+import userReducer from './reducers/user';
 
 const store = configureStore({
   reducer: {

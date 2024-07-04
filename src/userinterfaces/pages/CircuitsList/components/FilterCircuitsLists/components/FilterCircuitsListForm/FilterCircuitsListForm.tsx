@@ -6,9 +6,9 @@ import {
 } from '../../../../../../../services/hooks/redux';
 
 import {
-  resetSearchCircuitsList,
   searchCircuitsList,
-} from '../../../../../../../domain/usecases/circuits';
+  resetSearchCircuitsList,
+} from '../../../../../../../domain';
 
 import SelectControl from '../../../../../../components/SelectControl/SelectControl';
 

@@ -1,28 +1,30 @@
-import {
-  createAction,
-  createAsyncThunk,
-  createReducer,
-} from '@reduxjs/toolkit';
+import { createReducer } from '@reduxjs/toolkit';
 
 import { toast } from 'react-toastify';
-import { AxiosError } from 'axios';
-import api from '../../services/axios';
-import filteredList from './utils/FilteredList';
 
 import {
   Circuit,
   SearchState,
   StepsEntriesState,
-  UserCircuitEntriesState,
   UserCircuitAnswersResultState,
   CircuitQuizStep,
   CircuitPath,
-  CircuitPathStep,
   Search,
-} from '../entities/circuit';
+} from '../../domain/entities/circuit';
 
-import createCircuitQuizStepper from './utils/createCircuitQuizStepper';
-import formatUserCircuitEntries from './utils/formatUserCircuitEntries';
+import {
+  fetchCircuitsList,
+  searchCircuitsList,
+  resetSearchCircuitsList,
+  fetchCircuit,
+  storeCircuitQuiz,
+  resetCircuitQuiz,
+  storeStepEntries,
+  sendAnswers,
+} from '../../domain';
+
+import createCircuitQuizStepper from '../../domain/usecases/utils/createCircuitQuizStepper';
+import filteredList from '../../domain/usecases/utils/FilteredList';
 
 interface CircuitState {
   circuitsList: Circuit[];
@@ -51,80 +53,6 @@ export const initialCircuitsState: CircuitState = {
   isLoading: false,
   isFetchCircuitFailed: false,
 };
-
-export const fetchCircuitsList = createAsyncThunk(
-  'circuits/fetch-circuits-list',
-  async (): Promise<Circuit[]> => {
-    try {
-      const { data } = await api.get<Circuit[]>('circuits');
-
-      return data;
-    } catch (error: unknown) {
-      /* Specify known AxiosError Type to solve eslint warning.
-      Typscript cannot predict server error but do it on AxiosError Instance */
-      const err = error as AxiosError;
-      throw err.response ? err.response.data : err.message;
-    }
-  }
-);
-
-export const searchCircuitsList = createAction<SearchState>(
-  'circuits/search-circuits-list'
-);
-
-export const resetSearchCircuitsList = createAction(
-  'circuits/reset-search-circuits-list'
-);
-
-export const fetchCircuit = createAsyncThunk(
-  'circuits/fetch-circuit',
-  async (id: string): Promise<Circuit> => {
-    try {
-      const { data } = await api.get<Circuit>(`circuits/${id}`);
-
-      return data;
-    } catch (error: unknown) {
-      /* Specify known AxiosError Type to solve eslint warning.
-      Typscript cannot predict server error but do it on AxiosError Instance */
-      const err = error as AxiosError;
-      throw err.response ? err.response.data : err.message;
-    }
-  }
-);
-
-export const storeCircuitQuiz = createAction<CircuitPathStep[]>(
-  'circuits/store-circuit-quiz'
-);
-
-export const resetCircuitQuiz = createAction('circuits/reset-circuit-quiz');
-
-export const storeStepEntries = createAction<StepsEntriesState>(
-  'circuits/store-steps-entries'
-);
-
-export const sendAnswers = createAsyncThunk(
-  'circuits/send-answers',
-  async (
-    userCircuitEntries: UserCircuitEntriesState
-  ): Promise<UserCircuitAnswersResultState> => {
-    try {
-      const { circuitId } = userCircuitEntries;
-      const objectData = formatUserCircuitEntries(userCircuitEntries);
-
-      const { data } = await api.post<UserCircuitAnswersResultState>(
-        `circuits/${circuitId}/answer`,
-        objectData
-      );
-
-      return data;
-    } catch (error: unknown) {
-      /* Specify known AxiosError Type to solve eslint warning.
-      Typscript cannot predict server error but do it on AxiosError Instance */
-      const err = error as AxiosError;
-      throw err.response ? err.response.data : err.message;
-    }
-  }
-);
 
 const circuitsReducer = createReducer(initialCircuitsState, (builder) => {
   builder

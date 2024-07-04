@@ -9,8 +9,8 @@ export default {
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
   modulePathIgnorePatterns: [
     '<rootDir>/src/services',
-    '<rootDir>/src/userinterface/',
-    '<rootDir>/src/__tests__/data',
+    '<rootDir>/src/userinterface',
+    '<rootDir>/src/__mocks__',
   ],
   moduleNameMapper: {
     setupFilesAfterEnv: ['./jest.setup.ts'],

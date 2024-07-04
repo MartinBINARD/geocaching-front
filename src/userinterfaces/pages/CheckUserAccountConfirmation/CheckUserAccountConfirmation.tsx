@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../services/hooks/redux';
 
-import { checkUserAccountConfirmation } from '../../../domain/usecases/auth';
+import { checkAccount } from '../../../domain';
 
 function CheckUserAccountConfirmation() {
   const dispatch = useAppDispatch();
@@ -16,7 +16,7 @@ function CheckUserAccountConfirmation() {
 
   useEffect(() => {
     if (token) {
-      dispatch(checkUserAccountConfirmation(token));
+      dispatch(checkAccount(token));
     }
   }, [dispatch, token]);
 
