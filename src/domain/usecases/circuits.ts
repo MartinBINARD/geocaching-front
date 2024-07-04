@@ -1,15 +1,12 @@
-import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
+import { createReducer } from '@reduxjs/toolkit';
 
 import { toast } from 'react-toastify';
-import { AxiosError } from 'axios';
-import api from '../../services/axios';
 import filteredList from './utils/FilteredList';
 
 import {
   Circuit,
   SearchState,
   StepsEntriesState,
-  UserCircuitEntriesState,
   UserCircuitAnswersResultState,
   CircuitQuizStep,
   CircuitPath,
@@ -17,7 +14,6 @@ import {
 } from '../entities/circuit';
 
 import createCircuitQuizStepper from './utils/createCircuitQuizStepper';
-import formatUserCircuitEntries from './utils/formatUserCircuitEntries';
 import { fetchCircuitsList } from './circuits/fetchCircuitsListUseCase';
 import { searchCircuitsList } from './circuits/searchCircuitsListUseCase';
 import { resetSearchCircuitsList } from './circuits/resetSearchCircuitsListUseCase';
@@ -25,6 +21,7 @@ import { fetchCircuit } from './circuits/fetchCircuitUseCase';
 import { storeCircuitQuiz } from './circuits/storeCircuitQuizUseCase';
 import { resetCircuitQuiz } from './circuits/resetCircuitQuizUseCase';
 import { storeStepEntries } from './circuits/storeStepEntriesUseCase';
+import { sendAnswers } from './circuits/sendAnswersUseCase';
 
 interface CircuitState {
   circuitsList: Circuit[];
@@ -53,30 +50,6 @@ export const initialCircuitsState: CircuitState = {
   isLoading: false,
   isFetchCircuitFailed: false,
 };
-
-export const sendAnswers = createAsyncThunk(
-  'circuits/send-answers',
-  async (
-    userCircuitEntries: UserCircuitEntriesState
-  ): Promise<UserCircuitAnswersResultState> => {
-    try {
-      const { circuitId } = userCircuitEntries;
-      const objectData = formatUserCircuitEntries(userCircuitEntries);
-
-      const { data } = await api.post<UserCircuitAnswersResultState>(
-        `circuits/${circuitId}/answer`,
-        objectData
-      );
-
-      return data;
-    } catch (error: unknown) {
-      /* Specify known AxiosError Type to solve eslint warning.
-      Typscript cannot predict server error but do it on AxiosError Instance */
-      const err = error as AxiosError;
-      throw err.response ? err.response.data : err.message;
-    }
-  }
-);
 
 const circuitsReducer = createReducer(initialCircuitsState, (builder) => {
   builder
