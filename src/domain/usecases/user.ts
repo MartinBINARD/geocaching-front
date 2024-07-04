@@ -1,12 +1,11 @@
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { Profile, UpdateProfileForm } from '../entities/user';
+import { Profile } from '../entities/user';
 
-import { getProfile } from '..';
+import { getProfile, updateProfile } from '..';
 
 import api from '../../services/axios';
-import formatUserDataForm from './utils/formatUserDataForm';
 
 interface ProfileState {
   profile: Profile | null;
@@ -23,21 +22,6 @@ export const intialUserState: ProfileState = {
   isUpdateLoading: false,
   isProfileDelete: false,
 };
-
-export const updateProfile = createAsyncThunk(
-  'user/update-profile',
-  async (form: UpdateProfileForm): Promise<Profile> => {
-    try {
-      const objData = formatUserDataForm(form);
-
-      const { data } = await api.patch('profile', objData);
-
-      return data;
-    } catch (error) {
-      throw error && `Une erreur s'est produite. Veuillez essayer de nouveau.`;
-    }
-  }
-);
 
 export const deleteProfile = createAsyncThunk(
   'user/delete-profile',

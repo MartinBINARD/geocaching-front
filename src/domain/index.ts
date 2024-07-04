@@ -16,3 +16,4 @@ export * from './usecases/circuits/storeStepEntriesUseCase';
 export * from './usecases/circuits/sendAnswersUseCase';
 
 export * from './usecases/user/getProfileUseCase';
+export * from './usecases/user/updateProfileUseCase';
