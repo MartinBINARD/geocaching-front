@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Circuit } from '../../entities/circuit';
-import api from '../../../services/axios';
+import api from '../../../infracstructure/config/axios';
 import { AxiosError } from 'axios';
 
 export const fetchCircuitsList = createAsyncThunk(

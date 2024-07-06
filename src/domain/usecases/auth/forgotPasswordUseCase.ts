@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { EmailForm } from '../../entities/auth';
-import api from '../../../services/axios';
+import api from '../../../infracstructure/config/axios';
 import formatUserDataForm from '../utils/formatUserDataForm';
 
 export const forgotPassword = createAsyncThunk(

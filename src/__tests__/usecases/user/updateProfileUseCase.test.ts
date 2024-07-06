@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import userReducer, {
   intialUserState,
-} from '../../../userinterfaces/store/reducers/user';
+} from '../../../infracstructure/store/reducers/user';
 import { fakeRequestId } from '../../../__mocks__/request.mocks';
 import {
   userProfileFormEntries,
@@ -11,7 +11,7 @@ import {
 import { Profile, UpdateProfileForm } from '../../../domain/entities/user';
 import { updateProfile } from '../../../domain';
 
-jest.mock('../../../services/axios', () => ({
+jest.mock('../../../infracstructure/config/axios', () => ({
   api: {
     baseUrl: 'http://localhost:3000',
   },

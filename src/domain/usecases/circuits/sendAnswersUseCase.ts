@@ -6,7 +6,7 @@ import {
   UserCircuitEntriesState,
 } from '../../entities/circuit';
 import formatUserCircuitEntries from '../utils/formatUserCircuitEntries';
-import api from '../../../services/axios';
+import api from '../../../infracstructure/config/axios';
 
 export const sendAnswers = createAsyncThunk(
   'circuits/send-answers',

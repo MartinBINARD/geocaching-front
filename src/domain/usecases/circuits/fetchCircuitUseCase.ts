@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import { Circuit } from '../../entities/circuit';
-import api from '../../../services/axios';
+import api from '../../../infracstructure/config/axios';
 
 export const fetchCircuit = createAsyncThunk(
   'circuits/fetch-circuit',

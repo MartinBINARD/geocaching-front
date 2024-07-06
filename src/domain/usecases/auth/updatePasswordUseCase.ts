@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { UpdateCredentials } from '../../entities/auth';
 import formatUserUpdateCredentials from '../utils/formatUserUpdateCredentials';
-import api from '../../../services/axios';
+import api from '../../../infracstructure/config/axios';
 
 export const updatePassword = createAsyncThunk(
   'settings/update-password',

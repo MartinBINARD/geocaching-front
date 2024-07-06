@@ -1,9 +1,9 @@
 import circuitsReducer, {
   initialCircuitsState,
-} from '../../../userinterfaces/store/reducers/circuits';
+} from '../../../infracstructure/store/reducers/circuits';
 import { resetSearchCircuitsList } from '../../../domain';
 
-jest.mock('../../../services/axios', () => ({
+jest.mock('../../../infracstructure/config/axios', () => ({
   api: {
     baseUrl: 'http://localhost:3000',
   },

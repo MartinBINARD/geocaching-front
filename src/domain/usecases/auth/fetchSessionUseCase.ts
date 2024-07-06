@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { Session } from '../../entities/auth';
 
-import api from '../../../services/axios';
+import api from '../../../infracstructure/config/axios';
 
 export const fetchSession = createAsyncThunk(
   'settings/fetchSession',

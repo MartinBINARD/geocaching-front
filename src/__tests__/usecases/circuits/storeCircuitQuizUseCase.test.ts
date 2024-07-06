@@ -6,10 +6,10 @@ import { CircuitPathStep } from '../../../domain/entities/circuit';
 
 import circuitsReducer, {
   initialCircuitsState,
-} from '../../../userinterfaces/store/reducers/circuits';
+} from '../../../infracstructure/store/reducers/circuits';
 import { storeCircuitQuiz } from '../../../domain';
 
-jest.mock('../../../services/axios', () => ({
+jest.mock('../../../infracstructure/config/axios', () => ({
   api: {
     baseUrl: 'http://localhost:3000',
   },

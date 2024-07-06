@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { LoginForm, User } from '../../entities/auth';
 
 import formatUserDataForm from '../utils/formatUserDataForm';
-import api from '../../../services/axios';
+import api from '../../../infracstructure/config/axios';
 
 export const login = createAsyncThunk(
   'settings/login',

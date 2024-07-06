@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Profile, UpdateProfileForm } from '../../entities/user';
 import formatUserDataForm from '../utils/formatUserDataForm';
-import api from '../../../services/axios';
+import api from '../../../infracstructure/config/axios';
 
 export const updateProfile = createAsyncThunk(
   'user/update-profile',

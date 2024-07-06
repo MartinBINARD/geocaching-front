@@ -1,12 +1,12 @@
 import userReducer, {
   intialUserState,
-} from '../../../userinterfaces/store/reducers/user';
+} from '../../../infracstructure/store/reducers/user';
 import { fakeRequestId } from '../../../__mocks__/request.mocks';
 import { userProfileResponse } from '../../../__mocks__/user.mocks';
 import { getProfile } from '../../../domain';
 import { Profile } from '../../../domain/entities/user';
 
-jest.mock('../../../services/axios', () => ({
+jest.mock('../../../infracstructure/config/axios', () => ({
   api: {
     baseUrl: 'http://localhost:3000',
   },

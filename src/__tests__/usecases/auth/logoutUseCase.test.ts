@@ -3,9 +3,9 @@ import { fakeRequestId } from '../../../__mocks__/request.mocks';
 import { logout } from '../../../domain';
 import authReducer, {
   intialAuthState,
-} from '../../../userinterfaces/store/reducers/auth';
+} from '../../../infracstructure/store/reducers/auth';
 
-jest.mock('../../../services/axios', () => ({
+jest.mock('../../../infracstructure/config/axios', () => ({
   api: {
     baseUrl: 'http://localhost:3000',
   },

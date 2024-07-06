@@ -7,10 +7,10 @@ import { updatePassword } from '../../../domain';
 import { UpdateCredentials } from '../../../domain/entities/auth';
 import authReducer, {
   intialAuthState,
-} from '../../../userinterfaces/store/reducers/auth';
+} from '../../../infracstructure/store/reducers/auth';
 import { fakeRequestId } from '../../../__mocks__/request.mocks';
 
-jest.mock('../../../services/axios', () => ({
+jest.mock('../../../infracstructure/config/axios', () => ({
   api: {
     baseUrl: 'http://localhost:3000',
   },
