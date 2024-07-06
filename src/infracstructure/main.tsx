@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import router from './infracstructure/router/router';
+import router from './router/router';
 
-import store from './infracstructure/store';
+import store from './store';
 import './index.css';
 
 // App is provided by the hook RouterProvider.
