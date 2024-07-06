@@ -1,7 +1,9 @@
 import { checkAccountEntries } from '../../../__mocks__/auth.mocks';
 import { fakeRequestId } from '../../../__mocks__/request.mocks';
-import authReducer, { intialAuthState } from '../../../store/reducers/auth';
-import { checkAccountThunk } from '../../../store/thunks/auth/checkAccountThunk';
+import authReducer, {
+  intialAuthState,
+} from '../../../userinterfaces/store/reducers/auth';
+import { checkAccountThunk } from '../../../userinterfaces/store/thunks/auth/checkAccountThunk';
 
 const fakeParams = checkAccountEntries;
 

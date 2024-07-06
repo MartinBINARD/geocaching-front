@@ -10,7 +10,7 @@ import {
   CircuitQuizStep,
   CircuitPath,
   Search,
-} from '../../domain/entities/circuit';
+} from '../../../domain/entities/circuit';
 
 import {
   fetchCircuitsList,
@@ -21,10 +21,10 @@ import {
   resetCircuitQuiz,
   storeStepEntries,
   sendAnswers,
-} from '../../domain';
+} from '../../../domain';
 
-import createCircuitQuizStepper from '../../domain/usecases/utils/createCircuitQuizStepper';
-import filteredList from '../../domain/usecases/utils/FilteredList';
+import createCircuitQuizStepper from '../../../domain/usecases/utils/createCircuitQuizStepper';
+import filteredList from '../../../domain/usecases/utils/FilteredList';
 
 interface CircuitState {
   circuitsList: Circuit[];

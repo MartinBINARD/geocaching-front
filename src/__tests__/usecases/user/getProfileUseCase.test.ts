@@ -1,4 +1,6 @@
-import userReducer, { intialUserState } from '../../../store/reducers/user';
+import userReducer, {
+  intialUserState,
+} from '../../../userinterfaces/store/reducers/user';
 import { fakeRequestId } from '../../../__mocks__/request.mocks';
 import { userProfileResponse } from '../../../__mocks__/user.mocks';
 import { getProfile } from '../../../domain';

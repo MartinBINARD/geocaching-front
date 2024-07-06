@@ -1,5 +1,7 @@
 import { AxiosError } from 'axios';
-import userReducer, { intialUserState } from '../../../store/reducers/user';
+import userReducer, {
+  intialUserState,
+} from '../../../userinterfaces/store/reducers/user';
 import { fakeRequestId } from '../../../__mocks__/request.mocks';
 import {
   userProfileFormEntries,

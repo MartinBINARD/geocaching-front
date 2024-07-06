@@ -10,7 +10,9 @@ import {
 } from '../../../__mocks__/auth.mocks';
 
 import { RegisterForm, RegisterSucces } from '../../../domain/entities/auth';
-import authReducer, { intialAuthState } from '../../../store/reducers/auth';
+import authReducer, {
+  intialAuthState,
+} from '../../../userinterfaces/store/reducers/auth';
 
 import { register } from '../../../domain';
 import { fakeRequestId } from '../../../__mocks__/request.mocks';

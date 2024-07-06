@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../services/hooks/redux';
-import { checkAccountThunk } from '../../../store/thunks/auth/checkAccountThunk';
+import { checkAccountThunk } from '../../store/thunks/auth/checkAccountThunk';
 
 function CheckUserAccountConfirmation() {
   const dispatch = useAppDispatch();

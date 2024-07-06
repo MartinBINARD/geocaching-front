@@ -1,7 +1,9 @@
 import { AxiosError } from 'axios';
 import { forgotPassword } from '../../../domain';
 import { EmailForm } from '../../../domain/entities/auth';
-import authReducer, { intialAuthState } from '../../../store/reducers/auth';
+import authReducer, {
+  intialAuthState,
+} from '../../../userinterfaces/store/reducers/auth';
 import {
   forgotPasswordEntrie,
   forgotPasswordErrorResponse,

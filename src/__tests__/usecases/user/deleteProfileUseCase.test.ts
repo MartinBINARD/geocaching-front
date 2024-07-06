@@ -1,4 +1,6 @@
-import userReducer, { intialUserState } from '../../../store/reducers/user';
+import userReducer, {
+  intialUserState,
+} from '../../../userinterfaces/store/reducers/user';
 import { userProfileResponse } from '../../../__mocks__/user.mocks';
 import { deleteProfile } from '../../../domain';
 

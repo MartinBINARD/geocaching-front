@@ -4,7 +4,7 @@ import { Circuit } from '../../../domain/entities/circuit';
 
 import circuitsReducer, {
   initialCircuitsState,
-} from '../../../store/reducers/circuits';
+} from '../../../userinterfaces/store/reducers/circuits';
 import { fetchCircuit } from '../../../domain';
 
 jest.mock('../../../services/axios', () => ({
