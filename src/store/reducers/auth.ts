@@ -7,11 +7,11 @@ import {
   register,
   login,
   fetchSession,
-  checkAccount,
   logout,
   forgotPassword,
   updatePassword,
 } from '../../domain';
+import { checkAccountThunk } from '../thunks/auth/checkAccountThunk';
 
 interface AuthState {
   user: User | null;
@@ -82,15 +82,15 @@ const authReducer = createReducer(intialAuthState, (builder) => {
         'Impossible de vous déconnecté, veuillez essayer ultérieurement'
       );
     })
-    .addCase(checkAccount.pending, (state) => {
+    .addCase(checkAccountThunk.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(checkAccount.fulfilled, (state) => {
+    .addCase(checkAccountThunk.fulfilled, (state) => {
       state.isAccountConfirmed = true;
       toast.success('Compte approuvé !');
       state.isLoading = false;
     })
-    .addCase(checkAccount.rejected, (state) => {
+    .addCase(checkAccountThunk.rejected, (state) => {
       state.isAccountConfirmed = false;
       toast.error('Une erreur est survenue');
       state.isLoading = false;

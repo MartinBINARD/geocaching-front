@@ -1,3 +1,1 @@
-export interface CheckAccountRequest {
-  token: string;
-}
+export type CheckAccountRequest = string;

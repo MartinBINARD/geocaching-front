@@ -1,6 +1,9 @@
+import { checkAccountEntries } from '../../../__mocks__/auth.mocks';
 import { fakeRequestId } from '../../../__mocks__/request.mocks';
 import authReducer, { intialAuthState } from '../../../store/reducers/auth';
-import { checkAccount } from '../../../domain';
+import { checkAccountThunk } from '../../../store/thunks/auth/checkAccountThunk';
+
+const fakeParams = checkAccountEntries;
 
 jest.mock('../../../services/axios', () => ({
   api: {
@@ -16,10 +19,9 @@ describe('Authentication store', () => {
 
 describe('Check user account confirmation state test', () => {
   it('Should SUCCEED to confirm user account', () => {
-    const fakeParams = 'fake_params';
     const fakePayload = true;
 
-    const action = checkAccount.fulfilled(
+    const action = checkAccountThunk.fulfilled(
       fakePayload,
       fakeRequestId,
       fakeParams
@@ -39,10 +41,9 @@ describe('Check user account confirmation state test', () => {
   });
 
   it('Should FAIL to confirm user account', () => {
-    const fakeParams = 'fake_params';
     const fakePayload = null;
 
-    const action = checkAccount.rejected(
+    const action = checkAccountThunk.rejected(
       fakePayload,
       fakeRequestId,
       fakeParams

@@ -1,3 +1,5 @@
+export const checkAccountEntries = 'faketoken';
+
 export const validRegisterFormEntries = {
   pseudo: 'TestUser',
   email: 'testuser@email.com',
