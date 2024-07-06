@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { LoginForm, User } from '../../../domain/entities/auth';
+import { LoginForm, User } from '../../../core/domain/entities/auth';
 
 import {
   loginEntries,
@@ -10,7 +10,7 @@ import {
 import authReducer, {
   intialAuthState,
 } from '../../../infracstructure/store/reducers/auth';
-import { login } from '../../../domain';
+import { login } from '../../../core/domain';
 import { fakeRequestId } from '../../../__mocks__/request.mocks';
 
 jest.mock('../../../infracstructure/config/axios', () => ({

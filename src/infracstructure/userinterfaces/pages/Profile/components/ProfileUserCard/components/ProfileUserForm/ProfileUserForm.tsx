@@ -8,9 +8,9 @@ import {
 import {
   Profile,
   UpdateProfileForm,
-} from '../../../../../../../../domain/entities/user';
+} from '../../../../../../../../core/domain/entities/user';
 
-import { updateProfile } from '../../../../../../../../domain';
+import { updateProfile } from '../../../../../../../../core/domain';
 
 import TextInput from '../../../../../../components/TextInput/TextInput';
 import TextArea from '../../../../../../components/TextArea/TextArea';

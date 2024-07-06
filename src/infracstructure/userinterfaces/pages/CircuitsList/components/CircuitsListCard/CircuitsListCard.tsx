@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Circuit } from '../../../../../../domain/entities/circuit';
+import { Circuit } from '../../../../../../core/domain/entities/circuit';
 
 interface ListProps {
   list: Circuit[];

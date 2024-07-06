@@ -3,7 +3,7 @@ import { Flag } from 'lucide-react';
 
 import { useAppDispatch, useAppSelector } from '../../../../../hooks/redux';
 
-import { storeCircuitQuiz } from '../../../../../../domain';
+import { storeCircuitQuiz } from '../../../../../../core/domain';
 
 import Loader from '../../../../components/loader/Loader';
 import CircuitPathStepperMap from './components/CircuitPathStepperMap/CircuitPathStepperMap';

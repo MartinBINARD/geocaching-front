@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
-import { forgotPassword } from '../../../domain';
-import { EmailForm } from '../../../domain/entities/auth';
+import { forgotPassword } from '../../../core/domain';
+import { EmailForm } from '../../../core/domain/entities/auth';
 import authReducer, {
   intialAuthState,
 } from '../../../infracstructure/store/reducers/auth';

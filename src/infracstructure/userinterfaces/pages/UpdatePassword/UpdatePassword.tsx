@@ -1,12 +1,12 @@
 import { useLocation, Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 
-import { updatePassword } from '../../../../domain';
+import { updatePassword } from '../../../../core/domain';
 
 import {
   UpdateCredentials,
   UpdatePasswordForm,
-} from '../../../../domain/entities/auth';
+} from '../../../../core/domain/entities/auth';
 
 import Loader from '../../components/loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';

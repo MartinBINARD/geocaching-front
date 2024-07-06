@@ -6,11 +6,11 @@ import { fakeRequestId } from '../../../__mocks__/request.mocks';
 import {
   UserCircuitAnswersResultState,
   UserCircuitEntriesState,
-} from '../../../domain/entities/circuit';
+} from '../../../core/domain/entities/circuit';
 import circuitsReducer, {
   initialCircuitsState,
 } from '../../../infracstructure/store/reducers/circuits';
-import { sendAnswers } from '../../../domain';
+import { sendAnswers } from '../../../core/domain';
 
 jest.mock('../../../infracstructure/config/axios', () => ({
   api: {

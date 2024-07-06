@@ -8,8 +8,8 @@ import {
   userProfileFormErrorResponse,
   userProfileResponse,
 } from '../../../__mocks__/user.mocks';
-import { Profile, UpdateProfileForm } from '../../../domain/entities/user';
-import { updateProfile } from '../../../domain';
+import { Profile, UpdateProfileForm } from '../../../core/domain/entities/user';
+import { updateProfile } from '../../../core/domain';
 
 jest.mock('../../../infracstructure/config/axios', () => ({
   api: {

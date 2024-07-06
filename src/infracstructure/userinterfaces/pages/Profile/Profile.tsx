@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 
-import { getProfile } from '../../../../domain';
+import { getProfile } from '../../../../core/domain';
 
 import ProfileCircuitsCard from './components/ProfileCircuitsCard/ProfileCircuitsCard';
 import ProfileAwardsCard from './components/ProfileAwardsCard/ProfileAwardsCard';

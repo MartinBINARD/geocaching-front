@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { core } from '../../../../domain/build';
-import { CheckAccountRequest } from '../../../../adapters/requests';
+import { core } from '../../../../core/build';
+import { CheckAccountRequest } from '../../../../core/adapters/requests';
 
 export const checkAccountThunk = createAsyncThunk(
   'settings/confirm-user-account',

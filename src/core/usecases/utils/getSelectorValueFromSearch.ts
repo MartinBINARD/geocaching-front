@@ -1,4 +1,4 @@
-import { Search } from '../../entities/circuit';
+import { Search } from '../../domain/entities/circuit';
 
 function getSelectorValueFromSearch(search: Search | null, keyName: string) {
   if (search) {

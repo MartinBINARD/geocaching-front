@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { EmailForm } from '../../entities/auth';
+import { EmailForm } from '../../domain/entities/auth';
 import api from '../../../infracstructure/config/axios';
 import formatUserDataForm from '../utils/formatUserDataForm';
 

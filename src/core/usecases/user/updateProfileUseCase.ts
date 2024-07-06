@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Profile, UpdateProfileForm } from '../../entities/user';
+import { Profile, UpdateProfileForm } from '../../domain/entities/user';
 import formatUserDataForm from '../utils/formatUserDataForm';
 import api from '../../../infracstructure/config/axios';
 

@@ -3,7 +3,7 @@ import { fakeRequestId } from '../../../__mocks__/request.mocks';
 import authReducer, {
   intialAuthState,
 } from '../../../infracstructure/store/reducers/auth';
-import { fetchSession } from '../../../domain';
+import { fetchSession } from '../../../core/domain';
 
 jest.mock('../../../infracstructure/config/axios', () => ({
   api: {

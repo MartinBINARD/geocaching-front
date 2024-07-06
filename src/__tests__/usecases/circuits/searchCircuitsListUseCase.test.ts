@@ -3,11 +3,11 @@ import {
   searchCircuitsListResponse,
   wrongSearchEntries,
 } from '../../../__mocks__/circuits.mocks';
-import { Circuit, SearchState } from '../../../domain/entities/circuit';
+import { Circuit, SearchState } from '../../../core/domain/entities/circuit';
 import circuitsReducer, {
   initialCircuitsState,
 } from '../../../infracstructure/store/reducers/circuits';
-import { searchCircuitsList } from '../../../domain';
+import { searchCircuitsList } from '../../../core/domain';
 
 jest.mock('../../../infracstructure/config/axios', () => ({
   api: {

@@ -2,12 +2,12 @@ import {
   oneCircuitQuizResponse,
   oneCircuitStepResponse,
 } from '../../../__mocks__/circuits.mocks';
-import { CircuitPathStep } from '../../../domain/entities/circuit';
+import { CircuitPathStep } from '../../../core/domain/entities/circuit';
 
 import circuitsReducer, {
   initialCircuitsState,
 } from '../../../infracstructure/store/reducers/circuits';
-import { storeCircuitQuiz } from '../../../domain';
+import { storeCircuitQuiz } from '../../../core/domain';
 
 jest.mock('../../../infracstructure/config/axios', () => ({
   api: {

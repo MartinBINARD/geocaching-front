@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { User } from '../../../domain/entities/auth';
+import { User } from '../../../core/domain/entities/auth';
 
 import {
   register,
@@ -10,7 +10,7 @@ import {
   logout,
   forgotPassword,
   updatePassword,
-} from '../../../domain';
+} from '../../../core/domain';
 import { checkAccountThunk } from '../thunks/auth/checkAccountThunk';
 
 interface AuthState {

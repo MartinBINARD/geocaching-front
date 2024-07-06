@@ -1,11 +1,11 @@
 import { oneCircuitResponse } from '../../../__mocks__/circuits.mocks';
 import { fakeRequestId } from '../../../__mocks__/request.mocks';
-import { Circuit } from '../../../domain/entities/circuit';
+import { Circuit } from '../../../core/domain/entities/circuit';
 
 import circuitsReducer, {
   initialCircuitsState,
 } from '../../../infracstructure/store/reducers/circuits';
-import { fetchCircuit } from '../../../domain';
+import { fetchCircuit } from '../../../core/domain';
 
 jest.mock('../../../infracstructure/config/axios', () => ({
   api: {

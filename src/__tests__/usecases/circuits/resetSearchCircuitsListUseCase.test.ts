@@ -1,7 +1,7 @@
 import circuitsReducer, {
   initialCircuitsState,
 } from '../../../infracstructure/store/reducers/circuits';
-import { resetSearchCircuitsList } from '../../../domain';
+import { resetSearchCircuitsList } from '../../../core/domain';
 
 jest.mock('../../../infracstructure/config/axios', () => ({
   api: {

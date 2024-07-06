@@ -1,5 +1,5 @@
-import { EmailForm, LoginForm } from '../../entities/auth';
-import { UpdateProfileForm } from '../../entities/user';
+import { EmailForm, LoginForm } from '../../domain/entities/auth';
+import { UpdateProfileForm } from '../../domain/entities/user';
 
 function setLowerCaseEmail(formData: EmailForm) {
   const emailInput = formData.get('email');

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { Session } from '../../entities/auth';
+import { Session } from '../../domain/entities/auth';
 
 import api from '../../../infracstructure/config/axios';
 

@@ -1,6 +1,6 @@
 import api from '../infracstructure/config/axios';
-import { ConfirmAccountMapper } from '../adapters/real/mappers/ConfirmAccountMapper';
-import { RLAuthRepository } from '../adapters/real/repositories/RLAuthRepository';
+import { ConfirmAccountMapper } from './adapters/real/mappers/ConfirmAccountMapper';
+import { RLAuthRepository } from './adapters/real/repositories/RLAuthRepository';
 import { CheckAccountUseCase } from './usecases/auth/checkAccountUseCase';
 
 const Core = () => {

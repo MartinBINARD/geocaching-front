@@ -1,6 +1,6 @@
 import { useAppDispatch } from '../../../../../hooks/redux';
 
-import { logout } from '../../../../../../domain';
+import { logout } from '../../../../../../core/domain';
 
 import HeaderNavLink from '../HeaderNavLink/HeaderNavLink';
 

@@ -1,7 +1,7 @@
 /* Return array of values from object 
 with entries key object and array of object */
 
-import { Circuit } from '../../entities/circuit';
+import { Circuit } from '../../domain/entities/circuit';
 
 function getValuesArray(key: string, arr: Circuit[]) {
   return arr.map((obj: Circuit) => {

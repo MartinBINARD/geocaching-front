@@ -2,7 +2,7 @@ import userReducer, {
   intialUserState,
 } from '../../../infracstructure/store/reducers/user';
 import { userProfileResponse } from '../../../__mocks__/user.mocks';
-import { deleteProfile } from '../../../domain';
+import { deleteProfile } from '../../../core/domain';
 
 const fakeRequestId = 'fakeRequestId';
 

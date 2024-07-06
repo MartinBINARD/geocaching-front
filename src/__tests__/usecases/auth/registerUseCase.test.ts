@@ -9,12 +9,15 @@ import {
   validRegisterFormEntries,
 } from '../../../__mocks__/auth.mocks';
 
-import { RegisterForm, RegisterSucces } from '../../../domain/entities/auth';
+import {
+  RegisterForm,
+  RegisterSucces,
+} from '../../../core/domain/entities/auth';
 import authReducer, {
   intialAuthState,
 } from '../../../infracstructure/store/reducers/auth';
 
-import { register } from '../../../domain';
+import { register } from '../../../core/domain';
 import { fakeRequestId } from '../../../__mocks__/request.mocks';
 
 jest.mock('../../../infracstructure/config/axios', () => ({

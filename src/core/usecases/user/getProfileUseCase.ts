@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../../../infracstructure/config/axios';
-import { Profile } from '../../entities/user';
+import { Profile } from '../../domain/entities/user';
 
 export const getProfile = createAsyncThunk('user/get-profile', async () => {
   try {

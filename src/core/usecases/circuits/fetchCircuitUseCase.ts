@@ -1,13 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Circuit } from '../../entities/circuit';
-import api from '../../../infracstructure/config/axios';
 import { AxiosError } from 'axios';
 
-export const fetchCircuitsList = createAsyncThunk(
-  'circuits/fetch-circuits-list',
-  async (): Promise<Circuit[]> => {
+import { Circuit } from '../../domain/entities/circuit';
+import api from '../../../infracstructure/config/axios';
+
+export const fetchCircuit = createAsyncThunk(
+  'circuits/fetch-circuit',
+  async (id: string): Promise<Circuit> => {
     try {
-      const { data } = await api.get<Circuit[]>('circuits');
+      const { data } = await api.get<Circuit>(`circuits/${id}`);
 
       return data;
     } catch (error: unknown) {

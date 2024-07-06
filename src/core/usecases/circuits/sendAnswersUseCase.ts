@@ -4,7 +4,7 @@ import { AxiosError } from 'axios';
 import {
   UserCircuitAnswersResultState,
   UserCircuitEntriesState,
-} from '../../entities/circuit';
+} from '../../domain/entities/circuit';
 import formatUserCircuitEntries from '../utils/formatUserCircuitEntries';
 import api from '../../../infracstructure/config/axios';
 

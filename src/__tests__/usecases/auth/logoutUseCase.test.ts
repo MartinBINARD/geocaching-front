@@ -1,6 +1,6 @@
 import { validLoginResponse } from '../../../__mocks__/auth.mocks';
 import { fakeRequestId } from '../../../__mocks__/request.mocks';
-import { logout } from '../../../domain';
+import { logout } from '../../../core/domain';
 import authReducer, {
   intialAuthState,
 } from '../../../infracstructure/store/reducers/auth';

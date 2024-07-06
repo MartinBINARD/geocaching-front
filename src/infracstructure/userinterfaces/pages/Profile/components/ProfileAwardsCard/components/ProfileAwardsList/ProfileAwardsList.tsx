@@ -1,4 +1,4 @@
-import { Profile } from '../../../../../../../../domain/entities/user';
+import { Profile } from '../../../../../../../../core/domain/entities/user';
 
 import { useAppSelector } from '../../../../../../../hooks/redux';
 

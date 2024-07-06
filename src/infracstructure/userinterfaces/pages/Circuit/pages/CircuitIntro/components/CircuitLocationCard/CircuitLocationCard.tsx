@@ -2,7 +2,7 @@
 import { LatLngTuple } from 'leaflet';
 import { useAppSelector } from '../../../../../../../hooks/redux';
 
-import { Circuit } from '../../../../../../../../domain/entities/circuit';
+import { Circuit } from '../../../../../../../../core/domain/entities/circuit';
 
 import CircuitMapToggle from '../../../../../../components/CircuitMapToggle/CircuitMapToggle';
 

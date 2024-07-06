@@ -1,6 +1,6 @@
-import { AuthRepository } from '../../repositories';
-import { CheckAccountRequest } from '../../../adapters/requests';
-import { ConfirmAccount } from '../../entities/ConfirmAccount';
+import { AuthRepository } from '../../domain/repositories';
+import { CheckAccountRequest } from '../../adapters/requests';
+import { ConfirmAccount } from '../../domain/entities/ConfirmAccount';
 
 type Response = ConfirmAccount;
 

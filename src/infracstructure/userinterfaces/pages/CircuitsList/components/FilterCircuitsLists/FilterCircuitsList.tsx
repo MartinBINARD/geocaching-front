@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { MoveLeft, Plus, SlidersHorizontal } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks/redux';
 
-import { resetSearchCircuitsList } from '../../../../../../domain';
+import { resetSearchCircuitsList } from '../../../../../../core/domain';
 
 import Loader from '../../../../components/loader/Loader';
 import FilterCircuitsListForm from './components/FilterCircuitsListForm/FilterCircuitsListForm';

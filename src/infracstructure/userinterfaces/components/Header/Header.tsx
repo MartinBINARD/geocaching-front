@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { Menu, Plus } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 
-import { fetchSession } from '../../../../domain';
+import { fetchSession } from '../../../../core/domain';
 
 import HeaderNavLink from './components/HeaderNavLink/HeaderNavLink';
 import HeaderNavLinkLogin from './components/HeaderNavLinkLogin/HeaderNavLinkLogin';

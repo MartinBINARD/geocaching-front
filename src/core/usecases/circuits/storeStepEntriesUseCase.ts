@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { StepsEntriesState } from '../../entities/circuit';
+import { StepsEntriesState } from '../../domain/entities/circuit';
 
 export const storeStepEntries = createAction<StepsEntriesState>(
   'circuits/store-steps-entries'
