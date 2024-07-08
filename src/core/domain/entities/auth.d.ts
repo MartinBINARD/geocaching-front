@@ -17,12 +17,6 @@ export interface UserRequirements {
   verified: boolean;
 }
 
-export interface User extends UserRequirements {
-  id: number;
-  email: string;
-  pseudo: string;
-}
-
 export interface Session extends UserRequirements {
   id: number;
   email: string;

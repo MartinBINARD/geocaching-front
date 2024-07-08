@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { User } from '../../../core/domain/entities/auth';
+import { User } from '../../../core/domain/entities/User';
 
 import {
   register,

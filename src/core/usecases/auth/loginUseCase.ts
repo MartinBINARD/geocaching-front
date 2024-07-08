@@ -1,21 +1,19 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+// import formatUserDataForm from '../utils/formatUserDataForm';
 
-import { LoginForm, User } from '../../domain/entities/auth';
+import { LoginRequest } from '../../adapters/requests';
+import { User } from '../../domain/entities/User';
+import { AuthRepository } from '../../domain/repositories';
 
-import formatUserDataForm from '../utils/formatUserDataForm';
-import api from '../../../infracstructure/config/axios';
+type Response = User;
 
-export const login = createAsyncThunk(
-  'settings/login',
-  async (form: LoginForm): Promise<User> => {
+export class LoginUseCase {
+  constructor(private authRepository: AuthRepository) {}
+
+  public async execute(request: LoginRequest): Promise<Response> {
     try {
-      const objData = formatUserDataForm(form);
-
-      const { data } = await api.post<User>('login', objData);
-
-      return data;
+      return await this.authRepository.login(request);
     } catch (error) {
-      throw error.response.data.error;
+      throw error.response ? error.response.data : error.message;
     }
   }
-);
+}
