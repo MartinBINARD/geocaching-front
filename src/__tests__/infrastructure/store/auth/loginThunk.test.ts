@@ -1,20 +1,20 @@
 import { AxiosError } from 'axios';
-import { LoginRequest } from '../../../core/adapters/requests';
-import { User } from '../../../core/domain/entities/User';
+import { LoginRequest } from '../../../../core/adapters/requests';
+import { User } from '../../../../core/domain/entities/User';
 
 import authReducer, {
   intialAuthState,
-} from '../../../infracstructure/store/reducers/auth';
-import { loginThunk } from '../../../infracstructure/store/thunks/auth/LoginThunk';
+} from '../../../../infracstructure/store/reducers/auth';
+import { loginThunk } from '../../../../infracstructure/store/thunks/auth/LoginThunk';
 
 import {
   loginEntries,
   loginErrorResponse,
   validLoginResponse,
-} from '../../../__mocks__/auth.mocks';
-import { fakeRequestId } from '../../../__mocks__/request.mocks';
+} from '../../../../__mocks__/auth.mocks';
+import { fakeRequestId } from '../../../../__mocks__/request.mocks';
 
-jest.mock('../../../infracstructure/config/axios', () => ({
+jest.mock('../../../../infracstructure/config/axios', () => ({
   api: {
     baseUrl: 'http://localhost:3000',
   },
