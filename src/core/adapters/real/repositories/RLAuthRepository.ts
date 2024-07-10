@@ -20,7 +20,7 @@ export class RLAuthRepository implements AuthRepository {
   }
 
   async login(req: LoginRequest): Promise<User> {
-    const result = await this.httpClient.post('settings/login', req);
+    const result = await this.httpClient.post('login', req);
 
     return this.confirmLoginMapper.toDomain(result.data);
   }

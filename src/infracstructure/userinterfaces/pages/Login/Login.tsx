@@ -2,9 +2,10 @@ import { Link, Navigate } from 'react-router-dom';
 import { Compass, MountainSnow } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 
-import { LoginForm } from '../../../../core/domain/entities/auth';
+import { LoginRequest } from '../../../../core/adapters/requests';
 
-import { login } from '../../../../core/domain';
+import { loginThunk } from '../../../store/thunks/auth/LoginThunk';
+import { formToObject } from '../../../utils/formatLoginForm';
 
 import Footer from '../../components/Footer/Footer';
 import Loader from '../../components/loader/Loader';
@@ -19,11 +20,12 @@ function Login() {
   );
   const isLoading = useAppSelector((state) => state.auth.isLoading);
 
-  const handleSubmit = (e: React.FormEvent<LoginForm>): void => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.target as LoginForm;
+    const form = e.currentTarget;
+    const formObject = formToObject(form);
 
-    dispatch(login(form));
+    dispatch(loginThunk(formObject as unknown as LoginRequest));
   };
 
   if (isLoading) {
