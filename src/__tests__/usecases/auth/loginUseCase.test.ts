@@ -1,16 +1,17 @@
 import { AxiosError } from 'axios';
-import { LoginForm, User } from '../../../core/domain/entities/auth';
+import { LoginRequest } from '../../../core/adapters/requests';
+import { User } from '../../../core/domain/entities/User';
+
+import authReducer, {
+  intialAuthState,
+} from '../../../infracstructure/store/reducers/auth';
+import { loginThunk } from '../../../infracstructure/store/thunks/auth/LoginThunk';
 
 import {
   loginEntries,
   loginErrorResponse,
   validLoginResponse,
 } from '../../../__mocks__/auth.mocks';
-
-import authReducer, {
-  intialAuthState,
-} from '../../../infracstructure/store/reducers/auth';
-import { login } from '../../../core/domain';
 import { fakeRequestId } from '../../../__mocks__/request.mocks';
 
 jest.mock('../../../infracstructure/config/axios', () => ({
@@ -27,10 +28,14 @@ describe('Authentication store', () => {
 
 describe('Login state test', () => {
   it('Should SUCCEED to login', async () => {
-    const fakeEntries = loginEntries as unknown as LoginForm;
+    const fakeEntries = loginEntries as LoginRequest;
     const fakePayload: User = validLoginResponse;
 
-    const action = login.fulfilled(fakePayload, fakeRequestId, fakeEntries);
+    const action = loginThunk.fulfilled(
+      fakePayload,
+      fakeRequestId,
+      fakeEntries
+    );
     const state = authReducer(intialAuthState, action);
 
     expect(action.type).toEqual('settings/login/fulfilled');
@@ -44,10 +49,10 @@ describe('Login state test', () => {
   });
 
   it('Should FAIL to login', async () => {
-    const fakeEntries = loginEntries as unknown as LoginForm;
+    const fakeEntries = loginEntries as LoginRequest;
     const fakePayload = loginErrorResponse as AxiosError;
 
-    const action = login.rejected(fakePayload, fakeRequestId, fakeEntries);
+    const action = loginThunk.rejected(fakePayload, fakeRequestId, fakeEntries);
     const state = authReducer(intialAuthState, action);
 
     expect(action.type).toEqual('settings/login/rejected');
