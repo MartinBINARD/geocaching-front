@@ -5,13 +5,13 @@ import { User } from '../../../core/domain/entities/User';
 
 import {
   register,
-  login,
   fetchSession,
   logout,
   forgotPassword,
   updatePassword,
 } from '../../../core/domain';
 import { checkAccountThunk } from '../thunks/auth/checkAccountThunk';
+import { loginThunk } from '../thunks/auth/LoginThunk';
 
 interface AuthState {
   user: User | null;
@@ -51,15 +51,15 @@ const authReducer = createReducer(intialAuthState, (builder) => {
       state.registerErrorMessage = action.error.message!;
       state.isLoading = false;
     })
-    .addCase(login.pending, (state) => {
+    .addCase(loginThunk.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(login.fulfilled, (state, action) => {
+    .addCase(loginThunk.fulfilled, (state, action) => {
       state.user = action.payload;
       state.isLoading = false;
       toast.success('Vous êtes connecté');
     })
-    .addCase(login.rejected, (state, action) => {
+    .addCase(loginThunk.rejected, (state, action) => {
       /* "!" post-fix expression operator for null and undefined compatibility 
       TypeScript can not predict error server reponse
       See documentation :

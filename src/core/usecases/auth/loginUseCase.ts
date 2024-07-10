@@ -1,5 +1,3 @@
-// import formatUserDataForm from '../utils/formatUserDataForm';
-
 import { LoginRequest } from '../../adapters/requests';
 import { User } from '../../domain/entities/User';
 import { AuthRepository } from '../../domain/repositories';

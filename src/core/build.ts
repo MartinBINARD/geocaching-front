@@ -3,6 +3,7 @@ import { ConfirmAccountMapper } from './adapters/real/mappers/ConfirmAccountMapp
 import { ConfirmLoginMapper } from './adapters/real/mappers/ConfirmLoginMapper';
 import { RLAuthRepository } from './adapters/real/repositories/RLAuthRepository';
 import { CheckAccountUseCase } from './usecases/auth/checkAccountUseCase';
+import { LoginUseCase } from './usecases/auth/loginUseCase';
 
 const Core = () => {
   // REPOSITORIES //
@@ -16,9 +17,11 @@ const Core = () => {
 
   // AUTH
   const checkAccount = new CheckAccountUseCase(authRepository);
+  const login = new LoginUseCase(authRepository);
 
   return {
     checkAccount,
+    login,
   };
 };
 
