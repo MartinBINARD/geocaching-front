@@ -2,8 +2,10 @@ import { Compass, Globe2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 
-import { RegisterForm } from '../../../../core/domain/entities/auth';
-import { register } from '../../../../core/domain';
+import { RegisterRequest } from '../../../../core/adapters/requests';
+
+import { registerThunk } from '../../../store/thunks/auth/RegisterThunk';
+import { formToObject } from '../../../utils/formatLoginForm';
 
 import Footer from '../../components/Footer/Footer';
 import Loader from '../../components/loader/Loader';
@@ -19,11 +21,12 @@ function Register() {
 
   const isLoading = useAppSelector((state) => state.auth.isLoading);
 
-  const handleSubmit = (e: React.FormEvent<RegisterForm>): void => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.target as RegisterForm;
-    const formData = new FormData(form) as unknown as RegisterForm;
-    dispatch(register(formData));
+    const form = e.currentTarget;
+    const formObject = formToObject(form);
+
+    dispatch(registerThunk(formObject as unknown as RegisterRequest));
   };
 
   if (isLoading) {
