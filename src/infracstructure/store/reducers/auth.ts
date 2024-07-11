@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import { User } from '../../../core/domain/entities/User';
 
 import {
-  register,
   fetchSession,
   logout,
   forgotPassword,
@@ -12,6 +11,7 @@ import {
 } from '../../../core/domain';
 import { checkAccountThunk } from '../thunks/auth/checkAccountThunk';
 import { loginThunk } from '../thunks/auth/LoginThunk';
+import { registerThunk } from '../thunks/auth/RegisterThunk';
 
 interface AuthState {
   user: User | null;
@@ -35,15 +35,15 @@ export const intialAuthState: AuthState = {
 
 const authReducer = createReducer(intialAuthState, (builder) => {
   builder
-    .addCase(register.pending, (state) => {
+    .addCase(registerThunk.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(register.fulfilled, (state, action) => {
+    .addCase(registerThunk.fulfilled, (state, action) => {
       state.registerErrorMessage = '';
       toast.success(action.payload.message);
       state.isLoading = false;
     })
-    .addCase(register.rejected, (state, action) => {
+    .addCase(registerThunk.rejected, (state, action) => {
       /* "!" post-fix expression operator for null and undefined compatibility 
       TypeScript can not predict error server reponse
       See documentation :
