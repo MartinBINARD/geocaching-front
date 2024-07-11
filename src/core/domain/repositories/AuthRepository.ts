@@ -1,8 +1,12 @@
-import { CheckAccountRequest, LoginRequest } from '../../adapters/requests';
-import { ConfirmAccount } from '../entities/ConfirmAccount';
-import { User } from '../entities/User';
+import {
+  CheckAccountRequest,
+  LoginRequest,
+  RegisterRequest,
+} from '../../adapters/requests';
+import { ConfirmRegister, ConfirmAccount, User } from '../entities';
 
 export interface AuthRepository {
-  checkAccount(req: CheckAccountRequest): Promise<ConfirmAccount>;
+  register(req: RegisterRequest): Promise<ConfirmRegister>;
   login(req: LoginRequest): Promise<User>;
+  checkAccount(req: CheckAccountRequest): Promise<ConfirmAccount>;
 }
