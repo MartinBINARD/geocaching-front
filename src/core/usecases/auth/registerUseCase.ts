@@ -1,35 +1,27 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import api from '../../../infracstructure/config/axios';
+import { AuthRepository } from '../../domain/repositories';
+import { RegisterRequest } from '../../adapters/requests';
+import { ConfirmRegister } from '../../domain/entities';
+import { AuthErrors, ErrorOr, Result } from '../../domain/models';
 
-import { RegisterForm, RegisterSucces } from '../../domain/entities/auth';
+type Response = ErrorOr<ConfirmRegister>;
 
-export const register = createAsyncThunk(
-  'settings/register',
-  async (formData: RegisterForm): Promise<RegisterSucces> => {
+export class RegisterUseCase {
+  constructor(private authRepository: AuthRepository) {}
+
+  public async execute(request: RegisterRequest): Promise<Response> {
     try {
-      const objData = Object.fromEntries(formData.entries());
+      const result = await this.authRepository.register(request);
 
-      const { data } = await api.post<RegisterSucces>('register', objData);
-
-      return data;
+      return Result.ok(result);
     } catch (error) {
-      if (error.response.data.error) {
-        const errorMessage = error.response.data.error;
-
-        if (errorMessage.includes('user_email_key')) {
-          throw new Error(`Cette adresse email n'est pas valide`);
-        }
-
-        if (errorMessage.includes('user_pseudo_key')) {
-          throw new Error(`Ce pseudo n'est pas valide`);
-        }
-
-        throw new Error(errorMessage);
-      }
-
-      throw new Error(
-        'Désolé, nous rencontrons quelques problèmes techniques. Veuillez essayer de nouveau.'
+      const res = Result.fail(
+        AuthErrors.RegisterError({
+          type: 'REGISTER_ERROR',
+          details: error,
+        })
       );
+
+      return res;
     }
   }
-);
+}
