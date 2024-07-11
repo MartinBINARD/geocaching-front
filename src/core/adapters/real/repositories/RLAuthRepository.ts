@@ -1,16 +1,25 @@
 import { AxiosInstance } from 'axios';
 import { AuthRepository } from '../../../domain/repositories';
 import { ConfirmAccount } from '../../../domain/entities/ConfirmAccount';
-import { ConfirmAccountMapper } from '../mappers/ConfirmAccountMapper';
-import { CheckAccountRequest, LoginRequest } from '../../requests';
+import {
+  CheckAccountRequest,
+  LoginRequest,
+  RegisterRequest,
+} from '../../requests';
 import { User } from '../../../domain/entities/User';
-import { ConfirmLoginMapper } from '../mappers/ConfirmLoginMapper';
+import { ConfirmRegister } from '../../../domain/entities';
+import {
+  confirmRegisterMapper,
+  ConfirmLoginMapper,
+  ConfirmAccountMapper,
+} from '../mappers';
 
 export class RLAuthRepository implements AuthRepository {
   constructor(
     private httpClient: AxiosInstance,
     private confirmAccountMapper: ConfirmAccountMapper,
-    private confirmLoginMapper: ConfirmLoginMapper
+    private confirmLoginMapper: ConfirmLoginMapper,
+    private confirmRegisterMapper: confirmRegisterMapper
   ) {}
 
   async checkAccount(req: CheckAccountRequest): Promise<ConfirmAccount> {
@@ -23,5 +32,11 @@ export class RLAuthRepository implements AuthRepository {
     const result = await this.httpClient.post('login', req);
 
     return this.confirmLoginMapper.toDomain(result.data);
+  }
+
+  async register(req: RegisterRequest): Promise<ConfirmRegister> {
+    const result = await this.httpClient.post('register', req);
+
+    return this.confirmRegisterMapper.toDomain(result.data);
   }
 }
