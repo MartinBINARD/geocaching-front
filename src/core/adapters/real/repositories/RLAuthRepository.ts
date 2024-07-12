@@ -1,17 +1,21 @@
 import { AxiosInstance } from 'axios';
 import { AuthRepository } from '../../../domain/repositories';
-import { ConfirmAccount } from '../../../domain/entities/ConfirmAccount';
 import {
   CheckAccountRequest,
   LoginRequest,
   RegisterRequest,
 } from '../../requests';
-import { User } from '../../../domain/entities/User';
-import { ConfirmRegister } from '../../../domain/entities';
+import {
+  ConfirmAccount,
+  User,
+  ConfirmLogout,
+  ConfirmRegister,
+} from '../../../domain/entities';
 import {
   confirmRegisterMapper,
   ConfirmLoginMapper,
   ConfirmAccountMapper,
+  ConfirmLogoutMapper,
 } from '../mappers';
 
 export class RLAuthRepository implements AuthRepository {
@@ -19,6 +23,7 @@ export class RLAuthRepository implements AuthRepository {
     private httpClient: AxiosInstance,
     private confirmAccountMapper: ConfirmAccountMapper,
     private confirmLoginMapper: ConfirmLoginMapper,
+    private confirmLogoutMapper: ConfirmLogoutMapper,
     private confirmRegisterMapper: confirmRegisterMapper
   ) {}
 
@@ -38,6 +43,12 @@ export class RLAuthRepository implements AuthRepository {
     const result = await this.httpClient.get('session');
 
     return this.confirmLoginMapper.toDomain(result.data);
+  }
+
+  async logout(): Promise<ConfirmLogout> {
+    const result = await this.httpClient.get('logout');
+
+    return this.confirmLogoutMapper.toDomain(result.data);
   }
 
   async register(req: RegisterRequest): Promise<ConfirmRegister> {
