@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 
 import { LoginRequest } from '../../../../core/adapters/requests';
 
-import { loginThunk } from '../../../store/thunks/auth/LoginThunk';
+import { loginThunk } from '../../../store/thunks';
 import { formToObject } from '../../../utils/formatLoginForm';
 
 import Footer from '../../components/Footer/Footer';

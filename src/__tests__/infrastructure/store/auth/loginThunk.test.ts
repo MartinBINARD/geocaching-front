@@ -5,7 +5,7 @@ import { User } from '../../../../core/domain/entities/User';
 import authReducer, {
   intialAuthState,
 } from '../../../../infracstructure/store/reducers/auth';
-import { loginThunk } from '../../../../infracstructure/store/thunks/auth/LoginThunk';
+import { loginThunk } from '../../../../infracstructure/store/thunks';
 
 import {
   loginEntries,

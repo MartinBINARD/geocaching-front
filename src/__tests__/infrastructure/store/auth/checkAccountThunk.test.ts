@@ -3,7 +3,7 @@ import { fakeRequestId } from '../../../../__mocks__/request.mocks';
 import authReducer, {
   intialAuthState,
 } from '../../../../infracstructure/store/reducers/auth';
-import { checkAccountThunk } from '../../../../infracstructure/store/thunks/auth/CheckAccountThunk';
+import { checkAccountThunk } from '../../../../infracstructure/store/thunks';
 
 const fakeParams = checkAccountEntries;
 

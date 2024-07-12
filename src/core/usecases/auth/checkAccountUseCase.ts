@@ -1,6 +1,6 @@
 import { AuthRepository } from '../../domain/repositories';
 import { CheckAccountRequest } from '../../adapters/requests';
-import { ConfirmAccount } from '../../domain/entities/ConfirmAccount';
+import { ConfirmAccount } from '../../domain/entities';
 import { AuthErrors, ErrorOr, Result } from '../../domain/models';
 
 type Response = ErrorOr<ConfirmAccount>;

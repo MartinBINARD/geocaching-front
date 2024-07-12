@@ -1,6 +1,6 @@
 import { AuthRepository } from '../../domain/repositories';
 import { LoginRequest } from '../../adapters/requests';
-import { User } from '../../domain/entities/User';
+import { User } from '../../domain/entities';
 import { AuthErrors, ErrorOr, Result } from '../../domain/models';
 
 type Response = ErrorOr<User>;

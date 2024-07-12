@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../../../../hooks/redux';
-import { logoutThunk } from '../../../../../store/thunks/auth/LogoutThunk';
+import { logoutThunk } from '../../../../../store/thunks';
 
 import HeaderNavLink from '../HeaderNavLink/HeaderNavLink';
 

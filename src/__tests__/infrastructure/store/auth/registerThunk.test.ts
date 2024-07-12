@@ -15,7 +15,7 @@ import authReducer, {
 } from '../../../../infracstructure/store/reducers/auth';
 
 import { fakeRequestId } from '../../../../__mocks__/request.mocks';
-import { registerThunk } from '../../../../infracstructure/store/thunks/auth/RegisterThunk';
+import { registerThunk } from '../../../../infracstructure/store/thunks';
 import { RegisterRequest } from '../../../../core/adapters/requests';
 
 jest.mock('../../../../infracstructure/config/axios', () => ({
