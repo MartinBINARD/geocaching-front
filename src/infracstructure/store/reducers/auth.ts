@@ -9,7 +9,7 @@ import {
   forgotPassword,
   updatePassword,
 } from '../../../core/domain';
-import { checkAccountThunk } from '../thunks/auth/checkAccountThunk';
+import { checkAccountThunk } from '../thunks/auth/CheckAccountThunk';
 import { loginThunk } from '../thunks/auth/LoginThunk';
 import { registerThunk } from '../thunks/auth/RegisterThunk';
 
