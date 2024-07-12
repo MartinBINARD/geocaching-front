@@ -1,4 +1,4 @@
-import { ConfirmAccount } from '../../../domain/entities/ConfirmAccount';
+import { ConfirmAccount } from '../../../domain/entities';
 import { Mapper } from '../../../domain/models/Mapper';
 
 export class ConfirmAccountMapper implements Mapper<ConfirmAccount> {

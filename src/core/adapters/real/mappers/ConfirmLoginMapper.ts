@@ -1,4 +1,4 @@
-import { User } from '../../../domain/entities/User';
+import { User } from '../../../domain/entities';
 import { Mapper } from '../../../domain/models/Mapper';
 
 export class ConfirmLoginMapper implements Mapper<User> {
