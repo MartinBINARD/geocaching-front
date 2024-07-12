@@ -8,7 +8,7 @@ import {
 import {
   searchCircuitsList,
   resetSearchCircuitsList,
-} from '../../../../../../../../core/domain';
+} from '../../../../../../../../core/usecases';
 
 import SelectControl from '../../../../../../components/SelectControl/SelectControl';
 

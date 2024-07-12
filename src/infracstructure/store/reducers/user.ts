@@ -3,7 +3,11 @@ import { toast } from 'react-toastify';
 
 import { Profile } from '../../../core/domain/entities/user';
 
-import { deleteProfile, getProfile, updateProfile } from '../../../core/domain';
+import {
+  deleteProfile,
+  getProfile,
+  updateProfile,
+} from '../../../core/usecases';
 
 interface ProfileState {
   profile: Profile | null;

@@ -21,7 +21,7 @@ import {
   resetCircuitQuiz,
   storeStepEntries,
   sendAnswers,
-} from '../../../core/domain';
+} from '../../../core/usecases';
 
 import createCircuitQuizStepper from '../../../core/usecases/utils/createCircuitQuizStepper';
 import filteredList from '../../../core/usecases/utils/FilteredList';

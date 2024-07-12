@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 import { User } from '../../../core/domain/entities/User';
 
-import { logout, forgotPassword, updatePassword } from '../../../core/domain';
+import { logout, forgotPassword, updatePassword } from '../../../core/usecases';
 import { checkAccountThunk } from '../thunks/auth/CheckAccountThunk';
 import { loginThunk } from '../thunks/auth/LoginThunk';
 import { registerThunk } from '../thunks/auth/RegisterThunk';

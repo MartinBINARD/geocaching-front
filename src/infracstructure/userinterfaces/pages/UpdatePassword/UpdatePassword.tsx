@@ -1,7 +1,7 @@
 import { useLocation, Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 
-import { updatePassword } from '../../../../core/domain';
+import { updatePassword } from '../../../../core/usecases';
 
 import {
   UpdateCredentials,

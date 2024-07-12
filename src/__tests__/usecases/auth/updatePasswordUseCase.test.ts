@@ -3,7 +3,7 @@ import {
   updateCredentialsEntries,
   updateCredentialsErrorResponse,
 } from '../../../__mocks__/auth.mocks';
-import { updatePassword } from '../../../core/domain';
+import { updatePassword } from '../../../core/usecases';
 import { UpdateCredentials } from '../../../core/domain/entities/auth';
 import authReducer, {
   intialAuthState,

@@ -9,7 +9,7 @@ import {
   userProfileResponse,
 } from '../../../__mocks__/user.mocks';
 import { Profile, UpdateProfileForm } from '../../../core/domain/entities/user';
-import { updateProfile } from '../../../core/domain';
+import { updateProfile } from '../../../core/usecases';
 
 jest.mock('../../../infracstructure/config/axios', () => ({
   api: {

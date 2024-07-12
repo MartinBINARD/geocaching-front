@@ -5,7 +5,7 @@ import { Circuit } from '../../../core/domain/entities/circuit';
 import circuitsReducer, {
   initialCircuitsState,
 } from '../../../infracstructure/store/reducers/circuits';
-import { fetchCircuit } from '../../../core/domain';
+import { fetchCircuit } from '../../../core/usecases';
 
 jest.mock('../../../infracstructure/config/axios', () => ({
   api: {

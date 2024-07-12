@@ -7,7 +7,7 @@ import { CircuitPathStep } from '../../../core/domain/entities/circuit';
 import circuitsReducer, {
   initialCircuitsState,
 } from '../../../infracstructure/store/reducers/circuits';
-import { storeCircuitQuiz } from '../../../core/domain';
+import { storeCircuitQuiz } from '../../../core/usecases';
 
 jest.mock('../../../infracstructure/config/axios', () => ({
   api: {

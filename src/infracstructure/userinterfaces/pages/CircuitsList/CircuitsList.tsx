@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 
-import { fetchCircuitsList } from '../../../../core/domain';
+import { fetchCircuitsList } from '../../../../core/usecases';
 
 import Map from '../../components/Map/Map';
 import Loader from '../../components/loader/Loader';

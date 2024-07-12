@@ -10,7 +10,7 @@ import {
   UpdateProfileForm,
 } from '../../../../../../../../core/domain/entities/user';
 
-import { updateProfile } from '../../../../../../../../core/domain';
+import { updateProfile } from '../../../../../../../../core/usecases';
 
 import TextInput from '../../../../../../components/TextInput/TextInput';
 import TextArea from '../../../../../../components/TextArea/TextArea';

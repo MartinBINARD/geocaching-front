@@ -3,7 +3,7 @@ import userReducer, {
 } from '../../../infracstructure/store/reducers/user';
 import { fakeRequestId } from '../../../__mocks__/request.mocks';
 import { userProfileResponse } from '../../../__mocks__/user.mocks';
-import { getProfile } from '../../../core/domain';
+import { getProfile } from '../../../core/usecases';
 import { Profile } from '../../../core/domain/entities/user';
 
 jest.mock('../../../infracstructure/config/axios', () => ({
