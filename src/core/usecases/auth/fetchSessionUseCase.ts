@@ -1,18 +1,24 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { AuthRepository } from '../../domain/repositories';
+import { User } from '../../domain/entities';
+import { AuthErrors, ErrorOr, Result } from '../../domain/models';
 
-import { Session } from '../../domain/entities/auth';
+type Response = ErrorOr<User>;
 
-import api from '../../../infracstructure/config/axios';
+export class FetchSessionUseCase {
+  constructor(private authRepository: AuthRepository) {}
 
-export const fetchSession = createAsyncThunk(
-  'settings/fetchSession',
-  async (): Promise<Session> => {
+  public async execute(): Promise<Response> {
     try {
-      const { data } = await api.get<Session>('session');
+      const result = await this.authRepository.fetchSession();
 
-      return data;
+      return Result.ok(result);
     } catch (error) {
-      throw error.response ? error.response.data : error.message;
+      return Result.fail(
+        AuthErrors.FetchSession({
+          type: 'FETCH_SESSION_ERROR',
+          details: error,
+        })
+      );
     }
   }
-);
+}
