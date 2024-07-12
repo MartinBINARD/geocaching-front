@@ -1,15 +1,24 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import api from '../../../infracstructure/config/axios';
+import { AuthRepository } from '../../domain/repositories';
+import { ConfirmLogout } from '../../domain/entities';
+import { AuthErrors, ErrorOr, Result } from '../../domain/models';
 
-export const logout = createAsyncThunk(
-  'settings/logout',
-  async (): Promise<null> => {
+type Response = ErrorOr<ConfirmLogout>;
+
+export class LogoutUseCase {
+  constructor(private authRepository: AuthRepository) {}
+
+  public async execute(): Promise<Response> {
     try {
-      const { data } = await api.get(`/logout`);
+      const result = await this.authRepository.logout();
 
-      return data?.message;
+      return Result.ok(result);
     } catch (error) {
-      throw error.response ? error.response.data : error.message;
+      return Result.fail(
+        AuthErrors.Logout({
+          type: 'LOGOUT_ERROR',
+          details: error,
+        })
+      );
     }
   }
-);
+}
