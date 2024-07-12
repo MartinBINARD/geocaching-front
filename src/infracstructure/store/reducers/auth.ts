@@ -3,11 +3,14 @@ import { toast } from 'react-toastify';
 
 import { User } from '../../../core/domain/entities/User';
 
-import { logout, forgotPassword, updatePassword } from '../../../core/usecases';
-import { checkAccountThunk } from '../thunks/auth/CheckAccountThunk';
-import { loginThunk } from '../thunks/auth/LoginThunk';
-import { registerThunk } from '../thunks/auth/RegisterThunk';
-import { fetchSessionThunk } from '../thunks/auth/FetchSessionThunk';
+import { forgotPassword, updatePassword } from '../../../core/usecases';
+import {
+  registerThunk,
+  loginThunk,
+  fetchSessionThunk,
+  logoutThunk,
+  checkAccountThunk,
+} from '../thunks/';
 
 interface AuthState {
   user: User | null;
@@ -69,11 +72,11 @@ const authReducer = createReducer(intialAuthState, (builder) => {
     .addCase(fetchSessionThunk.rejected, () => {
       toast.error('Impossible de se connecté à la session');
     })
-    .addCase(logout.fulfilled, (state, action) => {
-      toast.success(action.payload);
+    .addCase(logoutThunk.fulfilled, (state, action) => {
+      toast.success(action.payload.message);
       state.user = null;
     })
-    .addCase(logout.rejected, () => {
+    .addCase(logoutThunk.rejected, () => {
       toast.error(
         'Impossible de vous déconnecté, veuillez essayer ultérieurement'
       );

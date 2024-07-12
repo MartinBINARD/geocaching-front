@@ -1,6 +1,5 @@
 import { useAppDispatch } from '../../../../../hooks/redux';
-
-import { logout } from '../../../../../../core/usecases';
+import { logoutThunk } from '../../../../../store/thunks/auth/LogoutThunk';
 
 import HeaderNavLink from '../HeaderNavLink/HeaderNavLink';
 
@@ -16,7 +15,7 @@ function HeaderNavLinkLogin({
   const dispatch = useAppDispatch();
 
   const handleLogOut = () => {
-    dispatch(logout());
+    dispatch(logoutThunk());
     setIsOpen(false);
   };
 
