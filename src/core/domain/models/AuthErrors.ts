@@ -57,7 +57,6 @@ export const AuthErrors = {
     return {
       type: e.type,
       details: e.details,
-      message: e.details.response?.data?.error,
     };
   },
   CheckAccountError(e: DomainErrorDTO): DomainErrorDTO {

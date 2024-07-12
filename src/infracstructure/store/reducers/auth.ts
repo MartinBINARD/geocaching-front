@@ -66,9 +66,7 @@ const authReducer = createReducer(intialAuthState, (builder) => {
     .addCase(fetchSessionThunk.fulfilled, (state, action) => {
       state.user = action.payload;
     })
-    .addCase(fetchSessionThunk.rejected, (state, action) => {
-      console.log('action', action.error);
-
+    .addCase(fetchSessionThunk.rejected, () => {
       toast.error('Impossible de se connecté à la session');
     })
     .addCase(logout.fulfilled, (state, action) => {
