@@ -90,9 +90,9 @@ const authReducer = createReducer(intialAuthState, (builder) => {
       toast.success('Compte approuvé !');
       state.isLoading = false;
     })
-    .addCase(checkAccountThunk.rejected, (state) => {
+    .addCase(checkAccountThunk.rejected, (state, action) => {
       state.isAccountConfirmed = false;
-      toast.error('Une erreur est survenue');
+      toast.error(action.error.message);
       state.isLoading = false;
     })
     .addCase(forgotPassword.pending, (state) => {
