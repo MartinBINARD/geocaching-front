@@ -5,10 +5,12 @@ import { CheckAccountRequest } from '../../../../core/adapters/requests';
 export const checkAccountThunk = createAsyncThunk(
   'settings/confirm-user-account',
   async (req: CheckAccountRequest) => {
-    try {
-      return await core.checkAccount.execute(req);
-    } catch (error) {
-      throw error;
+    const result = await core.checkAccount.execute(req);
+
+    if (result.type === 'failure') {
+      throw result.error;
     }
+
+    return result.value;
   }
 );
