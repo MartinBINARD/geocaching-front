@@ -2,7 +2,7 @@ import { ReactNode, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { logout } from '../../core/usecases';
+import { logoutThunk } from '../store/thunks';
 
 interface ProtectedRouteProp {
   children: ReactNode;
@@ -16,7 +16,7 @@ function ProtectedRoute({ children }: ProtectedRouteProp) {
 
   useEffect(() => {
     if (isProfileDelete) {
-      dispatch(logout());
+      dispatch(logoutThunk());
     }
   }, [isProfileDelete, dispatch]);
 
