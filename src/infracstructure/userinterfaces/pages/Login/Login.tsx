@@ -32,7 +32,7 @@ function Login() {
     return <Loader />;
   }
 
-  if (user) {
+  if (user && typeof user.id === 'number') {
     return <Navigate to="/profile" />;
   }
 
