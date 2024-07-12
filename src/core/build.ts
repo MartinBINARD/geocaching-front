@@ -3,6 +3,7 @@ import { RLAuthRepository } from './adapters/real/repositories/RLAuthRepository'
 import {
   ConfirmAccountMapper,
   ConfirmLoginMapper,
+  ConfirmLogoutMapper,
   confirmRegisterMapper,
 } from './adapters/real/mappers';
 import {
@@ -10,6 +11,7 @@ import {
   LoginUseCase,
   FetchSessionUseCase,
   CheckAccountUseCase,
+  LogoutUseCase,
 } from './usecases';
 
 const Core = () => {
@@ -18,6 +20,7 @@ const Core = () => {
     api,
     new ConfirmAccountMapper(),
     new ConfirmLoginMapper(),
+    new ConfirmLogoutMapper(),
     new confirmRegisterMapper()
   );
 
@@ -27,12 +30,14 @@ const Core = () => {
   const register = new RegisterUseCase(authRepository);
   const login = new LoginUseCase(authRepository);
   const fetchSession = new FetchSessionUseCase(authRepository);
+  const logout = new LogoutUseCase(authRepository);
   const checkAccount = new CheckAccountUseCase(authRepository);
 
   return {
     register,
     login,
     fetchSession,
+    logout,
     checkAccount,
   };
 };
