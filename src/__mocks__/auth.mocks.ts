@@ -53,6 +53,10 @@ export const loginErrorResponse = {
   message: 'Informations erronées',
 };
 
+export const logoutResponse = {
+  message: 'Vous avez bien été déconnecté',
+};
+
 export const forgotPasswordEntrie = {
   email: 'testuser@email.com',
 };

@@ -1,11 +1,14 @@
-import { validLoginResponse } from '../../../__mocks__/auth.mocks';
-import { fakeRequestId } from '../../../__mocks__/request.mocks';
-import { logout } from '../../../core/usecases';
+import {
+  logoutResponse,
+  validLoginResponse,
+} from '../../../../__mocks__/auth.mocks';
+import { fakeRequestId } from '../../../../__mocks__/request.mocks';
 import authReducer, {
   intialAuthState,
-} from '../../../infracstructure/store/reducers/auth';
+} from '../../../../infracstructure/store/reducers/auth';
+import { logoutThunk } from '../../../../infracstructure/store/thunks';
 
-jest.mock('../../../infracstructure/config/axios', () => ({
+jest.mock('../../../../infracstructure/config/axios', () => ({
   api: {
     baseUrl: 'http://localhost:3000',
   },
@@ -19,9 +22,9 @@ describe('Authentication store', () => {
 
 describe('Logout state test', () => {
   it('Should SUCCEED to logout', () => {
-    const fakePayload = null;
+    const fakePayload = logoutResponse;
 
-    const action = logout.fulfilled(fakePayload, fakeRequestId);
+    const action = logoutThunk.fulfilled(fakePayload, fakeRequestId);
     const filledInitialAuthState = {
       ...intialAuthState,
       user: validLoginResponse,
@@ -33,13 +36,13 @@ describe('Logout state test', () => {
     expect(action.meta.requestId).toEqual(fakeRequestId);
     expect(action.meta.arg).toEqual(undefined);
 
-    expect(state).toEqual({ ...intialAuthState, user: fakePayload });
+    expect(state).toEqual({ ...intialAuthState, user: null });
     expect(state.loginErrorMessage).toBeNull;
   });
   it('Should FAIL to logout', () => {
     const fakePayload = null;
 
-    const action = logout.rejected(fakePayload, fakeRequestId);
+    const action = logoutThunk.rejected(fakePayload, fakeRequestId);
     const filledInitialAuthState = {
       ...intialAuthState,
       user: validLoginResponse,
