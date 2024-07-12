@@ -14,14 +14,12 @@ export class RegisterUseCase {
 
       return Result.ok(result);
     } catch (error) {
-      const res = Result.fail(
+      return Result.fail(
         AuthErrors.RegisterError({
           type: 'REGISTER_ERROR',
           details: error,
         })
       );
-
-      return res;
     }
   }
 }
