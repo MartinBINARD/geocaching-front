@@ -34,6 +34,12 @@ export class RLAuthRepository implements AuthRepository {
     return this.confirmLoginMapper.toDomain(result.data);
   }
 
+  async fetchSession(): Promise<User> {
+    const result = await this.httpClient.get('session');
+
+    return this.confirmLoginMapper.toDomain(result.data);
+  }
+
   async register(req: RegisterRequest): Promise<ConfirmRegister> {
     const result = await this.httpClient.post('register', req);
 

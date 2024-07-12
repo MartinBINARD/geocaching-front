@@ -8,5 +8,6 @@ import { ConfirmRegister, ConfirmAccount, User } from '../entities';
 export interface AuthRepository {
   register(req: RegisterRequest): Promise<ConfirmRegister>;
   login(req: LoginRequest): Promise<User>;
+  fetchSession(): Promise<User>;
   checkAccount(req: CheckAccountRequest): Promise<ConfirmAccount>;
 }
