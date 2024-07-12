@@ -9,7 +9,7 @@ import {
   validRegisterFormEntries,
 } from '../../../../__mocks__/auth.mocks';
 
-import { RegisterSucces } from '../../../../core/domain/entities/auth';
+import { ConfirmRegister } from '../../../../core/domain/entities';
 import authReducer, {
   intialAuthState,
 } from '../../../../infracstructure/store/reducers/auth';
@@ -33,7 +33,7 @@ describe('Authentication store', () => {
 describe('Register state test', () => {
   it('Should SUCCEED to register', async () => {
     const fakeEntries = validRegisterFormEntries as RegisterRequest;
-    const fakePayload: RegisterSucces = registerMessageResponse;
+    const fakePayload: ConfirmRegister = registerMessageResponse;
 
     const action = registerThunk.fulfilled(
       fakePayload,
