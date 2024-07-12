@@ -14,7 +14,7 @@ const AUTH_CONFIRM_GENERIC_ERROR =
   'Désolé, nous rencontrons quelques problèmes techniques. Veuillez essayer de nouveau.';
 
 export const AuthErrors = {
-  RegisterError(e: DomainErrorDTO) {
+  RegisterError(e: DomainErrorDTO): DomainErrorDTO {
     const errorData = e.details.response?.data as errorDataState;
 
     let errorMessage;
@@ -42,8 +42,15 @@ export const AuthErrors = {
 
     return {
       type: e.type,
-      message: errorMessage,
       details: e.details,
+      message: errorMessage,
+    };
+  },
+  LoginError(e: DomainErrorDTO): DomainErrorDTO {
+    return {
+      type: e.type,
+      details: e.details,
+      message: e.details.response?.data?.error,
     };
   },
 };

@@ -1,17 +1,25 @@
+import { AuthRepository } from '../../domain/repositories';
 import { LoginRequest } from '../../adapters/requests';
 import { User } from '../../domain/entities/User';
-import { AuthRepository } from '../../domain/repositories';
+import { AuthErrors, ErrorOr, Result } from '../../domain/models';
 
-type Response = User;
+type Response = ErrorOr<User>;
 
 export class LoginUseCase {
   constructor(private authRepository: AuthRepository) {}
 
   public async execute(request: LoginRequest): Promise<Response> {
     try {
-      return await this.authRepository.login(request);
+      const result = await this.authRepository.login(request);
+
+      return Result.ok(result);
     } catch (error) {
-      throw error.response ? error.response.data : error.message;
+      return Result.fail(
+        AuthErrors.LoginError({
+          type: 'LOGIN_ERROR',
+          details: error,
+        })
+      );
     }
   }
 }

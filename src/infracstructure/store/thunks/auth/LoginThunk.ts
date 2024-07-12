@@ -5,10 +5,12 @@ import { LoginRequest } from '../../../../core/adapters/requests';
 export const loginThunk = createAsyncThunk(
   'settings/login',
   async (req: LoginRequest) => {
-    try {
-      return await core.login.execute(req);
-    } catch (error) {
-      throw error;
+    const result = await core.login.execute(req);
+
+    if (result.type === 'failure') {
+      throw result.error;
     }
+
+    return result.value;
   }
 );
