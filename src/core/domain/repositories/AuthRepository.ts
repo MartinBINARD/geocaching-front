@@ -3,6 +3,7 @@ import {
   LoginRequest,
   RegisterRequest,
   ForgotPasswordRequest,
+  UpdatePasswordRequest,
 } from '../../adapters/requests';
 import {
   ConfirmRegister,
@@ -10,6 +11,7 @@ import {
   User,
   ConfirmLogout,
   ConfirmForgotPassword,
+  ConfirmUpdatePassword,
 } from '../entities';
 
 export interface AuthRepository {
@@ -19,4 +21,5 @@ export interface AuthRepository {
   logout(): Promise<ConfirmLogout>;
   checkAccount(req: CheckAccountRequest): Promise<ConfirmAccount>;
   forgotPassword(req: ForgotPasswordRequest): Promise<ConfirmForgotPassword>;
+  updatePassword(req: UpdatePasswordRequest): Promise<ConfirmUpdatePassword>;
 }

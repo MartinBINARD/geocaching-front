@@ -5,6 +5,7 @@ import {
   ForgotPasswordRequest,
   LoginRequest,
   RegisterRequest,
+  UpdatePasswordRequest,
 } from '../../requests';
 import {
   ConfirmAccount,
@@ -12,6 +13,7 @@ import {
   ConfirmLogout,
   ConfirmRegister,
   ConfirmForgotPassword,
+  ConfirmUpdatePassword,
 } from '../../../domain/entities';
 import {
   ConfirmRegisterMapper,
@@ -19,6 +21,7 @@ import {
   ConfirmAccountMapper,
   ConfirmLogoutMapper,
   ConfirmForgotPasswordMapper,
+  ConfirmUpdatePasswordMapper,
 } from '../mappers';
 
 export class RLAuthRepository implements AuthRepository {
@@ -28,7 +31,8 @@ export class RLAuthRepository implements AuthRepository {
     private confirmLoginMapper: ConfirmLoginMapper,
     private confirmLogoutMapper: ConfirmLogoutMapper,
     private confirmRegisterMapper: ConfirmRegisterMapper,
-    private confirmForgotPasswordMapper: ConfirmForgotPasswordMapper
+    private confirmForgotPasswordMapper: ConfirmForgotPasswordMapper,
+    private confirmUpdatePasswordMapper: ConfirmUpdatePasswordMapper
   ) {}
 
   async checkAccount(req: CheckAccountRequest): Promise<ConfirmAccount> {
@@ -67,5 +71,13 @@ export class RLAuthRepository implements AuthRepository {
     const result = await this.httpClient.post('ask-password', req);
 
     return this.confirmForgotPasswordMapper.toDomain(result.data);
+  }
+
+  async updatePassword(
+    req: UpdatePasswordRequest
+  ): Promise<ConfirmUpdatePassword> {
+    const result = await this.httpClient.post('reset-password', req);
+
+    return this.confirmUpdatePasswordMapper.toDomain(result.data);
   }
 }
