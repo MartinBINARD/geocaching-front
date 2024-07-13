@@ -1,7 +1,7 @@
+import { AuthRepository } from '../../domain/repositories';
 import { ForgotPasswordRequest } from '../../adapters/requests';
 import { ConfirmForgotPassword } from '../../domain/entities';
 import { AuthErrors, ErrorOr, Result } from '../../domain/models';
-import { AuthRepository } from '../../domain/repositories';
 
 type Response = ErrorOr<ConfirmForgotPassword>;
 
@@ -16,7 +16,7 @@ export class ForgotPasswordUseCase {
     } catch (error) {
       return Result.fail(
         AuthErrors.ForgotPassword({
-          type: 'RESET_PASSWORD_ERROR',
+          type: 'FORGOT_PASSWORD_ERROR',
           details: error,
         })
       );

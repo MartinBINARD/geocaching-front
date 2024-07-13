@@ -1,19 +1,25 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { UpdateCredentials } from '../../domain/entities/auth';
-import formatUserUpdateCredentials from '../utils/formatUserUpdateCredentials';
-import api from '../../../infracstructure/config/axios';
+import { AuthRepository } from '../../domain/repositories';
+import { UpdatePasswordRequest } from '../../adapters/requests';
+import { ConfirmUpdatePassword } from '../../domain/entities';
+import { AuthErrors, ErrorOr, Result } from '../../domain/models';
 
-export const updatePassword = createAsyncThunk(
-  'settings/update-password',
-  async (credentials: UpdateCredentials): Promise<boolean> => {
+type Response = ErrorOr<ConfirmUpdatePassword>;
+
+export class UpdatePasswordUseCase {
+  constructor(private authRepository: AuthRepository) {}
+
+  public async execute(request: UpdatePasswordRequest): Promise<Response> {
     try {
-      const objData = formatUserUpdateCredentials(credentials);
+      const result = await this.authRepository.updatePassword(request);
 
-      await api.patch('reset-password', objData);
-
-      return true;
+      return Result.ok(result);
     } catch (error) {
-      throw error.response ? error.response.data : error.message;
+      return Result.fail(
+        AuthErrors.ForgotPassword({
+          type: 'RESET_PASSWORD_ERROR',
+          details: error,
+        })
+      );
     }
   }
-);
+}
