@@ -3,7 +3,7 @@ export * from './auth/loginUseCase';
 export * from './auth/fetchSessionUseCase';
 export * from './auth/checkAccountUseCase';
 export * from './auth/logoutUseCase';
-export * from './auth/forgotPasswordUseCase';
+export * from './auth/ForgotPasswordUseCase';
 export * from './auth/updatePasswordUseCase';
 
 export * from './circuits/fetchCircuitUseCase';

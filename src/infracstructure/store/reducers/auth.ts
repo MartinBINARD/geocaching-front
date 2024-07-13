@@ -3,13 +3,14 @@ import { toast } from 'react-toastify';
 
 import { User } from '../../../core/domain/entities/User';
 
-import { forgotPassword, updatePassword } from '../../../core/usecases';
+import { updatePassword } from '../../../core/usecases';
 import {
   registerThunk,
   loginThunk,
   fetchSessionThunk,
   logoutThunk,
   checkAccountThunk,
+  forgotPasswordThunk,
 } from '../thunks/';
 
 interface AuthState {
@@ -94,16 +95,16 @@ const authReducer = createReducer(intialAuthState, (builder) => {
       toast.error(action.error.message);
       state.isLoading = false;
     })
-    .addCase(forgotPassword.pending, (state) => {
+    .addCase(forgotPasswordThunk.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(forgotPassword.fulfilled, (state) => {
+    .addCase(forgotPasswordThunk.fulfilled, (state) => {
       state.isLoading = false;
       toast.success('Vérifiez vos email !');
     })
-    .addCase(forgotPassword.rejected, (state) => {
+    .addCase(forgotPasswordThunk.rejected, (state, action) => {
       state.isLoading = false;
-      toast.error('Email invalide');
+      toast.error(action.error.message);
     })
     .addCase(updatePassword.pending, (state) => {
       state.isLoading = true;
