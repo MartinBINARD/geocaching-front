@@ -6,6 +6,7 @@ import {
   ConfirmLogoutMapper,
   ConfirmRegisterMapper,
   ConfirmForgotPasswordMapper,
+  ConfirmUpdatePasswordMapper,
 } from './adapters/real/mappers';
 import {
   RegisterUseCase,
@@ -14,6 +15,7 @@ import {
   CheckAccountUseCase,
   LogoutUseCase,
   ForgotPasswordUseCase,
+  UpdatePasswordUseCase,
 } from './usecases';
 
 const Core = () => {
@@ -24,7 +26,8 @@ const Core = () => {
     new ConfirmLoginMapper(),
     new ConfirmLogoutMapper(),
     new ConfirmRegisterMapper(),
-    new ConfirmForgotPasswordMapper()
+    new ConfirmForgotPasswordMapper(),
+    new ConfirmUpdatePasswordMapper()
   );
 
   // USECASES //
@@ -36,6 +39,7 @@ const Core = () => {
   const logout = new LogoutUseCase(authRepository);
   const checkAccount = new CheckAccountUseCase(authRepository);
   const forgotPassword = new ForgotPasswordUseCase(authRepository);
+  const updatePassword = new UpdatePasswordUseCase(authRepository);
 
   return {
     register,
@@ -44,6 +48,7 @@ const Core = () => {
     logout,
     checkAccount,
     forgotPassword,
+    updatePassword,
   };
 };
 
