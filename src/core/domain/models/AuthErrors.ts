@@ -73,4 +73,11 @@ export const AuthErrors = {
       message: e.details.response?.data?.error,
     };
   },
+  ForgotPassword(e: DomainErrorDTO): DomainErrorDTO {
+    return {
+      type: e.type,
+      details: e.details,
+      message: e.details.response?.data?.error,
+    };
+  },
 };
