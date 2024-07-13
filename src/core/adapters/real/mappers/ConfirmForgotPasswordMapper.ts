@@ -1,7 +1,9 @@
 import { ConfirmForgotPassword } from '../../../domain/entities';
 import { Mapper } from '../../../domain/models';
 
-export class ForgotPasswordMapper implements Mapper<ConfirmForgotPassword> {
+export class ConfirmForgotPasswordMapper
+  implements Mapper<ConfirmForgotPassword>
+{
   toDomain(raw: any): ConfirmForgotPassword {
     return raw;
   }

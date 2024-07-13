@@ -18,7 +18,7 @@ import {
   ConfirmLoginMapper,
   ConfirmAccountMapper,
   ConfirmLogoutMapper,
-  ForgotPasswordMapper,
+  ConfirmForgotPasswordMapper,
 } from '../mappers';
 
 export class RLAuthRepository implements AuthRepository {
@@ -28,7 +28,7 @@ export class RLAuthRepository implements AuthRepository {
     private confirmLoginMapper: ConfirmLoginMapper,
     private confirmLogoutMapper: ConfirmLogoutMapper,
     private confirmRegisterMapper: ConfirmRegisterMapper,
-    private confirmForgotPasswordMapper: ForgotPasswordMapper
+    private confirmForgotPasswordMapper: ConfirmForgotPasswordMapper
   ) {}
 
   async checkAccount(req: CheckAccountRequest): Promise<ConfirmAccount> {

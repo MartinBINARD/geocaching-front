@@ -5,7 +5,7 @@ import {
   ConfirmLoginMapper,
   ConfirmLogoutMapper,
   ConfirmRegisterMapper,
-  ForgotPasswordMapper,
+  ConfirmForgotPasswordMapper,
 } from './adapters/real/mappers';
 import {
   RegisterUseCase,
@@ -24,7 +24,7 @@ const Core = () => {
     new ConfirmLoginMapper(),
     new ConfirmLogoutMapper(),
     new ConfirmRegisterMapper(),
-    new ForgotPasswordMapper()
+    new ConfirmForgotPasswordMapper()
   );
 
   // USECASES //
