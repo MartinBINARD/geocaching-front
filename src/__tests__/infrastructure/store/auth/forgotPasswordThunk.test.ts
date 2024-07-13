@@ -1,16 +1,17 @@
 import { AxiosError } from 'axios';
-import { forgotPassword } from '../../../core/usecases';
-import { EmailForm } from '../../../core/domain/entities/auth';
+import { EmailForm } from '../../../../core/domain/entities/auth';
 import authReducer, {
   intialAuthState,
-} from '../../../infracstructure/store/reducers/auth';
+} from '../../../../infracstructure/store/reducers/auth';
 import {
   forgotPasswordEntrie,
   forgotPasswordErrorResponse,
-} from '../../../__mocks__/auth.mocks';
-import { fakeRequestId } from '../../../__mocks__/request.mocks';
+} from '../../../../__mocks__/auth.mocks';
+import { fakeRequestId } from '../../../../__mocks__/request.mocks';
+import { forgotPasswordThunk } from '../../../../infracstructure/store/thunks';
+import { ForgotPasswordRequest } from '../../../../core/adapters/requests';
 
-jest.mock('../../../infracstructure/config/axios', () => ({
+jest.mock('../../../../infracstructure/config/axios', () => ({
   api: {
     baseUrl: 'http://localhost:3000',
   },
@@ -24,10 +25,10 @@ describe('Authentication store', () => {
 
 describe('Forgot paswword state test', () => {
   it('Should SUCCEED to send Email to restore password', () => {
-    const fakeEntries = forgotPasswordEntrie as unknown as EmailForm;
+    const fakeEntries = forgotPasswordEntrie as ForgotPasswordRequest;
     const fakePayload = true;
 
-    const action = forgotPassword.fulfilled(
+    const action = forgotPasswordThunk.fulfilled(
       fakePayload,
       fakeRequestId,
       fakeEntries
@@ -44,10 +45,10 @@ describe('Forgot paswword state test', () => {
   });
 
   it('Should FAIL to send Email to restore password', () => {
-    const fakeEntries = forgotPasswordEntrie as unknown as EmailForm;
+    const fakeEntries = forgotPasswordEntrie as ForgotPasswordRequest;
     const fakePayload = forgotPasswordErrorResponse as AxiosError;
 
-    const action = forgotPassword.rejected(
+    const action = forgotPasswordThunk.rejected(
       fakePayload,
       fakeRequestId,
       fakeEntries
