@@ -2,6 +2,7 @@ import { AxiosInstance } from 'axios';
 import { AuthRepository } from '../../../domain/repositories';
 import {
   CheckAccountRequest,
+  ForgotPasswordRequest,
   LoginRequest,
   RegisterRequest,
 } from '../../requests';
@@ -10,12 +11,14 @@ import {
   User,
   ConfirmLogout,
   ConfirmRegister,
+  ConfirmForgotPassword,
 } from '../../../domain/entities';
 import {
-  confirmRegisterMapper,
+  ConfirmRegisterMapper,
   ConfirmLoginMapper,
   ConfirmAccountMapper,
   ConfirmLogoutMapper,
+  ForgotPasswordMapper,
 } from '../mappers';
 
 export class RLAuthRepository implements AuthRepository {
@@ -24,7 +27,8 @@ export class RLAuthRepository implements AuthRepository {
     private confirmAccountMapper: ConfirmAccountMapper,
     private confirmLoginMapper: ConfirmLoginMapper,
     private confirmLogoutMapper: ConfirmLogoutMapper,
-    private confirmRegisterMapper: confirmRegisterMapper
+    private confirmRegisterMapper: ConfirmRegisterMapper,
+    private confirmForgotPasswordMapper: ForgotPasswordMapper
   ) {}
 
   async checkAccount(req: CheckAccountRequest): Promise<ConfirmAccount> {
@@ -55,5 +59,13 @@ export class RLAuthRepository implements AuthRepository {
     const result = await this.httpClient.post('register', req);
 
     return this.confirmRegisterMapper.toDomain(result.data);
+  }
+
+  async forgotPassword(
+    req: ForgotPasswordRequest
+  ): Promise<ConfirmForgotPassword> {
+    const result = await this.httpClient.post('ask-password', req);
+
+    return this.confirmForgotPasswordMapper.toDomain(result.data);
   }
 }
