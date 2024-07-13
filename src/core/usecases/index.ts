@@ -1,10 +1,10 @@
-export * from './auth/registerUseCase';
-export * from './auth/loginUseCase';
-export * from './auth/fetchSessionUseCase';
-export * from './auth/checkAccountUseCase';
-export * from './auth/logoutUseCase';
+export * from './auth/RegisterUseCase';
+export * from './auth/LoginUseCase';
+export * from './auth/FetchSessionUseCase';
+export * from './auth/CheckAccountUseCase';
+export * from './auth/LogoutUseCase';
 export * from './auth/ForgotPasswordUseCase';
-export * from './auth/updatePasswordUseCase';
+export * from './auth/UpdatePasswordUseCase';
 
 export * from './circuits/fetchCircuitUseCase';
 export * from './circuits/fetchCircuitsListUseCase';
