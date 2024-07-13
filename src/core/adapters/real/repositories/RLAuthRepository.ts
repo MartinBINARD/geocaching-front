@@ -76,7 +76,7 @@ export class RLAuthRepository implements AuthRepository {
   async updatePassword(
     req: UpdatePasswordRequest
   ): Promise<ConfirmUpdatePassword> {
-    const result = await this.httpClient.post('reset-password', req);
+    const result = await this.httpClient.patch('reset-password', req);
 
     return this.confirmUpdatePasswordMapper.toDomain(result.data);
   }
