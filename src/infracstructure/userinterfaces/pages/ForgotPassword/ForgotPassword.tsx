@@ -1,7 +1,9 @@
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 
-import { EmailForm } from '../../../../core/domain/entities/auth';
-import { forgotPassword } from '../../../../core/usecases';
+import { ForgotPasswordRequest } from '../../../../core/adapters/requests';
+
+import { formToObject } from '../../../utils/formatLoginForm';
+import { forgotPasswordThunk } from '../../../store/thunks';
 
 import Loader from '../../components/loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';
@@ -11,10 +13,14 @@ function ForgotPassword() {
 
   const isLoading = useAppSelector((state) => state.auth.isLoading);
 
-  const handleSubmit = (e: React.FormEvent<EmailForm>): void => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.target as EmailForm;
-    dispatch(forgotPassword(form));
+    const form = e.currentTarget;
+    const formObject = formToObject(form);
+
+    dispatch(
+      forgotPasswordThunk(formObject as unknown as ForgotPasswordRequest)
+    );
     form.reset();
   };
 
