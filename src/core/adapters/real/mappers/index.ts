@@ -4,3 +4,4 @@ export * from './ConfirmAccountMapper';
 export * from './ConfirmLogoutMapper';
 export * from './ConfirmLoginMapper';
 export * from './ConfirmForgotPasswordMapper';
+export * from './ConfirmUpdatePasswordMapper';
