@@ -3,7 +3,6 @@ import { createReducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 import {
-  Circuit,
   SearchState,
   StepsEntriesState,
   UserCircuitAnswersResultState,
@@ -11,9 +10,9 @@ import {
   CircuitPath,
   Search,
 } from '../../../core/domain/entities/circuit';
+import { CircuitsList } from '../../../core/domain/entities';
 
 import {
-  fetchCircuitsList,
   searchCircuitsList,
   resetSearchCircuitsList,
   fetchCircuit,
@@ -23,13 +22,15 @@ import {
   sendAnswers,
 } from '../../../core/usecases';
 
+import { fetchCircuitsListThunk } from '../thunks';
+
 import createCircuitQuizStepper from '../../../core/usecases/utils/createCircuitQuizStepper';
 import filteredList from '../../../core/usecases/utils/FilteredList';
 
 interface CircuitState {
-  circuitsList: Circuit[];
+  circuitsList: CircuitsList;
   searchSelectorsFilterEntries: Search | null;
-  searchList: Circuit[];
+  searchList: CircuitsList;
   isSearchNoResult: boolean;
   errorMessage: string | undefined;
   oneCircuit: CircuitPath | null;
@@ -56,16 +57,16 @@ export const initialCircuitsState: CircuitState = {
 
 const circuitsReducer = createReducer(initialCircuitsState, (builder) => {
   builder
-    .addCase(fetchCircuitsList.pending, (state) => {
+    .addCase(fetchCircuitsListThunk.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(fetchCircuitsList.fulfilled, (state, action) => {
+    .addCase(fetchCircuitsListThunk.fulfilled, (state, action) => {
       /* Reset isSearchResult to true in case of user navigating through
       application, previous negative search message must be not displayed */
       state.circuitsList = action.payload;
       state.isLoading = false;
     })
-    .addCase(fetchCircuitsList.rejected, (state, action) => {
+    .addCase(fetchCircuitsListThunk.rejected, (state, action) => {
       state.errorMessage = action.error.message;
       state.isLoading = false;
     })

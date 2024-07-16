@@ -6,3 +6,7 @@ export * from './auth/LogoutThunk';
 export * from './auth/CheckAccountThunk';
 export * from './auth/ForgotPasswordThunk';
 export * from './auth/UpdatePasswordThunk';
+
+// CIRCUITS
+
+export * from './circuits/FetchCircuitsListThunk';
