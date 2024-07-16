@@ -16,7 +16,10 @@ import {
   LogoutUseCase,
   ForgotPasswordUseCase,
   UpdatePasswordUseCase,
+  FetchCircuitsListUseCase,
 } from './usecases';
+import { RLCircuitsRepository } from './adapters/real/repositories/RLCircuitsRepository';
+import { FetchCircuitsListMapper } from './adapters/real/mappers/circuits/FetchCircuitsListMapper';
 
 const Core = () => {
   // REPOSITORIES //
@@ -30,6 +33,11 @@ const Core = () => {
     new ConfirmUpdatePasswordMapper()
   );
 
+  const circuitsRepository = new RLCircuitsRepository(
+    api,
+    new FetchCircuitsListMapper()
+  );
+
   // USECASES //
 
   // AUTH
@@ -41,6 +49,9 @@ const Core = () => {
   const forgotPassword = new ForgotPasswordUseCase(authRepository);
   const updatePassword = new UpdatePasswordUseCase(authRepository);
 
+  // CIRCUITS
+  const fetchCircuitsList = new FetchCircuitsListUseCase(circuitsRepository);
+
   return {
     register,
     login,
@@ -49,6 +60,7 @@ const Core = () => {
     checkAccount,
     forgotPassword,
     updatePassword,
+    fetchCircuitsList,
   };
 };
 
