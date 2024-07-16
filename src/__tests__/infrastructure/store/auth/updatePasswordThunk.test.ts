@@ -1,16 +1,16 @@
 import { AxiosError } from 'axios';
-import {
-  updateCredentialsEntries,
-  updateCredentialsErrorResponse,
-} from '../../../__mocks__/auth.mocks';
-import { updatePassword } from '../../../core/usecases';
-import { UpdateCredentials } from '../../../core/domain/entities/auth';
 import authReducer, {
   intialAuthState,
-} from '../../../infracstructure/store/reducers/auth';
-import { fakeRequestId } from '../../../__mocks__/request.mocks';
+} from '../../../../infracstructure/store/reducers/auth';
+import { updatePasswordThunk } from '../../../../infracstructure/store/thunks';
+import { UpdatePasswordRequest } from '../../../../core/adapters/requests';
+import {
+  updatePasswordEntries,
+  updatePasswordErrorResponse,
+} from '../../../../__mocks__/auth.mocks';
+import { fakeRequestId } from '../../../../__mocks__/request.mocks';
 
-jest.mock('../../../infracstructure/config/axios', () => ({
+jest.mock('../../../../infracstructure/config/axios', () => ({
   api: {
     baseUrl: 'http://localhost:3000',
   },
@@ -24,11 +24,10 @@ describe('Authentication store', () => {
 
 describe('Update password state test', () => {
   it('Should SUCCEED to update password', () => {
-    const fakeEntries =
-      updateCredentialsEntries as unknown as UpdateCredentials;
+    const fakeEntries = updatePasswordEntries as UpdatePasswordRequest;
     const fakePayload = true;
 
-    const action = updatePassword.fulfilled(
+    const action = updatePasswordThunk.fulfilled(
       fakePayload,
       fakeRequestId,
       fakeEntries
@@ -45,11 +44,10 @@ describe('Update password state test', () => {
   });
 
   it('Should FAIL to update password', () => {
-    const fakeEntries =
-      updateCredentialsEntries as unknown as UpdateCredentials;
-    const fakePayload = updateCredentialsErrorResponse as AxiosError;
+    const fakeEntries = updatePasswordEntries as UpdatePasswordRequest;
+    const fakePayload = updatePasswordErrorResponse as AxiosError;
 
-    const action = updatePassword.rejected(
+    const action = updatePasswordThunk.rejected(
       fakePayload,
       fakeRequestId,
       fakeEntries

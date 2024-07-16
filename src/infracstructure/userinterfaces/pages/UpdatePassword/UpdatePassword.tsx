@@ -17,12 +17,14 @@ function UpdatePassword() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const token = searchParams.get('token');
-  const userId = searchParams.get('user_id');
+  const userIdInString = searchParams.get('user_id');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const formObject = formToObject(form);
+    const userId = parseInt(userIdInString as string, 10);
+
     const credentials = {
       ...formObject,
       token,

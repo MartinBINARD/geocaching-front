@@ -1,6 +1,6 @@
 export interface UpdatePasswordRequest {
   token: string;
-  userId: string;
+  userId: number;
   password: string;
   confirmation: string;
 }
