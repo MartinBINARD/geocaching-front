@@ -1,12 +1,9 @@
 import { useLocation, Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { updatePasswordThunk } from '../../../store/thunks';
 
-import { updatePassword } from '../../../../core/usecases';
-
-import {
-  UpdateCredentials,
-  UpdatePasswordForm,
-} from '../../../../core/domain/entities/auth';
+import { UpdatePasswordRequest } from '../../../../core/adapters/requests';
+import { formToObject } from '../../../utils/formatLoginForm';
 
 import Loader from '../../components/loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';
@@ -22,11 +19,17 @@ function UpdatePassword() {
   const token = searchParams.get('token');
   const userId = searchParams.get('user_id');
 
-  const handleSubmit = (e: React.FormEvent<UpdatePasswordForm>): void => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.target as UpdatePasswordForm;
-    const credentials = { form, token, userId } as UpdateCredentials;
-    dispatch(updatePassword(credentials));
+    const form = e.currentTarget;
+    const formObject = formToObject(form);
+    const credentials = {
+      ...formObject,
+      token,
+      userId,
+    };
+
+    dispatch(updatePasswordThunk(credentials as UpdatePasswordRequest));
   };
 
   if (isLoading) {
