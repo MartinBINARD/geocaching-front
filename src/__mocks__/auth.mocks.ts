@@ -75,5 +75,5 @@ export const updatePasswordEntries = {
 
 export const updatePasswordErrorResponse = {
   name: 'AxiosError',
-  message: 'Request failed with status code 500',
+  message: 'Les mots de passe ne correspondent pas',
 };

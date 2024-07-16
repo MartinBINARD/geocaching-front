@@ -1,6 +1,6 @@
 import { DomainErrorDTO } from './ResultHandling';
 
-interface errorDataState {
+interface errorRegisterDataState {
   error: string;
 }
 
@@ -15,7 +15,7 @@ const AUTH_CONFIRM_GENERIC_ERROR =
 
 export const AuthErrors = {
   RegisterError(e: DomainErrorDTO): DomainErrorDTO {
-    const errorData = e.details.response?.data as errorDataState;
+    const errorData = e.details.response?.data as errorRegisterDataState;
 
     let errorMessage;
 
@@ -25,8 +25,6 @@ export const AuthErrors = {
       }
 
       if (errorData?.error.includes('user_email_key')) {
-        console.log(errorData?.error.includes('user_email_key'));
-
         errorMessage = AUTH_EMAIL_ERROR;
       }
 
@@ -81,10 +79,20 @@ export const AuthErrors = {
     };
   },
   UpdatePassword(e: DomainErrorDTO): DomainErrorDTO {
+    const errorData = e.details.response?.data;
+
+    let errorMessage;
+
+    if (errorData?.message) {
+      errorMessage = errorData.message;
+    } else {
+      errorMessage = errorData.error;
+    }
+
     return {
       type: e.type,
       details: e.details,
-      message: e.details.response?.data?.error,
+      message: errorMessage,
     };
   },
 };

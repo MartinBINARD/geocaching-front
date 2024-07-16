@@ -9,8 +9,6 @@ export const deleteProfile = createAsyncThunk(
 
       return true;
     } catch (error) {
-      console.log(error);
-
       throw error.response ? error.response.data : error.message;
     }
   }

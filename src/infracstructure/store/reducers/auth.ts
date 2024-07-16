@@ -112,12 +112,12 @@ const authReducer = createReducer(intialAuthState, (builder) => {
     .addCase(updatePasswordThunk.fulfilled, (state) => {
       state.isRegistered = true;
       state.isLoading = false;
-      toast('Réinitialisation effectuée !');
+      toast.success('Réinitialisation effectuée !');
     })
-    .addCase(updatePasswordThunk.rejected, (state) => {
+    .addCase(updatePasswordThunk.rejected, (state, action) => {
       state.isRegistered = false;
       state.isLoading = false;
-      toast('Erreur de mot de passe !');
+      toast.error(action.error.message);
     });
 });
 

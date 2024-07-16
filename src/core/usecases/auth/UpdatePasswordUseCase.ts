@@ -15,7 +15,7 @@ export class UpdatePasswordUseCase {
       return Result.ok(result);
     } catch (error) {
       return Result.fail(
-        AuthErrors.ForgotPassword({
+        AuthErrors.UpdatePassword({
           type: 'RESET_PASSWORD_ERROR',
           details: error,
         })
