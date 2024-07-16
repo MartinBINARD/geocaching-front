@@ -1,5 +1,5 @@
-import { ConfirmRegister } from '../../../domain/entities';
-import { Mapper } from '../../../domain/models/Mapper';
+import { ConfirmRegister } from '../../../../domain/entities';
+import { Mapper } from '../../../../domain/models/Mapper';
 
 export class ConfirmRegisterMapper implements Mapper<ConfirmRegister> {
   toDomain(raw: any): ConfirmRegister {

@@ -1,5 +1,5 @@
-import { User } from '../../../domain/entities';
-import { Mapper } from '../../../domain/models/Mapper';
+import { User } from '../../../../domain/entities';
+import { Mapper } from '../../../../domain/models/Mapper';
 
 export class ConfirmLoginMapper implements Mapper<User> {
   toDomain(raw: any): User {
