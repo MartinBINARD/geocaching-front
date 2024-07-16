@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 
 import { User } from '../../../core/domain/entities/User';
 
-import { updatePassword } from '../../../core/usecases';
 import {
   registerThunk,
   loginThunk,
@@ -11,6 +10,7 @@ import {
   logoutThunk,
   checkAccountThunk,
   forgotPasswordThunk,
+  updatePasswordThunk,
 } from '../thunks/';
 
 interface AuthState {
@@ -106,15 +106,15 @@ const authReducer = createReducer(intialAuthState, (builder) => {
       state.isLoading = false;
       toast.error(action.error.message);
     })
-    .addCase(updatePassword.pending, (state) => {
+    .addCase(updatePasswordThunk.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(updatePassword.fulfilled, (state) => {
+    .addCase(updatePasswordThunk.fulfilled, (state) => {
       state.isRegistered = true;
       state.isLoading = false;
       toast('Réinitialisation effectuée !');
     })
-    .addCase(updatePassword.rejected, (state) => {
+    .addCase(updatePasswordThunk.rejected, (state) => {
       state.isRegistered = false;
       state.isLoading = false;
       toast('Erreur de mot de passe !');
