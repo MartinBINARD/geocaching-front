@@ -68,7 +68,7 @@ export const forgotPasswordErrorResponse = {
 
 export const updatePasswordEntries = {
   token: 'secret_token',
-  userId: 1,
+  user_id: 1,
   password: 'Y#UJY3{43sgr',
   confirmation: 'Y#UJY3{43sgr',
 };

@@ -28,7 +28,7 @@ function UpdatePassword() {
     const credentials = {
       ...formObject,
       token,
-      userId,
+      user_id: userId,
     };
 
     dispatch(updatePasswordThunk(credentials as UpdatePasswordRequest));
