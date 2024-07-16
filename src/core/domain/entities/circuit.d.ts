@@ -1,4 +1,4 @@
-import { Circuit } from './Circuit';
+import { Circuit } from './Circuits';
 
 export interface CircuitPathStep {
   id: number;

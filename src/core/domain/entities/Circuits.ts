@@ -19,3 +19,5 @@ export interface Circuit {
   url_image: string;
   url_reward: string;
 }
+
+export type CircuitsList = Circuit[];
