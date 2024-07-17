@@ -6,7 +6,7 @@ export * from './auth/LogoutUseCase';
 export * from './auth/ForgotPasswordUseCase';
 export * from './auth/UpdatePasswordUseCase';
 
-export * from './circuits/fetchCircuitUseCase';
+export * from './circuits/FetchCircuitUseCase';
 export * from './circuits/FetchCircuitsListUseCase';
 export * from './circuits/searchCircuitsListUseCase';
 export * from './circuits/resetSearchCircuitsListUseCase';

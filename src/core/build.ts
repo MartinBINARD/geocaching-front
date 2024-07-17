@@ -7,6 +7,7 @@ import {
   ConfirmRegisterMapper,
   ConfirmForgotPasswordMapper,
   ConfirmUpdatePasswordMapper,
+  FetchCircuitMapper,
 } from './adapters/real/mappers';
 import {
   RegisterUseCase,
@@ -35,7 +36,8 @@ const Core = () => {
 
   const circuitsRepository = new RLCircuitsRepository(
     api,
-    new FetchCircuitsListMapper()
+    new FetchCircuitsListMapper(),
+    new FetchCircuitMapper()
   );
 
   // USECASES //
