@@ -15,14 +15,13 @@ import { CircuitsList } from '../../../core/domain/entities';
 import {
   searchCircuitsList,
   resetSearchCircuitsList,
-  fetchCircuit,
   storeCircuitQuiz,
   resetCircuitQuiz,
   storeStepEntries,
   sendAnswers,
 } from '../../../core/usecases';
 
-import { fetchCircuitsListThunk } from '../thunks';
+import { fetchCircuitsListThunk, fetchCircuitThunk } from '../thunks';
 
 import createCircuitQuizStepper from '../../../core/usecases/utils/createCircuitQuizStepper';
 import filteredList from '../../../core/usecases/utils/FilteredList';
@@ -90,15 +89,15 @@ const circuitsReducer = createReducer(initialCircuitsState, (builder) => {
       state.searchSelectorsFilterEntries = null;
       state.searchList = [];
     })
-    .addCase(fetchCircuit.pending, (state) => {
+    .addCase(fetchCircuitThunk.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(fetchCircuit.fulfilled, (state, action) => {
+    .addCase(fetchCircuitThunk.fulfilled, (state, action) => {
       state.oneCircuit = action.payload;
       state.isLoading = false;
       state.isFetchCircuitFailed = false;
     })
-    .addCase(fetchCircuit.rejected, (state, action) => {
+    .addCase(fetchCircuitThunk.rejected, (state, action) => {
       toast.error(action.error.message);
       state.isLoading = false;
       state.isFetchCircuitFailed = true;
