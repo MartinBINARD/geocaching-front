@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 
-import { fetchCircuitsList } from '../../../../core/usecases';
+import { fetchCircuitsListThunk } from '../../../store/thunks';
 
 import Map from '../../components/Map/Map';
 import Loader from '../../components/loader/Loader';
@@ -27,11 +27,15 @@ function CircuitsList() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchCircuitsList());
+    dispatch(fetchCircuitsListThunk());
   }, [dispatch]);
 
   if (errorMessage) {
-    return <h2>{errorMessage}</h2>;
+    return (
+      <h2 className="font-bold text-2xl text-red-500 text-center my-auto">
+        {errorMessage}
+      </h2>
+    );
   }
 
   return isLoading || !circuitsList.length ? (
