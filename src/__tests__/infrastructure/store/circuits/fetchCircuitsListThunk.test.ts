@@ -1,12 +1,12 @@
-import { ciruitsListResponse } from '../../../__mocks__/circuits.mocks';
-import { fakeRequestId } from '../../../__mocks__/request.mocks';
-import { Circuit } from '../../../core/domain/entities/circuit';
+import { ciruitsListResponse } from '../../../../__mocks__/circuits.mocks';
+import { fakeRequestId } from '../../../../__mocks__/request.mocks';
+import { CircuitsList } from '../../../../core/domain/entities';
 import circuitsReducer, {
   initialCircuitsState,
-} from '../../../infracstructure/store/reducers/circuits';
-import { fetchCircuitsList } from '../../../core/usecases';
+} from '../../../../infracstructure/store/reducers/circuits';
+import { fetchCircuitsListThunk } from '../../../../infracstructure/store/thunks';
 
-jest.mock('../../../infracstructure/config/axios', () => ({
+jest.mock('../../../../infracstructure/config/axios', () => ({
   api: {
     baseUrl: 'http://localhost:3000',
   },
@@ -22,9 +22,9 @@ describe('Circuits store', () => {
 
 describe('Circuits list state test', () => {
   it('Should GET circuits list', async () => {
-    const fakePayload: Circuit[] = ciruitsListResponse;
+    const fakePayload: CircuitsList = ciruitsListResponse;
 
-    const action = fetchCircuitsList.fulfilled(fakePayload, fakeRequestId);
+    const action = fetchCircuitsListThunk.fulfilled(fakePayload, fakeRequestId);
     const state = circuitsReducer(initialCircuitsState, action);
 
     expect(action.type).toEqual('circuits/fetch-circuits-list/fulfilled');
@@ -43,7 +43,7 @@ describe('Circuits list state test', () => {
   it('Should FAIL to return circuits list', async () => {
     const fakePayload = [] as any;
 
-    const action = fetchCircuitsList.rejected(fakePayload, fakeRequestId);
+    const action = fetchCircuitsListThunk.rejected(fakePayload, fakeRequestId);
     const state = circuitsReducer(initialCircuitsState, action);
 
     expect(action.type).toEqual('circuits/fetch-circuits-list/rejected');
