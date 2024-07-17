@@ -1,13 +1,13 @@
-import { oneCircuitResponse } from '../../../__mocks__/circuits.mocks';
-import { fakeRequestId } from '../../../__mocks__/request.mocks';
-import { Circuit } from '../../../core/domain/entities/circuit';
+import { oneCircuitResponse } from '../../../../__mocks__/circuits.mocks';
+import { fakeRequestId } from '../../../../__mocks__/request.mocks';
+import { Circuit } from '../../../../core/domain/entities';
 
 import circuitsReducer, {
   initialCircuitsState,
-} from '../../../infracstructure/store/reducers/circuits';
-import { fetchCircuit } from '../../../core/usecases';
+} from '../../../../infracstructure/store/reducers/circuits';
+import { fetchCircuitThunk } from '../../../../infracstructure/store/thunks';
 
-jest.mock('../../../infracstructure/config/axios', () => ({
+jest.mock('../../../../infracstructure/config/axios', () => ({
   api: {
     baseUrl: 'http://localhost:3000',
   },
@@ -26,7 +26,7 @@ describe('Fetch one circuit state test', () => {
     const fakePayload: Circuit = oneCircuitResponse;
     const fakeParam = 'circuits/1';
 
-    const action = fetchCircuit.fulfilled(
+    const action = fetchCircuitThunk.fulfilled(
       fakePayload,
       fakeRequestId,
       fakeParam
@@ -49,7 +49,11 @@ describe('Fetch one circuit state test', () => {
     const fakePayload = null;
     const fakeParam = 'circuits/1';
 
-    const action = fetchCircuit.rejected(fakePayload, fakeRequestId, fakeParam);
+    const action = fetchCircuitThunk.rejected(
+      fakePayload,
+      fakeRequestId,
+      fakeParam
+    );
     const state = circuitsReducer(initialCircuitsState, action);
 
     expect(action.type).toEqual('circuits/fetch-circuit/rejected');
