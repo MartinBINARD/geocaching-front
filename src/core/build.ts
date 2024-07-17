@@ -18,6 +18,7 @@ import {
   ForgotPasswordUseCase,
   UpdatePasswordUseCase,
   FetchCircuitsListUseCase,
+  FetchCircuitUseCase,
 } from './usecases';
 import { RLCircuitsRepository } from './adapters/real/repositories/RLCircuitsRepository';
 import { FetchCircuitsListMapper } from './adapters/real/mappers/circuits/FetchCircuitsListMapper';
@@ -53,6 +54,7 @@ const Core = () => {
 
   // CIRCUITS
   const fetchCircuitsList = new FetchCircuitsListUseCase(circuitsRepository);
+  const fetchCircuit = new FetchCircuitUseCase(circuitsRepository);
 
   return {
     register,
@@ -63,6 +65,7 @@ const Core = () => {
     forgotPassword,
     updatePassword,
     fetchCircuitsList,
+    fetchCircuit,
   };
 };
 
