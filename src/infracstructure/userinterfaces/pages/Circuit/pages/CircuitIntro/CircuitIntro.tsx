@@ -3,11 +3,13 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { Compass } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks/redux';
 
+import { FetchCircuitRequest } from '../../../../../../core/adapters/requests';
+
 import {
-  fetchCircuit,
   storeCircuitQuiz,
   resetCircuitQuiz,
 } from '../../../../../../core/usecases';
+import { fetchCircuitThunk } from '../../../../../store/thunks';
 
 import Loader from '../../../../components/loader/Loader';
 import CircuitDescriptionCard from './components/CircuitDescriptionCard/CircuitDescriptionCard';
@@ -26,7 +28,7 @@ function CircuitIntro() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchCircuit(id as string));
+    dispatch(fetchCircuitThunk(id as FetchCircuitRequest));
   }, [dispatch, id]);
 
   const handleClick = () => {
