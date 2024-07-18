@@ -3,7 +3,6 @@ import { createReducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 import {
-  SearchState,
   StepsEntriesState,
   UserCircuitAnswersResultState,
   CircuitQuizStep,
@@ -20,12 +19,13 @@ import {
   sendAnswers,
 } from '../../../core/usecases';
 
-import { fetchCircuitsListThunk, fetchCircuitThunk } from '../thunks';
+import {
+  fetchCircuitsListThunk,
+  fetchCircuitThunk,
+  filterCircuitsListThunk,
+} from '../thunks';
 
 import createCircuitQuizStepper from '../../../core/usecases/utils/createCircuitQuizStepper';
-import filteredList from '../../../core/usecases/utils/FilteredList';
-import { FilterCircuitListRequest } from '../../../core/adapters/requests';
-import { filterCircuitsListAction } from '../actions/circuits/filterCircuitsListAction';
 
 interface CircuitState {
   circuitsList: CircuitsList;
@@ -70,20 +70,24 @@ const circuitsReducer = createReducer(initialCircuitsState, (builder) => {
       state.errorMessage = action.error.message;
       state.isLoading = false;
     })
-    .addCase(filterCircuitsListAction, (state, action) => {
-      const { search, circuitsList }: FilterCircuitListRequest = action.payload;
-      const searchListResult = filteredList(search, circuitsList);
+    .addCase(filterCircuitsListThunk.pending, (state) => {
+      state.isLoading = true;
+    })
+    .addCase(filterCircuitsListThunk.fulfilled, (state, action) => {
+      state.searchList = action.payload;
+      state.isSearchNoResult = false;
+      state.isLoading = false;
 
-      if (!searchListResult.length) {
-        toast.error('Aucun résulat ne correspond à votre recherche !');
-      }
-
-      state.isSearchNoResult = !searchListResult.length;
+      const formatSearch = Object.assign({}, action.meta.arg.search);
       state.searchSelectorsFilterEntries = {
         ...state.searchSelectorsFilterEntries,
-        ...search,
+        ...formatSearch,
       };
-      state.searchList = searchListResult;
+    })
+    .addCase(filterCircuitsListThunk.rejected, (state, action) => {
+      state.isSearchNoResult = true;
+      state.isLoading = false;
+      toast.error(action.error.message);
     })
     .addCase(resetSearchCircuitsList, (state) => {
       state.isSearchNoResult = false;

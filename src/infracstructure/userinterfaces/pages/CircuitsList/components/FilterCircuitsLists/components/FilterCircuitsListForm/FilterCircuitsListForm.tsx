@@ -6,7 +6,7 @@ import {
 } from '../../../../../../../hooks/redux';
 
 import { resetSearchCircuitsList } from '../../../../../../../../core/usecases';
-import { filterCircuitsListAction } from '../../../../../../../store/actions/circuits/filterCircuitsListAction';
+import { filterCircuitsListThunk } from '../../../../../../../store/thunks';
 
 import SelectControl from '../../../../../../components/SelectControl/SelectControl';
 
@@ -48,7 +48,7 @@ function FilterCircuitsListForm({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(filterCircuitsListAction({ search, circuitsList }));
+    dispatch(filterCircuitsListThunk({ search, circuitsList }));
     setIsOpen(false);
   };
 

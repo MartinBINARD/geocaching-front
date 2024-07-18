@@ -1,7 +1,9 @@
+import { FilterCircuitListRequest } from '../../adapters/requests';
 import { FetchCircuitRequest } from '../../adapters/requests/circuits/FetchCircuitRequest';
-import { Circuit } from '../entities/Circuits';
+import { Circuit, CircuitsList } from '../entities/Circuits';
 
 export interface CircuitsRepository {
-  fetchCircuitsList(): Promise<Circuit[]>;
+  fetchCircuitsList(): Promise<CircuitsList>;
   fetchCircuit(req: FetchCircuitRequest): Promise<Circuit>;
+  filterCircuitsList(req: FilterCircuitListRequest): Promise<CircuitsList>;
 }
