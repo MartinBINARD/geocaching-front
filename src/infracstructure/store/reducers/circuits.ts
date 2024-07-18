@@ -18,7 +18,6 @@ import {
   resetCircuitQuiz,
   storeStepEntries,
   sendAnswers,
-  filterCircuitsListAction,
 } from '../../../core/usecases';
 
 import { fetchCircuitsListThunk, fetchCircuitThunk } from '../thunks';
@@ -26,6 +25,7 @@ import { fetchCircuitsListThunk, fetchCircuitThunk } from '../thunks';
 import createCircuitQuizStepper from '../../../core/usecases/utils/createCircuitQuizStepper';
 import filteredList from '../../../core/usecases/utils/FilteredList';
 import { FilterCircuitListRequest } from '../../../core/adapters/requests';
+import { filterCircuitsListAction } from '../actions/circuits/filterCircuitsListAction';
 
 interface CircuitState {
   circuitsList: CircuitsList;

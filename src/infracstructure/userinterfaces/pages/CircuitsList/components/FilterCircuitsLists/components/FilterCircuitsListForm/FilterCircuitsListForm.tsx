@@ -5,10 +5,8 @@ import {
   useAppSelector,
 } from '../../../../../../../hooks/redux';
 
-import {
-  searchCircuitsList,
-  resetSearchCircuitsList,
-} from '../../../../../../../../core/usecases';
+import { resetSearchCircuitsList } from '../../../../../../../../core/usecases';
+import { filterCircuitsListAction } from '../../../../../../../store/actions/circuits/filterCircuitsListAction';
 
 import SelectControl from '../../../../../../components/SelectControl/SelectControl';
 
@@ -50,7 +48,7 @@ function FilterCircuitsListForm({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(searchCircuitsList({ search, list: circuitsList }));
+    dispatch(filterCircuitsListAction({ search, circuitsList }));
     setIsOpen(false);
   };
 
