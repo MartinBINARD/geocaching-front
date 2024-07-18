@@ -10,3 +10,4 @@ export * from './auth/UpdatePasswordThunk';
 // CIRCUITS
 export * from './circuits/FetchCircuitsListThunk';
 export * from './circuits/FetchCircuitThunk';
+export * from './circuits/FilterCircuitsListThunk';
