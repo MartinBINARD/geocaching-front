@@ -5,3 +5,4 @@ export * from './auth/ForgotPasswordRequest';
 export * from './auth/UpdatePasswordRequest';
 
 export * from './circuits/FetchCircuitRequest';
+export * from './circuits/FilterCircuitsListRequest';

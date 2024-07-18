@@ -13,18 +13,19 @@ import {
 import { CircuitsList } from '../../../core/domain/entities';
 
 import {
-  searchCircuitsList,
   resetSearchCircuitsList,
   storeCircuitQuiz,
   resetCircuitQuiz,
   storeStepEntries,
   sendAnswers,
+  filterCircuitsListAction,
 } from '../../../core/usecases';
 
 import { fetchCircuitsListThunk, fetchCircuitThunk } from '../thunks';
 
 import createCircuitQuizStepper from '../../../core/usecases/utils/createCircuitQuizStepper';
 import filteredList from '../../../core/usecases/utils/FilteredList';
+import { FilterCircuitListRequest } from '../../../core/adapters/requests';
 
 interface CircuitState {
   circuitsList: CircuitsList;
@@ -69,9 +70,9 @@ const circuitsReducer = createReducer(initialCircuitsState, (builder) => {
       state.errorMessage = action.error.message;
       state.isLoading = false;
     })
-    .addCase(searchCircuitsList, (state, action) => {
-      const { search, list }: SearchState = action.payload;
-      const searchListResult = filteredList(search, list);
+    .addCase(filterCircuitsListAction, (state, action) => {
+      const { search, circuitsList }: FilterCircuitListRequest = action.payload;
+      const searchListResult = filteredList(search, circuitsList);
 
       if (!searchListResult.length) {
         toast.error('Aucun résulat ne correspond à votre recherche !');
