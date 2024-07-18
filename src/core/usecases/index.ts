@@ -8,7 +8,7 @@ export * from './auth/UpdatePasswordUseCase';
 
 export * from './circuits/FetchCircuitUseCase';
 export * from './circuits/FetchCircuitsListUseCase';
-export * from './circuits/searchCircuitsListUseCase';
+export * from './circuits/FilterCircuitsListUseCase';
 export * from './circuits/resetSearchCircuitsListUseCase';
 export * from './circuits/storeCircuitQuizUseCase';
 export * from './circuits/resetCircuitQuizUseCase';
