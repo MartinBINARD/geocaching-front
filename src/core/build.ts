@@ -8,6 +8,7 @@ import {
   ConfirmForgotPasswordMapper,
   ConfirmUpdatePasswordMapper,
   FetchCircuitMapper,
+  FilterCircuitsListMapper,
 } from './adapters/real/mappers';
 import {
   RegisterUseCase,
@@ -19,6 +20,7 @@ import {
   UpdatePasswordUseCase,
   FetchCircuitsListUseCase,
   FetchCircuitUseCase,
+  FilterCircuitsListUseCase,
 } from './usecases';
 import { RLCircuitsRepository } from './adapters/real/repositories/RLCircuitsRepository';
 import { FetchCircuitsListMapper } from './adapters/real/mappers/circuits/FetchCircuitsListMapper';
@@ -38,7 +40,8 @@ const Core = () => {
   const circuitsRepository = new RLCircuitsRepository(
     api,
     new FetchCircuitsListMapper(),
-    new FetchCircuitMapper()
+    new FetchCircuitMapper(),
+    new FilterCircuitsListMapper()
   );
 
   // USECASES //
@@ -55,6 +58,7 @@ const Core = () => {
   // CIRCUITS
   const fetchCircuitsList = new FetchCircuitsListUseCase(circuitsRepository);
   const fetchCircuit = new FetchCircuitUseCase(circuitsRepository);
+  const filterCircuitsList = new FilterCircuitsListUseCase(circuitsRepository);
 
   return {
     register,
@@ -66,6 +70,7 @@ const Core = () => {
     updatePassword,
     fetchCircuitsList,
     fetchCircuit,
+    filterCircuitsList,
   };
 };
 
