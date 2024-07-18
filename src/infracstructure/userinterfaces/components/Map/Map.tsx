@@ -15,7 +15,12 @@ interface MapsProps {
   className: string;
 }
 
-function Map({ markersList, oneMarker, zoom, className }: MapsProps) {
+export default function Map({
+  markersList,
+  oneMarker,
+  zoom,
+  className,
+}: MapsProps) {
   const centerMap = markersList ? FindCenter(markersList) : oneMarker;
 
   return (
@@ -43,10 +48,3 @@ function Map({ markersList, oneMarker, zoom, className }: MapsProps) {
     </MapContainer>
   );
 }
-
-Map.defaultProps = {
-  oneMarker: null,
-  markersList: null,
-};
-
-export default Map;
