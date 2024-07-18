@@ -1,14 +1,20 @@
 import { AxiosInstance } from 'axios';
 import { CircuitsRepository } from '../../../domain/repositories/CircuitsRepository';
-import { FetchCircuitRequest } from '../../requests/circuits/FetchCircuitRequest';
+import { FetchCircuitRequest, FilterCircuitListRequest } from '../../requests';
 import { Circuit, CircuitsList } from '../../../domain/entities/Circuits';
-import { FetchCircuitsListMapper, FetchCircuitMapper } from '../mappers';
+import {
+  FetchCircuitsListMapper,
+  FetchCircuitMapper,
+  FilterCircuitsListMapper,
+} from '../mappers';
+import filterCircuitsList from '../../../usecases/utils/filterCircuitsList';
 
 export class RLCircuitsRepository implements CircuitsRepository {
   constructor(
     private httpClient: AxiosInstance,
     private fetchCircuitsListMapper: FetchCircuitsListMapper,
-    private fetchCircuitMapper: FetchCircuitMapper
+    private fetchCircuitMapper: FetchCircuitMapper,
+    private filterCircuitsListMapper: FilterCircuitsListMapper
   ) {}
 
   async fetchCircuitsList(): Promise<CircuitsList> {
@@ -21,5 +27,13 @@ export class RLCircuitsRepository implements CircuitsRepository {
     const result = await this.httpClient.get(`circuits/${req}`);
 
     return this.fetchCircuitMapper.toDomain(result.data);
+  }
+
+  async filterCircuitsList(
+    req: FilterCircuitListRequest
+  ): Promise<CircuitsList> {
+    const result = await filterCircuitsList(req);
+
+    return this.filterCircuitsListMapper.toDomain(result);
   }
 }
