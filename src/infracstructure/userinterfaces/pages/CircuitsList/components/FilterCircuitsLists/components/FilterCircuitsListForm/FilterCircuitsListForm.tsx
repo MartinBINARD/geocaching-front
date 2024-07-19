@@ -6,7 +6,7 @@ import {
 } from '../../../../../../../hooks/redux';
 
 import { filterCircuitsListThunk } from '../../../../../../../store/thunks';
-import { resetFilterCircuitsList } from '../../../../../../../store/actions';
+import { resetFilterCircuitsListAction } from '../../../../../../../store/actions';
 
 import SelectControl from '../../../../../../components/SelectControl/SelectControl';
 import { formToObject } from '../../../../../../../utils/formatLoginForm';
@@ -61,7 +61,7 @@ function FilterCircuitsListForm({
     e.preventDefault();
     filter.current?.reset();
     setSearch({});
-    dispatch(resetFilterCircuitsList());
+    dispatch(resetFilterCircuitsListAction());
     setIsOpen(false);
   };
 
