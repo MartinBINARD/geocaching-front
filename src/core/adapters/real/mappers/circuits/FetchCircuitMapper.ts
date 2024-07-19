@@ -16,13 +16,16 @@ export class FetchCircuitMapper implements Mapper<Circuit> {
       maintenance,
       mobility,
       name,
+      number,
       parking_address,
+      postcode,
       region,
       state,
       terrain,
       theme,
       url_image,
       url_reward,
+      step,
     } = raw;
 
     return {
@@ -38,13 +41,16 @@ export class FetchCircuitMapper implements Mapper<Circuit> {
       maintenance,
       mobility,
       name,
+      number,
       parking_address,
+      postcode,
       region,
       state,
       terrain,
       theme,
       url_image,
       url_reward,
+      step,
     };
   }
 }
