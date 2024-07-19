@@ -7,8 +7,8 @@ import {
   UserCircuitAnswersResultState,
   CircuitQuizStep,
   CircuitPath,
-  Search,
 } from '../../../core/domain/entities/circuit';
+import { SearchCircuitsRequest } from '../../../core/adapters/requests';
 import { CircuitsList } from '../../../core/domain/entities';
 
 import {
@@ -29,7 +29,7 @@ import createCircuitQuizStepper from '../../../core/usecases/utils/createCircuit
 
 interface CircuitState {
   circuitsList: CircuitsList;
-  searchSelectorsFilterEntries: Search | null;
+  searchSelectorsFilterEntries: SearchCircuitsRequest | null;
   searchList: CircuitsList;
   isSearchNoResult: boolean;
   errorMessage: string | undefined;
@@ -78,10 +78,9 @@ const circuitsReducer = createReducer(initialCircuitsState, (builder) => {
       state.isSearchNoResult = false;
       state.isLoading = false;
 
-      const formatSearch = Object.assign({}, action.meta.arg.search);
       state.searchSelectorsFilterEntries = {
         ...state.searchSelectorsFilterEntries,
-        ...formatSearch,
+        ...action.meta.arg.search,
       };
     })
     .addCase(filterCircuitsListThunk.rejected, (state, action) => {

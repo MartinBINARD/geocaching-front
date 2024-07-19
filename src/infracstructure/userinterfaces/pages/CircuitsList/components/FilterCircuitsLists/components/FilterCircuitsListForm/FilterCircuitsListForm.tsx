@@ -9,6 +9,8 @@ import { resetSearchCircuitsList } from '../../../../../../../../core/usecases';
 import { filterCircuitsListThunk } from '../../../../../../../store/thunks';
 
 import SelectControl from '../../../../../../components/SelectControl/SelectControl';
+import { formToObject } from '../../../../../../../utils/formatLoginForm';
+import { SearchCircuitsRequest } from '../../../../../../../../core/adapters/requests';
 
 interface FilterCircuitsListFormProps {
   searchState: {
@@ -48,6 +50,9 @@ function FilterCircuitsListForm({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    const search = formToObject(form) as unknown as SearchCircuitsRequest;
+
     dispatch(filterCircuitsListThunk({ search, circuitsList }));
     setIsOpen(false);
   };
