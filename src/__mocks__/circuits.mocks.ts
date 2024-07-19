@@ -258,7 +258,7 @@ export const userCircuitAnswerResultResponse = [
   true,
 ];
 
-export const searchCircuitsListResponse = [
+export const filterCircuitsListResponse = [
   oneCircuitResponse,
   {
     id_circuit: 2,
@@ -286,7 +286,7 @@ export const searchCircuitsListResponse = [
 ];
 
 export const ciruitsListResponse = [
-  ...searchCircuitsListResponse,
+  ...filterCircuitsListResponse,
   {
     id_circuit: 3,
     name: 'Chantilly',
@@ -312,22 +312,32 @@ export const ciruitsListResponse = [
   },
 ];
 
-const goodSearch = {
-  region: 'Bretagne',
+const rightSearch = {
+  city: 'Toutes',
+  description: 'Toutes',
+  distance: 'Toutes',
   mobility: 'À pied',
+  region: 'Bretagne',
+  state: 'Tous',
+  theme: 'Toutes',
 };
 
 const wrongSearch = {
-  region: 'Bretagne',
   city: 'Chantilly',
+  description: 'Toutes',
+  distance: 'Toutes',
+  mobility: 'Toutes',
+  region: 'Bretagne',
+  state: 'Tous',
+  theme: 'Toutes',
 };
 
-export const goodSearchEntries = {
-  search: goodSearch,
-  list: ciruitsListResponse,
+export const rightFilterEntries = {
+  search: rightSearch,
+  circuitList: ciruitsListResponse,
 };
 
-export const wrongSearchEntries = {
+export const wrongFilterEntries = {
   search: wrongSearch,
-  list: ciruitsListResponse,
+  circuitList: ciruitsListResponse,
 };
