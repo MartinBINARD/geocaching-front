@@ -2,14 +2,13 @@ import { createReducer } from '@reduxjs/toolkit';
 
 import { toast } from 'react-toastify';
 
+import { SearchCircuitsRequest } from '../../../core/adapters/requests';
 import {
   StepsEntriesState,
   UserCircuitAnswersResultState,
   CircuitQuizStep,
-  CircuitPath,
 } from '../../../core/domain/entities/circuit';
-import { SearchCircuitsRequest } from '../../../core/adapters/requests';
-import { CircuitsList } from '../../../core/domain/entities';
+import { Circuit, CircuitsList } from '../../../core/domain/entities';
 
 import {
   storeCircuitQuiz,
@@ -33,7 +32,7 @@ interface CircuitState {
   searchList: CircuitsList;
   isSearchNoResult: boolean;
   errorMessage: string | undefined;
-  oneCircuit: CircuitPath | null;
+  oneCircuit: Circuit | null;
   circuitQuiz: CircuitQuizStep[];
   stepsEntries: StepsEntriesState | null;
   userCircuitAnswersResult: UserCircuitAnswersResultState | null;
