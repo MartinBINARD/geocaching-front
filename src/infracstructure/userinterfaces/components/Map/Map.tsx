@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 
 import { Circuit } from '../../../../core/domain/entities/circuit';
 
-import FindCenter from '../../../../core/usecases/utils/FindCenter';
+import FindCenter from '../../../../core/usecases/utils/FindMapCenter';
 import ButtonLocateMe from './components/ButtonLocateMe/ButtonLocateMe';
 import MapPopup from './components/MapPopup/MapPopup';
 
