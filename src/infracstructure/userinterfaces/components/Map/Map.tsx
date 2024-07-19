@@ -3,8 +3,8 @@ import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import { Circuit } from '../../../../core/domain/entities/circuit';
+import FindMapCenter from '../../../utils/FindMapCenter';
 
-import FindCenter from '../../../../core/usecases/utils/FindMapCenter';
 import ButtonLocateMe from './components/ButtonLocateMe/ButtonLocateMe';
 import MapPopup from './components/MapPopup/MapPopup';
 
@@ -21,7 +21,7 @@ export default function Map({
   zoom,
   className,
 }: MapsProps) {
-  const centerMap = markersList ? FindCenter(markersList) : oneMarker;
+  const centerMap = markersList ? FindMapCenter(markersList) : oneMarker;
 
   return (
     <MapContainer

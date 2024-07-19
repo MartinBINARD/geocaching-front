@@ -1,7 +1,7 @@
 import { LatLngTuple } from 'leaflet';
-import { Circuit } from '../../domain/entities/circuit';
+import { CircuitsList } from '../../core/domain/entities';
 
-export default function FindMapCenter(markers: Circuit[]): LatLngTuple {
+export default function FindMapCenter(markers: CircuitsList): LatLngTuple {
   const lats = markers.map((m) => m.latitude);
   const lngs = markers.map((m) => m.longitude);
 
