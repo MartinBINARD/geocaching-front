@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
 
-export const resetFilterCircuitsList = createAction(
+export const resetFilterCircuitsListAction = createAction(
   'circuits/reset-filter-circuits-list'
 );

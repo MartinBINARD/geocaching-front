@@ -12,7 +12,6 @@ import { SearchCircuitsRequest } from '../../../core/adapters/requests';
 import { CircuitsList } from '../../../core/domain/entities';
 
 import {
-  resetSearchCircuitsList,
   storeCircuitQuiz,
   resetCircuitQuiz,
   storeStepEntries,
@@ -26,6 +25,7 @@ import {
 } from '../thunks';
 
 import createCircuitQuizStepper from '../../../core/usecases/utils/createCircuitQuizStepper';
+import { resetFilterCircuitsListAction } from '../actions';
 
 interface CircuitState {
   circuitsList: CircuitsList;
@@ -88,7 +88,7 @@ const circuitsReducer = createReducer(initialCircuitsState, (builder) => {
       state.isLoading = false;
       toast.error(action.error.message);
     })
-    .addCase(resetSearchCircuitsList, (state) => {
+    .addCase(resetFilterCircuitsListAction, (state) => {
       state.isSearchNoResult = false;
       state.searchSelectorsFilterEntries = null;
       state.searchList = [];
