@@ -1,43 +1,62 @@
-import { FilterCircuitListRequest } from '../../adapters/requests';
-import { Circuit, Search } from '../../domain/entities/circuit';
-import FilteredObjectKeys from './FilteredObjectKeys';
+import {
+  FilterCircuitListRequest,
+  SearchCircuitsRequest,
+} from '../../adapters/requests';
+import { Circuit } from '../../domain/entities';
+import filterDefaultSearchKeys from './filterDefaultSearchKeys';
 
-function stringifyObjectValues(obj: Circuit, key: string, value: string) {
-  const keyValue = obj[key as keyof Circuit];
+function findSelectedMobilityValue(
+  circuit: Circuit,
+  key: keyof Circuit,
+  value: string
+) {
+  const arrayValues = circuit[key] as string[];
+
+  return arrayValues.find((v) => v === value);
+}
+
+function stringifyCircuitObjectValues(
+  circuit: Circuit,
+  key: string,
+  value: string
+) {
+  const keyValue = circuit[key as keyof Circuit];
 
   if (typeof keyValue !== 'string') {
     return keyValue.toString() === value;
   }
-
   return keyValue === value;
 }
 
-function compareValuesObject(obj: Circuit, filteredSearchObj: Search): boolean {
-  return Object.entries(filteredSearchObj).every(([key, value]) => {
-    // Check Array values obj from arr
+function parseSearchObject(
+  circuit: Circuit,
+  stringifiedSearchObj: SearchCircuitsRequest
+) {
+  return Object.entries(stringifiedSearchObj).every(([key, value]) => {
     if (key === 'mobility') {
-      return obj[key].find((v) => v === value);
+      return findSelectedMobilityValue(circuit, key, value);
     }
 
-    // Stringify for number value of obj
-    return stringifyObjectValues(obj, key, value);
+    return stringifyCircuitObjectValues(circuit, key, value);
   });
 }
 
 export default function filterCircuitsList({
   search,
   circuitsList,
-}: FilterCircuitListRequest): Promise<Circuit[] | Error> {
+}: FilterCircuitListRequest) {
   return new Promise((resolve, reject) => {
-    const filteredSearchObj = FilteredObjectKeys(search);
+    const filteredSearchObject = filterDefaultSearchKeys(
+      search
+    ) as SearchCircuitsRequest;
 
-    if (!Object.keys(filteredSearchObj).length) {
+    const result = circuitsList.filter((circuit) => {
+      return parseSearchObject(circuit, filteredSearchObject);
+    });
+
+    if (!Object.keys(filteredSearchObject).length) {
       resolve(circuitsList);
     }
-
-    const result = circuitsList.filter((obj) => {
-      return compareValuesObject(obj, filteredSearchObj);
-    });
 
     if (!result.length) {
       reject(new Error('Aucun résulat ne correspond à votre recherche !'));
