@@ -100,7 +100,7 @@ export const oneCircuitStepResponse = [
   },
 ];
 
-export const oneCircuitResponse = {
+const oneCircuitWithoutSteps = {
   id_circuit: 1,
   name: 'Carnac',
   parking_address: 'Parking Devallen, chemin du tumulus',
@@ -117,12 +117,16 @@ export const oneCircuitResponse = {
   difficulty: 2,
   terrain: 1,
   city: 'Carnac',
-  postcode: 56340,
   state: 'Morbihan',
-  number: 56,
   region: 'Bretagne',
   duration: '2h-3h',
   mobility: ['À pied', 'À vélo', 'Poussette'],
+};
+
+export const oneCircuitResponse = {
+  ...oneCircuitWithoutSteps,
+  number: 56,
+  postcode: 56340,
   step: oneCircuitStepResponse,
 };
 
@@ -259,7 +263,7 @@ export const userCircuitAnswerResultResponse = [
 ];
 
 export const filterCircuitsListResponse = [
-  oneCircuitResponse,
+  oneCircuitWithoutSteps,
   {
     id_circuit: 2,
     name: 'Saint-Pol-de-Léon',

@@ -1,4 +1,4 @@
-interface CircuitWithoutSteps {
+export interface CircuitWithoutSteps {
   id_circuit: number;
   city: string;
   description: string;
@@ -20,6 +20,8 @@ interface CircuitWithoutSteps {
   url_reward: string;
 }
 
+export type CircuitsList = CircuitWithoutSteps[];
+
 interface Step {
   id: number;
   order: number;
@@ -40,5 +42,3 @@ export interface Circuit extends CircuitWithoutSteps {
   number: number;
   postcode: number;
 }
-
-export type CircuitsList = Circuit[];

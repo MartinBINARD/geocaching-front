@@ -2,12 +2,12 @@ import {
   FilterCircuitListRequest,
   SearchCircuitsRequest,
 } from '../../adapters/requests';
-import { Circuit } from '../../domain/entities';
+import { CircuitWithoutSteps } from '../../domain/entities';
 import filterDefaultSearchKeys from './filterDefaultSearchKeys';
 
 function findSelectedMobilityValue(
-  circuit: Circuit,
-  key: keyof Circuit,
+  circuit: CircuitWithoutSteps,
+  key: keyof CircuitWithoutSteps,
   value: string
 ) {
   const arrayValues = circuit[key] as string[];
@@ -16,11 +16,11 @@ function findSelectedMobilityValue(
 }
 
 function stringifyCircuitObjectValues(
-  circuit: Circuit,
+  circuit: CircuitWithoutSteps,
   key: string,
   value: string
 ) {
-  const keyValue = circuit[key as keyof Circuit];
+  const keyValue = circuit[key as keyof CircuitWithoutSteps];
 
   if (typeof keyValue !== 'string') {
     return keyValue.toString() === value;
@@ -29,7 +29,7 @@ function stringifyCircuitObjectValues(
 }
 
 function parseSearchObject(
-  circuit: Circuit,
+  circuit: CircuitWithoutSteps,
   stringifiedSearchObj: SearchCircuitsRequest
 ) {
   return Object.entries(stringifiedSearchObj).every(([key, value]) => {
