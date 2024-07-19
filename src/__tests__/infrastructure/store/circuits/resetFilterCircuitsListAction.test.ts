@@ -1,9 +1,9 @@
+import { resetFilterCircuitsListAction } from '../../../../infracstructure/store/actions';
 import circuitsReducer, {
   initialCircuitsState,
-} from '../../../infracstructure/store/reducers/circuits';
-import { resetSearchCircuitsList } from '../../../core/usecases';
+} from '../../../../infracstructure/store/reducers/circuits';
 
-jest.mock('../../../infracstructure/config/axios', () => ({
+jest.mock('../../../../infracstructure/config/axios', () => ({
   api: {
     baseUrl: 'http://localhost:3000',
   },
@@ -19,10 +19,10 @@ describe('Circuits store', () => {
 
 describe('Reset search circuits list state test', () => {
   it('Should SUCCEED to return RESET research on circuits list', async () => {
-    const action = resetSearchCircuitsList();
+    const action = resetFilterCircuitsListAction();
     const state = circuitsReducer(initialCircuitsState, action);
 
-    expect(action.type).toEqual('circuits/reset-search-circuits-list');
+    expect(action.type).toEqual('circuits/reset-filter-circuits-list');
     expect(action.payload).toEqual(undefined);
 
     expect(state.isSearchNoResult).toBeFalsy;
