@@ -53,7 +53,7 @@ function CircuitIntro() {
 
         <CicuitLocationCard />
 
-        {user ? (
+        {user?.id ? (
           <Link
             className="btn btn-primary text-white my-4 mx-auto"
             to={`/circuit/${id}/path`}
