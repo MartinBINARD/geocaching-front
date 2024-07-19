@@ -2,14 +2,14 @@ import { LatLngTuple } from 'leaflet';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
-import { Circuit } from '../../../../core/domain/entities/circuit';
+import { CircuitsList } from '../../../../core/domain/entities';
 import FindMapCenter from '../../../utils/FindMapCenter';
 
 import ButtonLocateMe from './components/ButtonLocateMe/ButtonLocateMe';
 import MapPopup from './components/MapPopup/MapPopup';
 
 interface MapsProps {
-  markersList?: Circuit[];
+  markersList?: CircuitsList;
   oneMarker?: LatLngTuple;
   zoom: number;
   className: string;
