@@ -2,7 +2,7 @@ import { Circuit, Search } from '../../../../core/domain/entities/circuit';
 import { useAppSelector } from '../../../hooks/redux';
 
 import GetSelectValueArray from '../../../../core/usecases/utils/getSelectValueArray';
-import getSelectorValueFromSearch from '../../../../core/usecases/utils/getSelectorValueFromSearch';
+import saveSelectedValue from '../../../utils/saveSelectedValue';
 
 type OnSelectType = (e: React.ChangeEvent<HTMLSelectElement>) => void;
 
@@ -26,11 +26,12 @@ function SelectControl({
   const searchSelectorsFilterEntries = useAppSelector(
     (state) => state.circuits.searchSelectorsFilterEntries
   );
-  const previousValue = getSelectorValueFromSearch(
-    searchSelectorsFilterEntries,
-    keyName
-  );
-  const currentValue = getSelectorValueFromSearch(search, keyName);
+
+  const selectedValue = saveSelectedValue({
+    currentSearch: search,
+    previousSearch: searchSelectorsFilterEntries,
+    keyName,
+  });
 
   const listValue = GetSelectValueArray(keyName, list);
 
@@ -42,7 +43,7 @@ function SelectControl({
       <select
         name={keyName}
         className="select select-primary select-bordered"
-        value={currentValue || previousValue || ''}
+        value={selectedValue}
         onChange={onSelect}
       >
         <option>{placeholder}</option>
