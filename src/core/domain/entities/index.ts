@@ -6,3 +6,4 @@ export * from './ConfirmForgotPassword';
 export * from './ConfirmUpdatePassword';
 export * from './CircuitsList';
 export * from './Circuit';
+export * from './CircuitQuiz';
