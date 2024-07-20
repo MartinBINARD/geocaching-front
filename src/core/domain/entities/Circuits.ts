@@ -24,14 +24,16 @@ export type CircuitsList = CircuitWithoutSteps[];
 
 interface Step {
   id: number;
-  order: number;
-  question: string;
-  latitude: number;
-  longitude: number;
-  hint: string | null;
-  paragraph: string;
+  answer: string | null;
   circuit_id: number;
   created_at: string;
+  hint: string | null;
+  latitude: number;
+  longitude: number;
+  order: number;
+  paragraph: string;
+  question: string;
+  transition: string;
   updated_at: string;
 }
 
