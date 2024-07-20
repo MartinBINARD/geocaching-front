@@ -22,4 +22,11 @@ export const CircuitsErrors = {
       message: e.details.message,
     };
   },
+  GetCircuitQuizError(e: DomainErrorDTO): DomainErrorDTO {
+    return {
+      type: e.type,
+      details: e.details,
+      message: e.details.message,
+    };
+  },
 };
