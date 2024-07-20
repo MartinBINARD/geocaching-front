@@ -9,6 +9,7 @@ export * from './auth/UpdatePasswordUseCase';
 export * from './circuits/FetchCircuitUseCase';
 export * from './circuits/FetchCircuitsListUseCase';
 export * from './circuits/FilterCircuitsListUseCase';
+export * from './circuits/GetCircuitQuizUseCase';
 export * from './circuits/storeCircuitQuizUseCase';
 export * from './circuits/resetCircuitQuizUseCase';
 export * from './circuits/storeStepEntriesUseCase';
