@@ -1,5 +1,16 @@
-import { GetCircuitQuizRequest } from '../../adapters/requests/circuits/getCircuitQuizRequest';
 import { Circuit } from '../../domain/entities';
+
+interface QuizStep {
+  id: number;
+  hint: string | null;
+  latitude: number;
+  longitude: number;
+  paragraph: string;
+  question: string;
+  transition: string;
+}
+
+type QuizStepList = QuizStep[];
 
 const STEPS_KEYS = [
   'id',
@@ -11,7 +22,7 @@ const STEPS_KEYS = [
   'transition',
 ];
 
-function checkQuizStepStructure(steps: GetCircuitQuizRequest): boolean {
+function checkQuizStepStructure(steps: QuizStepList): boolean {
   const result = steps.map((step) => {
     const stepKeys = Object.keys(step);
 
@@ -25,7 +36,7 @@ function checkQuizStepStructure(steps: GetCircuitQuizRequest): boolean {
   return true;
 }
 
-function circuitQuizStepsMapper(steps: GetCircuitQuizRequest) {
+function circuitQuizStepsMapper(steps: QuizStepList) {
   return steps.map((step) => {
     const { id, latitude, longitude, paragraph, hint, question, transition } =
       step;

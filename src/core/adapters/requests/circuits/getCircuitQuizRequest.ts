@@ -1,11 +1,3 @@
-interface Step {
-  id: number;
-  hint: string | null;
-  latitude: number;
-  longitude: number;
-  paragraph: string;
-  question: string;
-  transition: string;
-}
+import { Circuit } from '../../../domain/entities';
 
-export type GetCircuitQuizRequest = Step[];
+export type GetCircuitQuizRequest = Circuit;
