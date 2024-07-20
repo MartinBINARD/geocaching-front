@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { CircuitsRepository } from '../../../domain/repositories/CircuitsRepository';
 import { FetchCircuitRequest, FilterCircuitListRequest } from '../../requests';
-import { Circuit, CircuitsList } from '../../../domain/entities/Circuits';
+import { Circuit, CircuitsList } from '../../../domain/entities';
 import {
   FetchCircuitsListMapper,
   FetchCircuitMapper,

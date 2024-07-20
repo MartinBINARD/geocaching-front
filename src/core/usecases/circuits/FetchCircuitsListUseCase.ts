@@ -1,5 +1,5 @@
 import { CircuitsRepository } from '../../domain/repositories/CircuitsRepository';
-import { CircuitsList } from '../../domain/entities/Circuits';
+import { CircuitsList } from '../../domain/entities/CircuitsList';
 import { CircuitsErrors, ErrorOr, Result } from '../../domain/models';
 
 type Response = ErrorOr<CircuitsList>;
