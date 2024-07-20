@@ -6,12 +6,14 @@ import { SearchCircuitsRequest } from '../../../core/adapters/requests';
 import {
   StepsEntriesState,
   UserCircuitAnswersResultState,
-  CircuitQuizStep,
 } from '../../../core/domain/entities/circuit';
-import { Circuit, CircuitsList } from '../../../core/domain/entities';
+import {
+  Circuit,
+  CircuitQuiz,
+  CircuitsList,
+} from '../../../core/domain/entities';
 
 import {
-  storeCircuitQuiz,
   resetCircuitQuiz,
   storeStepEntries,
   sendAnswers,
@@ -21,9 +23,9 @@ import {
   fetchCircuitsListThunk,
   fetchCircuitThunk,
   filterCircuitsListThunk,
+  getCircuitQuizThunk,
 } from '../thunks';
 
-import createCircuitQuizStepper from '../../../core/usecases/utils/createCircuitQuizStepper';
 import { resetFilterCircuitsListAction } from '../actions';
 
 interface CircuitState {
@@ -33,7 +35,7 @@ interface CircuitState {
   isSearchNoResult: boolean;
   errorMessage: string | undefined;
   oneCircuit: Circuit | null;
-  circuitQuiz: CircuitQuizStep[];
+  circuitQuiz: CircuitQuiz | null;
   stepsEntries: StepsEntriesState | null;
   userCircuitAnswersResult: UserCircuitAnswersResultState | null;
   isLoading: boolean;
@@ -47,7 +49,7 @@ export const initialCircuitsState: CircuitState = {
   isSearchNoResult: false,
   errorMessage: '',
   oneCircuit: null,
-  circuitQuiz: [],
+  circuitQuiz: null,
   stepsEntries: null,
   userCircuitAnswersResult: null,
   isLoading: false,
@@ -105,12 +107,16 @@ const circuitsReducer = createReducer(initialCircuitsState, (builder) => {
       state.isLoading = false;
       state.isFetchCircuitFailed = true;
     })
-    .addCase(storeCircuitQuiz, (state, action) => {
-      const formatArrayStepper = createCircuitQuizStepper(
-        action.payload
-      ) as CircuitQuizStep[];
-
-      state.circuitQuiz = formatArrayStepper;
+    .addCase(getCircuitQuizThunk.pending, (state, action) => {
+      state.isLoading = true;
+    })
+    .addCase(getCircuitQuizThunk.fulfilled, (state, action) => {
+      state.circuitQuiz = action.payload;
+      state.isLoading = false;
+    })
+    .addCase(getCircuitQuizThunk.rejected, (state, action) => {
+      toast.error(action.error.message);
+      state.isLoading = false;
     })
     .addCase(storeStepEntries, (state, action) => {
       state.stepsEntries = {
