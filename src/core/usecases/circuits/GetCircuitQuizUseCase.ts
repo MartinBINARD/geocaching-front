@@ -1,9 +1,9 @@
 import { CircuitsRepository } from '../../domain/repositories';
-import { CircuitQuiz } from '../../domain/entities';
+import { CircuitQuizList } from '../../domain/entities';
 import { GetCircuitQuizRequest } from '../../adapters/requests';
 import { CircuitsErrors, ErrorOr, Result } from '../../domain/models';
 
-type Response = ErrorOr<CircuitQuiz>;
+type Response = ErrorOr<CircuitQuizList>;
 
 export class GetCircuitQuizUseCase {
   constructor(private circuitsRepository: CircuitsRepository) {}

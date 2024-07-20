@@ -9,7 +9,7 @@ import {
 } from '../../../core/domain/entities/circuit';
 import {
   Circuit,
-  CircuitQuiz,
+  CircuitQuizList,
   CircuitsList,
 } from '../../../core/domain/entities';
 
@@ -35,7 +35,7 @@ interface CircuitState {
   isSearchNoResult: boolean;
   errorMessage: string | undefined;
   oneCircuit: Circuit | null;
-  circuitQuiz: CircuitQuiz | null;
+  circuitQuiz: CircuitQuizList | [];
   stepsEntries: StepsEntriesState | null;
   userCircuitAnswersResult: UserCircuitAnswersResultState | null;
   isLoading: boolean;
@@ -49,7 +49,7 @@ export const initialCircuitsState: CircuitState = {
   isSearchNoResult: false,
   errorMessage: '',
   oneCircuit: null,
-  circuitQuiz: null,
+  circuitQuiz: [],
   stepsEntries: null,
   userCircuitAnswersResult: null,
   isLoading: false,
@@ -107,7 +107,7 @@ const circuitsReducer = createReducer(initialCircuitsState, (builder) => {
       state.isLoading = false;
       state.isFetchCircuitFailed = true;
     })
-    .addCase(getCircuitQuizThunk.pending, (state, action) => {
+    .addCase(getCircuitQuizThunk.pending, (state) => {
       state.isLoading = true;
     })
     .addCase(getCircuitQuizThunk.fulfilled, (state, action) => {

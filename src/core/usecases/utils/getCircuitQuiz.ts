@@ -1,18 +1,6 @@
-import { Circuit } from '../../domain/entities';
+import { Circuit, CircuitStepsList } from '../../domain/entities';
 
-interface QuizStep {
-  id: number;
-  hint: string | null;
-  latitude: number;
-  longitude: number;
-  paragraph: string;
-  question: string;
-  transition: string;
-}
-
-type QuizStepList = QuizStep[];
-
-const STEPS_KEYS = [
+const STEP_KEYS = [
   'id',
   'hint',
   'latitude',
@@ -22,11 +10,11 @@ const STEPS_KEYS = [
   'transition',
 ];
 
-function checkQuizStepStructure(steps: QuizStepList): boolean {
+function checkQuizStepStructure(steps: CircuitStepsList): boolean {
   const result = steps.map((step) => {
     const stepKeys = Object.keys(step);
 
-    return stepKeys.every((key) => STEPS_KEYS.includes(key));
+    return STEP_KEYS.every((key) => stepKeys.includes(key));
   });
 
   if (result.includes(false)) {
@@ -36,7 +24,7 @@ function checkQuizStepStructure(steps: QuizStepList): boolean {
   return true;
 }
 
-function circuitQuizStepsMapper(steps: QuizStepList) {
+function circuitQuizStepsMapper(steps: CircuitStepsList) {
   return steps.map((step) => {
     const { id, latitude, longitude, paragraph, hint, question, transition } =
       step;
@@ -67,7 +55,7 @@ export default function getCircuitQuiz(circuit: Circuit) {
     if (!circuit.step) {
       reject(
         new Error(
-          'Problème de chargement des étapes du circuit ! Veuillez réessayer plus tard.'
+          'Problème de chargement du circuit ! Veuillez réessayer plus tard.'
         )
       );
     }
@@ -75,15 +63,13 @@ export default function getCircuitQuiz(circuit: Circuit) {
     if (!isQuizStepStructureExist) {
       reject(
         new Error(
-          'Problème de chargement des étapes du circuit ! Veuillez réessayer plus tard.'
+          'Problème de structure des étapes du circuit ! Veuillez réessayer plus tard.'
         )
       );
     }
 
-    if (isQuizStepStructureExist) {
-      const circuitQuizStepper = circuitQuizStepsMapper(circuit.step);
+    const circuitQuizStepper = circuitQuizStepsMapper(circuit.step);
 
-      resolve(circuitQuizStepper);
-    }
+    resolve(circuitQuizStepper);
   });
 }

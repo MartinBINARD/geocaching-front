@@ -1,21 +1,20 @@
-interface CircuitQuizContentParagraph {
+interface QuizContentParagraph {
   paragraph: string;
   hint: string | null;
   question: string;
 }
 
-interface CircuitQuizContentTransition {
+interface QuizContentTransition {
   transition: string;
 }
 
-type CircuitQuizContent = [
-  CircuitQuizContentParagraph,
-  CircuitQuizContentTransition,
-];
+type QuizStepContent = [QuizContentParagraph, QuizContentTransition];
 
-export interface CircuitQuiz {
+export interface CircuitStep {
   id: number;
   latitude: number;
   longitude: number;
-  content: CircuitQuizContent;
+  content: QuizStepContent;
 }
+
+export type CircuitQuizList = CircuitStep[];

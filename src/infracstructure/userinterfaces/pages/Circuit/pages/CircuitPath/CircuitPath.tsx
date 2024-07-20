@@ -3,12 +3,11 @@ import { Flag } from 'lucide-react';
 
 import { useAppDispatch, useAppSelector } from '../../../../../hooks/redux';
 
-import { storeCircuitQuiz } from '../../../../../../core/usecases';
-
 import Loader from '../../../../components/loader/Loader';
 import CircuitPathStepperMap from './components/CircuitPathStepperMap/CircuitPathStepperMap';
 import CircuitPathStepperQuestion from './components/CircuitPathStepperQuestion/CircuitPathStepperQuestion';
 import CircuitPathStepperControl from './components/CircuitPathStepperControl/CircuitPathStepperControl';
+import { getCircuitQuizThunk } from '../../../../../store/thunks';
 
 function CircuitPath() {
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
@@ -34,8 +33,8 @@ function CircuitPath() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (circuit?.step) {
-      dispatch(storeCircuitQuiz(circuit.step));
+    if (circuit) {
+      dispatch(getCircuitQuizThunk(circuit));
     }
   }, [circuit, dispatch]);
 

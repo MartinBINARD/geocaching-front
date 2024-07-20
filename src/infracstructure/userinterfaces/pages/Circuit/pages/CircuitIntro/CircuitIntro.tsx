@@ -5,11 +5,11 @@ import { useAppDispatch, useAppSelector } from '../../../../../hooks/redux';
 
 import { FetchCircuitRequest } from '../../../../../../core/adapters/requests';
 
+import { resetCircuitQuiz } from '../../../../../../core/usecases';
 import {
-  storeCircuitQuiz,
-  resetCircuitQuiz,
-} from '../../../../../../core/usecases';
-import { fetchCircuitThunk } from '../../../../../store/thunks';
+  fetchCircuitThunk,
+  getCircuitQuizThunk,
+} from '../../../../../store/thunks';
 
 import Loader from '../../../../components/loader/Loader';
 import CircuitDescriptionCard from './components/CircuitDescriptionCard/CircuitDescriptionCard';
@@ -33,8 +33,8 @@ function CircuitIntro() {
 
   const handleClick = () => {
     dispatch(resetCircuitQuiz());
-    if (circuit && circuit.step) {
-      dispatch(storeCircuitQuiz(circuit.step));
+    if (circuit) {
+      dispatch(getCircuitQuizThunk(circuit));
     }
   };
 

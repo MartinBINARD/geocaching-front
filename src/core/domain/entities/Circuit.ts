@@ -15,10 +15,10 @@ interface Step {
   updated_at: string;
 }
 
-type StepsList = Step[];
+export type CircuitStepsList = Step[];
 
 export interface Circuit extends CircuitWithoutSteps {
-  step: StepsList;
+  step: CircuitStepsList;
   number: number;
   postcode: number;
 }
