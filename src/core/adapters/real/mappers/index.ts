@@ -9,3 +9,4 @@ export * from './auth/ConfirmUpdatePasswordMapper';
 export * from './circuits/FetchCircuitsListMapper';
 export * from './circuits/FetchCircuitMapper';
 export * from './circuits/FilterCircuitsListMapper';
+export * from './circuits/GetCircuitQuizMapper';
