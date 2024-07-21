@@ -10,7 +10,7 @@ import {
   CircuitsList,
 } from '../../../core/domain/entities';
 
-import { resetCircuitQuiz, sendAnswers } from '../../../core/usecases';
+import { sendAnswers } from '../../../core/usecases';
 
 import {
   fetchCircuitsListThunk,
@@ -21,6 +21,7 @@ import {
 
 import {
   resetFilterCircuitsListAction,
+  resetQuizStepsAnswersAction,
   storeQuizStepsAnswersAction,
 } from '../actions';
 
@@ -120,7 +121,7 @@ const circuitsReducer = createReducer(initialCircuitsState, (builder) => {
         ...action.payload,
       };
     })
-    .addCase(resetCircuitQuiz, (state) => {
+    .addCase(resetQuizStepsAnswersAction, (state) => {
       state.quizStepsAnswers = null;
       state.userCircuitAnswersResult = null;
     })

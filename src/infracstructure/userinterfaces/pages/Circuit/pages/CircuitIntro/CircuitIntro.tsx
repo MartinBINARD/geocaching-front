@@ -5,11 +5,12 @@ import { useAppDispatch, useAppSelector } from '../../../../../hooks/redux';
 
 import { FetchCircuitRequest } from '../../../../../../core/adapters/requests';
 
-import { resetCircuitQuiz } from '../../../../../../core/usecases';
 import {
   fetchCircuitThunk,
   getCircuitQuizThunk,
 } from '../../../../../store/thunks';
+
+import { resetQuizStepsAnswersAction } from '../../../../../store/actions';
 
 import Loader from '../../../../components/loader/Loader';
 import CircuitDescriptionCard from './components/CircuitDescriptionCard/CircuitDescriptionCard';
@@ -32,7 +33,7 @@ function CircuitIntro() {
   }, [dispatch, id]);
 
   const handleClick = () => {
-    dispatch(resetCircuitQuiz());
+    dispatch(resetQuizStepsAnswersAction());
     if (circuit) {
       dispatch(getCircuitQuizThunk(circuit));
     }
