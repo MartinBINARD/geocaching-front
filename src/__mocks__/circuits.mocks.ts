@@ -1,4 +1,4 @@
-export const circuitStepsList = [
+export const rightCircuitStepsList = [
   {
     id: 1,
     order: 1,
@@ -94,6 +94,37 @@ export const circuitStepsList = [
       'Le musée de la Préhistoire a été créé en 1881 grâce à un legs (don d’argent suite au décès de quelqu’un) de l’antiquaire et archéologue écossais James Miln. Le Musée porte aujourd’hui son nom ainsi qu’un second, celui de l’assistant de J. Miln à qui on doit des fouilles à Carnac, notamment celle du tumulus St-Michel.',
     transition:
       'Tu as terminé ce parcours, félicitations ! Vérifie tes réponses pour savoir si tu as gagné ta récompense.',
+    circuit_id: 1,
+    created_at: '2024-06-19T10:53:54.12346',
+    updated_at: '2024-06-19T10:53:54.12346',
+  },
+];
+
+export const wrongCircuitStepsList = [
+  {
+    id: 1,
+    order: 1,
+    question: 'À combien de km se trouve le Clocher Ste-Anne d’Auray ?',
+    answer: null,
+    hint: null,
+    paragraph:
+      'Te voici au sommet du tumulus Saint-Michel ! Un tumulus est un très grand tas de terre ou de pierres élevé au-dessus d’une tombe. Celui-ci fait environ 35 000 mètres cubes ! Cette construction est très vieille ! Imagine que la grande pyramide d’Egypte est plus jeune d’environ 1500 ans ! Ce tumulus a été fouillé plusieurs fois par des archéologues entre 1862 et 1907, ils ont percé un puits puis des galeries dont l’entrée est encore visible au nord-est, à côté des escaliers menant à la chapelle Saint-Michel. Ils ont découvert un petit caveau au centre de l’édifice avec de nombreuses haches en pierre polies (aujourd’hui visibles au musée de préhistoire de Carnac).',
+    transition:
+      'Emprunte le chemin de Cloucarnac, puis celui de Croëz er Gwen et enfin celui de Kerluir pour te rendre au point suivant.',
+    circuit_id: 1,
+    created_at: '2024-06-19T10:53:54.12346',
+    updated_at: '2024-06-19T10:53:54.12346',
+  },
+  {
+    id: 2,
+    order: 2,
+    question: 'Combien de dalles forment le toit du monument ?',
+    answer: null,
+    latitude: 47.595597,
+    longitude: -3.06708,
+    hint: null,
+    transition:
+      'Longe la route départementale 196, attention à bien emprunter le chemin piéton pour ne pas gêner la circulation.',
     circuit_id: 1,
     created_at: '2024-06-19T10:53:54.12346',
     updated_at: '2024-06-19T10:53:54.12346',
@@ -231,11 +262,28 @@ export const oneCircuitWithoutSteps = {
   mobility: ['À pied', 'À vélo', 'Poussette'],
 };
 
+export const wrongCircuitStepStructure = {
+  ...oneCircuitWithoutSteps,
+  step: wrongCircuitStepsList,
+};
+
+export const circuitQuizLoadingError = {
+  type: 'GET_CIRCUIT_QUIZ_ERROR',
+  details: {},
+  message: 'Problème de chargement du circuit ! Veuillez réessayer plus tard.',
+};
+
+export const circuitQuizStepsStructureError = {
+  type: 'GET_CIRCUIT_QUIZ_ERROR',
+  details: {},
+  message: 'Problème de chargement du circuit ! Veuillez réessayer plus tard.',
+};
+
 export const oneCircuitResponse = {
   ...oneCircuitWithoutSteps,
   number: 56,
   postcode: 56340,
-  step: circuitStepsList,
+  step: rightCircuitStepsList,
 };
 
 export const oneCircuitQuizResponse = [

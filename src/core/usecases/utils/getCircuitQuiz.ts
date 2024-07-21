@@ -52,7 +52,7 @@ export default function getCircuitQuiz(circuit: Circuit) {
   return new Promise((resolve, reject) => {
     const isQuizStepStructureExist = checkQuizStepStructure(circuit?.step);
 
-    if (!circuit || !circuit.step) {
+    if (!circuit.step) {
       reject(
         new Error(
           'Problème de chargement du circuit ! Veuillez réessayer plus tard.'

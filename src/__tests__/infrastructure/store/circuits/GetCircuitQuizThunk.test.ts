@@ -7,8 +7,11 @@ import { Circuit, CircuitQuizList } from '../../../../core/domain/entities';
 
 import {
   CircuitQuizListResponse,
+  circuitQuizLoadingError,
+  circuitQuizStepsStructureError,
   oneCircuitResponse,
   oneCircuitWithoutSteps,
+  wrongCircuitStepStructure,
 } from '../../../../__mocks__/circuits.mocks';
 import { fakeRequestId } from '../../../../__mocks__/request.mocks';
 
@@ -48,8 +51,8 @@ describe('GET circuit quiz list', () => {
   });
 
   it('Should FAILED to return circuit quiz list due to circuit loading ERROR', async () => {
-    const fakePayload = null;
-    const fakeSearchEntries = oneCircuitWithoutSteps as any;
+    const fakePayload = circuitQuizLoadingError as unknown as Error;
+    const fakeSearchEntries: any = oneCircuitWithoutSteps;
 
     const action = getCircuitQuizThunk.rejected(
       fakePayload,
@@ -60,9 +63,27 @@ describe('GET circuit quiz list', () => {
 
     expect(action.type).toEqual('circuits/get-circuit-quiz/rejected');
     expect(action.payload).toEqual(undefined);
-    expect(action.error).toEqual({
-      message: 'Rejected',
-    });
+    expect(action.error.message).toEqual(circuitQuizLoadingError.message);
+
+    expect(state).toEqual(initialCircuitsState);
+  });
+
+  it('Should FAILED to return circuit quiz list due to steps structure ERROR', async () => {
+    const fakePayload = circuitQuizStepsStructureError as unknown as Error;
+    const fakeSearchEntries: any = wrongCircuitStepStructure;
+
+    const action = getCircuitQuizThunk.rejected(
+      fakePayload,
+      fakeRequestId,
+      fakeSearchEntries
+    );
+    const state = circuitsReducer(initialCircuitsState, action);
+
+    expect(action.type).toEqual('circuits/get-circuit-quiz/rejected');
+    expect(action.payload).toEqual(undefined);
+    expect(action.error.message).toEqual(
+      circuitQuizStepsStructureError.message
+    );
 
     expect(state).toEqual(initialCircuitsState);
   });
