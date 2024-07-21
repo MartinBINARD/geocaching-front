@@ -1,12 +1,11 @@
-import { stepsEntriesResponse } from '../../../__mocks__/circuits.mocks';
-import { StepsEntriesState } from '../../../core/domain/entities/circuit';
+import { quizStepsAnswsersEntries } from '../../../../__mocks__/circuits.mocks';
+import { storeQuizStepsAnswersAction } from '../../../../infracstructure/store/actions';
 
 import circuitsReducer, {
   initialCircuitsState,
-} from '../../../infracstructure/store/reducers/circuits';
-import { storeStepEntries } from '../../../core/usecases';
+} from '../../../../infracstructure/store/reducers/circuits';
 
-jest.mock('../../../infracstructure/config/axios', () => ({
+jest.mock('../../../../infracstructure/config/axios', () => ({
   api: {
     baseUrl: 'http://localhost:3000',
   },
@@ -22,8 +21,8 @@ describe('Circuits store', () => {
 
 describe('Store step entries from circuit quiz state test', () => {
   it('Should SUCCEED to store step entries', () => {
-    const fakePayload: StepsEntriesState = stepsEntriesResponse;
-    const action = storeStepEntries(fakePayload);
+    const fakePayload: Record<string, string> = quizStepsAnswsersEntries;
+    const action = storeQuizStepsAnswersAction(fakePayload);
     const state = circuitsReducer(initialCircuitsState, action);
 
     expect(action.type).toEqual('circuits/store-steps-entries');
@@ -31,7 +30,7 @@ describe('Store step entries from circuit quiz state test', () => {
 
     expect(state).toEqual({
       ...initialCircuitsState,
-      stepsEntries: fakePayload,
+      quizStepsAnswers: fakePayload,
     });
   });
 });

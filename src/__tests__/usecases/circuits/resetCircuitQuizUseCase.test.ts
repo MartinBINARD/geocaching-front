@@ -27,7 +27,7 @@ describe('RESET circuit quiz state test', () => {
 
     expect(state).toEqual({
       ...initialCircuitsState,
-      stepsEntries: null,
+      quizStepsAnswers: null,
       userCircuitAnswersResult: null,
     });
   });

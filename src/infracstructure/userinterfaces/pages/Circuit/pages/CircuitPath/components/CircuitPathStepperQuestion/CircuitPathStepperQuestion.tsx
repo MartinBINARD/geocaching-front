@@ -6,7 +6,7 @@ import {
   useAppSelector,
 } from '../../../../../../../hooks/redux';
 
-import { storeStepEntries } from '../../../../../../../../core/usecases';
+import { storeQuizStepsAnswersAction } from '../../../../../../../store/actions';
 
 import CircuitMapToggle from '../../../../../../components/CircuitMapToggle/CircuitMapToggle';
 import CircuitPathStepperQuestionHint from './components/CircuitPathStepperQuestionHint/CircuitPathStepperQuestionHint';
@@ -30,9 +30,11 @@ function CircuitPathQuestion({
   error,
 }: CircuitPathQuestionProps) {
   const { invalidInput, setInvalidInput } = error;
-  const stepsEntries = useAppSelector((state) => state.circuits.stepsEntries);
+  const quizStepsAnswers = useAppSelector(
+    (state) => state.circuits.quizStepsAnswers
+  );
 
-  const [userEntries, setUserEntries] = useState(stepsEntries || {});
+  const [userEntries, setUserEntries] = useState(quizStepsAnswers || {});
   const circuitQuiz = useAppSelector((state) => state.circuits.circuitQuiz);
 
   const oneMarker = [
@@ -63,7 +65,7 @@ function CircuitPathQuestion({
 
     if (e.target.value.length > 0) {
       setInvalidInput(false);
-      dispatch(storeStepEntries(newObjectEntries));
+      dispatch(storeQuizStepsAnswersAction(newObjectEntries));
     }
   }
 

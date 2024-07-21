@@ -20,7 +20,9 @@ function CircuitPatStepperControlAnswerRecord({
   currentStepIndex,
   currentStepContentIndex,
 }: CircuitPatStepperControlAnswerRecordProps) {
-  const stepsEntries = useAppSelector((state) => state.circuits.stepsEntries);
+  const quizStepsAnswers = useAppSelector(
+    (state) => state.circuits.quizStepsAnswers
+  );
   const userCircuitAnswersResult = useAppSelector(
     (state) => state.circuits.userCircuitAnswersResult
   );
@@ -39,8 +41,8 @@ function CircuitPatStepperControlAnswerRecord({
   );
 
   function isUserAnswsersReadyForCheck() {
-    if (stepsEntries && circuitQuiz) {
-      const userAnswsersArrayLength = Object.keys(stepsEntries).length;
+    if (quizStepsAnswers && circuitQuiz) {
+      const userAnswsersArrayLength = Object.keys(quizStepsAnswers).length;
       const conditions = [currentStepIndex + 1, circuitQuiz.length];
 
       if (currentStepContentIndex === 1) {
@@ -58,7 +60,7 @@ function CircuitPatStepperControlAnswerRecord({
     const userCircuitEntries = {
       userId,
       circuitId,
-      stepsEntries,
+      quizStepsAnswers,
     } as UserCircuitEntriesState;
     dispatch(sendAnswers(userCircuitEntries));
   }

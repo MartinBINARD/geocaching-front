@@ -3,21 +3,14 @@ import { createReducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 import { SearchCircuitsRequest } from '../../../core/adapters/requests';
-import {
-  StepsEntriesState,
-  UserCircuitAnswersResultState,
-} from '../../../core/domain/entities/circuit';
+import { UserCircuitAnswersResultState } from '../../../core/domain/entities/circuit';
 import {
   Circuit,
   CircuitQuizList,
   CircuitsList,
 } from '../../../core/domain/entities';
 
-import {
-  resetCircuitQuiz,
-  storeStepEntries,
-  sendAnswers,
-} from '../../../core/usecases';
+import { resetCircuitQuiz, sendAnswers } from '../../../core/usecases';
 
 import {
   fetchCircuitsListThunk,
@@ -26,7 +19,10 @@ import {
   getCircuitQuizThunk,
 } from '../thunks';
 
-import { resetFilterCircuitsListAction } from '../actions';
+import {
+  resetFilterCircuitsListAction,
+  storeQuizStepsAnswersAction,
+} from '../actions';
 
 interface CircuitState {
   circuitsList: CircuitsList;
@@ -36,7 +32,7 @@ interface CircuitState {
   errorMessage: string | undefined;
   oneCircuit: Circuit | null;
   circuitQuiz: CircuitQuizList | [];
-  stepsEntries: StepsEntriesState | null;
+  quizStepsAnswers: Record<string, string> | null;
   userCircuitAnswersResult: UserCircuitAnswersResultState | null;
   isLoading: boolean;
   isFetchCircuitFailed: boolean;
@@ -50,7 +46,7 @@ export const initialCircuitsState: CircuitState = {
   errorMessage: '',
   oneCircuit: null,
   circuitQuiz: [],
-  stepsEntries: null,
+  quizStepsAnswers: null,
   userCircuitAnswersResult: null,
   isLoading: false,
   isFetchCircuitFailed: false,
@@ -118,14 +114,14 @@ const circuitsReducer = createReducer(initialCircuitsState, (builder) => {
       toast.error(action.error.message);
       state.isLoading = false;
     })
-    .addCase(storeStepEntries, (state, action) => {
-      state.stepsEntries = {
-        ...state.stepsEntries,
+    .addCase(storeQuizStepsAnswersAction, (state, action) => {
+      state.quizStepsAnswers = {
+        ...state.quizStepsAnswers,
         ...action.payload,
       };
     })
     .addCase(resetCircuitQuiz, (state) => {
-      state.stepsEntries = null;
+      state.quizStepsAnswers = null;
       state.userCircuitAnswersResult = null;
     })
     .addCase(sendAnswers.pending, (state) => {

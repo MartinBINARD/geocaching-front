@@ -29,7 +29,9 @@ function CircuitPathStepperControl({
   } = index;
   const { invalidInput, setInvalidInput } = error;
   const circuitQuiz = useAppSelector((state) => state.circuits.circuitQuiz);
-  const stepsEntries = useAppSelector((state) => state.circuits.stepsEntries);
+  const quizStepsAnswers = useAppSelector(
+    (state) => state.circuits.quizStepsAnswers
+  );
 
   function incrementStepContentIndex() {
     if (currentStepContentIndex < 1) {
@@ -77,11 +79,11 @@ function CircuitPathStepperControl({
 
   function handleSecondPartNextStep() {
     if (currentStepContentIndex === 1) {
-      if (!stepsEntries || !stepsEntries[currentStepIndex]) {
+      if (!quizStepsAnswers || !quizStepsAnswers[currentStepIndex]) {
         setInvalidInput(true);
       }
 
-      if (stepsEntries && stepsEntries[currentStepIndex]) {
+      if (quizStepsAnswers && quizStepsAnswers[currentStepIndex]) {
         setInvalidInput(false);
         incrementStepContentIndex();
         incrementStepIndex();
