@@ -5,7 +5,7 @@ import {
   UserCircuitAnswersResultState,
   UserCircuitEntriesState,
 } from '../../domain/entities/circuit';
-import formatUserCircuitEntries from '../utils/formatUserCircuitEntries';
+import formatUserCircuitEntries from '../../../infracstructure/utils/formatUserQuizAnswers';
 import api from '../../../infracstructure/config/axios';
 
 export const sendAnswers = createAsyncThunk(
