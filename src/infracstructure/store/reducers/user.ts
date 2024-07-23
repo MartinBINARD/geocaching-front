@@ -2,8 +2,9 @@ import { createReducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 import { Profile } from '../../../core/domain/entities';
-import { deleteProfile, updateProfile } from '../../../core/usecases';
+import { deleteProfile } from '../../../core/usecases';
 import { getProfileThunk } from '../thunks';
+import { updateProfileThunk } from '../thunks/user/UpdateProfileThunk';
 
 interface ProfileState {
   profile: Profile | null;
@@ -38,16 +39,16 @@ const userReducer = createReducer(intialUserState, (builder) => {
       state.errorMessage = action.error.message!;
       state.isProfileLoading = false;
     })
-    .addCase(updateProfile.pending, (state) => {
+    .addCase(updateProfileThunk.pending, (state) => {
       state.isUpdateLoading = true;
     })
-    .addCase(updateProfile.fulfilled, (state, action) => {
+    .addCase(updateProfileThunk.fulfilled, (state, action) => {
       state.profile = action.payload;
       state.isUpdateLoading = false;
       state.errorMessage = null;
       toast.success('Votre profil a bien été mis à jour');
     })
-    .addCase(updateProfile.rejected, (state, action) => {
+    .addCase(updateProfileThunk.rejected, (state, action) => {
       state.profile = null;
       state.isUpdateLoading = false;
       state.errorMessage = action.error.message!;
