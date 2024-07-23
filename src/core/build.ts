@@ -12,6 +12,7 @@ import {
   GetCircuitMapper,
   SendUserQuizAnswersMapper,
   GetProfileMapper,
+  UpdateProfileMapper,
 } from './adapters/real/mappers';
 import {
   RegisterUseCase,
@@ -27,6 +28,7 @@ import {
   GetCircuitQuizUseCase,
   SendUserQuizAnswersUseCase,
   GetProfileUseCase,
+  UpdateProfileUseCase,
 } from './usecases';
 import { RLCircuitsRepository } from './adapters/real/repositories/RLCircuitsRepository';
 import { FetchCircuitsListMapper } from './adapters/real/mappers/circuits/FetchCircuitsListMapper';
@@ -53,7 +55,11 @@ const Core = () => {
     new SendUserQuizAnswersMapper()
   );
 
-  const profileRepository = new RLUserRepository(api, new GetProfileMapper());
+  const profileRepository = new RLUserRepository(
+    api,
+    new GetProfileMapper(),
+    new UpdateProfileMapper()
+  );
 
   // USECASES //
 
@@ -77,6 +83,7 @@ const Core = () => {
 
   // PROFILE
   const getProfile = new GetProfileUseCase(profileRepository);
+  const updateProfile = new UpdateProfileUseCase(profileRepository);
 
   return {
     register,
@@ -92,6 +99,7 @@ const Core = () => {
     getCircuitQuiz,
     sendUserQuizAnswers,
     getProfile,
+    updateProfile,
   };
 };
 
