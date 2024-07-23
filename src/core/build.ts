@@ -10,6 +10,7 @@ import {
   FetchCircuitMapper,
   FilterCircuitsListMapper,
   GetCircuitMapper,
+  SendUserQuizAnswersMapper,
 } from './adapters/real/mappers';
 import {
   RegisterUseCase,
@@ -23,6 +24,7 @@ import {
   FetchCircuitUseCase,
   FilterCircuitsListUseCase,
   GetCircuitQuizUseCase,
+  SendUserQuizAnswersUseCase,
 } from './usecases';
 import { RLCircuitsRepository } from './adapters/real/repositories/RLCircuitsRepository';
 import { FetchCircuitsListMapper } from './adapters/real/mappers/circuits/FetchCircuitsListMapper';
@@ -44,7 +46,8 @@ const Core = () => {
     new FetchCircuitsListMapper(),
     new FetchCircuitMapper(),
     new FilterCircuitsListMapper(),
-    new GetCircuitMapper()
+    new GetCircuitMapper(),
+    new SendUserQuizAnswersMapper()
   );
 
   // USECASES //
@@ -63,7 +66,9 @@ const Core = () => {
   const fetchCircuit = new FetchCircuitUseCase(circuitsRepository);
   const filterCircuitsList = new FilterCircuitsListUseCase(circuitsRepository);
   const getCircuitQuiz = new GetCircuitQuizUseCase(circuitsRepository);
-
+  const sendUserQuizAnswers = new SendUserQuizAnswersUseCase(
+    circuitsRepository
+  );
   return {
     register,
     login,
@@ -76,6 +81,7 @@ const Core = () => {
     fetchCircuit,
     filterCircuitsList,
     getCircuitQuiz,
+    sendUserQuizAnswers,
   };
 };
 
