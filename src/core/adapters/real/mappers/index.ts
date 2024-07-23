@@ -11,3 +11,5 @@ export * from './circuits/FetchCircuitMapper';
 export * from './circuits/FilterCircuitsListMapper';
 export * from './circuits/GetCircuitQuizMapper';
 export * from './circuits/SendUserQuizAnswsersMapper';
+
+export * from './profile/GetProfileMapper';

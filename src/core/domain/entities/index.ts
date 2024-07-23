@@ -9,3 +9,4 @@ export * from './Circuit';
 export * from './CircuitQuiz';
 export * from './UserQuizAnswsers';
 export * from './UserQuizResult';
+export * from './Profile';
