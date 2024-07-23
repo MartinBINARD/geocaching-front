@@ -13,3 +13,6 @@ export * from './circuits/FetchCircuitThunk';
 export * from './circuits/FilterCircuitsListThunk';
 export * from './circuits/GetCircuitQuizThunk';
 export * from './circuits/SendUserQuizAnswers';
+
+// PROFILE
+export * from './profile/GetProfileThunk';
