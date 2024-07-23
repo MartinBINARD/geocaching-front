@@ -5,12 +5,12 @@ import { useAppSelector } from '../../../../../hooks/redux';
 
 function CircuitCongrats() {
   const { id } = useParams();
-  const userCircuitAnswersResult = useAppSelector(
-    (state) => state.circuits.userCircuitAnswersResult
+  const userQuizResult = useAppSelector(
+    (state) => state.circuits.userQuizResult
   );
-  const isCircuitQuizWrong = userCircuitAnswersResult?.includes(false);
+  const isCircuitQuizWrong = userQuizResult?.includes(false);
 
-  if (!userCircuitAnswersResult || isCircuitQuizWrong) {
+  if (!userQuizResult || isCircuitQuizWrong) {
     return <Navigate to={`circuit/${id}`} />;
   }
 
