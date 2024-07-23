@@ -1,13 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { Profile } from '../../../core/domain/entities/user';
-
-import {
-  deleteProfile,
-  getProfile,
-  updateProfile,
-} from '../../../core/usecases';
+import { Profile } from '../../../core/domain/entities';
+import { deleteProfile, updateProfile } from '../../../core/usecases';
+import { getProfileThunk } from '../thunks';
 
 interface ProfileState {
   profile: Profile | null;
@@ -27,14 +23,14 @@ export const intialUserState: ProfileState = {
 
 const userReducer = createReducer(intialUserState, (builder) => {
   builder
-    .addCase(getProfile.pending, (state) => {
+    .addCase(getProfileThunk.pending, (state) => {
       state.isProfileLoading = true;
     })
-    .addCase(getProfile.fulfilled, (state, action) => {
+    .addCase(getProfileThunk.fulfilled, (state, action) => {
       state.profile = action.payload;
       state.isProfileLoading = false;
     })
-    .addCase(getProfile.rejected, (state, action) => {
+    .addCase(getProfileThunk.rejected, (state, action) => {
       /* "!" post-fix expression operator for null and undefined compatibility 
       TypeScript can not predict error server reponse
       See documentation :
