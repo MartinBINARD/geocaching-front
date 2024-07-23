@@ -10,6 +10,8 @@ import {
 } from '../../../../../../../../../hooks/redux';
 
 import { sendAnswers } from '../../../../../../../../../../core/usecases';
+import formatUserQuizAnswers from '../../../../../../../../../utils/formatUserQuizAnswers';
+import { UserQuizAnswers } from '../../../../../../../../../../core/domain/entities/UserQuizAnswsers';
 
 interface CircuitPatStepperControlAnswerRecordProps {
   currentStepIndex: number;
@@ -55,13 +57,15 @@ function CircuitPatStepperControlAnswerRecord({
   }
 
   function handleClick() {
-    const userId = user?.id;
-    const circuitId = circuit?.id_circuit;
-    const userCircuitEntries = {
-      userId,
-      circuitId,
-      quizStepsAnswers,
-    } as UserCircuitEntriesState;
+    const id_user = user?.id;
+    const id_circuit = circuit?.id_circuit;
+    const steps = quizStepsAnswers;
+
+    const formatedUserQuizAnswser = formatUserQuizAnswers({
+      id_user,
+      id_circuit,
+      steps,
+    } as unknown as UserQuizAnswers);
     dispatch(sendAnswers(userCircuitEntries));
   }
 

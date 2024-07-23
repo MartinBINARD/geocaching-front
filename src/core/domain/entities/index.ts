@@ -7,3 +7,4 @@ export * from './ConfirmUpdatePassword';
 export * from './CircuitsList';
 export * from './Circuit';
 export * from './CircuitQuiz';
+export * from './UserQuizAnswsers';
