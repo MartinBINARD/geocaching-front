@@ -3,20 +3,19 @@ import { createReducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 import { SearchCircuitsRequest } from '../../../core/adapters/requests';
-import { UserCircuitAnswersResultState } from '../../../core/domain/entities/circuit';
 import {
   Circuit,
   CircuitQuizList,
   CircuitsList,
+  UserQuizResult,
 } from '../../../core/domain/entities';
-
-import { sendAnswers } from '../../../core/usecases';
 
 import {
   fetchCircuitsListThunk,
   fetchCircuitThunk,
   filterCircuitsListThunk,
   getCircuitQuizThunk,
+  sendUserQuizAnswersThunk,
 } from '../thunks';
 
 import {
@@ -34,7 +33,7 @@ interface CircuitState {
   oneCircuit: Circuit | null;
   circuitQuiz: CircuitQuizList | [];
   quizStepsAnswers: Record<string, string> | null;
-  userCircuitAnswersResult: UserCircuitAnswersResultState | null;
+  userQuizResult: UserQuizResult | null;
   isLoading: boolean;
   isFetchCircuitFailed: boolean;
 }
@@ -48,7 +47,7 @@ export const initialCircuitsState: CircuitState = {
   oneCircuit: null,
   circuitQuiz: [],
   quizStepsAnswers: null,
-  userCircuitAnswersResult: null,
+  userQuizResult: null,
   isLoading: false,
   isFetchCircuitFailed: false,
 };
@@ -123,19 +122,17 @@ const circuitsReducer = createReducer(initialCircuitsState, (builder) => {
     })
     .addCase(resetQuizStepsAnswersAction, (state) => {
       state.quizStepsAnswers = null;
-      state.userCircuitAnswersResult = null;
+      state.userQuizResult = null;
     })
-    .addCase(sendAnswers.pending, (state) => {
+    .addCase(sendUserQuizAnswersThunk.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(sendAnswers.fulfilled, (state, action) => {
-      state.userCircuitAnswersResult = action.payload;
+    .addCase(sendUserQuizAnswersThunk.fulfilled, (state, action) => {
+      state.userQuizResult = action.payload;
       state.isLoading = false;
     })
-    .addCase(sendAnswers.rejected, (state) => {
-      toast.error(
-        `Une erreur s'est produite lors de l'envoie de vos réponse, Veuillez essayer de nouveau.`
-      );
+    .addCase(sendUserQuizAnswersThunk.rejected, (state, action) => {
+      toast.error(action.error.message);
       state.isLoading = false;
     });
 });
