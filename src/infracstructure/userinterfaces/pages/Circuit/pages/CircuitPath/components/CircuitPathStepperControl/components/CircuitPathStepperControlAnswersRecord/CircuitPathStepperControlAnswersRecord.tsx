@@ -2,16 +2,14 @@ import { useEffect, useRef } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { AlertCircle, CheckCircle, Compass, XCircle } from 'lucide-react';
 
-import { UserCircuitEntriesState } from '../../../../../../../../../../core/domain/entities/circuit';
-
 import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../../../../../../hooks/redux';
 
-import { sendAnswers } from '../../../../../../../../../../core/usecases';
 import formatUserQuizAnswers from '../../../../../../../../../utils/formatUserQuizAnswers';
 import { UserQuizAnswers } from '../../../../../../../../../../core/domain/entities/UserQuizAnswsers';
+import { sendUserQuizAnswersThunk } from '../../../../../../../../../store/thunks';
 
 interface CircuitPatStepperControlAnswerRecordProps {
   currentStepIndex: number;
@@ -25,8 +23,8 @@ function CircuitPatStepperControlAnswerRecord({
   const quizStepsAnswers = useAppSelector(
     (state) => state.circuits.quizStepsAnswers
   );
-  const userCircuitAnswersResult = useAppSelector(
-    (state) => state.circuits.userCircuitAnswersResult
+  const userQuizResult = useAppSelector(
+    (state) => state.circuits.userQuizResult
   );
   const user = useAppSelector((state) => state.auth.user);
   const circuit = useAppSelector((state) => state.circuits.oneCircuit);
@@ -38,7 +36,7 @@ function CircuitPatStepperControlAnswerRecord({
 
   const dispatch = useAppDispatch();
 
-  const isCircuitQuizCorrect = !!userCircuitAnswersResult?.every(
+  const isCircuitQuizCorrect = !!userQuizResult?.every(
     (value) => value === true
   );
 
@@ -66,7 +64,7 @@ function CircuitPatStepperControlAnswerRecord({
       id_circuit,
       steps,
     } as unknown as UserQuizAnswers);
-    dispatch(sendAnswers(userCircuitEntries));
+    dispatch(sendUserQuizAnswersThunk(formatedUserQuizAnswser));
   }
 
   function openModal() {
@@ -74,10 +72,10 @@ function CircuitPatStepperControlAnswerRecord({
   }
 
   useEffect(() => {
-    if (userCircuitAnswersResult?.includes(false)) {
+    if (userQuizResult?.includes(false)) {
       openModal();
     }
-  }, [userCircuitAnswersResult]);
+  }, [userQuizResult]);
 
   if (isCircuitQuizCorrect) {
     return <Navigate to={`/circuit/${id}/congrats`} />;
@@ -96,7 +94,7 @@ function CircuitPatStepperControlAnswerRecord({
         </button>
       )}
 
-      {userCircuitAnswersResult?.length && (
+      {userQuizResult?.length && (
         <dialog
           ref={modalAnswersRecord}
           className="modal text-sm lg:text-base md:text-lg xl:text-xl"
@@ -116,7 +114,7 @@ function CircuitPatStepperControlAnswerRecord({
               <table className="table table-xs table-pin-rows table-pin-cols">
                 <tbody>
                   <tr>
-                    {userCircuitAnswersResult.map((item, index) => (
+                    {userQuizResult.map((item, index) => (
                       <td
                         key={`${item}-${Math.random()}`}
                         className="font-semibold text-xl text-center border"
@@ -126,7 +124,7 @@ function CircuitPatStepperControlAnswerRecord({
                     ))}
                   </tr>
                   <tr>
-                    {userCircuitAnswersResult.map((item) => (
+                    {userQuizResult.map((item) => (
                       <td key={`${item}-${Math.random()}`} className="border">
                         {item ? (
                           <CheckCircle className="w-6 h-6 text-success mx-auto my-1" />
