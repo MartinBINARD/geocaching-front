@@ -29,4 +29,11 @@ export const CircuitsErrors = {
       message: e.details.message,
     };
   },
+  SendUserQuizAnswsersError(e: DomainErrorDTO): DomainErrorDTO {
+    return {
+      type: e.type,
+      details: e.details,
+      message: e.details.response?.data?.error,
+    };
+  },
 };
