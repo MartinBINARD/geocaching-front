@@ -7,3 +7,4 @@ export * from './auth/UpdatePasswordRequest';
 export * from './circuits/FetchCircuitRequest';
 export * from './circuits/FilterCircuitsListRequest';
 export * from './circuits/getCircuitQuizRequest';
+export * from './circuits/SendUserQuizAnswsersRequest';
