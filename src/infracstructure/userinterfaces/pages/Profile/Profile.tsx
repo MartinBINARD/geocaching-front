@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 
-import { getProfile } from '../../../../core/usecases';
+import { getProfileThunk } from '../../../store/thunks';
 
 import ProfileCircuitsCard from './components/ProfileCircuitsCard/ProfileCircuitsCard';
 import ProfileAwardsCard from './components/ProfileAwardsCard/ProfileAwardsCard';
@@ -29,7 +29,7 @@ function Profile() {
 
   useEffect(() => {
     if (!isEdit) {
-      dispatch(getProfile());
+      dispatch(getProfileThunk());
     }
   }, [isEdit, dispatch]);
 
