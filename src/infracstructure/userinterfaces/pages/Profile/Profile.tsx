@@ -10,6 +10,7 @@ import ProfileUserCard from './components/ProfileUserCard/ProfileUserCard';
 function Profile() {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const profile = useAppSelector((state) => state.user.profile);
+
   const errorMessage = useAppSelector((state) => state.user.errorMessage);
 
   const dispatch = useAppDispatch();
