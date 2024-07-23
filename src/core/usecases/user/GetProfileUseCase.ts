@@ -1,12 +1,12 @@
 import { Profile } from '../../domain/entities';
 import { ErrorOr, Result } from '../../domain/models';
-import { ProfileErrors } from '../../domain/models/ProfileErrors';
-import { ProfileRespository } from '../../domain/repositories';
+import { UserErrors } from '../../domain/models/UserErrors';
+import { UserRespository } from '../../domain/repositories';
 
 type Response = ErrorOr<Profile>;
 
 export class GetProfileUseCase {
-  constructor(private profileRespository: ProfileRespository) {}
+  constructor(private profileRespository: UserRespository) {}
 
   public async execute(): Promise<Response> {
     try {
@@ -15,7 +15,7 @@ export class GetProfileUseCase {
       return Result.ok(result);
     } catch (error) {
       return Result.fail(
-        ProfileErrors.getProfileError({
+        UserErrors.getProfileError({
           type: 'GET_PROFILE_ERROR',
           details: error,
         })

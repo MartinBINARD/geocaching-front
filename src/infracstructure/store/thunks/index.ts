@@ -15,4 +15,4 @@ export * from './circuits/GetCircuitQuizThunk';
 export * from './circuits/SendUserQuizAnswers';
 
 // PROFILE
-export * from './profile/GetProfileThunk';
+export * from './user/GetProfileThunk';

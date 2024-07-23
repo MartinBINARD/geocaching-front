@@ -30,7 +30,7 @@ import {
 } from './usecases';
 import { RLCircuitsRepository } from './adapters/real/repositories/RLCircuitsRepository';
 import { FetchCircuitsListMapper } from './adapters/real/mappers/circuits/FetchCircuitsListMapper';
-import { RLProfileRepository } from './adapters/real/repositories/RLProfileRepository';
+import { RLUserRepository } from './adapters/real/repositories/RLUserRepository';
 
 const Core = () => {
   // REPOSITORIES //
@@ -53,10 +53,7 @@ const Core = () => {
     new SendUserQuizAnswersMapper()
   );
 
-  const profileRepository = new RLProfileRepository(
-    api,
-    new GetProfileMapper()
-  );
+  const profileRepository = new RLUserRepository(api, new GetProfileMapper());
 
   // USECASES //
 

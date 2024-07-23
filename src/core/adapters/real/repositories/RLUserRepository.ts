@@ -1,8 +1,8 @@
 import { AxiosInstance } from 'axios';
-import { ProfileRespository } from '../../../domain/repositories';
+import { UserRespository } from '../../../domain/repositories';
 import { GetProfileMapper } from '../mappers';
 
-export class RLProfileRepository implements ProfileRespository {
+export class RLUserRepository implements UserRespository {
   constructor(
     private httpClient: AxiosInstance,
     private getProfileMapper: GetProfileMapper

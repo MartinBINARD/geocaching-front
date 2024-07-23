@@ -1,5 +1,5 @@
 import { Profile } from '../entities';
 
-export interface ProfileRespository {
+export interface UserRespository {
   getProfile(): Promise<Profile>;
 }

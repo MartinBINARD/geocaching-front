@@ -12,6 +12,6 @@ export * from './circuits/FilterCircuitsListUseCase';
 export * from './circuits/GetCircuitQuizUseCase';
 export * from './circuits/SendAnswersUseCase';
 
-export * from './user/getProfileUseCase';
+export * from './user/GetProfileUseCase';
 export * from './user/updateProfileUseCase';
 export * from './user/deleteProfileUseCase';

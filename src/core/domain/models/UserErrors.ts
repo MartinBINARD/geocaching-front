@@ -1,6 +1,6 @@
 import { DomainErrorDTO } from './ResultHandling';
 
-export const ProfileErrors = {
+export const UserErrors = {
   getProfileError(e: DomainErrorDTO): DomainErrorDTO {
     return {
       type: e.type,
