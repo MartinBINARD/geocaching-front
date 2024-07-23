@@ -1,15 +1,16 @@
 export interface CircuitProfile {
   id: number;
-  city: string;
   description: string;
   name: string;
   url_image: string;
   url_reward: string;
 }
 
+type CircuitProfileList = CircuitProfile[] | null;
+
 export interface Profile {
   id: number;
-  circuits: CircuitProfile[] | null;
+  circuits: CircuitProfileList;
   city: string | null;
   count_finished_circuits: number;
   email: string;
