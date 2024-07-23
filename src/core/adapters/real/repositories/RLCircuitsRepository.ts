@@ -9,15 +9,18 @@ import {
   Circuit,
   CircuitQuizList,
   CircuitsList,
+  UserQuizResult,
 } from '../../../domain/entities';
 import {
   FetchCircuitsListMapper,
   FetchCircuitMapper,
   FilterCircuitsListMapper,
   GetCircuitMapper,
+  SendUserQuizAnswersMapper,
 } from '../mappers';
 import filterCircuitsList from '../../../usecases/utils/filterCircuitsList';
 import getCircuitQuiz from '../../../usecases/utils/getCircuitQuiz';
+import { SendUserQuizAnswersRequest } from '../../requests/circuits/SendUserQuizAnswsersRequest';
 
 export class RLCircuitsRepository implements CircuitsRepository {
   constructor(
@@ -25,7 +28,8 @@ export class RLCircuitsRepository implements CircuitsRepository {
     private fetchCircuitsListMapper: FetchCircuitsListMapper,
     private fetchCircuitMapper: FetchCircuitMapper,
     private filterCircuitsListMapper: FilterCircuitsListMapper,
-    private getCircuitMapper: GetCircuitMapper
+    private getCircuitMapper: GetCircuitMapper,
+    private sendUserQuizAnswersMapper: SendUserQuizAnswersMapper
   ) {}
 
   async fetchCircuitsList(): Promise<CircuitsList> {
@@ -52,5 +56,16 @@ export class RLCircuitsRepository implements CircuitsRepository {
     const result = await getCircuitQuiz(req);
 
     return this.getCircuitMapper.toDomain(result);
+  }
+
+  async sendUserQuizAnswers(
+    req: SendUserQuizAnswersRequest
+  ): Promise<UserQuizResult> {
+    const result = await this.httpClient.post(
+      `circuits/${req.id_circuit}/answer`,
+      req
+    );
+
+    return this.sendUserQuizAnswersMapper.toDomain(result.data);
   }
 }
