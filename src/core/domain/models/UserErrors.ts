@@ -10,14 +10,9 @@ export const UserErrors = {
   },
   updateProfileError(e: DomainErrorDTO): DomainErrorDTO {
     const errorData = e.details.response?.data;
-
-    let errorMessage;
-
-    if (errorData?.message) {
-      errorMessage = errorData.message;
-    } else {
-      errorMessage = errorData.error;
-    }
+    const errorMessage = errorData?.message
+      ? errorData.message
+      : errorData.error;
 
     return {
       type: e.type,
