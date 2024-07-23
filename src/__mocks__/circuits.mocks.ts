@@ -403,20 +403,19 @@ export const quizStepsAnswsersEntries = {
   5: '16',
 };
 
-export const userCircuitEntriesResponse = {
-  userId: 1,
-  circuitId: 1,
-  stepsEntries: quizStepsAnswsersEntries,
+export const userQuizAnswersRequest = {
+  id_user: 1,
+  id_circuit: 1,
+  steps: [
+    { id_step: 1, answer: 15 },
+    { id_step: 2, answer: 4 },
+    { id_step: 3, answer: 8 },
+    { id_step: 4, answer: 350 },
+    { id_step: 5, answer: 2 },
+    { id_step: 6, answer: 16 },
+  ],
 };
-
-export const userCircuitAnswerResultResponse = [
-  true,
-  true,
-  true,
-  true,
-  true,
-  true,
-];
+export const userQuizResultResponse = [true, true, true, true, true, true];
 
 export const filterCircuitsListResponse = [
   oneCircuitWithoutSteps,
