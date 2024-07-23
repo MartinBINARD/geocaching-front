@@ -13,3 +13,4 @@ export * from './circuits/GetCircuitQuizMapper';
 export * from './circuits/SendUserQuizAnswsersMapper';
 
 export * from './user/GetProfileMapper';
+export * from './user/UpdateProfileMapper';
