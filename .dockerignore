@@ -1,2 +1,8 @@
 geoachetrek_mobile.git
 README.md
+.git
+.env
+.vscode
+src/__mocks__/**/*
+src/__mocks__
+src/__tests__/**/*
