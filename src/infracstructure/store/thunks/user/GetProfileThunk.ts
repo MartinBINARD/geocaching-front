@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { core } from '../../../../core/build';
 
 export const getProfileThunk = createAsyncThunk(
-  'profile/get-profile',
+  'user/get-profile',
   async () => {
     const result = await core.getProfile.execute();
 
