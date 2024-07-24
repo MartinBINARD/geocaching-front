@@ -1,16 +1,26 @@
-import { Circuit, Search } from '../../../../core/domain/entities/circuit';
 import { useAppSelector } from '../../../hooks/redux';
+import { CircuitsList } from '../../../../core/domain/entities';
 
-import GetSelectValueArray from '../../../utils/getSelectValueArray';
+import getSelectValueArray from '../../../utils/getSelectValueArray';
 import saveSelectedValue from '../../../utils/saveSelectedValue';
 
 type OnSelectType = (e: React.ChangeEvent<HTMLSelectElement>) => void;
+
+interface Search {
+  city?: string;
+  description?: string;
+  distance?: number;
+  mobility?: string[] | string;
+  region?: string;
+  state?: string;
+  theme?: string;
+}
 
 interface SelectProps {
   keyName: string;
   label: string;
   placeholder: string;
-  list: Circuit[];
+  list: CircuitsList;
   search: Search;
   onSelect: OnSelectType;
 }
@@ -33,7 +43,7 @@ function SelectControl({
     keyName,
   });
 
-  const listValue = GetSelectValueArray(keyName, list);
+  const listValue = getSelectValueArray(keyName, list);
 
   return (
     <div className="form-control m-1 lg:m-2">

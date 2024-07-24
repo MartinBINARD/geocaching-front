@@ -31,7 +31,7 @@ function removeDuplicatedValuesArray(arr: (string | number | string[])[]) {
   }, []);
 }
 
-function GetSelectValueArray(
+export default function getSelectValueArray(
   key: string,
   arr: CircuitsList
 ): (string | number | string[])[] {
@@ -59,5 +59,3 @@ function GetSelectValueArray(
   // Sort Data order
   return selectorUniqueValuesList.sort();
 }
-
-export default GetSelectValueArray;
