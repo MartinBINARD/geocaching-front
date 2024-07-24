@@ -1,8 +1,8 @@
 import { Popup } from 'react-leaflet';
-import { Circuit } from '../../../../../../core/domain/entities';
+import { CircuitWithoutSteps } from '../../../../../../core/domain/entities';
 
 interface PopupProps {
-  marker: Circuit;
+  marker: CircuitWithoutSteps;
 }
 
 function CircuitCardPopup({ marker }: PopupProps) {
