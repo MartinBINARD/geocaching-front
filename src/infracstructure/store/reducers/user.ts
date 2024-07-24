@@ -2,8 +2,11 @@ import { createReducer } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 import { Profile } from '../../../core/domain/entities';
-import { deleteProfile } from '../../../core/usecases';
-import { getProfileThunk, updateProfileThunk } from '../thunks';
+import {
+  deleteProfileThunk,
+  getProfileThunk,
+  updateProfileThunk,
+} from '../thunks';
 
 interface ProfileState {
   profile: Profile | null;
@@ -53,17 +56,17 @@ const userReducer = createReducer(intialUserState, (builder) => {
       state.errorMessage = action.error.message!;
       toast.error(action.error.message!);
     })
-    .addCase(deleteProfile.pending, (state) => {
+    .addCase(deleteProfileThunk.pending, (state) => {
       state.isProfileLoading = true;
       state.isProfileDelete = false;
     })
-    .addCase(deleteProfile.fulfilled, (state) => {
+    .addCase(deleteProfileThunk.fulfilled, (state, action) => {
       state.isProfileLoading = false;
       state.profile = null;
-      state.isProfileDelete = true;
+      state.isProfileDelete = action.payload;
       toast.success('Votre compte utilisateur a bien été supprimé');
     })
-    .addCase(deleteProfile.rejected, (state, action) => {
+    .addCase(deleteProfileThunk.rejected, (state, action) => {
       state.isProfileLoading = false;
       state.isProfileDelete = false;
       toast.error(action.error.message!);
