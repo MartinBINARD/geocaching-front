@@ -16,3 +16,4 @@ export * from './circuits/SendUserQuizAnswers';
 
 // PROFILE
 export * from './user/GetProfileThunk';
+export * from './user/UpdateProfileThunk';

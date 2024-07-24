@@ -3,8 +3,7 @@ import { toast } from 'react-toastify';
 
 import { Profile } from '../../../core/domain/entities';
 import { deleteProfile } from '../../../core/usecases';
-import { getProfileThunk } from '../thunks';
-import { updateProfileThunk } from '../thunks/user/UpdateProfileThunk';
+import { getProfileThunk, updateProfileThunk } from '../thunks';
 
 interface ProfileState {
   profile: Profile | null;

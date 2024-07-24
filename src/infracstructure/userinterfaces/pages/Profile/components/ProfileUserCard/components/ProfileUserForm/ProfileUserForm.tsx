@@ -10,10 +10,11 @@ import {
   UpdateProfileForm,
 } from '../../../../../../../../core/domain/entities/user';
 
-import { updateProfile } from '../../../../../../../../core/usecases';
-
 import TextInput from '../../../../../../components/TextInput/TextInput';
 import TextArea from '../../../../../../components/TextArea/TextArea';
+import { updateProfileThunk } from '../../../../../../../store/thunks';
+import { formToObject } from '../../../../../../../utils/formatLoginForm';
+import { UpdateProfileRequest } from '../../../../../../../../core/adapters/requests/user/UpdateProfileRequest';
 
 interface ProfileUserFormProps {
   setIsEdit: Dispatch<SetStateAction<boolean>>;
@@ -31,9 +32,10 @@ function ProfileUserForm({ setIsEdit }: ProfileUserFormProps) {
 
   function handleSubmit(e: React.FormEvent<UpdateProfileForm>) {
     e.preventDefault();
-    const form = e.target as UpdateProfileForm;
+    const form = e.currentTarget;
+    const formObject = formToObject(form);
 
-    dispatch(updateProfile(form));
+    dispatch(updateProfileThunk(formObject as unknown as UpdateProfileRequest));
     setIsEdit(false);
   }
 
