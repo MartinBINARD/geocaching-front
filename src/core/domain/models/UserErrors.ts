@@ -20,4 +20,11 @@ export const UserErrors = {
       message: errorMessage,
     };
   },
+  deleteProfileError(e: DomainErrorDTO): DomainErrorDTO {
+    return {
+      type: e.type,
+      details: e.details,
+      message: e.details.response?.data?.message,
+    };
+  },
 };
