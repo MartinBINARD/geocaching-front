@@ -1,6 +1,5 @@
 import { Popup } from 'react-leaflet';
-
-import { Circuit } from '../../../../@types/circuit';
+import { Circuit } from '../../../../../../core/domain/entities';
 
 interface PopupProps {
   marker: Circuit;

@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { Circuit } from '../../../../../../core/domain/entities/circuit';
+import { CircuitsList } from '../../../../../../core/domain/entities';
 
 interface ListProps {
-  list: Circuit[];
+  list: CircuitsList;
 }
 
 function CircuitListCard({ list }: ListProps) {
