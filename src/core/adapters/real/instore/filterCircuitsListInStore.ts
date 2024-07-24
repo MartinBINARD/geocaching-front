@@ -1,9 +1,24 @@
 import {
   FilterCircuitListRequest,
   SearchCircuitsRequest,
-} from '../../adapters/requests';
-import { CircuitWithoutSteps } from '../../domain/entities';
-import filterDefaultSearchKeys from './filterDefaultSearchKeys';
+} from '../../requests';
+import { CircuitWithoutSteps } from '../../../domain/entities';
+
+const DEFAULT_VALUES = ['Toutes', 'Tous'];
+
+function filterDefaultSearchKeys(obj: SearchCircuitsRequest) {
+  return Object.keys(obj)
+    .filter(
+      (key) => !DEFAULT_VALUES.includes(obj[key as keyof SearchCircuitsRequest])
+    )
+    .reduce(
+      (acc, key) => ({
+        ...acc,
+        [key]: obj[key as keyof SearchCircuitsRequest],
+      }),
+      {}
+    );
+}
 
 function findSelectedMobilityValue(
   circuit: CircuitWithoutSteps,

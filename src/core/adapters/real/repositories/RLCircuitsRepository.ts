@@ -4,6 +4,7 @@ import {
   FetchCircuitRequest,
   FilterCircuitListRequest,
   GetCircuitQuizRequest,
+  SendUserQuizAnswersRequest,
 } from '../../requests';
 import {
   Circuit,
@@ -18,9 +19,8 @@ import {
   GetCircuitMapper,
   SendUserQuizAnswersMapper,
 } from '../mappers';
-import filterCircuitsList from '../../../usecases/utils/filterCircuitsList';
-import getCircuitQuiz from '../../../usecases/utils/getCircuitQuiz';
-import { SendUserQuizAnswersRequest } from '../../requests/circuits/SendUserQuizAnswsersRequest';
+import filterCircuitsListInStore from '../instore/filterCircuitsListInStore';
+import getCircuitQuizInStore from '../instore/getCircuitQuizInStore';
 
 export class RLCircuitsRepository implements CircuitsRepository {
   constructor(
@@ -47,13 +47,13 @@ export class RLCircuitsRepository implements CircuitsRepository {
   async filterCircuitsList(
     req: FilterCircuitListRequest
   ): Promise<CircuitsList> {
-    const result = await filterCircuitsList(req);
+    const result = await filterCircuitsListInStore(req);
 
     return this.filterCircuitsListMapper.toDomain(result);
   }
 
   async getCircuitQuiz(req: GetCircuitQuizRequest): Promise<CircuitQuizList> {
-    const result = await getCircuitQuiz(req);
+    const result = await getCircuitQuizInStore(req);
 
     return this.getCircuitMapper.toDomain(result);
   }

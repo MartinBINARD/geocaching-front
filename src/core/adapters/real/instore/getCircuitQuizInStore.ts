@@ -1,4 +1,4 @@
-import { Circuit, CircuitStepsList } from '../../domain/entities';
+import { Circuit, CircuitStepsList } from '../../../domain/entities';
 
 const STEP_KEYS = [
   'id',
@@ -48,7 +48,7 @@ function circuitQuizStepsMapper(steps: CircuitStepsList) {
   });
 }
 
-export default function getCircuitQuiz(circuit: Circuit) {
+export default function getCircuitQuizInStore(circuit: Circuit) {
   return new Promise((resolve, reject) => {
     const isQuizStepStructureExist = checkQuizStepStructure(circuit?.step);
 
