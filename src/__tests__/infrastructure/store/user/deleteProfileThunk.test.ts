@@ -1,12 +1,12 @@
 import userReducer, {
   intialUserState,
-} from '../../../infracstructure/store/reducers/user';
-import { userProfileResponse } from '../../../__mocks__/user.mocks';
-import { deleteProfile } from '../../../core/usecases';
+} from '../../../../infracstructure/store/reducers/user';
+import { getProfileResponse } from '../../../../__mocks__/user.mocks';
+import { deleteProfileThunk } from '../../../../infracstructure/store/thunks';
 
 const fakeRequestId = 'fakeRequestId';
 
-jest.mock('../../../infracstructure/config/axios', () => ({
+jest.mock('../../../../infracstructure/config/axios', () => ({
   api: {
     baseUrl: 'http://localhost:3000',
   },
@@ -22,10 +22,10 @@ describe('Delete user profile state test', () => {
   it('Should SUCCEED to delete user profile', () => {
     const fakePayload = true;
 
-    const action = deleteProfile.fulfilled(fakePayload, fakeRequestId);
+    const action = deleteProfileThunk.fulfilled(fakePayload, fakeRequestId);
     const filledInitialUserState = {
       ...intialUserState,
-      profile: userProfileResponse,
+      profile: null,
     };
     const state = userReducer(filledInitialUserState, action);
 
@@ -42,10 +42,10 @@ describe('Delete user profile state test', () => {
   it('Should FAIL to delete user profile', () => {
     const fakePayload = null;
 
-    const action = deleteProfile.rejected(fakePayload, fakeRequestId);
+    const action = deleteProfileThunk.rejected(fakePayload, fakeRequestId);
     const filledInitialUserState = {
       ...intialUserState,
-      profile: userProfileResponse,
+      profile: getProfileResponse,
     };
     const state = userReducer(filledInitialUserState, action);
 
@@ -56,7 +56,7 @@ describe('Delete user profile state test', () => {
     expect(action.error).toEqual({ message: 'Rejected' });
 
     expect(state).toEqual(filledInitialUserState);
-    expect(state.profile).toEqual(userProfileResponse);
+    expect(state.profile).toEqual(getProfileResponse);
     expect(state.isProfileDelete).toBeFalsy;
     expect(state.isProfileLoading).toBeFalsy;
   });
