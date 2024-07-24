@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../../../../../../hooks/redux';
-import { Profile } from '../../../../../../../../core/domain/entities/user';
+import { Profile } from '../../../../../../../../core/domain/entities';
 
 function ProfileUserDescription() {
   const profile = useAppSelector((state) => state.user.profile);

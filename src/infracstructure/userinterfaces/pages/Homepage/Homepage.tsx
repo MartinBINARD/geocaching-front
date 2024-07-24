@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Compass } from 'lucide-react';
 
-// import of picture and icons for the homepage
 import illustration from '../../assets/images/illustration.png';
 import Footer from '../../components/Footer/Footer';
 

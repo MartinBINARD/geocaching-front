@@ -7,8 +7,7 @@ import {
 } from 'lucide-react';
 
 import { useAppSelector } from '../../../../../../../hooks/redux';
-
-import { Circuit } from '../../../../../../../../core/domain/entities/circuit';
+import { Circuit } from '../../../../../../../../core/domain/entities';
 
 function CircuitDescriptionCard() {
   const circuit = useAppSelector((state) => state.circuits.oneCircuit);

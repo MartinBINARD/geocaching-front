@@ -2,10 +2,8 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 function Privacy() {
-  // get pathname from useLocation
   const { pathname } = useLocation();
 
-  // useEffect to scroll to the top page when you display it
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);

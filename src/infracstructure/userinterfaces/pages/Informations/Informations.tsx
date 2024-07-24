@@ -1,7 +1,5 @@
-// import footer componant
 import { Footprints, Navigation, Sprout, UnlockKeyhole } from 'lucide-react';
 import Footer from '../../components/Footer/Footer';
-// import icons and member's illustrations
 
 function Informations() {
   return (

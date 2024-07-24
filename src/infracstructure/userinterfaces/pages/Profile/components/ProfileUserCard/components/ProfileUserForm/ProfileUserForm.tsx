@@ -5,16 +5,14 @@ import {
   useAppSelector,
 } from '../../../../../../../hooks/redux';
 
-import {
-  Profile,
-  UpdateProfileForm,
-} from '../../../../../../../../core/domain/entities/user';
+import { Profile } from '../../../../../../../../core/domain/entities';
+import { UpdateProfileRequest } from '../../../../../../../../core/adapters/requests/user/UpdateProfileRequest';
+
+import { updateProfileThunk } from '../../../../../../../store/thunks';
+import { formToObject } from '../../../../../../../utils/formToObject';
 
 import TextInput from '../../../../../../components/TextInput/TextInput';
 import TextArea from '../../../../../../components/TextArea/TextArea';
-import { updateProfileThunk } from '../../../../../../../store/thunks';
-import { formToObject } from '../../../../../../../utils/formToObject';
-import { UpdateProfileRequest } from '../../../../../../../../core/adapters/requests/user/UpdateProfileRequest';
 
 interface ProfileUserFormProps {
   setIsEdit: Dispatch<SetStateAction<boolean>>;
@@ -30,7 +28,7 @@ function ProfileUserForm({ setIsEdit }: ProfileUserFormProps) {
 
   const dispatch = useAppDispatch();
 
-  function handleSubmit(e: React.FormEvent<UpdateProfileForm>) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const formObject = formToObject(form);
