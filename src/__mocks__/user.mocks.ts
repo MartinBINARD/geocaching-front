@@ -35,7 +35,7 @@ export const userProfileFormEntries = {
   email: 'testuser@email.com',
 };
 
-export const userProfileFormErrorResponse = {
+export const userProfileFormError = {
   name: 'AxiosError',
-  message: "Une erreur s'est produite. Veuillez essayer de nouveau.",
+  message: "Aucun utilisateur n'a été trouvé.",
 };

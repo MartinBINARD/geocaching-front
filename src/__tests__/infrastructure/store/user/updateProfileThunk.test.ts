@@ -1,17 +1,18 @@
 import { AxiosError } from 'axios';
 import userReducer, {
   intialUserState,
-} from '../../../infracstructure/store/reducers/user';
-import { fakeRequestId } from '../../../__mocks__/request.mocks';
+} from '../../../../infracstructure/store/reducers/user';
+import { fakeRequestId } from '../../../../__mocks__/request.mocks';
 import {
+  getProfileResponse,
   userProfileFormEntries,
-  userProfileFormErrorResponse,
-  userProfileResponse,
-} from '../../../__mocks__/user.mocks';
-import { Profile, UpdateProfileForm } from '../../../core/domain/entities/user';
-import { updateProfile } from '../../../core/usecases';
+  userProfileFormError,
+} from '../../../../__mocks__/user.mocks';
+import { Profile } from '../../../../core/domain/entities';
+import { UpdateProfileRequest } from '../../../../core/adapters/requests/user/UpdateProfileRequest';
+import { updateProfileThunk } from '../../../../infracstructure/store/thunks';
 
-jest.mock('../../../infracstructure/config/axios', () => ({
+jest.mock('../../../../infracstructure/config/axios', () => ({
   api: {
     baseUrl: 'http://localhost:3000',
   },
@@ -25,10 +26,10 @@ describe('User store', () => {
 
 describe('UPDATE user profile state test', () => {
   it('Should SUCCEED to update user profile', () => {
-    const fakeEntries = userProfileFormEntries as unknown as UpdateProfileForm;
-    const fakePayload: Profile = userProfileResponse;
+    const fakeEntries: UpdateProfileRequest = userProfileFormEntries;
+    const fakePayload: Profile = getProfileResponse;
 
-    const action = updateProfile.fulfilled(
+    const action = updateProfileThunk.fulfilled(
       fakePayload,
       fakeRequestId,
       fakeEntries
@@ -45,10 +46,10 @@ describe('UPDATE user profile state test', () => {
   });
 
   it('Should FAIL to update user profile', () => {
-    const fakeEntries = userProfileFormEntries as unknown as UpdateProfileForm;
-    const fakePayload = userProfileFormErrorResponse as AxiosError;
+    const fakeEntries: UpdateProfileRequest = userProfileFormEntries;
+    const fakePayload = userProfileFormError as AxiosError;
 
-    const action = updateProfile.rejected(
+    const action = updateProfileThunk.rejected(
       fakePayload,
       fakeRequestId,
       fakeEntries
