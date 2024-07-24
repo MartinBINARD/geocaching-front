@@ -1,18 +1,29 @@
-import { oneCircuitResponse } from './circuits.mocks';
-
-export const userProfileResponse = {
-  id: 1,
-  circuits: [oneCircuitResponse],
-  city: 'Vannes',
+export const getProfileResponse = {
+  id: 2,
+  circuits: [
+    {
+      id: 1,
+      name: 'Carnac',
+      description: 'Venez découvrir Carnac, la ville aux 3000 menhirs !',
+      url_reward: 'random_image.svg',
+      url_image: 'random_image.webp',
+    },
+  ],
+  city: null,
   count_finished_circuits: 1,
-  email: 'testuser@email.com',
-  km_traveled: 3.5,
-  presentation: 'Hello world !',
-  pseudo: 'testUser',
-  region: 'Bretagne',
-  role: 'user',
-  state: 'Morbihan',
+  email: 'test@email.com',
+  km_traveled: 5,
+  presentation: null,
+  pseudo: 'test',
+  region: null,
+  role: 'member',
+  state: null,
   verified: true,
+};
+
+export const getProfileError = {
+  name: 'AxiosError',
+  message: "Profil d'utilisateur non trouvé.",
 };
 
 export const userProfileFormEntries = {
@@ -24,7 +35,7 @@ export const userProfileFormEntries = {
   email: 'testuser@email.com',
 };
 
-export const userProfileFormErrorResponse = {
+export const userProfileFormError = {
   name: 'AxiosError',
-  message: "Une erreur s'est produite. Veuillez essayer de nouveau.",
+  message: "Aucun utilisateur n'a été trouvé.",
 };
