@@ -2,8 +2,7 @@ import { useRef } from 'react';
 import { HeartCrack } from 'lucide-react';
 
 import { useAppDispatch } from '../../../../../../../hooks/redux';
-
-import { deleteProfile } from '../../../../../../../../core/usecases';
+import { deleteProfileThunk } from '../../../../../../../store/thunks';
 
 interface ProfileUserCardDeleteModalProp {
   isEdit: boolean;
@@ -21,7 +20,7 @@ function ProfileUserCardDeleteModal({
   }
 
   function onClickDeleteProfile() {
-    dispatch(deleteProfile());
+    dispatch(deleteProfileThunk());
   }
 
   return (
