@@ -1,14 +1,19 @@
 import { AxiosInstance } from 'axios';
 import { UserRespository } from '../../../domain/repositories';
-import { GetProfileMapper, UpdateProfileMapper } from '../mappers';
+import {
+  GetProfileMapper,
+  UpdateProfileMapper,
+  DeleteProfileMapper,
+} from '../mappers';
 import { UpdateProfileRequest } from '../../requests/user/UpdateProfileRequest';
-import { Profile } from '../../../domain/entities';
+import { ConfirmDeleteProfile, Profile } from '../../../domain/entities';
 
 export class RLUserRepository implements UserRespository {
   constructor(
     private httpClient: AxiosInstance,
     private getProfileMapper: GetProfileMapper,
-    private updateProfileMapper: UpdateProfileMapper
+    private updateProfileMapper: UpdateProfileMapper,
+    private deleteProfileMapper: DeleteProfileMapper
   ) {}
 
   async getProfile() {
@@ -21,5 +26,11 @@ export class RLUserRepository implements UserRespository {
     const result = await this.httpClient.patch('profile', req);
 
     return this.updateProfileMapper.toDomain(result.data);
+  }
+
+  async deleteProfile(): Promise<ConfirmDeleteProfile> {
+    const result = await this.httpClient.delete('profile');
+
+    return this.deleteProfileMapper.toDomain(result.data);
   }
 }
