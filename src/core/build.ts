@@ -1,4 +1,4 @@
-import api from '../infracstructure/config/axios';
+import { AxiosInstance } from 'axios';
 import { RLAuthRepository } from './adapters/real/repositories/RLAuthRepository';
 import {
   ConfirmAccountMapper,
@@ -35,11 +35,17 @@ import {
 import { RLCircuitsRepository } from './adapters/real/repositories/RLCircuitsRepository';
 import { FetchCircuitsListMapper } from './adapters/real/mappers/circuits/FetchCircuitsListMapper';
 import { RLUserRepository } from './adapters/real/repositories/RLUserRepository';
+import api from '../infracstructure/config/axios';
 
-const Core = () => {
+export interface ConfigurationProps {
+  httpClient: AxiosInstance;
+}
+const Core = (configuration: ConfigurationProps) => {
+  const { httpClient } = configuration;
+
   // REPOSITORIES //
   const authRepository = new RLAuthRepository(
-    api,
+    httpClient,
     new ConfirmAccountMapper(),
     new ConfirmLoginMapper(),
     new ConfirmLogoutMapper(),
@@ -49,7 +55,7 @@ const Core = () => {
   );
 
   const circuitsRepository = new RLCircuitsRepository(
-    api,
+    httpClient,
     new FetchCircuitsListMapper(),
     new FetchCircuitMapper(),
     new FilterCircuitsListMapper(),
@@ -58,7 +64,7 @@ const Core = () => {
   );
 
   const profileRepository = new RLUserRepository(
-    api,
+    httpClient,
     new GetProfileMapper(),
     new UpdateProfileMapper(),
     new DeleteProfileMapper()
@@ -108,4 +114,4 @@ const Core = () => {
   };
 };
 
-export const core = Core();
+export const core = Core({ httpClient: api });
