@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 
 import { ForgotPasswordRequest } from '../../../../core/adapters/requests';
 
-import { formToObject } from '../../../utils/formatLoginForm';
+import { formToObject } from '../../../utils/formToObject';
 import { forgotPasswordThunk } from '../../../store/thunks';
 
 import Loader from '../../components/loader/Loader';

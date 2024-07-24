@@ -9,7 +9,7 @@ import { filterCircuitsListThunk } from '../../../../../../../store/thunks';
 import { resetFilterCircuitsListAction } from '../../../../../../../store/actions';
 
 import SelectControl from '../../../../../../components/SelectControl/SelectControl';
-import { formToObject } from '../../../../../../../utils/formatLoginForm';
+import { formToObject } from '../../../../../../../utils/formToObject';
 import { SearchCircuitsRequest } from '../../../../../../../../core/adapters/requests';
 
 interface FilterCircuitsListFormProps {

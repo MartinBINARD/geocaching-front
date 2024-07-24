@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { updatePasswordThunk } from '../../../store/thunks';
 
 import { UpdatePasswordRequest } from '../../../../core/adapters/requests';
-import { formToObject } from '../../../utils/formatLoginForm';
+import { formToObject } from '../../../utils/formToObject';
 
 import Loader from '../../components/loader/Loader';
 import TextInput from '../../components/TextInput/TextInput';

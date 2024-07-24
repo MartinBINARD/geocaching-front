@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { RegisterRequest } from '../../../../core/adapters/requests';
 
 import { registerThunk } from '../../../store/thunks';
-import { formToObject } from '../../../utils/formatLoginForm';
+import { formToObject } from '../../../utils/formToObject';
 
 import Footer from '../../components/Footer/Footer';
 import Loader from '../../components/loader/Loader';

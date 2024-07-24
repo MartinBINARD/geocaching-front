@@ -13,7 +13,7 @@ import {
 import TextInput from '../../../../../../components/TextInput/TextInput';
 import TextArea from '../../../../../../components/TextArea/TextArea';
 import { updateProfileThunk } from '../../../../../../../store/thunks';
-import { formToObject } from '../../../../../../../utils/formatLoginForm';
+import { formToObject } from '../../../../../../../utils/formToObject';
 import { UpdateProfileRequest } from '../../../../../../../../core/adapters/requests/user/UpdateProfileRequest';
 
 interface ProfileUserFormProps {
