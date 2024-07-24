@@ -1,15 +1,15 @@
 /* Return array of values from object 
 with entries key object and array of object */
 
-import { Circuit } from '../../core/domain/entities/circuit';
+import { CircuitsList, CircuitWithoutSteps } from '../../core/domain/entities';
 
-function getValuesArray(key: string, arr: Circuit[]) {
-  return arr.map((obj: Circuit) => {
+function getValuesArray(key: string, arr: CircuitsList) {
+  return arr.map((obj: CircuitWithoutSteps) => {
     const findKeySelect: string | undefined = Object.keys(obj).find(
       (str) => str.toLocaleLowerCase() === key.toLocaleLowerCase()
     );
 
-    return obj[findKeySelect as keyof Circuit];
+    return obj[findKeySelect as keyof CircuitWithoutSteps];
   });
 }
 
@@ -33,7 +33,7 @@ function removeDuplicatedValuesArray(arr: (string | number | string[])[]) {
 
 function GetSelectValueArray(
   key: string,
-  arr: Circuit[]
+  arr: CircuitsList
 ): (string | number | string[])[] {
   if (!key.trim().length) {
     /* array method do not expect type boolean
