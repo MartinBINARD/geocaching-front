@@ -1,15 +1,8 @@
 {
   "schemaVersion": 2,
   "dockerfileLines": [
-    "FROM node:20.16-alpine3.19",
-    "RUN mkdir -p /usr/src/app",
-    "WORKDIR /usr/src/app",
-    "COPY ./package*.json /usr/src/app/",
-    "RUN npm install && npm cache clean --force",
-    "COPY ./ /usr/src/app",
-    "ENV NODE_ENV production",
-    "ENV PORT 5173",
-    "EXPOSE 5173",
-    "CMD [ \"npm\", \"start\" ]"
+    "FROM socialengine/nginx-spa:latest", 
+    "COPY ./dist /app", 
+    "RUN chmod -R 777 /app"
   ]
 }
