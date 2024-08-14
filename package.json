@@ -7,6 +7,7 @@
     "dev": "vite",
     "start": "vite",
     "build": "npx tsc && npx vite build",
+    "build:prod": "npx tsc && NODE_ENV=production npx vite build",
     "test": "jest",
     "preview": "vite preview",
     "lint": "tsc --noEmit && eslint src/**/*.{js,jsx,ts,tsx} --cache --max-warnings=0",
