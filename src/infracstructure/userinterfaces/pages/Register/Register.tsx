@@ -9,6 +9,7 @@ import { formToObject } from '../../../utils/formToObject';
 
 import Footer from '../../components/Footer/Footer';
 import Loader from '../../components/loader/Loader';
+import PasswordInput from '../../components/PasswordInput/PasswordInput';
 import TextInput from '../../components/TextInput/TextInput';
 
 function Register() {
@@ -65,23 +66,17 @@ function Register() {
               className="input input-bordered w-full max-w-xs"
               required
             />
-            <TextInput
+            <PasswordInput
               name="password"
-              type="password"
               label="Mot de passe"
               placeholder="Renseignez votre mot de passe"
-              defaultValue=""
               className="input input-bordered w-full max-w-xs"
-              required
             />
-            <TextInput
+            <PasswordInput
               name="confirmation"
-              type="password"
               label="Confirmation du mot de passe"
-              placeholder="Renseignez de nouveau votre mot de passe"
-              defaultValue=""
+              placeholder="Comfirmez votre mot de passe"
               className="input input-bordered w-full max-w-xs"
-              required
             />
             <div className="flex justify-center lg:justify-end py-2">
               <button
