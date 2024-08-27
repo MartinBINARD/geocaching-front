@@ -61,12 +61,7 @@ function Login() {
               className="input input-bordered w-full max-w-xs"
               required
             />
-            <PasswordInput
-              name="password"
-              label="Mot de passe"
-              placeholder="Renseignez votre mot de passe"
-              className="input input-bordered w-full max-w-xs"
-            />
+            <PasswordInput className="input input-bordered w-full max-w-xs" />
             <Link className="text-sm p-2 hover:underline" to="/forgot-password">
               Mot de passe oublié ?
             </Link>

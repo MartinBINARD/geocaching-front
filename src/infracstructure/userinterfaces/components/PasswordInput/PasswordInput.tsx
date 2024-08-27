@@ -3,18 +3,10 @@ import { useState } from 'react';
 import TextInput from '../TextInput/TextInput';
 
 interface PasswordInputProps {
-  name: string;
-  label: string;
-  placeholder: string;
   className: string;
 }
 
-export default function PasswordInput({
-  name,
-  label,
-  placeholder,
-  className,
-}: PasswordInputProps) {
+export default function PasswordInput({ className }: PasswordInputProps) {
   const [inputType, setInputType] = useState<string>('password');
 
   const handleToggle = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -29,10 +21,10 @@ export default function PasswordInput({
   return (
     <div className="relative">
       <TextInput
-        name={name}
+        name="password"
         type={inputType}
-        label={label}
-        placeholder={placeholder}
+        label="Mot de passe"
+        placeholder="Renseignez votre mot de passe"
         className={className}
         defaultValue=""
         required
