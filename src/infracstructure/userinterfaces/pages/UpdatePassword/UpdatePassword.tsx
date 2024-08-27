@@ -6,7 +6,7 @@ import { UpdatePasswordRequest } from '../../../../core/adapters/requests';
 import { formToObject } from '../../../utils/formToObject';
 
 import Loader from '../../components/loader/Loader';
-import PasswordInput from '../../components/PasswordInput/PasswordInput';
+import PasswordInputsChecker from '../../components/PasswordInputsChecker/PasswordInputsChecker';
 
 function UpdatePassword() {
   const dispatch = useAppDispatch();
@@ -46,18 +46,7 @@ function UpdatePassword() {
     <section className="flex flex-col m-auto p-4">
       <h2 className="font-bold my-5">Choissisez votre nouveau mot de passe</h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-        <PasswordInput
-          name="password"
-          label="Mot de passe"
-          placeholder="Renseignez votre mot de passe"
-          className="input input-bordered w-full max-w-xs"
-        />
-        <PasswordInput
-          name="confirmation"
-          label="Confirmation du mot de passe"
-          placeholder="Comfirmez votre mot de passe"
-          className="input input-bordered w-full max-w-xs"
-        />
+        <PasswordInputsChecker className="input input-bordered w-full max-w-xs" />
         <div className="self-end py-2">
           <button type="submit" className="btn btn-primary">
             Valider
