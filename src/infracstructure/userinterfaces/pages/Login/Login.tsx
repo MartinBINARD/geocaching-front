@@ -1,5 +1,5 @@
-import { Link, Navigate } from 'react-router-dom';
 import { Compass, MountainSnow } from 'lucide-react';
+import { Link, Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 
 import { LoginRequest } from '../../../../core/adapters/requests';
@@ -9,6 +9,7 @@ import { formToObject } from '../../../utils/formToObject';
 
 import Footer from '../../components/Footer/Footer';
 import Loader from '../../components/loader/Loader';
+import PasswordInput from '../../components/PasswordInput/PasswordInput';
 import TextInput from '../../components/TextInput/TextInput';
 
 function Login() {
@@ -60,15 +61,7 @@ function Login() {
               className="input input-bordered w-full max-w-xs"
               required
             />
-            <TextInput
-              name="password"
-              type="password"
-              label="Mot de passe"
-              placeholder="Renseignez votre mot de passe"
-              defaultValue=""
-              className="input input-bordered w-full max-w-xs"
-              required
-            />
+            <PasswordInput className="input input-bordered w-full max-w-xs" />
             <Link className="text-sm p-2 hover:underline" to="/forgot-password">
               Mot de passe oublié ?
             </Link>
