@@ -12,6 +12,7 @@ import {
   FilterCircuitListRequest,
   SendUserQuizAnswersRequest,
 } from '../../requests';
+import { FetchCircuitQuizFromStore } from '../instore/FetchCircuitQuizFromStore';
 import filterCircuitsListInStore from '../instore/filterCircuitsListInStore';
 import {
   FetchCircuitMapper,
@@ -54,7 +55,7 @@ export class RLCircuitsRepository implements CircuitsRepository {
   async fetchCircuitQuiz(
     req: FetchCircuitQuizRequest
   ): Promise<CircuitQuizList> {
-    const result = req.step;
+    const result = await new FetchCircuitQuizFromStore().execute(req);
 
     return this.fetchCircuitQuizMapper.toDomain(result);
   }
