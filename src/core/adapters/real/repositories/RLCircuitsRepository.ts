@@ -25,6 +25,7 @@ import {
 export class RLCircuitsRepository implements CircuitsRepository {
   constructor(
     private httpClient: AxiosInstance,
+    private store: [FetchCircuitQuizFromStore],
     private fetchCircuitsListMapper: FetchCircuitsListMapper,
     private fetchCircuitMapper: FetchCircuitMapper,
     private filterCircuitsListMapper: FilterCircuitsListMapper,
@@ -55,7 +56,8 @@ export class RLCircuitsRepository implements CircuitsRepository {
   async fetchCircuitQuiz(
     req: FetchCircuitQuizRequest
   ): Promise<CircuitQuizList> {
-    const result = await new FetchCircuitQuizFromStore().execute(req);
+    const [FetchCircuitQuizFromStore] = this.store;
+    const result = await FetchCircuitQuizFromStore.execute(req);
 
     return this.fetchCircuitQuizMapper.toDomain(result);
   }
