@@ -7,9 +7,9 @@ import {
 } from '../../../domain/entities';
 import { CircuitsRepository } from '../../../domain/repositories/CircuitsRepository';
 import {
+  FetchCircuitQuizRequest,
   FetchCircuitRequest,
   FilterCircuitListRequest,
-  GetCircuitQuizRequest,
   SendUserQuizAnswersRequest,
 } from '../../requests';
 import filterCircuitsListInStore from '../instore/filterCircuitsListInStore';
@@ -51,7 +51,9 @@ export class RLCircuitsRepository implements CircuitsRepository {
     return this.filterCircuitsListMapper.toDomain(result);
   }
 
-  async getCircuitQuiz(req: GetCircuitQuizRequest): Promise<CircuitQuizList> {
+  async fetchCircuitQuiz(
+    req: FetchCircuitQuizRequest
+  ): Promise<CircuitQuizList> {
     const result = req.step;
 
     return this.fetchCircuitQuizMapper.toDomain(result);

@@ -1,13 +1,13 @@
-import { useEffect } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
 import { Compass } from 'lucide-react';
+import { useEffect } from 'react';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks/redux';
 
 import { FetchCircuitRequest } from '../../../../../../core/adapters/requests';
 
 import {
+  fetchCircuitQuizThunk,
   fetchCircuitThunk,
-  getCircuitQuizThunk,
 } from '../../../../../store/thunks';
 
 import { resetQuizStepsAnswersAction } from '../../../../../store/actions';
@@ -35,7 +35,7 @@ function CircuitIntro() {
   const handleClick = () => {
     dispatch(resetQuizStepsAnswersAction());
     if (circuit) {
-      dispatch(getCircuitQuizThunk(circuit));
+      dispatch(fetchCircuitQuizThunk(circuit));
     }
   };
 

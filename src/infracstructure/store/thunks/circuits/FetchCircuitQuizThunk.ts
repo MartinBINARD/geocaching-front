@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { GetCircuitQuizRequest } from '../../../../core/adapters/requests';
+import { FetchCircuitQuizRequest } from '../../../../core/adapters/requests';
 import { core } from '../../../../core/build';
 
 export const fetchCircuitQuizThunk = createAsyncThunk(
   'circuits/get-circuit-quiz',
-  async (req: GetCircuitQuizRequest) => {
+  async (req: FetchCircuitQuizRequest) => {
     const result = await core.fetchCircuitQuiz.execute(req);
 
     if (result.type === 'failure') {
