@@ -1,4 +1,10 @@
 import { AxiosInstance } from 'axios';
+import {
+  Circuit,
+  CircuitQuizList,
+  CircuitsList,
+  UserQuizResult,
+} from '../../../domain/entities';
 import { CircuitsRepository } from '../../../domain/repositories/CircuitsRepository';
 import {
   FetchCircuitRequest,
@@ -6,21 +12,14 @@ import {
   GetCircuitQuizRequest,
   SendUserQuizAnswersRequest,
 } from '../../requests';
+import filterCircuitsListInStore from '../instore/filterCircuitsListInStore';
 import {
-  Circuit,
-  CircuitQuizList,
-  CircuitsList,
-  UserQuizResult,
-} from '../../../domain/entities';
-import {
-  FetchCircuitsListMapper,
   FetchCircuitMapper,
+  FetchCircuitQuizMapper,
+  FetchCircuitsListMapper,
   FilterCircuitsListMapper,
-  GetCircuitMapper,
   SendUserQuizAnswersMapper,
 } from '../mappers';
-import filterCircuitsListInStore from '../instore/filterCircuitsListInStore';
-import getCircuitQuizInStore from '../instore/getCircuitQuizInStore';
 
 export class RLCircuitsRepository implements CircuitsRepository {
   constructor(
@@ -28,7 +27,7 @@ export class RLCircuitsRepository implements CircuitsRepository {
     private fetchCircuitsListMapper: FetchCircuitsListMapper,
     private fetchCircuitMapper: FetchCircuitMapper,
     private filterCircuitsListMapper: FilterCircuitsListMapper,
-    private getCircuitMapper: GetCircuitMapper,
+    private fetchCircuitQuizMapper: FetchCircuitQuizMapper,
     private sendUserQuizAnswersMapper: SendUserQuizAnswersMapper
   ) {}
 
@@ -53,9 +52,9 @@ export class RLCircuitsRepository implements CircuitsRepository {
   }
 
   async getCircuitQuiz(req: GetCircuitQuizRequest): Promise<CircuitQuizList> {
-    const result = await getCircuitQuizInStore(req);
+    const result = req.step;
 
-    return this.getCircuitMapper.toDomain(result);
+    return this.fetchCircuitQuizMapper.toDomain(result);
   }
 
   async sendUserQuizAnswers(

@@ -1,8 +1,8 @@
+import { CircuitWithoutSteps } from '../../../domain/entities';
 import {
   FilterCircuitListRequest,
   SearchCircuitsRequest,
 } from '../../requests';
-import { CircuitWithoutSteps } from '../../../domain/entities';
 
 const DEFAULT_VALUES = ['Toutes', 'Tous'];
 
@@ -56,7 +56,7 @@ function parseSearchObject(
   });
 }
 
-export default function filterCircuitsList({
+export default function filterCircuitsListInStore({
   search,
   circuitsList,
 }: FilterCircuitListRequest) {

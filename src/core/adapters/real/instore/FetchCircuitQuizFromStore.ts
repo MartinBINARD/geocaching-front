@@ -24,31 +24,7 @@ function checkQuizStepStructure(steps: CircuitStepsList): boolean {
   return true;
 }
 
-function circuitQuizStepsMapper(steps: CircuitStepsList) {
-  return steps.map((step) => {
-    const { id, latitude, longitude, paragraph, hint, question, transition } =
-      step;
-    const content = [
-      {
-        paragraph,
-        hint,
-        question,
-      },
-      {
-        transition,
-      },
-    ];
-
-    return {
-      id,
-      latitude,
-      longitude,
-      content,
-    };
-  });
-}
-
-export default function getCircuitQuizInStore(circuit: Circuit) {
+export default function FetchCircuitQuizFromStore(circuit: Circuit) {
   return new Promise((resolve, reject) => {
     const isQuizStepStructureExist = checkQuizStepStructure(circuit?.step);
 
@@ -68,8 +44,6 @@ export default function getCircuitQuizInStore(circuit: Circuit) {
       );
     }
 
-    const circuitQuizStepper = circuitQuizStepsMapper(circuit.step);
-
-    resolve(circuitQuizStepper);
+    resolve(circuit.step);
   });
 }

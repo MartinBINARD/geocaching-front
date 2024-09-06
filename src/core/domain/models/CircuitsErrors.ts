@@ -22,7 +22,7 @@ export const CircuitsErrors = {
       message: e.details.message,
     };
   },
-  GetCircuitQuizError(e: DomainErrorDTO): DomainErrorDTO {
+  FetchCircuitQuizError(e: DomainErrorDTO): DomainErrorDTO {
     return {
       type: e.type,
       details: e.details,
