@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
 import { Flag } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../../../../hooks/redux';
 
+import { fetchCircuitQuizThunk } from '../../../../../store/thunks';
 import Loader from '../../../../components/loader/Loader';
+import CircuitPathStepperControl from './components/CircuitPathStepperControl/CircuitPathStepperControl';
 import CircuitPathStepperMap from './components/CircuitPathStepperMap/CircuitPathStepperMap';
 import CircuitPathStepperQuestion from './components/CircuitPathStepperQuestion/CircuitPathStepperQuestion';
-import CircuitPathStepperControl from './components/CircuitPathStepperControl/CircuitPathStepperControl';
-import { getCircuitQuizThunk } from '../../../../../store/thunks';
 
 function CircuitPath() {
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
@@ -34,7 +34,7 @@ function CircuitPath() {
 
   useEffect(() => {
     if (circuit) {
-      dispatch(getCircuitQuizThunk(circuit));
+      dispatch(fetchCircuitQuizThunk(circuit));
     }
   }, [circuit, dispatch]);
 

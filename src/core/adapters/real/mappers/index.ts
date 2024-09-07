@@ -9,7 +9,7 @@ export * from './auth/ConfirmUpdatePasswordMapper';
 export * from './circuits/FetchCircuitsListMapper';
 export * from './circuits/FetchCircuitMapper';
 export * from './circuits/FilterCircuitsListMapper';
-export * from './circuits/GetCircuitQuizMapper';
+export * from './circuits/FetchCircuitQuizMapper';
 export * from './circuits/SendUserQuizAnswsersMapper';
 
 export * from './user/GetProfileMapper';
