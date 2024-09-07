@@ -5,12 +5,12 @@ import {
 } from '../../../domain/entities';
 
 export class FetchCircuitQuizFromStore {
-  private static readonly STEP_KEYS = CircuitQuizStepKeys;
+  private readonly STEP_KEYS = CircuitQuizStepKeys;
 
   private checkQuizStepStructure(steps: CircuitStepsList): boolean {
     const result = steps.map((step) => {
       const stepKeys = Object.keys(step);
-      return Object.values(FetchCircuitQuizFromStore.STEP_KEYS).every((key) =>
+      return Object.values(this.STEP_KEYS).every((key) =>
         stepKeys.includes(key)
       );
     });
