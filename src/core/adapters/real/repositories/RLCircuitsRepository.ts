@@ -1,34 +1,36 @@
 import { AxiosInstance } from 'axios';
-import { CircuitsRepository } from '../../../domain/repositories/CircuitsRepository';
-import {
-  FetchCircuitRequest,
-  FilterCircuitListRequest,
-  GetCircuitQuizRequest,
-  SendUserQuizAnswersRequest,
-} from '../../requests';
+import { FetchCircuitQuizFromStore } from '../instore/FetchCircuitQuizFromStore';
+import { FilterCircuitListFromStore } from '../instore/FilterCircuitsListFromStore';
 import {
   Circuit,
   CircuitQuizList,
   CircuitsList,
   UserQuizResult,
 } from '../../../domain/entities';
+import { CircuitsRepository } from '../../../domain/repositories/CircuitsRepository';
 import {
-  FetchCircuitsListMapper,
+  FetchCircuitQuizRequest,
+  FetchCircuitRequest,
+  FilterCircuitListRequest,
+  SendUserQuizAnswersRequest,
+} from '../../requests';
+import {
   FetchCircuitMapper,
+  FetchCircuitQuizMapper,
+  FetchCircuitsListMapper,
   FilterCircuitsListMapper,
-  GetCircuitMapper,
   SendUserQuizAnswersMapper,
 } from '../mappers';
-import filterCircuitsListInStore from '../instore/filterCircuitsListInStore';
-import getCircuitQuizInStore from '../instore/getCircuitQuizInStore';
 
 export class RLCircuitsRepository implements CircuitsRepository {
   constructor(
     private httpClient: AxiosInstance,
+    private fetchCircuitQuizFromStore: FetchCircuitQuizFromStore,
+    private filterCircuitListFromStore: FilterCircuitListFromStore,
     private fetchCircuitsListMapper: FetchCircuitsListMapper,
     private fetchCircuitMapper: FetchCircuitMapper,
     private filterCircuitsListMapper: FilterCircuitsListMapper,
-    private getCircuitMapper: GetCircuitMapper,
+    private fetchCircuitQuizMapper: FetchCircuitQuizMapper,
     private sendUserQuizAnswersMapper: SendUserQuizAnswersMapper
   ) {}
 
@@ -47,15 +49,17 @@ export class RLCircuitsRepository implements CircuitsRepository {
   async filterCircuitsList(
     req: FilterCircuitListRequest
   ): Promise<CircuitsList> {
-    const result = await filterCircuitsListInStore(req);
+    const result = await this.filterCircuitListFromStore.execute(req);
 
     return this.filterCircuitsListMapper.toDomain(result);
   }
 
-  async getCircuitQuiz(req: GetCircuitQuizRequest): Promise<CircuitQuizList> {
-    const result = await getCircuitQuizInStore(req);
+  async fetchCircuitQuiz(
+    req: FetchCircuitQuizRequest
+  ): Promise<CircuitQuizList> {
+    const result = await this.fetchCircuitQuizFromStore.execute(req);
 
-    return this.getCircuitMapper.toDomain(result);
+    return this.fetchCircuitQuizMapper.toDomain(result);
   }
 
   async sendUserQuizAnswers(

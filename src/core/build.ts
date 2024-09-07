@@ -1,47 +1,51 @@
 import { AxiosInstance } from 'axios';
-import { RLAuthRepository } from './adapters/real/repositories/RLAuthRepository';
+import api from '../infracstructure/config/axios';
+import { FetchCircuitQuizFromStore } from './adapters/real/instore/FetchCircuitQuizFromStore';
+import { FilterCircuitListFromStore } from './adapters/real/instore/FilterCircuitsListFromStore';
 import {
   ConfirmAccountMapper,
+  ConfirmForgotPasswordMapper,
   ConfirmLoginMapper,
   ConfirmLogoutMapper,
   ConfirmRegisterMapper,
-  ConfirmForgotPasswordMapper,
   ConfirmUpdatePasswordMapper,
-  FetchCircuitMapper,
-  FilterCircuitsListMapper,
-  GetCircuitMapper,
-  SendUserQuizAnswersMapper,
-  GetProfileMapper,
-  UpdateProfileMapper,
   DeleteProfileMapper,
+  FetchCircuitMapper,
+  FetchCircuitQuizMapper,
+  FilterCircuitsListMapper,
+  GetProfileMapper,
+  SendUserQuizAnswersMapper,
+  UpdateProfileMapper,
 } from './adapters/real/mappers';
+import { FetchCircuitsListMapper } from './adapters/real/mappers/circuits/FetchCircuitsListMapper';
+import { RLAuthRepository } from './adapters/real/repositories/RLAuthRepository';
+import { RLCircuitsRepository } from './adapters/real/repositories/RLCircuitsRepository';
+import { RLUserRepository } from './adapters/real/repositories/RLUserRepository';
 import {
-  RegisterUseCase,
-  LoginUseCase,
-  FetchSessionUseCase,
   CheckAccountUseCase,
-  LogoutUseCase,
-  ForgotPasswordUseCase,
-  UpdatePasswordUseCase,
+  DeleteProfileUseCase,
+  FetchCircuitQuizUseCase,
   FetchCircuitsListUseCase,
   FetchCircuitUseCase,
+  FetchSessionUseCase,
   FilterCircuitsListUseCase,
-  GetCircuitQuizUseCase,
-  SendUserQuizAnswersUseCase,
+  ForgotPasswordUseCase,
   GetProfileUseCase,
+  LoginUseCase,
+  LogoutUseCase,
+  RegisterUseCase,
+  SendUserQuizAnswersUseCase,
+  UpdatePasswordUseCase,
   UpdateProfileUseCase,
-  DeleteProfileUseCase,
 } from './usecases';
-import { RLCircuitsRepository } from './adapters/real/repositories/RLCircuitsRepository';
-import { FetchCircuitsListMapper } from './adapters/real/mappers/circuits/FetchCircuitsListMapper';
-import { RLUserRepository } from './adapters/real/repositories/RLUserRepository';
-import api from '../infracstructure/config/axios';
 
 export interface ConfigurationProps {
   httpClient: AxiosInstance;
+  store: [FetchCircuitQuizFromStore, FilterCircuitListFromStore];
 }
 const Core = (configuration: ConfigurationProps) => {
-  const { httpClient } = configuration;
+  const { httpClient, store } = configuration;
+  const [FetchCircuitQuizFromStore, FilterCircuitListFromStore] = store;
 
   // REPOSITORIES //
   const authRepository = new RLAuthRepository(
@@ -56,10 +60,12 @@ const Core = (configuration: ConfigurationProps) => {
 
   const circuitsRepository = new RLCircuitsRepository(
     httpClient,
+    FetchCircuitQuizFromStore,
+    FilterCircuitListFromStore,
     new FetchCircuitsListMapper(),
     new FetchCircuitMapper(),
     new FilterCircuitsListMapper(),
-    new GetCircuitMapper(),
+    new FetchCircuitQuizMapper(),
     new SendUserQuizAnswersMapper()
   );
 
@@ -85,7 +91,7 @@ const Core = (configuration: ConfigurationProps) => {
   const fetchCircuitsList = new FetchCircuitsListUseCase(circuitsRepository);
   const fetchCircuit = new FetchCircuitUseCase(circuitsRepository);
   const filterCircuitsList = new FilterCircuitsListUseCase(circuitsRepository);
-  const getCircuitQuiz = new GetCircuitQuizUseCase(circuitsRepository);
+  const fetchCircuitQuiz = new FetchCircuitQuizUseCase(circuitsRepository);
   const sendUserQuizAnswers = new SendUserQuizAnswersUseCase(
     circuitsRepository
   );
@@ -106,7 +112,7 @@ const Core = (configuration: ConfigurationProps) => {
     fetchCircuitsList,
     fetchCircuit,
     filterCircuitsList,
-    getCircuitQuiz,
+    fetchCircuitQuiz,
     sendUserQuizAnswers,
     getProfile,
     updateProfile,
@@ -114,4 +120,7 @@ const Core = (configuration: ConfigurationProps) => {
   };
 };
 
-export const core = Core({ httpClient: api });
+export const core = Core({
+  httpClient: api,
+  store: [new FetchCircuitQuizFromStore(), new FilterCircuitListFromStore()],
+});

@@ -6,5 +6,5 @@ export * from './auth/UpdatePasswordRequest';
 
 export * from './circuits/FetchCircuitRequest';
 export * from './circuits/FilterCircuitsListRequest';
-export * from './circuits/GetCircuitQuizRequest';
+export * from './circuits/FetchCircuitQuizRequest';
 export * from './circuits/SendUserQuizAnswsersRequest';

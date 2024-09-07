@@ -11,7 +11,7 @@ export * from './auth/UpdatePasswordThunk';
 export * from './circuits/FetchCircuitsListThunk';
 export * from './circuits/FetchCircuitThunk';
 export * from './circuits/FilterCircuitsListThunk';
-export * from './circuits/GetCircuitQuizThunk';
+export * from './circuits/FetchCircuitQuizThunk';
 export * from './circuits/SendUserQuizAnswers';
 
 // PROFILE

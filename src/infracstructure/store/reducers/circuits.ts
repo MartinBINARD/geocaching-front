@@ -11,10 +11,10 @@ import {
 } from '../../../core/domain/entities';
 
 import {
+  fetchCircuitQuizThunk,
   fetchCircuitsListThunk,
   fetchCircuitThunk,
   filterCircuitsListThunk,
-  getCircuitQuizThunk,
   sendUserQuizAnswersThunk,
 } from '../thunks';
 
@@ -103,14 +103,14 @@ const circuitsReducer = createReducer(initialCircuitsState, (builder) => {
       state.isLoading = false;
       state.isFetchCircuitFailed = true;
     })
-    .addCase(getCircuitQuizThunk.pending, (state) => {
+    .addCase(fetchCircuitQuizThunk.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(getCircuitQuizThunk.fulfilled, (state, action) => {
+    .addCase(fetchCircuitQuizThunk.fulfilled, (state, action) => {
       state.circuitQuiz = action.payload;
       state.isLoading = false;
     })
-    .addCase(getCircuitQuizThunk.rejected, (state, action) => {
+    .addCase(fetchCircuitQuizThunk.rejected, (state, action) => {
       toast.error(action.error.message);
       state.isLoading = false;
     })
