@@ -1,6 +1,7 @@
 import { AxiosInstance } from 'axios';
 import api from '../infracstructure/config/axios';
 import { FetchCircuitQuizFromStore } from './adapters/real/instore/FetchCircuitQuizFromStore';
+import { FilterCircuitListFromStore } from './adapters/real/instore/FilterCircuitsListFromStore';
 import {
   ConfirmAccountMapper,
   ConfirmForgotPasswordMapper,
@@ -40,10 +41,11 @@ import {
 
 export interface ConfigurationProps {
   httpClient: AxiosInstance;
-  store: [FetchCircuitQuizFromStore];
+  store: [FetchCircuitQuizFromStore, FilterCircuitListFromStore];
 }
 const Core = (configuration: ConfigurationProps) => {
   const { httpClient, store } = configuration;
+  const [FetchCircuitQuizFromStore, FilterCircuitListFromStore] = store;
 
   // REPOSITORIES //
   const authRepository = new RLAuthRepository(
@@ -58,7 +60,8 @@ const Core = (configuration: ConfigurationProps) => {
 
   const circuitsRepository = new RLCircuitsRepository(
     httpClient,
-    store,
+    FetchCircuitQuizFromStore,
+    FilterCircuitListFromStore,
     new FetchCircuitsListMapper(),
     new FetchCircuitMapper(),
     new FilterCircuitsListMapper(),
@@ -119,5 +122,5 @@ const Core = (configuration: ConfigurationProps) => {
 
 export const core = Core({
   httpClient: api,
-  store: [new FetchCircuitQuizFromStore()],
+  store: [new FetchCircuitQuizFromStore(), new FilterCircuitListFromStore()],
 });
