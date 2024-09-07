@@ -6,10 +6,6 @@ interface errorRegisterDataState {
 
 const AUTH_PESUDO_ERROR = `Ce pseudo n'est pas valide`;
 const AUTH_EMAIL_ERROR = `Cette adresse email n'est pas valide`;
-const AUTH_PASWORD_ERROR =
-  'Votre mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule et un chiffre';
-const AUTH_CONFIRM_PASWORD_ERROR =
-  'Votre mot de passe doit être identique au précédent';
 const AUTH_CONFIRM_GENERIC_ERROR =
   'Désolé, nous rencontrons quelques problèmes techniques. Veuillez essayer de nouveau.';
 
@@ -28,10 +24,7 @@ export const AuthErrors = {
         errorMessage = AUTH_EMAIL_ERROR;
       }
 
-      if (
-        errorData?.error === AUTH_PASWORD_ERROR ||
-        AUTH_CONFIRM_PASWORD_ERROR
-      ) {
+      if (!errorData?.error.includes('constraint')) {
         errorMessage = errorData.error;
       }
     } else {
