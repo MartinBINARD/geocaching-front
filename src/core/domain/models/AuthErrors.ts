@@ -6,6 +6,8 @@ interface errorRegisterDataState {
 
 const AUTH_PSEUDO_ERROR = `Ce pseudo n'est pas valide`;
 const AUTH_EMAIL_ERROR = `Cette adresse email n'est pas valide`;
+const AUTH_GENERIC_ERROR =
+  'Désolé, nous rencontrons quelques problèmes techniques. Veuillez essayer de nouveau.';
 const SERVER_ERROR_TYPES = [
   { key: 'user_pseudo_key', message: AUTH_PSEUDO_ERROR },
   { key: 'user_email_key', message: AUTH_EMAIL_ERROR },
@@ -18,19 +20,23 @@ export const AuthErrors = {
 
     let errorMessage;
 
-    const foundServerErrorHandle = !errorData?.error.includes(
-      SERVER_ERROR_TYPES_EXCEPTION
-    );
-    const foundServerErrorNotHandle = SERVER_ERROR_TYPES.find(({ key }) =>
-      errorData?.error.includes(key)
-    );
+    if (errorData?.error) {
+      const foundServerErrorHandle = !errorData.error.includes(
+        SERVER_ERROR_TYPES_EXCEPTION
+      );
+      const foundServerErrorNotHandle = SERVER_ERROR_TYPES.find(({ key }) =>
+        errorData.error.includes(key)
+      );
 
-    if (foundServerErrorHandle) {
-      errorMessage = errorData.error;
-    }
+      if (foundServerErrorHandle) {
+        errorMessage = errorData.error;
+      }
 
-    if (foundServerErrorNotHandle) {
-      errorMessage = foundServerErrorNotHandle.message;
+      if (foundServerErrorNotHandle) {
+        errorMessage = foundServerErrorNotHandle.message;
+      }
+    } else {
+      errorMessage = AUTH_GENERIC_ERROR;
     }
 
     return {
