@@ -4,10 +4,13 @@ interface errorRegisterDataState {
   error: string;
 }
 
-const AUTH_PESUDO_ERROR = `Ce pseudo n'est pas valide`;
+const AUTH_PSEUDO_ERROR = `Ce pseudo n'est pas valide`;
 const AUTH_EMAIL_ERROR = `Cette adresse email n'est pas valide`;
-const AUTH_CONFIRM_GENERIC_ERROR =
-  'Désolé, nous rencontrons quelques problèmes techniques. Veuillez essayer de nouveau.';
+const SERVER_ERROR_TYPES = [
+  { key: 'user_pseudo_key', message: AUTH_PSEUDO_ERROR },
+  { key: 'user_email_key', message: AUTH_EMAIL_ERROR },
+];
+const SERVER_ERROR_TYPES_EXCEPTION = 'constraint';
 
 export const AuthErrors = {
   RegisterError(e: DomainErrorDTO): DomainErrorDTO {
@@ -15,20 +18,19 @@ export const AuthErrors = {
 
     let errorMessage;
 
-    if (errorData?.error) {
-      if (errorData?.error.includes('user_pseudo_key')) {
-        errorMessage = AUTH_PESUDO_ERROR;
-      }
+    const foundServerErrorHandle = !errorData?.error.includes(
+      SERVER_ERROR_TYPES_EXCEPTION
+    );
+    const foundServerErrorNotHandle = SERVER_ERROR_TYPES.find(({ key }) =>
+      errorData?.error.includes(key)
+    );
 
-      if (errorData?.error.includes('user_email_key')) {
-        errorMessage = AUTH_EMAIL_ERROR;
-      }
+    if (foundServerErrorHandle) {
+      errorMessage = errorData.error;
+    }
 
-      if (!errorData?.error.includes('constraint')) {
-        errorMessage = errorData.error;
-      }
-    } else {
-      errorMessage = AUTH_CONFIRM_GENERIC_ERROR;
+    if (foundServerErrorNotHandle) {
+      errorMessage = foundServerErrorNotHandle.message;
     }
 
     return {
