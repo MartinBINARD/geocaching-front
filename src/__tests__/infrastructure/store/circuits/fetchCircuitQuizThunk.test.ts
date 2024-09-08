@@ -1,7 +1,6 @@
 import circuitsReducer, {
   initialCircuitsState,
 } from '../../../../infracstructure/store/reducers/circuits';
-import { getCircuitQuizThunk } from '../../../../infracstructure/store/thunks';
 
 import { Circuit, CircuitQuizList } from '../../../../core/domain/entities';
 
@@ -14,6 +13,7 @@ import {
   wrongCircuitStepStructure,
 } from '../../../../__mocks__/circuits.mocks';
 import { fakeRequestId } from '../../../../__mocks__/request.mocks';
+import { fetchCircuitQuizThunk } from '../../../../infracstructure/store/thunks';
 
 jest.mock('../../../../infracstructure/config/axios', () => ({
   api: {
@@ -34,7 +34,7 @@ describe('GET circuit quiz list', () => {
     const fakePayload = CircuitQuizListResponse as unknown as CircuitQuizList;
     const fakeSearchEntries: Circuit = oneCircuitResponse;
 
-    const action = getCircuitQuizThunk.fulfilled(
+    const action = fetchCircuitQuizThunk.fulfilled(
       fakePayload,
       fakeRequestId,
       fakeSearchEntries
@@ -54,7 +54,7 @@ describe('GET circuit quiz list', () => {
     const fakePayload = circuitQuizLoadingError as unknown as Error;
     const fakeSearchEntries: any = oneCircuitWithoutSteps;
 
-    const action = getCircuitQuizThunk.rejected(
+    const action = fetchCircuitQuizThunk.rejected(
       fakePayload,
       fakeRequestId,
       fakeSearchEntries
@@ -72,7 +72,7 @@ describe('GET circuit quiz list', () => {
     const fakePayload = circuitQuizStepsStructureError as unknown as Error;
     const fakeSearchEntries: any = wrongCircuitStepStructure;
 
-    const action = getCircuitQuizThunk.rejected(
+    const action = fetchCircuitQuizThunk.rejected(
       fakePayload,
       fakeRequestId,
       fakeSearchEntries
